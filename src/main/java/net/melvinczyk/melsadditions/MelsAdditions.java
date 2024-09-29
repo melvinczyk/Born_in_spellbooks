@@ -1,10 +1,12 @@
 package net.melvinczyk.melsadditions;
 
 import com.mojang.logging.LogUtils;
+import net.melvinczyk.melsadditions.entity.mobs.render.SummonedBoneSerpentRenderer;
 import net.melvinczyk.melsadditions.registry.MAEntityRegistry;
 import net.melvinczyk.melsadditions.registry.MAMobEffectRegistry;
 import net.melvinczyk.melsadditions.registry.SpellRegistries;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -57,6 +59,7 @@ public class MelsAdditions
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {
+            EntityRenderers.register(MAEntityRegistry.SUMMONED_BONE_SERPENT.get(), SummonedBoneSerpentRenderer::new);
             LOGGER.info("HELLO FROM CLIENT SETUP");
             LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
         }
