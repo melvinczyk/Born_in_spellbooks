@@ -2,6 +2,7 @@ package net.melvinczyk.melsadditions;
 
 import com.mojang.logging.LogUtils;
 import net.melvinczyk.melsadditions.entity.mobs.render.SummonedBoneSerpentRenderer;
+import net.melvinczyk.melsadditions.events.JumpEventHandler;
 import net.melvinczyk.melsadditions.registry.MAEntityRegistry;
 import net.melvinczyk.melsadditions.registry.MAMobEffectRegistry;
 import net.melvinczyk.melsadditions.registry.SpellRegistries;

@@ -1,24 +1,25 @@
 package net.melvinczyk.melsadditions.entity.mobs;
 
 import com.github.alexthe666.alexsmobs.entity.EntityBoneSerpent;
+import com.github.alexthe666.alexsmobs.entity.ai.BoneSerpentAIJump;
 import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
 import io.redspace.ironsspellbooks.entity.mobs.MagicSummon;
 import net.melvinczyk.melsadditions.registry.MAEntityRegistry;
 import net.melvinczyk.melsadditions.registry.MAMobEffectRegistry;
 import net.melvinczyk.melsadditions.registry.SpellRegistries;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
-import net.minecraft.world.entity.monster.Ravager;
+import net.minecraft.world.entity.animal.horse.AbstractHorse;
+import net.minecraft.world.entity.monster.warden.Warden;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.core.particles.ParticleTypes;
 import io.redspace.ironsspellbooks.util.OwnerHelper;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.Entity;
 import io.redspace.ironsspellbooks.entity.mobs.goals.*;
-import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.player.Player;
@@ -26,34 +27,8 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.phys.Vec3;
-
-import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
-import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
-import io.redspace.ironsspellbooks.entity.mobs.goals.*;
-import io.redspace.ironsspellbooks.registries.EntityRegistry;
-import io.redspace.ironsspellbooks.registries.MobEffectRegistry;
-import io.redspace.ironsspellbooks.util.OwnerHelper;
-import io.redspace.ironsspellbooks.api.util.Utils;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.FloatGoal;
-import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
-import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
-import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
-import net.minecraft.world.entity.animal.PolarBear;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
-
 
 import javax.annotation.Nullable;
 import java.util.UUID;
@@ -73,17 +48,16 @@ public class SummonedBoneSerpent extends EntityBoneSerpent implements MagicSummo
     public void registerGoals() {
 
         this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(1, new PolarBearMeleeAttackGoal());
+        this.goalSelector.addGoal(1, new BoneSerpentAttackGoal());
+        //this.goalSelector.addGoal(0, new BoneSerpentAIJump(this, 10));
         this.goalSelector.addGoal(7, new GenericFollowOwnerGoal(this, this::getSummoner, 0.9f, 15, 5, false, 25));
         this.goalSelector.addGoal(8, new WaterAvoidingRandomStrollGoal(this, 0.8D));
-        this.goalSelector.addGoal(9, new LookAtPlayerGoal(this, Player.class, 3.0F, 1.0F));
-        this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Mob.class, 8.0F));
+        this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Player.class, 6.0F));
 
         this.targetSelector.addGoal(1, new GenericOwnerHurtByTargetGoal(this, this::getSummoner));
         this.targetSelector.addGoal(2, new GenericOwnerHurtTargetGoal(this, this::getSummoner));
         this.targetSelector.addGoal(3, new GenericCopyOwnerTargetGoal(this, this::getSummoner));
         this.targetSelector.addGoal(4, (new GenericHurtByTargetGoal(this, (entity) -> entity == getSummoner())).setAlertOthers());
-
     }
 
     protected LivingEntity cachedSummoner;
@@ -93,7 +67,6 @@ public class SummonedBoneSerpent extends EntityBoneSerpent implements MagicSummo
     public float getStepHeight() {
         return 1f;
     }
-
 
     public void setSummoner(@Nullable LivingEntity owner) {
         if (owner != null) {
@@ -145,11 +118,11 @@ public class SummonedBoneSerpent extends EntityBoneSerpent implements MagicSummo
 
     public static AttributeSupplier setAttributes() {
         return Mob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 15)
-                .add(Attributes.JUMP_STRENGTH, 1.0)
+                .add(Attributes.MAX_HEALTH, 40)
+                .add(Attributes.JUMP_STRENGTH, 2.0)
                 .add(Attributes.FOLLOW_RANGE, 32.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.35)
-                .add(Attributes.ATTACK_DAMAGE, 10.0D)
+                .add(Attributes.MOVEMENT_SPEED, 0.5)
+                .add(Attributes.ATTACK_DAMAGE, 5.0D)
                 .build();
     }
 
@@ -203,12 +176,13 @@ public class SummonedBoneSerpent extends EntityBoneSerpent implements MagicSummo
             pPlayer.setXRot(this.getXRot());
             pPlayer.startRiding(this);
         }
-
     }
 
     @Override
     public void travel(Vec3 pTravelVector) {
         Entity conductor = this.getControllingPassenger();
+        boolean liquid = SummonedBoneSerpent.this.isInLava() || SummonedBoneSerpent.this.isInWater();
+
         if (this.isVehicle() && conductor instanceof LivingEntity livingEntity) {
             this.yRotO = this.getYRot();
             this.setYRot(livingEntity.getYRot());
@@ -219,7 +193,14 @@ public class SummonedBoneSerpent extends EntityBoneSerpent implements MagicSummo
             float f = livingEntity.xxa * 0.5F;
             float f1 = livingEntity.zza;
             if (this.isControlledByLocalInstance()) {
-                this.setSpeed((float) this.getAttributeValue(Attributes.MOVEMENT_SPEED) * .55f);
+                if (liquid) {
+                    this.setDeltaMovement(this.getDeltaMovement().add(0.0D, 0.5D, 0.0D));
+                    SummonedBoneSerpent.this.setSpeed((float) this.getAttributeValue(Attributes.MOVEMENT_SPEED) * 5.0F);
+                }
+                else
+                {
+                    this.setSpeed((float) this.getAttributeValue(Attributes.MOVEMENT_SPEED) * 0.55f);
+                }
                 super.travel(new Vec3((double) f, pTravelVector.y, (double) f1));
             }
         } else {
@@ -227,9 +208,18 @@ public class SummonedBoneSerpent extends EntityBoneSerpent implements MagicSummo
         }
     }
 
+    public boolean canBreatheUnderwater() {
+        return true;
+    }
 
-    class PolarBearMeleeAttackGoal extends MeleeAttackGoal {
-        public PolarBearMeleeAttackGoal() {
+    @Override
+    public boolean isInvulnerableTo(DamageSource source) {
+        return source.is(DamageTypes.FALL) || source.is(DamageTypes.DROWN) || source.is(DamageTypes.IN_WALL)  || source.is(DamageTypes.LAVA) || source.is(DamageTypeTags.IS_FIRE) || super.isInvulnerableTo(source);
+    }
+
+
+    class BoneSerpentAttackGoal extends MeleeAttackGoal {
+        public BoneSerpentAttackGoal() {
             super(SummonedBoneSerpent.this, 1.25D, true);
         }
 
@@ -246,7 +236,6 @@ public class SummonedBoneSerpent extends EntityBoneSerpent implements MagicSummo
             } else {
                 this.resetAttackCooldown();
             }
-
         }
 
         @Override
@@ -254,6 +243,4 @@ public class SummonedBoneSerpent extends EntityBoneSerpent implements MagicSummo
             super.stop();
         }
     }
-
-
 }

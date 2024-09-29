@@ -209,7 +209,7 @@ dependencies {
 
     implementation fg.deobf("maven.modrinth:alexs-mobs:1.22.9")
     implementation fg.deobf("maven.modrinth:citadel:2.6.0")
-
+    //implementation fg.deobf("maven.modrinth:aquamirae:7lX4KLFc")
 
     runtimeOnly fg.deobf("maven.modrinth:jei:PeYsGsQy")
 

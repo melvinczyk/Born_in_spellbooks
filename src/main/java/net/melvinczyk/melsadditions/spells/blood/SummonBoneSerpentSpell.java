@@ -14,10 +14,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.Level;
-import org.w3c.dom.Attr;
 
 import java.util.List;
 import java.util.Optional;
@@ -31,23 +28,24 @@ public class SummonBoneSerpentSpell extends AbstractSpell
     public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster)
     {
         return List.of(
-                Component.translatable("ui.irons_spellbooks.hp", getBoneSerpentHealth(spellLevel, null))
+                Component.translatable("ui.irons_spellbooks.hp", getBoneSerpentHealth(spellLevel, caster)),
+                Component.translatable("ui.irons_spellbooks.damage", getBoneSerpentDamage(spellLevel, caster))
         );
     }
 
     private final DefaultConfig defaultConfig = new DefaultConfig()
-            .setMinRarity(SpellRarity.RARE)
+            .setMinRarity(SpellRarity.EPIC)
             .setSchoolResource(SchoolRegistry.BLOOD_RESOURCE)
             .setMaxLevel(10)
             .setCooldownSeconds(180)
             .build();
 
     public SummonBoneSerpentSpell() {
-        this.manaCostPerLevel = 30;
+        this.manaCostPerLevel = 15;
         this.baseSpellPower = 5;
         this.spellPowerPerLevel = 1;
-        this.castTime = 100;
-        this.baseManaCost = 100;
+        this.castTime = 70;
+        this.baseManaCost = 200;
     }
 
     @Override
@@ -55,6 +53,7 @@ public class SummonBoneSerpentSpell extends AbstractSpell
     {
         return CastType.LONG;
     }
+
 
     @Override
     public DefaultConfig getDefaultConfig() {
@@ -69,6 +68,12 @@ public class SummonBoneSerpentSpell extends AbstractSpell
     @Override
     public Optional<SoundEvent> getCastStartSound() {
         return Optional.of(SoundEvents.EVOKER_PREPARE_SUMMON);
+    }
+
+    @Override
+    public Optional<SoundEvent> getCastFinishSound()
+    {
+        return Optional.of(SoundEvents.EVOKER_CAST_SPELL);
     }
 
     @Override
