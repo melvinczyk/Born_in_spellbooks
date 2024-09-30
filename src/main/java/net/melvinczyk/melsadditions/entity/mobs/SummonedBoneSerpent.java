@@ -11,8 +11,6 @@ import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
-import net.minecraft.world.entity.animal.horse.AbstractHorse;
-import net.minecraft.world.entity.monster.warden.Warden;
 import net.minecraft.world.level.Level;
 import net.minecraft.core.particles.ParticleTypes;
 import io.redspace.ironsspellbooks.util.OwnerHelper;
@@ -49,7 +47,7 @@ public class SummonedBoneSerpent extends EntityBoneSerpent implements MagicSummo
 
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(1, new BoneSerpentAttackGoal());
-        //this.goalSelector.addGoal(0, new BoneSerpentAIJump(this, 10));
+        this.goalSelector.addGoal(0, new BoneSerpentAIJump(this, 10));
         this.goalSelector.addGoal(7, new GenericFollowOwnerGoal(this, this::getSummoner, 0.9f, 15, 5, false, 25));
         this.goalSelector.addGoal(8, new WaterAvoidingRandomStrollGoal(this, 0.8D));
         this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Player.class, 6.0F));
@@ -179,34 +177,26 @@ public class SummonedBoneSerpent extends EntityBoneSerpent implements MagicSummo
     }
 
     @Override
-    public void travel(Vec3 pTravelVector) {
-        Entity conductor = this.getControllingPassenger();
-        boolean liquid = SummonedBoneSerpent.this.isInLava() || SummonedBoneSerpent.this.isInWater();
-
-        if (this.isVehicle() && conductor instanceof LivingEntity livingEntity) {
+    public void travel(Vec3 travelVector) {
+        if (this.isVehicle()) {
+            Player player = (Player) this.getControllingPassenger();
+            this.setYRot(player.getYRot());
             this.yRotO = this.getYRot();
-            this.setYRot(livingEntity.getYRot());
-            this.setXRot(livingEntity.getXRot());
-            this.setRot(this.getYRot(), this.getXRot());
-            this.yBodyRot = this.yRotO;
-            this.yHeadRot = this.getYRot();
-            float f = livingEntity.xxa * 0.5F;
-            float f1 = livingEntity.zza;
-            if (this.isControlledByLocalInstance()) {
-                if (liquid) {
-                    this.setDeltaMovement(this.getDeltaMovement().add(0.0D, 0.5D, 0.0D));
-                    SummonedBoneSerpent.this.setSpeed((float) this.getAttributeValue(Attributes.MOVEMENT_SPEED) * 5.0F);
-                }
-                else
-                {
-                    this.setSpeed((float) this.getAttributeValue(Attributes.MOVEMENT_SPEED) * 0.55f);
-                }
-                super.travel(new Vec3((double) f, pTravelVector.y, (double) f1));
+            this.setXRot(player.getXRot() * 0.3F);
+
+            if (this.isInLava()) {
+                this.setSpeed((float) (this.getAttribute(Attributes.MOVEMENT_SPEED).getValue() * 15.0));
+                super.travel(new Vec3(player.xxa * 0.6F, travelVector.y, player.zza * 0.6F));
+            } else {
+                this.setSpeed((float) (this.getAttribute(Attributes.MOVEMENT_SPEED).getValue()));
+                super.travel(new Vec3(player.xxa * 0.3F, travelVector.y, player.zza * 0.3F));
             }
         } else {
-            super.travel(pTravelVector);
+            super.travel(travelVector);
         }
     }
+
+
 
     public boolean canBreatheUnderwater() {
         return true;
