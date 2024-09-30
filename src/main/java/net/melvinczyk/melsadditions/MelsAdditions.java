@@ -8,6 +8,7 @@ import net.melvinczyk.melsadditions.registry.MAMobEffectRegistry;
 import net.melvinczyk.melsadditions.registry.SpellRegistries;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -19,6 +20,7 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 
 @Mod(MelsAdditions.MODID)
@@ -38,6 +40,11 @@ public class MelsAdditions
         MinecraftForge.EVENT_BUS.register(this);
 
         modEventBus.addListener(this::addCreative);
+    }
+
+    public static ResourceLocation id(@NotNull String path)
+    {
+        return new ResourceLocation(MelsAdditions.MODID, path);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event)
