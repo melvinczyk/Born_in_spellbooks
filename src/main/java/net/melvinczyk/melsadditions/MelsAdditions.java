@@ -3,6 +3,7 @@ package net.melvinczyk.melsadditions;
 import com.mojang.logging.LogUtils;
 import net.melvinczyk.melsadditions.entity.mobs.render.SummonedBoneSerpentRenderer;
 import net.melvinczyk.melsadditions.events.EntityEventHandler;
+import net.melvinczyk.melsadditions.registry.MAAttributeRegistry;
 import net.melvinczyk.melsadditions.registry.MAEntityRegistry;
 import net.melvinczyk.melsadditions.registry.MAMobEffectRegistry;
 import net.melvinczyk.melsadditions.registry.SpellRegistries;
@@ -36,6 +37,7 @@ public class MelsAdditions
         SpellRegistries.register(modEventBus);
         MAEntityRegistry.register(modEventBus);
         MAMobEffectRegistry.register(modEventBus);
+        MAAttributeRegistry.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
 

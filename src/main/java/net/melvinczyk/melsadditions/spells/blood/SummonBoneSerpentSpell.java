@@ -8,6 +8,7 @@ import net.melvinczyk.melsadditions.MelsAdditions;
 import net.melvinczyk.melsadditions.config.MADefaultConfig;
 import net.melvinczyk.melsadditions.entity.mobs.SummonedBoneSerpent;
 import net.melvinczyk.melsadditions.registry.MAMobEffectRegistry;
+import net.melvinczyk.melsadditions.registry.MASchoolRegistry;
 import net.melvinczyk.melsadditions.spells.MASpellRarity;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -35,9 +36,9 @@ public class SummonBoneSerpentSpell extends AbstractSpell
         );
     }
 
-    private final DefaultConfig defaultConfig = new MADefaultConfig()
-            .setMinRarity(MASpellRarity.MYTHIC)
-            .setSchoolResource(SchoolRegistry.BLOOD_RESOURCE)
+    private final DefaultConfig defaultConfig = new DefaultConfig()
+            .setMinRarity(SpellRarity.LEGENDARY)
+            .setSchoolResource(MASchoolRegistry.WATER_RESOURCE)
             .setMaxLevel(10)
             .setCooldownSeconds(180)
             .build();
@@ -81,20 +82,20 @@ public class SummonBoneSerpentSpell extends AbstractSpell
     @Override
     public void onCast(Level world, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData)
     {
-     int summonTime = 20 * 60 * 10;
+         int summonTime = 20 * 60 * 10;
 
-     SummonedBoneSerpent boneSerpent = new SummonedBoneSerpent(world, entity);
-     boneSerpent.setPos(entity.position());
+         SummonedBoneSerpent boneSerpent = new SummonedBoneSerpent(world, entity);
+         boneSerpent.setPos(entity.position());
 
-     world.addFreshEntity(boneSerpent);
+         world.addFreshEntity(boneSerpent);
 
-     boneSerpent.addEffect(new MobEffectInstance(MAMobEffectRegistry.BONE_SERPENT_TIMER.get(), summonTime, 0, false, false, false));
-     int effectAmplifier = 0;
-     if (entity.hasEffect(MAMobEffectRegistry.BONE_SERPENT_TIMER.get()))
-         effectAmplifier += entity.getEffect(MAMobEffectRegistry.BONE_SERPENT_TIMER.get()).getAmplifier() + 1;
-     entity.addEffect(new MobEffectInstance(MAMobEffectRegistry.BONE_SERPENT_TIMER.get(), summonTime, effectAmplifier, false, false, true));
+         boneSerpent.addEffect(new MobEffectInstance(MAMobEffectRegistry.BONE_SERPENT_TIMER.get(), summonTime, 0, false, false, false));
+         int effectAmplifier = 0;
+         if (entity.hasEffect(MAMobEffectRegistry.BONE_SERPENT_TIMER.get()))
+             effectAmplifier += entity.getEffect(MAMobEffectRegistry.BONE_SERPENT_TIMER.get()).getAmplifier() + 1;
+         entity.addEffect(new MobEffectInstance(MAMobEffectRegistry.BONE_SERPENT_TIMER.get(), summonTime, effectAmplifier, false, false, true));
 
-     super.onCast(world, spellLevel, entity, castSource, playerMagicData);
+         super.onCast(world, spellLevel, entity, castSource, playerMagicData);
     }
 
     private float getBoneSerpentHealth(int spellLevel, LivingEntity caster)

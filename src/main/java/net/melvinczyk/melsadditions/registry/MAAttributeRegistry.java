@@ -19,13 +19,13 @@ public class MAAttributeRegistry {
     public static final RegistryObject<Attribute> WATER_MAGIC_RESIST = newResistanceAttribute("water");
     public static final RegistryObject<Attribute> WATER_MAGIC_POWER = newPowerAttribute("water");
 
-//    @SubscribeEvent
-//    public static void modifyEntityAttributes(EntityAttributeModificationEvent e) {
-//        e.getTypes().forEach(entity -> {
-//            e.add(entity, WATER_MAGIC_RESIST.get());
-//            e.add(entity, WATER_MAGIC_POWER.get());
-//        });
-//    }
+    @SubscribeEvent
+    public static void modifyEntityAttributes(EntityAttributeModificationEvent e) {
+        e.getTypes().forEach(entity -> {
+            e.add(entity, WATER_MAGIC_RESIST.get());
+            e.add(entity, WATER_MAGIC_POWER.get());
+        });
+    }
 
     private static RegistryObject<Attribute> newResistanceAttribute(String id)
     {
