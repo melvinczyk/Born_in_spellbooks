@@ -9,8 +9,6 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import com.github.alexthe666.alexsmobs.entity.EntityBoneSerpent;
-import software.bernie.example.registry.EntityRegistry;
 
 public class MAEntityRegistry {
     private static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, MelsAdditions.MODID);

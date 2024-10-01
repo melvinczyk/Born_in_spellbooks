@@ -5,8 +5,10 @@ import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import io.redspace.ironsspellbooks.api.spells.*;
 import net.melvinczyk.melsadditions.MelsAdditions;
+import net.melvinczyk.melsadditions.config.MADefaultConfig;
 import net.melvinczyk.melsadditions.entity.mobs.SummonedBoneSerpent;
 import net.melvinczyk.melsadditions.registry.MAMobEffectRegistry;
+import net.melvinczyk.melsadditions.spells.MASpellRarity;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -33,8 +35,8 @@ public class SummonBoneSerpentSpell extends AbstractSpell
         );
     }
 
-    private final DefaultConfig defaultConfig = new DefaultConfig()
-            .setMinRarity(SpellRarity.EPIC)
+    private final DefaultConfig defaultConfig = new MADefaultConfig()
+            .setMinRarity(MASpellRarity.MYTHIC)
             .setSchoolResource(SchoolRegistry.BLOOD_RESOURCE)
             .setMaxLevel(10)
             .setCooldownSeconds(180)

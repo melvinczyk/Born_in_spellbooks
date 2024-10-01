@@ -15,33 +15,27 @@ import net.minecraftforge.registries.RegistryObject;
 public class MAAttributeRegistry {
     private static final DeferredRegister<Attribute> ATTRIBUTES = DeferredRegister.create(ForgeRegistries.ATTRIBUTES, MelsAdditions.MODID);
 
-    public static final RegistryObject<Attribute> WATER_MAGIC_RESIST = registerResistanceAttribute("water");
 
-    public static final RegistryObject<Attribute> WATER_MAGIC_POWER = registerPowerAttribute("water");
+    public static final RegistryObject<Attribute> WATER_MAGIC_RESIST = newResistanceAttribute("water");
+    public static final RegistryObject<Attribute> WATER_MAGIC_POWER = newPowerAttribute("water");
 
-    @SubscribeEvent
-    public static void modifyEntityAttributes(EntityAttributeModificationEvent event)
+//    @SubscribeEvent
+//    public static void modifyEntityAttributes(EntityAttributeModificationEvent e) {
+//        e.getTypes().forEach(entity -> {
+//            e.add(entity, WATER_MAGIC_RESIST.get());
+//            e.add(entity, WATER_MAGIC_POWER.get());
+//        });
+//    }
+
+    private static RegistryObject<Attribute> newResistanceAttribute(String id)
     {
-        event.getTypes().forEach(entity -> {
-            event.add(entity, WATER_MAGIC_RESIST.get());
-            event.add(entity, WATER_MAGIC_POWER.get());
-        });
+        return ATTRIBUTES.register(id + "_magic_resist", () -> (new MagicRangedAttribute("attribute.mels_additions." + id + "_magic_resist", 1.0D, -100, 100).setSyncable(true)));
     }
 
-    // ;_;
-    private static RegistryObject<Attribute> registerResistanceAttribute(String id)
-    {
-        return ATTRIBUTES.register(id + "_magic_resist", () ->
-                (new MagicRangedAttribute("attribute.mels_addons." + id + "_magic_resist",
-                        1.0D, 0, 10).setSyncable(true)));
+    private static RegistryObject<Attribute> newPowerAttribute(String id) {
+        return ATTRIBUTES.register(id + "_spell_power", () -> (new MagicRangedAttribute("attribute.mels_additions." + id + "_spell_power", 1.0D, -100, 100).setSyncable(true)));
     }
 
-    private static RegistryObject<Attribute> registerPowerAttribute(String id)
-    {
-        return ATTRIBUTES.register(id + "_spell_power", () ->
-                (new MagicRangedAttribute("attribute.mels_addons." + id + "_spell_power",
-                        1.0D, 0, 10).setSyncable(true)));
-    }
 
     public static void register(IEventBus eventBus)
     {

@@ -212,6 +212,7 @@ dependencies {
     //implementation fg.deobf("maven.modrinth:aquamirae:7lX4KLFc")
 
     runtimeOnly fg.deobf("maven.modrinth:jei:PeYsGsQy")
+    runtimeOnly fg.deobf("maven.modrinth:neat:FrjOZVxL")
 
 }
 
