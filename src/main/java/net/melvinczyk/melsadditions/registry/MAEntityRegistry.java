@@ -2,6 +2,7 @@ package net.melvinczyk.melsadditions.registry;
 
 import net.melvinczyk.melsadditions.MelsAdditions;
 import net.melvinczyk.melsadditions.entity.mobs.SummonedBoneSerpent;
+import net.melvinczyk.melsadditions.entity.spells.trident.TridentProjectile;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -22,4 +23,11 @@ public class MAEntityRegistry {
                     .sized(1f, 1f)
                     .clientTrackingRange(10)
                     .build(new ResourceLocation(MelsAdditions.MODID, "summoned_bone_serpent").toString()));
+
+    public static final RegistryObject<EntityType<TridentProjectile>> TRIDENT_PROJECTILE =
+            ENTITIES.register("trident_projectile", () -> EntityType.Builder.<TridentProjectile>of(TridentProjectile::new, MobCategory.MISC)
+                    .sized(1f, 1f)
+                    .clientTrackingRange(64)
+                    .build(new ResourceLocation(MelsAdditions.MODID, "summoned_trident").toString()));
+
 }

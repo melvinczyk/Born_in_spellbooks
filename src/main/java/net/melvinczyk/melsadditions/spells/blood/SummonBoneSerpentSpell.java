@@ -38,7 +38,7 @@ public class SummonBoneSerpentSpell extends AbstractSpell
 
     private final DefaultConfig defaultConfig = new DefaultConfig()
             .setMinRarity(SpellRarity.LEGENDARY)
-            .setSchoolResource(MASchoolRegistry.WATER_RESOURCE)
+            .setSchoolResource(SchoolRegistry.BLOOD_RESOURCE)
             .setMaxLevel(10)
             .setCooldownSeconds(180)
             .build();
