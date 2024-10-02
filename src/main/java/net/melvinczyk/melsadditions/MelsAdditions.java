@@ -2,6 +2,7 @@ package net.melvinczyk.melsadditions;
 
 import com.mojang.logging.LogUtils;
 import net.melvinczyk.melsadditions.entity.mobs.render.SummonedBoneSerpentRenderer;
+import net.melvinczyk.melsadditions.entity.mobs.render.SummonedRavagerRenderer;
 import net.melvinczyk.melsadditions.entity.spells.trident.TridentRenderer;
 import net.melvinczyk.melsadditions.events.EntityEventHandler;
 import net.melvinczyk.melsadditions.registry.*;
@@ -70,6 +71,7 @@ public class MelsAdditions
         public static void onClientSetup(FMLClientSetupEvent event)
         {
             EntityRenderers.register(MAEntityRegistry.SUMMONED_BONE_SERPENT.get(), SummonedBoneSerpentRenderer::new);
+            EntityRenderers.register(MAEntityRegistry.SUMMONED_RAVAGER.get(), SummonedRavagerRenderer::new);
             EntityRenderers.register(MAEntityRegistry.TRIDENT_PROJECTILE.get(), TridentRenderer::new);
             LOGGER.info("HELLO FROM CLIENT SETUP");
             LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());

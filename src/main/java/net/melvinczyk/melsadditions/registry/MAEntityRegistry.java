@@ -2,6 +2,7 @@ package net.melvinczyk.melsadditions.registry;
 
 import net.melvinczyk.melsadditions.MelsAdditions;
 import net.melvinczyk.melsadditions.entity.mobs.SummonedBoneSerpent;
+import net.melvinczyk.melsadditions.entity.mobs.SummonedRavager;
 import net.melvinczyk.melsadditions.entity.spells.trident.TridentProjectile;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
@@ -18,12 +19,22 @@ public class MAEntityRegistry {
         ENTITIES.register(eventBus);
     }
 
+    // Mobs
     public static final RegistryObject<EntityType<SummonedBoneSerpent>> SUMMONED_BONE_SERPENT =
             ENTITIES.register("summoned_bone_serpent", () -> EntityType.Builder.<SummonedBoneSerpent>of(SummonedBoneSerpent::new, MobCategory.MONSTER)
                     .sized(1f, 1f)
                     .clientTrackingRange(10)
                     .build(new ResourceLocation(MelsAdditions.MODID, "summoned_bone_serpent").toString()));
 
+
+    public static final RegistryObject<EntityType<SummonedRavager>> SUMMONED_RAVAGER =
+            ENTITIES.register("summoned_ravager", () -> EntityType.Builder.<SummonedRavager>of(SummonedRavager::new, MobCategory.MONSTER)
+                    .sized(1f, 1f)
+                    .clientTrackingRange(10)
+                    .build(new ResourceLocation(MelsAdditions.MODID, "summoned_ravager").toString()));
+
+
+    // Projectiles
     public static final RegistryObject<EntityType<TridentProjectile>> TRIDENT_PROJECTILE =
             ENTITIES.register("trident_projectile", () -> EntityType.Builder.<TridentProjectile>of(TridentProjectile::new, MobCategory.MISC)
                     .sized(1f, 1f)

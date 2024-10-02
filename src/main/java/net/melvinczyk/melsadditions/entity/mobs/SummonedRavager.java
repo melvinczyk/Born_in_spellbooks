@@ -1,7 +1,5 @@
 package net.melvinczyk.melsadditions.entity.mobs;
 
-import com.github.alexthe666.alexsmobs.entity.EntityBoneSerpent;
-import com.github.alexthe666.alexsmobs.entity.ai.BoneSerpentAIJump;
 import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
 import io.redspace.ironsspellbooks.entity.mobs.MagicSummon;
 import net.melvinczyk.melsadditions.registry.MAEntityRegistry;
@@ -32,23 +30,22 @@ import net.minecraft.world.InteractionResult;
 import javax.annotation.Nullable;
 import java.util.UUID;
 
-public class SummonedBoneSerpent extends EntityBoneSerpent implements MagicSummon {
+public class SummonedRavager extends Ravager implements MagicSummon {
 
-    public SummonedBoneSerpent(EntityType<? extends EntityBoneSerpent> pEntityType, Level pLevel) {
+    public SummonedRavager(EntityType<? extends Ravager> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
         xpReward = 0;
     }
 
-    public SummonedBoneSerpent(Level pLevel, LivingEntity owner) {
-        this(MAEntityRegistry.SUMMONED_BONE_SERPENT.get(), pLevel);
+    public SummonedRavager(Level pLevel, LivingEntity owner) {
+        this(MAEntityRegistry.SUMMONED_RAVAGER.get(), pLevel);
         setSummoner(owner);
     }
 
     public void registerGoals() {
 
         this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(1, new BoneSerpentAttackGoal());
-        this.goalSelector.addGoal(0, new BoneSerpentAIJump(this, 10));
+
         this.goalSelector.addGoal(7, new GenericFollowOwnerGoal(this, this::getSummoner, 0.9f, 15, 5, false, 25));
         this.goalSelector.addGoal(8, new WaterAvoidingRandomStrollGoal(this, 0.8D));
         this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Player.class, 6.0F));
@@ -64,7 +61,7 @@ public class SummonedBoneSerpent extends EntityBoneSerpent implements MagicSummo
 
     @Override
     public float getStepHeight() {
-        return 1.5f;
+        return 1f;
     }
 
     public void setSummoner(@Nullable LivingEntity owner) {
@@ -82,7 +79,7 @@ public class SummonedBoneSerpent extends EntityBoneSerpent implements MagicSummo
 
     @Override
     public void onRemovedFromWorld() {
-        this.onRemovedHelper(this, MAMobEffectRegistry.BONE_SERPENT_TIMER.get());
+        this.onRemovedHelper(this, MAMobEffectRegistry.RAVAGER_TIMER.get());
         super.onRemovedFromWorld();
     }
 
@@ -100,7 +97,7 @@ public class SummonedBoneSerpent extends EntityBoneSerpent implements MagicSummo
 
     @Override
     public boolean doHurtTarget(Entity pEntity) {
-        return Utils.doMeleeAttack(this, pEntity, SpellRegistries.SUMMON_BONE_SERPENT.get().getDamageSource(this, getSummoner()));
+        return Utils.doMeleeAttack(this, pEntity, SpellRegistries.SUMMON_RAVAGER.get().getDamageSource(this, getSummoner()));
     }
 
     @Override
@@ -117,11 +114,11 @@ public class SummonedBoneSerpent extends EntityBoneSerpent implements MagicSummo
 
     public static AttributeSupplier setAttributes() {
         return Mob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 40)
+                .add(Attributes.MAX_HEALTH, 50)
                 .add(Attributes.JUMP_STRENGTH, 2.0)
                 .add(Attributes.FOLLOW_RANGE, 32.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.5)
-                .add(Attributes.ATTACK_DAMAGE, 5.0D)
+                .add(Attributes.ATTACK_DAMAGE, 9.0D)
                 .build();
     }
 
@@ -185,13 +182,8 @@ public class SummonedBoneSerpent extends EntityBoneSerpent implements MagicSummo
             this.yRotO = this.getYRot();
             this.setXRot(player.getXRot() * 0.3F);
 
-            if (this.isInLava()) {
-                this.setSpeed((float) (this.getAttribute(Attributes.MOVEMENT_SPEED).getValue() * 15.0));
-                super.travel(new Vec3(player.xxa * 0.6F, travelVector.y, player.zza * 0.6F));
-            } else {
                 this.setSpeed((float) (this.getAttribute(Attributes.MOVEMENT_SPEED).getValue()));
                 super.travel(new Vec3(player.xxa * 0.3F, travelVector.y, player.zza * 0.3F));
-            }
         } else {
             super.travel(travelVector);
         }
@@ -209,9 +201,9 @@ public class SummonedBoneSerpent extends EntityBoneSerpent implements MagicSummo
     }
 
 
-    class BoneSerpentAttackGoal extends MeleeAttackGoal {
-        public BoneSerpentAttackGoal() {
-            super(SummonedBoneSerpent.this, 1.25D, true);
+    class RavagerAttackGoal extends MeleeAttackGoal {
+        public RavagerAttackGoal() {
+            super(SummonedRavager.this, 1.25D, true);
         }
 
         protected void checkAndPerformAttack(LivingEntity pEnemy, double pDistToEnemySqr) {

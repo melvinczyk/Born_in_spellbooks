@@ -4,6 +4,7 @@ import net.melvinczyk.melsadditions.MelsAdditions;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
 import net.melvinczyk.melsadditions.spells.blood.SummonBoneSerpentSpell;
+import net.melvinczyk.melsadditions.spells.evocation.SummonRavagerSpell;
 import net.melvinczyk.melsadditions.spells.water.LaunchTridentSpell;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -23,4 +24,5 @@ public class SpellRegistries {
 
     public static final RegistryObject<AbstractSpell> SUMMON_BONE_SERPENT = registerSpell(new SummonBoneSerpentSpell());
     public static final RegistryObject<AbstractSpell> LAUNCH_TRIDENT = registerSpell(new LaunchTridentSpell());
+    public static final RegistryObject<AbstractSpell> SUMMON_RAVAGER = registerSpell(new SummonRavagerSpell());
 }

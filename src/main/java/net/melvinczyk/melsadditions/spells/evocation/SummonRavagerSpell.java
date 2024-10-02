@@ -1,15 +1,14 @@
-package net.melvinczyk.melsadditions.spells.blood;
+package net.melvinczyk.melsadditions.spells.evocation;
+
 
 import io.redspace.ironsspellbooks.api.config.DefaultConfig;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import io.redspace.ironsspellbooks.api.spells.*;
 import net.melvinczyk.melsadditions.MelsAdditions;
-import net.melvinczyk.melsadditions.config.MADefaultConfig;
 import net.melvinczyk.melsadditions.entity.mobs.SummonedBoneSerpent;
+import net.melvinczyk.melsadditions.entity.mobs.SummonedRavager;
 import net.melvinczyk.melsadditions.registry.MAMobEffectRegistry;
-import net.melvinczyk.melsadditions.registry.MASchoolRegistry;
-import net.melvinczyk.melsadditions.spells.MASpellRarity;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -23,32 +22,31 @@ import java.util.List;
 import java.util.Optional;
 
 @AutoSpellConfig
-public class SummonBoneSerpentSpell extends AbstractSpell
-{
-    private final ResourceLocation spellId = new ResourceLocation(MelsAdditions.MODID, "summon_bone_serpent");
+public class SummonRavagerSpell extends AbstractSpell {
+    private final ResourceLocation spellId = new ResourceLocation(MelsAdditions.MODID, "summon_ravager");
 
     @Override
     public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster)
     {
         return List.of(
-                Component.translatable("ui.irons_spellbooks.hp", getBoneSerpentHealth(spellLevel, caster)),
-                Component.translatable("ui.irons_spellbooks.damage", getBoneSerpentDamage(spellLevel, caster))
+                Component.translatable("ui.irons_spellbooks.hp", getRavagerHealth(spellLevel, caster)),
+                Component.translatable("ui.irons_spellbooks.damage", getRavagerDamage(spellLevel, caster))
         );
     }
 
     private final DefaultConfig defaultConfig = new DefaultConfig()
-            .setMinRarity(SpellRarity.EPIC)
-            .setSchoolResource(SchoolRegistry.BLOOD_RESOURCE)
+            .setMinRarity(SpellRarity.LEGENDARY)
+            .setSchoolResource(SchoolRegistry.EVOCATION_RESOURCE)
             .setMaxLevel(10)
-            .setCooldownSeconds(180)
+            .setCooldownSeconds(360)
             .build();
 
-    public SummonBoneSerpentSpell() {
-        this.manaCostPerLevel = 20;
+    public SummonRavagerSpell() {
+        this.manaCostPerLevel = 25;
         this.baseSpellPower = 5;
         this.spellPowerPerLevel = 1;
-        this.castTime = 70;
-        this.baseManaCost = 200;
+        this.castTime = 100;
+        this.baseManaCost = 300;
     }
 
     @Override
@@ -82,28 +80,28 @@ public class SummonBoneSerpentSpell extends AbstractSpell
     @Override
     public void onCast(Level world, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData)
     {
-         int summonTime = 20 * 60 * 10;
+        int summonTime = 20 * 60 * 10;
 
-         SummonedBoneSerpent boneSerpent = new SummonedBoneSerpent(world, entity);
-         boneSerpent.setPos(entity.position());
+        SummonedRavager ravager = new SummonedRavager(world, entity);
+        ravager.setPos(entity.position());
 
-         world.addFreshEntity(boneSerpent);
+        world.addFreshEntity(ravager);
 
-         boneSerpent.addEffect(new MobEffectInstance(MAMobEffectRegistry.BONE_SERPENT_TIMER.get(), summonTime, 0, false, false, false));
-         int effectAmplifier = 0;
-         if (entity.hasEffect(MAMobEffectRegistry.BONE_SERPENT_TIMER.get()))
-             effectAmplifier += entity.getEffect(MAMobEffectRegistry.BONE_SERPENT_TIMER.get()).getAmplifier() + 1;
-         entity.addEffect(new MobEffectInstance(MAMobEffectRegistry.BONE_SERPENT_TIMER.get(), summonTime, effectAmplifier, false, false, true));
+        ravager.addEffect(new MobEffectInstance(MAMobEffectRegistry.RAVAGER_TIMER.get(), summonTime, 0, false, false, false));
+        int effectAmplifier = 0;
+        if (entity.hasEffect(MAMobEffectRegistry.RAVAGER_TIMER.get()))
+            effectAmplifier += entity.getEffect(MAMobEffectRegistry.RAVAGER_TIMER.get()).getAmplifier() + 1;
+        entity.addEffect(new MobEffectInstance(MAMobEffectRegistry.RAVAGER_TIMER.get(), summonTime, effectAmplifier, false, false, true));
 
-         super.onCast(world, spellLevel, entity, castSource, playerMagicData);
+        super.onCast(world, spellLevel, entity, castSource, playerMagicData);
     }
 
-    private float getBoneSerpentHealth(int spellLevel, LivingEntity caster)
+    private float getRavagerHealth(int spellLevel, LivingEntity caster)
     {
         return 20 + spellLevel * 4;
     }
 
-    private float getBoneSerpentDamage(int spellLevel, LivingEntity caster) {
+    private float getRavagerDamage(int spellLevel, LivingEntity caster) {
         return getSpellPower(spellLevel, caster);
     }
 }
