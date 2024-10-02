@@ -22,7 +22,17 @@ public class SpellRegistries {
         return SPELLS.register(spell.getSpellName(), () -> spell);
     }
 
+    // Blood
     public static final RegistryObject<AbstractSpell> SUMMON_BONE_SERPENT = registerSpell(new SummonBoneSerpentSpell());
-    public static final RegistryObject<AbstractSpell> LAUNCH_TRIDENT = registerSpell(new LaunchTridentSpell());
+
+    // Evocation
     public static final RegistryObject<AbstractSpell> SUMMON_RAVAGER = registerSpell(new SummonRavagerSpell());
+
+    // Water
+    public static final RegistryObject<AbstractSpell> LAUNCH_TRIDENT = registerSpell(new LaunchTridentSpell());
+    // TODO: Water Spout spell - Targets an entity and launches them in the air with a waver spout
+    // TODO: Wave Push Back spell - Summon a wave in front of you that pushes entities away
+    // TODO: Erode spell - Water beam that hits target and destroys stone
+    // TODO: Summon Coralsus - Summons a Cataclysm coralsus
+    
 }

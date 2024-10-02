@@ -39,6 +39,7 @@ public class MelsAdditions
         MAMobEffectRegistry.register(modEventBus);
         MAAttributeRegistry.register(modEventBus);
         MASchoolRegistry.register(modEventBus);
+        MAItemRegistry.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
 

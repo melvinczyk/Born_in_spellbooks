@@ -35,16 +35,16 @@ public class LaunchTridentSpell extends AbstractSpell {
             .setMinRarity(SpellRarity.COMMON)
             .setSchoolResource(MASchoolRegistry.WATER_RESOURCE)
             .setMaxLevel(10)
-            .setCooldownSeconds(15)
+            .setCooldownSeconds(1)
             .build();
 
     public LaunchTridentSpell()
     {
-        this.manaCostPerLevel = 15;
-        this.baseSpellPower = 6;
+        this.manaCostPerLevel = 2;
+        this.baseSpellPower = 12;
         this.spellPowerPerLevel = 1;
         this.castTime = 0;
-        this.baseManaCost = 25;
+        this.baseManaCost = 10;
     }
 
     @Override
@@ -89,6 +89,6 @@ public class LaunchTridentSpell extends AbstractSpell {
     }
 
     private float getDamage(int spellLevel, LivingEntity caster) {
-        return getSpellPower(spellLevel, caster) * 1.5f;
+        return getSpellPower(spellLevel, caster) * .5f;
     }
 }

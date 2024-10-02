@@ -66,11 +66,10 @@ public class TridentProjectile extends AbstractMagicProjectile {
 
     @Override
     public void trailParticles() {
-
     }
 
     @Override
     public void impactParticles(double x, double y, double z) {
-        MagicManager.spawnParticles(level(), ParticleTypes.SPLASH, x, y, z, 10, .1, .1, .1, .25, true);
+        MagicManager.spawnParticles(level(), ParticleTypes.SPLASH, x, y, z, 20, .1, .1, .1, .25, true);
     }
 }
