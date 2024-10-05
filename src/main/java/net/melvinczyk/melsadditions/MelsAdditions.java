@@ -2,12 +2,11 @@ package net.melvinczyk.melsadditions;
 
 import com.mojang.logging.LogUtils;
 import net.melvinczyk.melsadditions.entity.mobs.render.SummonedBoneSerpentRenderer;
+import net.melvinczyk.melsadditions.entity.mobs.render.SummonedDreadHoundRenderer;
 import net.melvinczyk.melsadditions.entity.mobs.render.SummonedRavagerRenderer;
 import net.melvinczyk.melsadditions.entity.spells.trident.TridentRenderer;
-import net.melvinczyk.melsadditions.events.EntityEventHandler;
 import net.melvinczyk.melsadditions.registry.*;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -17,7 +16,6 @@ import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -74,6 +72,7 @@ public class MelsAdditions
             EntityRenderers.register(MAEntityRegistry.SUMMONED_BONE_SERPENT.get(), SummonedBoneSerpentRenderer::new);
             EntityRenderers.register(MAEntityRegistry.SUMMONED_RAVAGER.get(), SummonedRavagerRenderer::new);
             EntityRenderers.register(MAEntityRegistry.TRIDENT_PROJECTILE.get(), TridentRenderer::new);
+            EntityRenderers.register(MAEntityRegistry.SUMMONED_DREAD_HOUND.get(), SummonedDreadHoundRenderer::new);
             LOGGER.info("HELLO FROM CLIENT SETUP");
             LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
         }

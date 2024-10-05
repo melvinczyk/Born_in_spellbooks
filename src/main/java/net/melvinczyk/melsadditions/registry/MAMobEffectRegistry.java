@@ -20,4 +20,5 @@ public class MAMobEffectRegistry {
 
     public static final RegistryObject<SummonTimer> BONE_SERPENT_TIMER = MOB_EFFECT_DEFERRED_REGISTER.register("bone_serpent_timer", () -> new SummonTimer(MobEffectCategory.BENEFICIAL, 0xbea925));
     public static final RegistryObject<SummonTimer> RAVAGER_TIMER = MOB_EFFECT_DEFERRED_REGISTER.register("ravager_timer", () -> new SummonTimer(MobEffectCategory.BENEFICIAL, 0xbea925));
+    public static final RegistryObject<SummonTimer> DREAD_HOUND_TIMER = MOB_EFFECT_DEFERRED_REGISTER.register("dread_hound_timer", () -> new SummonTimer(MobEffectCategory.BENEFICIAL, 0xbea925));
 }

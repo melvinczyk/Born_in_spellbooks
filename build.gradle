@@ -156,6 +156,13 @@ repositories {
         url 'https://maven.kosmx.dev/'
     }
 
+    maven {
+        url "https://cursemaven.com"
+        content {
+            includeGroup "curse.maven"
+        }
+    }
+
     exclusiveContent {
         forRepository {
             maven {
@@ -214,6 +221,8 @@ dependencies {
     runtimeOnly fg.deobf("maven.modrinth:jei:PeYsGsQy")
     runtimeOnly fg.deobf("maven.modrinth:neat:FrjOZVxL")
     implementation fg.deobf("maven.modrinth:LVnvHVBp:EzN8KQYF")
+
+    implementation fg.deobf("curse.maven:born-in-chaos-686437:5369688")
 
 }
 
