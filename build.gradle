@@ -219,8 +219,10 @@ dependencies {
     //implementation fg.deobf("maven.modrinth:aquamirae:7lX4KLFc")
 
     runtimeOnly fg.deobf("maven.modrinth:jei:PeYsGsQy")
-    runtimeOnly fg.deobf("maven.modrinth:neat:FrjOZVxL")
     implementation fg.deobf("maven.modrinth:LVnvHVBp:EzN8KQYF")
+    implementation fg.deobf("maven.modrinth:Adega8YN:NRqFuyt1")
+    implementation fg.deobf("maven.modrinth:4A86JsDZ:FCQy9L24")
+    implementation fg.deobf("maven.modrinth:twkfQtEc:ViCNvRED")
 
     implementation fg.deobf("curse.maven:born-in-chaos-686437:5369688")
 
