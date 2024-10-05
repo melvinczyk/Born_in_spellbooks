@@ -1,9 +1,11 @@
 package net.melvinczyk.melsadditions;
 
 import com.mojang.logging.LogUtils;
+import net.melvinczyk.melsadditions.entity.mobs.SummonedSkeletonThrasher;
 import net.melvinczyk.melsadditions.entity.mobs.render.SummonedBoneSerpentRenderer;
 import net.melvinczyk.melsadditions.entity.mobs.render.SummonedDreadHoundRenderer;
 import net.melvinczyk.melsadditions.entity.mobs.render.SummonedRavagerRenderer;
+import net.melvinczyk.melsadditions.entity.mobs.render.SummonedSkeletonThrasherRenderer;
 import net.melvinczyk.melsadditions.entity.spells.trident.TridentRenderer;
 import net.melvinczyk.melsadditions.registry.*;
 import net.minecraft.client.Minecraft;
@@ -73,6 +75,7 @@ public class MelsAdditions
             EntityRenderers.register(MAEntityRegistry.SUMMONED_RAVAGER.get(), SummonedRavagerRenderer::new);
             EntityRenderers.register(MAEntityRegistry.TRIDENT_PROJECTILE.get(), TridentRenderer::new);
             EntityRenderers.register(MAEntityRegistry.SUMMONED_DREAD_HOUND.get(), SummonedDreadHoundRenderer::new);
+            EntityRenderers.register(MAEntityRegistry.SUMMONED_SKELETON_THRASHER.get(), SummonedSkeletonThrasherRenderer::new);
             LOGGER.info("HELLO FROM CLIENT SETUP");
             LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
         }

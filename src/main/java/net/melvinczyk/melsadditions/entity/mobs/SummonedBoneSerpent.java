@@ -11,7 +11,6 @@ import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
-import net.minecraft.world.entity.monster.Ravager;
 import net.minecraft.world.level.Level;
 import net.minecraft.core.particles.ParticleTypes;
 import io.redspace.ironsspellbooks.util.OwnerHelper;

@@ -45,10 +45,11 @@ public class SummonedRavager extends Ravager implements MagicSummon {
     public void registerGoals() {
 
         this.goalSelector.addGoal(0, new FloatGoal(this));
-
+        this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.2f, true));
         this.goalSelector.addGoal(7, new GenericFollowOwnerGoal(this, this::getSummoner, 0.9f, 15, 5, false, 25));
         this.goalSelector.addGoal(8, new WaterAvoidingRandomStrollGoal(this, 0.8D));
-        this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Player.class, 6.0F));
+        this.goalSelector.addGoal(9, new LookAtPlayerGoal(this, Player.class, 6.0F));
+        this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Mob.class, 8.0F));
 
         this.targetSelector.addGoal(1, new GenericOwnerHurtByTargetGoal(this, this::getSummoner));
         this.targetSelector.addGoal(2, new GenericOwnerHurtTargetGoal(this, this::getSummoner));
@@ -98,6 +99,11 @@ public class SummonedRavager extends Ravager implements MagicSummon {
     @Override
     public boolean doHurtTarget(Entity pEntity) {
         return Utils.doMeleeAttack(this, pEntity, SpellRegistries.SUMMON_RAVAGER.get().getDamageSource(this, getSummoner()));
+    }
+
+    @Override
+    public boolean isPushable() {
+        return super.isPushable();
     }
 
     @Override

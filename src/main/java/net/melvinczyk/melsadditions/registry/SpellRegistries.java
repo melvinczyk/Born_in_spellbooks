@@ -4,6 +4,7 @@ import net.melvinczyk.melsadditions.MelsAdditions;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
 import net.melvinczyk.melsadditions.spells.blood.SummonBoneSerpentSpell;
+import net.melvinczyk.melsadditions.spells.blood.SummonSkeletonThrasherSpell;
 import net.melvinczyk.melsadditions.spells.evocation.SummonRavagerSpell;
 import net.melvinczyk.melsadditions.spells.nature.SummonDreadHoundSpell;
 import net.melvinczyk.melsadditions.spells.water.LaunchTridentSpell;
@@ -25,6 +26,7 @@ public class SpellRegistries {
 
     // Blood
     public static final RegistryObject<AbstractSpell> SUMMON_BONE_SERPENT = registerSpell(new SummonBoneSerpentSpell());
+    public static final RegistryObject<AbstractSpell> SUMMON_SKELETON_THRASHER = registerSpell(new SummonSkeletonThrasherSpell());
 
     // Evocation
     public static final RegistryObject<AbstractSpell> SUMMON_RAVAGER = registerSpell(new SummonRavagerSpell());

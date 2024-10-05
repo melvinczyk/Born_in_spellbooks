@@ -5,15 +5,13 @@ import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
 import io.redspace.ironsspellbooks.entity.mobs.MagicSummon;
 import io.redspace.ironsspellbooks.entity.mobs.goals.*;
 import io.redspace.ironsspellbooks.util.OwnerHelper;
-import net.mcreator.borninchaosv.entity.DreadHoundEntity;
+import net.mcreator.borninchaosv.entity.SkeletonThrasherEntity;
 import net.melvinczyk.melsadditions.registry.MAEntityRegistry;
 import net.melvinczyk.melsadditions.registry.MAMobEffectRegistry;
 import net.melvinczyk.melsadditions.registry.SpellRegistries;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.tags.DamageTypeTags;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
@@ -29,32 +27,28 @@ import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.UUID;
 
-public class SummonedDreadHound extends DreadHoundEntity implements MagicSummon {
-    public SummonedDreadHound(EntityType<? extends DreadHoundEntity> pEntityType, Level pLevel)
-    {
-        super((EntityType<DreadHoundEntity>) pEntityType, pLevel);
+public class SummonedSkeletonThrasher extends SkeletonThrasherEntity implements MagicSummon {
+    public SummonedSkeletonThrasher(EntityType<? extends SkeletonThrasherEntity> pEntityType, Level pLevel) {
+        super((EntityType<SkeletonThrasherEntity>) pEntityType, pLevel);
         xpReward = 0;
     }
 
-    public SummonedDreadHound(Level pLevel, LivingEntity owner)
-    {
-        this(MAEntityRegistry.SUMMONED_DREAD_HOUND.get(), pLevel);
+    public SummonedSkeletonThrasher(Level pLevel, LivingEntity owner) {
+        this(MAEntityRegistry.SUMMONED_SKELETON_THRASHER.get(), pLevel);
         setSummoner(owner);
     }
 
-
     public void registerGoals() {
+
         this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.2f, true));
+        this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.2f, false));
         this.goalSelector.addGoal(7, new GenericFollowOwnerGoal(this, this::getSummoner, 0.9f, 15, 5, false, 25));
         this.goalSelector.addGoal(8, new WaterAvoidingRandomStrollGoal(this, 0.8D));
-        this.goalSelector.addGoal(9, new LookAtPlayerGoal(this, Player.class, 6.0F));
-        this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Mob.class, 8.0F));
+        this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Player.class, 6.0F));
 
         this.targetSelector.addGoal(1, new GenericOwnerHurtByTargetGoal(this, this::getSummoner));
         this.targetSelector.addGoal(2, new GenericOwnerHurtTargetGoal(this, this::getSummoner));
@@ -85,7 +79,7 @@ public class SummonedDreadHound extends DreadHoundEntity implements MagicSummon 
 
     @Override
     public void onRemovedFromWorld() {
-        this.onRemovedHelper(this, MAMobEffectRegistry.DREAD_HOUND_TIMER.get());
+        this.onRemovedHelper(this, MAMobEffectRegistry.SKELETON_THRASHER_TIMER.get());
         super.onRemovedFromWorld();
     }
 
@@ -103,7 +97,7 @@ public class SummonedDreadHound extends DreadHoundEntity implements MagicSummon 
 
     @Override
     public boolean doHurtTarget(Entity pEntity) {
-        return Utils.doMeleeAttack(this, pEntity, SpellRegistries.SUMMON_DREAD_HOUND.get().getDamageSource(this, getSummoner()));
+        return Utils.doMeleeAttack(this, pEntity, SpellRegistries.SUMMON_SKELETON_THRASHER.get().getDamageSource(this, getSummoner()));
     }
 
     @Override
@@ -113,19 +107,35 @@ public class SummonedDreadHound extends DreadHoundEntity implements MagicSummon 
 
     @Override
     public boolean hurt(DamageSource pSource, float pAmount) {
-        if (shouldIgnoreDamage(pSource))
+        if (!pSource.is(DamageTypeTags.BYPASSES_INVULNERABILITY) && shouldIgnoreDamage(pSource))
             return false;
         return super.hurt(pSource, pAmount);
     }
 
     public static AttributeSupplier setAttributes() {
         return Mob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 20)
+                .add(Attributes.MAX_HEALTH, 60)
                 .add(Attributes.JUMP_STRENGTH, 2.0)
                 .add(Attributes.FOLLOW_RANGE, 32.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.3)
-                .add(Attributes.ATTACK_DAMAGE, 5.0D)
+                .add(Attributes.ATTACK_DAMAGE, 12.0D)
                 .build();
+    }
+
+    @Override
+    public boolean fireImmune() {
+        return true;
+    }
+
+
+    @Override
+    protected boolean isSunBurnTick() {
+        return false;
+    }
+
+    @Override
+    public boolean isPreventingPlayerRest(Player pPlayer) {
+        return !this.isAlliedTo(pPlayer);
     }
 
     @Override
@@ -158,48 +168,12 @@ public class SummonedDreadHound extends DreadHoundEntity implements MagicSummon 
             this.setYRot(player.getYRot());
             this.yRotO = this.getYRot();
             this.setXRot(player.getXRot() * 0.3F);
-                this.setSpeed((float) (this.getAttribute(Attributes.MOVEMENT_SPEED).getValue()));
-                super.travel(new Vec3(player.xxa * 0.3F, travelVector.y, player.zza * 0.3F));
+
+            this.setSpeed((float) (this.getAttribute(Attributes.MOVEMENT_SPEED).getValue()));
+            super.travel(new Vec3(player.xxa * 0.3F, travelVector.y, player.zza * 0.3F));
+
         } else {
             super.travel(travelVector);
-        }
-    }
-
-
-
-    public boolean canBreatheUnderwater() {
-        return false;
-    }
-
-    @Override
-    public boolean isInvulnerableTo(DamageSource source) {
-        return source.is(DamageTypes.IN_WALL)  || super.isInvulnerableTo(source);
-    }
-
-
-    class DreadHoundAttackGoal extends MeleeAttackGoal {
-        public DreadHoundAttackGoal() {
-            super(SummonedDreadHound.this, 1.25D, true);
-        }
-
-        protected void checkAndPerformAttack(LivingEntity pEnemy, double pDistToEnemySqr) {
-            double d0 = this.getAttackReachSqr(pEnemy);
-            if (pDistToEnemySqr <= d0 && this.isTimeToAttack()) {
-                this.resetAttackCooldown();
-                this.mob.doHurtTarget(pEnemy);
-            } else if (pDistToEnemySqr <= d0 * 2.0D) {
-                if (this.isTimeToAttack()) {
-                    this.resetAttackCooldown();
-                }
-
-            } else {
-                this.resetAttackCooldown();
-            }
-        }
-
-        @Override
-        public void stop() {
-            super.stop();
         }
     }
 }

@@ -4,6 +4,7 @@ import net.melvinczyk.melsadditions.MelsAdditions;
 import net.melvinczyk.melsadditions.entity.mobs.SummonedBoneSerpent;
 import net.melvinczyk.melsadditions.entity.mobs.SummonedDreadHound;
 import net.melvinczyk.melsadditions.entity.mobs.SummonedRavager;
+import net.melvinczyk.melsadditions.entity.mobs.SummonedSkeletonThrasher;
 import net.melvinczyk.melsadditions.entity.spells.trident.TridentProjectile;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
@@ -40,6 +41,12 @@ public class MAEntityRegistry {
                     .sized(1f, 1f)
                     .clientTrackingRange(10)
                     .build(new ResourceLocation(MelsAdditions.MODID, "summoned_dread_hound").toString()));
+
+    public static final RegistryObject<EntityType<SummonedSkeletonThrasher>> SUMMONED_SKELETON_THRASHER =
+            ENTITIES.register("summoned_skeleton_thrasher", () -> EntityType.Builder.<SummonedSkeletonThrasher>of(SummonedSkeletonThrasher::new, MobCategory.MONSTER)
+                    .sized(1f, 1f)
+                    .clientTrackingRange(10)
+                    .build(new ResourceLocation(MelsAdditions.MODID, "summoned_skeleton_thrasher").toString()));
 
 
     // Projectiles

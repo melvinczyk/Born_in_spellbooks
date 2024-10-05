@@ -32,25 +32,23 @@ public class SummonDreadHoundSpell extends AbstractSpell {
     @Override
     public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster)
     {
-        return List.of(
-                Component.translatable("ui.irons_spellbooks.hp", getDreadHoundHealth(spellLevel, caster)),
-                Component.translatable("ui.irons_spellbooks.damage", getDreadHoundDamage(spellLevel, caster))
-        );
+        int summons = spellLevel / 2;
+        return List.of(Component.translatable("ui.irons_spellbooks.summon_count", summons));
     }
 
     private final DefaultConfig defaultConfig = new DefaultConfig()
-            .setMinRarity(SpellRarity.EPIC)
+            .setMinRarity(SpellRarity.UNCOMMON)
             .setSchoolResource(SchoolRegistry.NATURE_RESOURCE)
             .setMaxLevel(10)
-            .setCooldownSeconds(180)
+            .setCooldownSeconds(360)
             .build();
 
     public SummonDreadHoundSpell() {
-        this.manaCostPerLevel = 20;
-        this.baseSpellPower = 5;
-        this.spellPowerPerLevel = 1;
-        this.castTime = 70;
-        this.baseManaCost = 200;
+        this.manaCostPerLevel = 10;
+        this.baseSpellPower = 10;
+        this.spellPowerPerLevel = 3;
+        this.castTime = 30;
+        this.baseManaCost = 50;
     }
 
     @Override

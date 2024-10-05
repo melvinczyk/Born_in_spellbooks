@@ -5,11 +5,8 @@ import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import io.redspace.ironsspellbooks.api.spells.*;
 import net.melvinczyk.melsadditions.MelsAdditions;
-import net.melvinczyk.melsadditions.config.MADefaultConfig;
-import net.melvinczyk.melsadditions.entity.mobs.SummonedBoneSerpent;
+import net.melvinczyk.melsadditions.entity.mobs.SummonedSkeletonThrasher;
 import net.melvinczyk.melsadditions.registry.MAMobEffectRegistry;
-import net.melvinczyk.melsadditions.registry.MASchoolRegistry;
-import net.melvinczyk.melsadditions.spells.MASpellRarity;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -23,31 +20,31 @@ import java.util.List;
 import java.util.Optional;
 
 @AutoSpellConfig
-public class SummonBoneSerpentSpell extends AbstractSpell
+public class SummonSkeletonThrasherSpell extends AbstractSpell
 {
-    private final ResourceLocation spellId = new ResourceLocation(MelsAdditions.MODID, "summon_bone_serpent");
+    private final ResourceLocation spellId = new ResourceLocation(MelsAdditions.MODID, "summoned_skeleton_thrasher");
 
     @Override
     public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster)
     {
         return List.of(
-                Component.translatable("ui.irons_spellbooks.hp", getBoneSerpentHealth(spellLevel, caster)),
-                Component.translatable("ui.irons_spellbooks.damage", getBoneSerpentDamage(spellLevel, caster))
+                Component.translatable("ui.irons_spellbooks.hp", getThrasherHealth(spellLevel, caster)),
+                Component.translatable("ui.irons_spellbooks.damage", getThrasherDamage(spellLevel, caster))
         );
     }
 
     private final DefaultConfig defaultConfig = new DefaultConfig()
-            .setMinRarity(SpellRarity.EPIC)
+            .setMinRarity(SpellRarity.LEGENDARY)
             .setSchoolResource(SchoolRegistry.BLOOD_RESOURCE)
             .setMaxLevel(10)
             .setCooldownSeconds(180)
             .build();
 
-    public SummonBoneSerpentSpell() {
+    public SummonSkeletonThrasherSpell() {
         this.manaCostPerLevel = 20;
         this.baseSpellPower = 5;
         this.spellPowerPerLevel = 1;
-        this.castTime = 50;
+        this.castTime = 30;
         this.baseManaCost = 200;
     }
 
@@ -82,28 +79,28 @@ public class SummonBoneSerpentSpell extends AbstractSpell
     @Override
     public void onCast(Level world, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData)
     {
-         int summonTime = 20 * 60 * 10;
+        int summonTime = 20 * 60 * 10;
 
-         SummonedBoneSerpent boneSerpent = new SummonedBoneSerpent(world, entity);
-         boneSerpent.setPos(entity.position());
+        SummonedSkeletonThrasher thrasher = new SummonedSkeletonThrasher(world, entity);
+        thrasher.setPos(entity.position());
 
-         world.addFreshEntity(boneSerpent);
+        world.addFreshEntity(thrasher);
 
-         boneSerpent.addEffect(new MobEffectInstance(MAMobEffectRegistry.BONE_SERPENT_TIMER.get(), summonTime, 0, false, false, false));
-         int effectAmplifier = 0;
-         if (entity.hasEffect(MAMobEffectRegistry.BONE_SERPENT_TIMER.get()))
-             effectAmplifier += entity.getEffect(MAMobEffectRegistry.BONE_SERPENT_TIMER.get()).getAmplifier() + 1;
-         entity.addEffect(new MobEffectInstance(MAMobEffectRegistry.BONE_SERPENT_TIMER.get(), summonTime, effectAmplifier, false, false, true));
+        thrasher.addEffect(new MobEffectInstance(MAMobEffectRegistry.SKELETON_THRASHER_TIMER.get(), summonTime, 0, false, false, false));
+        int effectAmplifier = 0;
+        if (entity.hasEffect(MAMobEffectRegistry.SKELETON_THRASHER_TIMER.get()))
+            effectAmplifier += entity.getEffect(MAMobEffectRegistry.SKELETON_THRASHER_TIMER.get()).getAmplifier() + 1;
+        entity.addEffect(new MobEffectInstance(MAMobEffectRegistry.SKELETON_THRASHER_TIMER.get(), summonTime, effectAmplifier, false, false, true));
 
-         super.onCast(world, spellLevel, entity, castSource, playerMagicData);
+        super.onCast(world, spellLevel, entity, castSource, playerMagicData);
     }
 
-    private float getBoneSerpentHealth(int spellLevel, LivingEntity caster)
+    private float getThrasherHealth(int spellLevel, LivingEntity caster)
     {
         return 20 + spellLevel * 4;
     }
 
-    private float getBoneSerpentDamage(int spellLevel, LivingEntity caster) {
+    private float getThrasherDamage(int spellLevel, LivingEntity caster) {
         return getSpellPower(spellLevel, caster);
     }
 }
