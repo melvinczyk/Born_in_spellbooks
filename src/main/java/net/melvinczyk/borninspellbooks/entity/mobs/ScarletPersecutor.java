@@ -19,7 +19,7 @@ import javax.annotation.Nullable;
 import java.util.UUID;
 
 
-public class ScarletPersecutor extends ScarletPersecutorEntity implements MagicSummon {
+public class ScarletPersecutor extends ScarletPersecutorEntity {
     public ScarletPersecutor(EntityType<? extends ScarletPersecutorEntity> pEntityType, Level pLevel) {
         super((EntityType<ScarletPersecutorEntity>) pEntityType, pLevel);
         xpReward = 0;
@@ -57,11 +57,6 @@ public class ScarletPersecutor extends ScarletPersecutorEntity implements MagicS
 
     public LivingEntity getSummoner() {
         return OwnerHelper.getAndCacheOwner(level(), cachedSummoner, summonerUUID);
-    }
-
-    @Override
-    public void onUnSummon() {
-
     }
 
     @Override

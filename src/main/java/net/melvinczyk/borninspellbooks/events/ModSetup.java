@@ -19,5 +19,6 @@ public class ModSetup {
         event.put(MAEntityRegistry.SUMMONED_DREAD_HOUND.get(), SummonedDreadHound.setAttributes());
         event.put(MAEntityRegistry.SUMMONED_SKELETON_THRASHER.get(), SummonedSkeletonThrasher.setAttributes());
         event.put(MAEntityRegistry.SCARLET_PERSECUTOR.get(), ScarletPersecutor.setAttributes());
+        event.put(MAEntityRegistry.CORPSEFLY_PATHFINDER.get(), ScarletPersecutor.setAttributes());
     }
 }

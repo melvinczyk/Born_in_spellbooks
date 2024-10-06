@@ -3,10 +3,7 @@ package net.melvinczyk.borninspellbooks.spells.blood;
 import io.redspace.ironsspellbooks.api.config.DefaultConfig;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
-import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
-import io.redspace.ironsspellbooks.api.spells.CastSource;
-import io.redspace.ironsspellbooks.api.spells.CastType;
-import io.redspace.ironsspellbooks.api.spells.SpellRarity;
+import io.redspace.ironsspellbooks.api.spells.*;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.capabilities.magic.TargetEntityCastData;
 import io.redspace.ironsspellbooks.damage.DamageSources;
@@ -32,9 +29,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 
+@AutoSpellConfig
 public class CurseSpell extends AbstractSpell {
     private final ResourceLocation spellId = new ResourceLocation(BornInSpellbooks.MODID, "curse");
-    private static final int MAX_TARGETS = 1;
 
     @Override
     public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster)
@@ -99,16 +96,7 @@ public class CurseSpell extends AbstractSpell {
     public void onCast(Level world, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
         if (playerMagicData.getAdditionalCastData() instanceof TargetedTargetAreaCastData targetData) {
             var targetEntity = targetData.getTarget((ServerLevel) world);
-            if (targetEntity != null) {
-                float radius = 1;
-                AtomicInteger targets = new AtomicInteger(0);
-                targetEntity.level().getEntitiesOfClass(LivingEntity.class, targetEntity.getBoundingBox().inflate(radius)).forEach((victim) -> {
-                    if (targets.get() < MAX_TARGETS && victim != entity && victim.distanceToSqr(targetEntity) < radius * radius && !DamageSources.isFriendlyFireBetween(entity, victim)) {
-                        victim.addEffect(new MAMobEffectInstance(MAMobEffectRegistry.CURSED_MARK.get(), getDuration(spellLevel, entity), getAmplifier(spellLevel, entity), entity));
-                        targets.incrementAndGet();
-                    }
-                });
-            }
+            targetEntity.addEffect(new MAMobEffectInstance(MAMobEffectRegistry.CURSED_MARK.get(), getDuration(spellLevel, entity), getAmplifier(spellLevel, entity), entity));
         }
         super.onCast(world, spellLevel, entity, castSource, playerMagicData);
     }

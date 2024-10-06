@@ -2,12 +2,10 @@ package net.melvinczyk.borninspellbooks.spells.nature;
 
 import io.redspace.ironsspellbooks.api.config.DefaultConfig;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
-import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
-import io.redspace.ironsspellbooks.api.spells.CastSource;
-import io.redspace.ironsspellbooks.api.spells.CastType;
-import io.redspace.ironsspellbooks.api.spells.SpellRarity;
+import io.redspace.ironsspellbooks.api.spells.*;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import net.melvinczyk.borninspellbooks.BornInSpellbooks;
+import net.melvinczyk.borninspellbooks.entity.spells.maggot.MaggotProjectile;
 import net.melvinczyk.borninspellbooks.entity.spells.trident.TridentProjectile;
 import net.melvinczyk.borninspellbooks.registry.MASchoolRegistry;
 import net.minecraft.network.chat.Component;
@@ -22,6 +20,8 @@ import net.minecraftforge.registries.RegistryObject;
 import java.util.List;
 import java.util.Optional;
 
+
+@AutoSpellConfig
 public class InfectSpell extends AbstractSpell {
     private final ResourceLocation spellId = new ResourceLocation(BornInSpellbooks.MODID, "infect");
 
@@ -35,7 +35,7 @@ public class InfectSpell extends AbstractSpell {
     }
 
     private final DefaultConfig defaultConfig = new DefaultConfig()
-            .setMinRarity(SpellRarity.COMMON)
+            .setMinRarity(SpellRarity.UNCOMMON)
             .setSchoolResource(MASchoolRegistry.NATURE_RESOURCE)
             .setMaxLevel(10)
             .setCooldownSeconds(1)
@@ -73,17 +73,17 @@ public class InfectSpell extends AbstractSpell {
 
     @Override
     public Optional<SoundEvent> getCastFinishSound() {
-        return Optional.of(SoundEvents.TRIDENT_THROW);
+        return Optional.of(SoundEvents.SLIME_SQUISH);
     }
 
     @Override
     public void onCast(Level world, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
-        TridentProjectile trident = new TridentProjectile(world, entity);
-        trident.setPos(entity.position().add(0, entity.getEyeHeight() , 0));
-        trident.shoot(entity.getLookAngle());
-        trident.setDamage(getDamage(spellLevel, entity));
-        trident.setNoGravity(false);
-        world.addFreshEntity(trident);
+        MaggotProjectile maggot = new MaggotProjectile(world, entity);
+        maggot.setPos(entity.position().add(0, entity.getEyeHeight() , 0));
+        maggot.shoot(entity.getLookAngle());
+        maggot.setDamage(getDamage(spellLevel, entity));
+        maggot.setNoGravity(false);
+        world.addFreshEntity(maggot);
         super.onCast(world, spellLevel, entity, castSource, playerMagicData);
     }
 

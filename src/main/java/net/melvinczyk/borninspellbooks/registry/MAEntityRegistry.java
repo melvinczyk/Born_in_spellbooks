@@ -2,6 +2,7 @@ package net.melvinczyk.borninspellbooks.registry;
 
 import net.melvinczyk.borninspellbooks.BornInSpellbooks;
 import net.melvinczyk.borninspellbooks.entity.mobs.*;
+import net.melvinczyk.borninspellbooks.entity.spells.maggot.MaggotProjectile;
 import net.melvinczyk.borninspellbooks.entity.spells.trident.TridentProjectile;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
@@ -53,6 +54,13 @@ public class MAEntityRegistry {
                     .build(new ResourceLocation(BornInSpellbooks.MODID, "scarlet_persecutor").toString()));
 
 
+    public static final RegistryObject<EntityType<CorpseFlyPathFinder>> CORPSEFLY_PATHFINDER =
+            ENTITIES.register("corpsefly_pathfinder", () -> EntityType.Builder.<CorpseFlyPathFinder>of(CorpseFlyPathFinder::new, MobCategory.MISC)
+                    .sized(1f, 1f)
+                    .clientTrackingRange(64)
+                    .build(new ResourceLocation(BornInSpellbooks.MODID, "corpsefly_pathfinder").toString()));
+
+
     // Projectiles
     public static final RegistryObject<EntityType<TridentProjectile>> TRIDENT_PROJECTILE =
             ENTITIES.register("trident_projectile", () -> EntityType.Builder.<TridentProjectile>of(TridentProjectile::new, MobCategory.MISC)
@@ -60,4 +68,10 @@ public class MAEntityRegistry {
                     .clientTrackingRange(64)
                     .build(new ResourceLocation(BornInSpellbooks.MODID, "summoned_trident").toString()));
 
+
+    public static final RegistryObject<EntityType<MaggotProjectile>> MAGGOT_PROJECTILE =
+            ENTITIES.register("maggot_projectile", () -> EntityType.Builder.<MaggotProjectile>of(MaggotProjectile::new, MobCategory.MISC)
+                    .sized(1f, 1f)
+                    .clientTrackingRange(64)
+                    .build(new ResourceLocation(BornInSpellbooks.MODID, "maggot_projectile").toString()));
 }
