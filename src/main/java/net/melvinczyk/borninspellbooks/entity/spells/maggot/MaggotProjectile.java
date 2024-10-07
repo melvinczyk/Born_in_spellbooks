@@ -51,7 +51,6 @@ public class MaggotProjectile extends AbstractMagicProjectile implements GeoAnim
     @Override
     protected void doImpactSound(SoundEvent sound) {
         level().playSound(null, getX(), getY(), getZ(), sound, SoundSource.NEUTRAL, 2, 1.2f + Utils.random.nextFloat() * .2f);
-
     }
 
     @Override

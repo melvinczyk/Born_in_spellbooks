@@ -6,7 +6,6 @@ import io.redspace.ironsspellbooks.api.spells.*;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import net.melvinczyk.borninspellbooks.BornInSpellbooks;
 import net.melvinczyk.borninspellbooks.entity.spells.maggot.MaggotProjectile;
-import net.melvinczyk.borninspellbooks.entity.spells.trident.TridentProjectile;
 import net.melvinczyk.borninspellbooks.registry.MASchoolRegistry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -15,14 +14,13 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.registries.RegistryObject;
 
 import java.util.List;
 import java.util.Optional;
 
 
 @AutoSpellConfig
-public class InfectSpell extends AbstractSpell {
+public class ShootMaggot extends AbstractSpell {
     private final ResourceLocation spellId = new ResourceLocation(BornInSpellbooks.MODID, "infect");
 
     @Override
@@ -41,7 +39,7 @@ public class InfectSpell extends AbstractSpell {
             .setCooldownSeconds(1)
             .build();
 
-    public InfectSpell()
+    public ShootMaggot()
     {
         this.manaCostPerLevel = 2;
         this.baseSpellPower = 12;

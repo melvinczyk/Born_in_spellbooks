@@ -75,6 +75,8 @@ public class BornInSpellbooks
             EntityRenderers.register(MAEntityRegistry.SUMMONED_SKELETON_THRASHER.get(), SummonedSkeletonThrasherRenderer::new);
             EntityRenderers.register(MAEntityRegistry.SCARLET_PERSECUTOR.get(), MAScarletPersecutorRenderer::new);
             EntityRenderers.register(MAEntityRegistry.CORPSEFLY_PATHFINDER.get(), CorpseFlyPathFinderRenderer::new);
+            EntityRenderers.register(MAEntityRegistry.SPAWNED_MAGGOT.get(), SpawnedMaggotRenderer::new);
+
 
             EntityRenderers.register(MAEntityRegistry.MAGGOT_PROJECTILE.get(), MaggotProjectileRenderer::new);
             LOGGER.info("HELLO FROM CLIENT SETUP");

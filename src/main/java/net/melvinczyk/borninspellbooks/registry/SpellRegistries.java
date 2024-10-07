@@ -8,7 +8,7 @@ import net.melvinczyk.borninspellbooks.spells.blood.SummonBoneSerpentSpell;
 import net.melvinczyk.borninspellbooks.spells.blood.SummonSkeletonThrasherSpell;
 import net.melvinczyk.borninspellbooks.spells.evocation.SummonRavagerSpell;
 import net.melvinczyk.borninspellbooks.spells.nature.InfectHostSpell;
-import net.melvinczyk.borninspellbooks.spells.nature.InfectSpell;
+import net.melvinczyk.borninspellbooks.spells.nature.ShootMaggot;
 import net.melvinczyk.borninspellbooks.spells.nature.SummonDreadHoundSpell;
 import net.melvinczyk.borninspellbooks.spells.water.LaunchTridentSpell;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -37,7 +37,7 @@ public class SpellRegistries {
 
     // Nature
     public static final RegistryObject<AbstractSpell> SUMMON_DREAD_HOUND = registerSpell(new SummonDreadHoundSpell());
-    public static final RegistryObject<AbstractSpell> INFECT = registerSpell(new InfectSpell());
+    public static final RegistryObject<AbstractSpell> INFECT = registerSpell(new ShootMaggot());
     public static final RegistryObject<AbstractSpell> INFECT_HOST = registerSpell(new InfectHostSpell());
 
 

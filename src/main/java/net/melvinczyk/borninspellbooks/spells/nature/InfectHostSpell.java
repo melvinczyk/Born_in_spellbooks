@@ -19,6 +19,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -70,7 +71,7 @@ public class InfectHostSpell extends AbstractSpell {
 
     @Override
     public Optional<SoundEvent> getCastFinishSound() {
-        return Optional.of(SoundRegistry.EVOCATION_CAST.get());
+        return Optional.of(ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("born_in_chaos_v1:corpse_fly_ambient")));
     }
 
     public static SoundEvent getImpactSound() {
@@ -86,9 +87,9 @@ public class InfectHostSpell extends AbstractSpell {
     public void onCast(Level world, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
         if (playerMagicData.getAdditionalCastData() instanceof TargetEntityCastData targetingData) {
             var targetEntity = targetingData.getTarget((ServerLevel) world);
-            CorpseFlyPathFinder corpseFly = new CorpseFlyPathFinder(world, entity);
+            CorpseFlyPathFinder corpseFly = new CorpseFlyPathFinder(world, entity, getSpellPower(spellLevel, entity));
             corpseFly.setTarget(targetEntity);
-            corpseFly.setPos(Utils.getPositionFromEntityLookDirection(entity, 2).subtract(0, 0, 0));
+            corpseFly.setPos(Utils.getPositionFromEntityLookDirection(entity, 2).subtract(0, .2, 0));
             world.addFreshEntity(corpseFly);
         }
         super.onCast(world, spellLevel, entity, castSource, playerMagicData);

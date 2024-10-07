@@ -61,6 +61,14 @@ public class MAEntityRegistry {
                     .build(new ResourceLocation(BornInSpellbooks.MODID, "corpsefly_pathfinder").toString()));
 
 
+
+    public static final RegistryObject<EntityType<SpawnedMaggot>> SPAWNED_MAGGOT =
+            ENTITIES.register("spawned_maggot", () -> EntityType.Builder.<SpawnedMaggot>of(SpawnedMaggot::new, MobCategory.MISC)
+                    .sized(1f, 1f)
+                    .clientTrackingRange(64)
+                    .build(new ResourceLocation(BornInSpellbooks.MODID, "spawned_maggot").toString()));
+
+
     // Projectiles
     public static final RegistryObject<EntityType<TridentProjectile>> TRIDENT_PROJECTILE =
             ENTITIES.register("trident_projectile", () -> EntityType.Builder.<TridentProjectile>of(TridentProjectile::new, MobCategory.MISC)
