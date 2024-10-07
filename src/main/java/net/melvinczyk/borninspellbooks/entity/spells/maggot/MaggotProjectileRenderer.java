@@ -32,9 +32,6 @@ public class MaggotProjectileRenderer extends GeoEntityRenderer<MaggotProjectile
         poseStack.mulPose(Axis.YP.rotationDegrees(yRot));
         poseStack.mulPose(Axis.XP.rotationDegrees(xRot));
 
-        //poseStack.mulPose(Axis.XP.rotationDegrees(90.0F));
-        //poseStack.mulPose(Axis.YP.rotationDegrees(90.0F));
-
         VertexConsumer vertexConsumer = bufferSource.getBuffer(RenderType.entityCutoutNoCull(TEXTURE));
         super.render(entity, yaw ,partialTicks, poseStack, bufferSource, light);
 

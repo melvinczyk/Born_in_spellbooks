@@ -6,7 +6,7 @@ import io.redspace.ironsspellbooks.api.spells.*;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import net.mcreator.borninchaosv.entity.StaffofBlindnessProjectileEntity;
 import net.melvinczyk.borninspellbooks.BornInSpellbooks;
-import net.melvinczyk.borninspellbooks.entity.spells.maggot.MaggotProjectile;
+import net.melvinczyk.borninspellbooks.entity.spells.blind.BlindnessProjectile;
 import net.melvinczyk.borninspellbooks.registry.MASchoolRegistry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -76,7 +76,7 @@ public class BlindSpell extends AbstractSpell {
 
     @Override
     public void onCast(Level world, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
-        StaffofBlindnessProjectileEntity blindnessProjectile = StaffofBlindnessProjectileEntity.shoot(world, entity, world.getRandom(), 1, getDamage(spellLevel, entity) , getKnockback(spellLevel, entity));
+        StaffofBlindnessProjectileEntity blindnessProjectile = StaffofBlindnessProjectileEntity.shoot(world, entity, world.getRandom(), 0, getDamage(spellLevel, entity) , getKnockback(spellLevel, entity));
         blindnessProjectile.setPos(entity.position().add(0, entity.getEyeHeight() , 0));
         blindnessProjectile.setNoGravity(false);
         world.addFreshEntity(blindnessProjectile);

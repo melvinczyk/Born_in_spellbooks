@@ -9,6 +9,7 @@ import net.melvinczyk.borninspellbooks.spells.blood.SummonBoneSerpentSpell;
 import net.melvinczyk.borninspellbooks.spells.blood.SummonSkeletonThrasherSpell;
 import net.melvinczyk.borninspellbooks.spells.evocation.BlindSpell;
 import net.melvinczyk.borninspellbooks.spells.evocation.SummonRavagerSpell;
+import net.melvinczyk.borninspellbooks.spells.fire.FelBombSpell;
 import net.melvinczyk.borninspellbooks.spells.nature.InfectHostSpell;
 import net.melvinczyk.borninspellbooks.spells.nature.ShootMaggot;
 import net.melvinczyk.borninspellbooks.spells.nature.SummonDreadHoundSpell;
@@ -43,6 +44,8 @@ public class SpellRegistries {
     public static final RegistryObject<AbstractSpell> INFECT = registerSpell(new ShootMaggot());
     public static final RegistryObject<AbstractSpell> INFECT_HOST = registerSpell(new InfectHostSpell());
 
+    // Fire
+    public static final RegistryObject<AbstractSpell> FEL_BOMB = registerSpell(new FelBombSpell());
 
 
     // Water

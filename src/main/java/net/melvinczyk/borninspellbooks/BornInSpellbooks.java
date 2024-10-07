@@ -2,6 +2,7 @@ package net.melvinczyk.borninspellbooks;
 
 import com.mojang.logging.LogUtils;
 import net.melvinczyk.borninspellbooks.entity.mobs.render.*;
+import net.melvinczyk.borninspellbooks.entity.spells.fel_bomb.FelBombRenderer;
 import net.melvinczyk.borninspellbooks.entity.spells.maggot.MaggotProjectileRenderer;
 import net.melvinczyk.borninspellbooks.entity.spells.trident.TridentRenderer;
 import net.melvinczyk.borninspellbooks.registry.*;
@@ -76,6 +77,7 @@ public class BornInSpellbooks
             EntityRenderers.register(MAEntityRegistry.SCARLET_PERSECUTOR.get(), MAScarletPersecutorRenderer::new);
             EntityRenderers.register(MAEntityRegistry.CORPSEFLY_PATHFINDER.get(), CorpseFlyPathFinderRenderer::new);
             EntityRenderers.register(MAEntityRegistry.SPAWNED_MAGGOT.get(), SpawnedMaggotRenderer::new);
+            EntityRenderers.register(MAEntityRegistry.FEL_BOMB.get(), FelBombRenderer::new);
 
 
             EntityRenderers.register(MAEntityRegistry.MAGGOT_PROJECTILE.get(), MaggotProjectileRenderer::new);
