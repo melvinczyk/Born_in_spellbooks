@@ -39,7 +39,7 @@ public class ScarletPersecutor extends ScarletPersecutorEntity {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 30)
                 .add(Attributes.FLYING_SPEED, 0.4D)
-                .add(Attributes.MOVEMENT_SPEED, 0.8D)
+                .add(Attributes.MOVEMENT_SPEED, 1.0D)
                 .add(Attributes.ATTACK_DAMAGE, 5.0D)
                 .build();
     }

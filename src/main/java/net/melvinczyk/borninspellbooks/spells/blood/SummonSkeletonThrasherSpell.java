@@ -23,7 +23,7 @@ import java.util.Optional;
 @AutoSpellConfig
 public class SummonSkeletonThrasherSpell extends AbstractSpell
 {
-    private final ResourceLocation spellId = new ResourceLocation(BornInSpellbooks.MODID, "summoned_skeleton_thrasher");
+    private final ResourceLocation spellId = new ResourceLocation(BornInSpellbooks.MODID, "summon_skeleton_thrasher");
 
     @Override
     public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster)

@@ -1,0 +1,19 @@
+{
+  "ui.born_in_spellbooks.knockback": "%d Knockback",
+
+  "spell.born_in_spellbooks.curse": "Curse",
+  "spell.born_in_spellbooks.summon_skeleton_thrasher": "Raise Skeleton Thrasher",
+  "spell.born_in_spellbooks.blind": "Blind",
+  "spell.born_in_spellbooks.infect_host": "Infect Host",
+  "spell.born_in_spellbooks.shoot_maggot": "Infest",
+  "spell.born_in_spellbooks.summon_dread_hound": "Pack Leader",
+
+  "entity.born_in_spellbooks.summoned_skeleton_thrasher": "Summoned Skeleton Thrasher",
+  "entity.born_in_spellbooks.summoned_dread_hound": "Summoned Dread Hound",
+  "entity.born_in_spellbooks.scarlet_persecutor": "Scarlet Persecutor",
+  "entity.born_in_spellbooks.corpsefly_pathfinder": "Corpse Fly",
+  "entity.born_in_spellbooks.spawned_maggot": "Maggot",
+  "entity.born_in_spellbooks.summoned_bone_serpent": "Summoned Bone Serpent",
+
+  "effect.born_in_spellbooks.cursed_mark": "Cursed Mark"
+}

@@ -1,11 +1,13 @@
 package net.melvinczyk.borninspellbooks.registry;
 
+import io.redspace.ironsspellbooks.spells.blood.BloodNeedlesSpell;
 import net.melvinczyk.borninspellbooks.BornInSpellbooks;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
 import net.melvinczyk.borninspellbooks.spells.blood.CurseSpell;
 import net.melvinczyk.borninspellbooks.spells.blood.SummonBoneSerpentSpell;
 import net.melvinczyk.borninspellbooks.spells.blood.SummonSkeletonThrasherSpell;
+import net.melvinczyk.borninspellbooks.spells.evocation.BlindSpell;
 import net.melvinczyk.borninspellbooks.spells.evocation.SummonRavagerSpell;
 import net.melvinczyk.borninspellbooks.spells.nature.InfectHostSpell;
 import net.melvinczyk.borninspellbooks.spells.nature.ShootMaggot;
@@ -34,6 +36,7 @@ public class SpellRegistries {
 
     // Evocation
     public static final RegistryObject<AbstractSpell> SUMMON_RAVAGER = registerSpell(new SummonRavagerSpell());
+    public static final RegistryObject<AbstractSpell> BLIND = registerSpell(new BlindSpell());
 
     // Nature
     public static final RegistryObject<AbstractSpell> SUMMON_DREAD_HOUND = registerSpell(new SummonDreadHoundSpell());

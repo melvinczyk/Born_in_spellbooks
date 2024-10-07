@@ -74,10 +74,6 @@ public class InfectHostSpell extends AbstractSpell {
         return Optional.of(ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("born_in_chaos_v1:corpse_fly_ambient")));
     }
 
-    public static SoundEvent getImpactSound() {
-        return SoundRegistry.DARK_MAGIC_BUFF_03_CUSTOM_1.get();
-    }
-
     @Override
     public boolean checkPreCastConditions(Level level, int spellLevel, LivingEntity entity, MagicData playerMagicData) {
         return Utils.preCastTargetHelper(level, entity, playerMagicData, this, 48, .35f);

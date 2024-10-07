@@ -1,9 +1,10 @@
-package net.melvinczyk.borninspellbooks.spells.nature;
+package net.melvinczyk.borninspellbooks.spells.evocation;
 
 import io.redspace.ironsspellbooks.api.config.DefaultConfig;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.spells.*;
 import io.redspace.ironsspellbooks.api.util.Utils;
+import net.mcreator.borninchaosv.entity.StaffofBlindnessProjectileEntity;
 import net.melvinczyk.borninspellbooks.BornInSpellbooks;
 import net.melvinczyk.borninspellbooks.entity.spells.maggot.MaggotProjectile;
 import net.melvinczyk.borninspellbooks.registry.MASchoolRegistry;
@@ -18,28 +19,27 @@ import net.minecraft.world.level.Level;
 import java.util.List;
 import java.util.Optional;
 
-
 @AutoSpellConfig
-public class ShootMaggot extends AbstractSpell {
-    private final ResourceLocation spellId = new ResourceLocation(BornInSpellbooks.MODID, "shoot_maggot");
+public class BlindSpell extends AbstractSpell {
+    private final ResourceLocation spellId = new ResourceLocation(BornInSpellbooks.MODID, "blind");
 
     @Override
     public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster)
     {
         return List.of(
                 Component.translatable("ui.irons_spellbooks.damage", Utils.stringTruncation(getDamage(spellLevel, caster), 2)),
-                Component.translatable("ui.irons_spellbooks.distance", Utils.stringTruncation(getRange(spellLevel, caster), 1))
+                Component.translatable("ui.born_in_spellbooks.knockback", Utils.stringTruncation(getKnockback(spellLevel, caster), 2))
         );
     }
 
     private final DefaultConfig defaultConfig = new DefaultConfig()
-            .setMinRarity(SpellRarity.UNCOMMON)
-            .setSchoolResource(MASchoolRegistry.NATURE_RESOURCE)
+            .setMinRarity(SpellRarity.COMMON)
+            .setSchoolResource(MASchoolRegistry.EVOCATION_RESOURCE)
             .setMaxLevel(10)
             .setCooldownSeconds(1)
             .build();
 
-    public ShootMaggot()
+    public BlindSpell()
     {
         this.manaCostPerLevel = 2;
         this.baseSpellPower = 12;
@@ -76,20 +76,19 @@ public class ShootMaggot extends AbstractSpell {
 
     @Override
     public void onCast(Level world, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
-        MaggotProjectile maggot = new MaggotProjectile(world, entity);
-        maggot.setPos(entity.position().add(0, entity.getEyeHeight() , 0));
-        maggot.shoot(entity.getLookAngle());
-        maggot.setDamage(getDamage(spellLevel, entity));
-        maggot.setNoGravity(false);
-        world.addFreshEntity(maggot);
+        StaffofBlindnessProjectileEntity blindnessProjectile = StaffofBlindnessProjectileEntity.shoot(world, entity, world.getRandom(), 1, getDamage(spellLevel, entity) , getKnockback(spellLevel, entity));
+        blindnessProjectile.setPos(entity.position().add(0, entity.getEyeHeight() , 0));
+        blindnessProjectile.setNoGravity(false);
+        world.addFreshEntity(blindnessProjectile);
         super.onCast(world, spellLevel, entity, castSource, playerMagicData);
     }
 
-    public static float getRange(int level, LivingEntity caster) {
-        return 10;
+    private float getDamage(int spellLevel, LivingEntity caster) {
+        return getSpellPower(spellLevel, caster) * .3F;
     }
 
-    private float getDamage(int spellLevel, LivingEntity caster) {
-        return getSpellPower(spellLevel, caster) * .5f;
+    private int getKnockback(int spellLevel, LivingEntity caster)
+    {
+        return (int)(getSpellPower(spellLevel, caster) * .2F);
     }
 }
