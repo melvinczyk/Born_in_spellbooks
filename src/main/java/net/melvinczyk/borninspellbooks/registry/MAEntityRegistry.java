@@ -2,8 +2,9 @@ package net.melvinczyk.borninspellbooks.registry;
 
 import net.melvinczyk.borninspellbooks.BornInSpellbooks;
 import net.melvinczyk.borninspellbooks.entity.mobs.*;
-import net.melvinczyk.borninspellbooks.entity.spells.fel_bomb.FelBombEntity;
-import net.melvinczyk.borninspellbooks.entity.spells.fel_bomb.InfernalFireField;
+import net.melvinczyk.borninspellbooks.entity.spells.infernal_bolt.InfernalBoltProjectile;
+import net.melvinczyk.borninspellbooks.entity.spells.infernal_bomb.InfernalBombEntity;
+import net.melvinczyk.borninspellbooks.entity.spells.infernal_bomb.InfernalFireField;
 import net.melvinczyk.borninspellbooks.entity.spells.maggot.MaggotProjectile;
 import net.melvinczyk.borninspellbooks.entity.spells.trident.TridentProjectile;
 import net.minecraft.resources.ResourceLocation;
@@ -78,8 +79,8 @@ public class MAEntityRegistry {
                     .clientTrackingRange(64)
                     .build(new ResourceLocation(BornInSpellbooks.MODID, "summoned_trident").toString()));
 
-    public static final RegistryObject<EntityType<FelBombEntity>> INFERNAL_BOMB =
-            ENTITIES.register("fel_bomb", () -> EntityType.Builder.<FelBombEntity>of(FelBombEntity::new, MobCategory.MISC)
+    public static final RegistryObject<EntityType<InfernalBombEntity>> INFERNAL_BOMB =
+            ENTITIES.register("fel_bomb", () -> EntityType.Builder.<InfernalBombEntity>of(InfernalBombEntity::new, MobCategory.MISC)
                     .sized(1f, 1f)
                     .clientTrackingRange(64)
                     .build(new ResourceLocation(BornInSpellbooks.MODID, "fel_bomb").toString()));
@@ -90,6 +91,13 @@ public class MAEntityRegistry {
                     .sized(1f, 1f)
                     .clientTrackingRange(64)
                     .build(new ResourceLocation(BornInSpellbooks.MODID, "maggot_projectile").toString()));
+
+
+    public static final RegistryObject<EntityType<InfernalBoltProjectile>> INFERNAL_BOLT_PROJECTILE =
+            ENTITIES.register("infernal_bolt_projectile", () -> EntityType.Builder.<InfernalBoltProjectile>of(InfernalBoltProjectile::new, MobCategory.MISC)
+                    .sized(1f, 1f)
+                    .clientTrackingRange(64)
+                    .build(new ResourceLocation(BornInSpellbooks.MODID, "infernal_bolt_projectile").toString()));
 
     // Misc
 

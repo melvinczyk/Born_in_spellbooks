@@ -1,11 +1,9 @@
-package net.melvinczyk.borninspellbooks.entity.spells.fel_bomb;
+package net.melvinczyk.borninspellbooks.entity.spells.infernal_bomb;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import io.redspace.ironsspellbooks.entity.spells.acid_orb.AcidOrbRenderer;
-import io.redspace.ironsspellbooks.entity.spells.magma_ball.FireBomb;
-import io.redspace.ironsspellbooks.entity.spells.magma_ball.MagmaBallRenderer;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -17,10 +15,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
 
-public class FelBombRenderer extends EntityRenderer<FelBombEntity> {
+public class InfernalBombRenderer extends EntityRenderer<InfernalBombEntity> {
     private final static ResourceLocation TEXTURE = new ResourceLocation("born_in_chaos_v1", "textures/block/felsoil.png");
 
-    public FelBombRenderer(Context context) {
+    public InfernalBombRenderer(Context context) {
         super(context);
         ModelPart modelpart = context.bakeLayer(AcidOrbRenderer.MODEL_LAYER_LOCATION);
         this.orb = modelpart.getChild("orb");
@@ -28,7 +26,7 @@ public class FelBombRenderer extends EntityRenderer<FelBombEntity> {
 
     private final ModelPart orb;
 
-    public void render(FelBombEntity entity, float yaw, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int light) {
+    public void render(InfernalBombEntity entity, float yaw, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int light) {
         poseStack.pushPose();
 
         float scaleFactor = 2.0F;
@@ -55,7 +53,7 @@ public class FelBombRenderer extends EntityRenderer<FelBombEntity> {
         super.render(entity, yaw, partialTicks, poseStack, bufferSource, light);
     }
 
-    public ResourceLocation getTextureLocation(FelBombEntity entity)
+    public ResourceLocation getTextureLocation(InfernalBombEntity entity)
     {
         return TEXTURE;
     }

@@ -1,5 +1,6 @@
 {
   "ui.born_in_spellbooks.knockback": "%d Knockback",
+  "ui.born_in_spellbooks.effect_amplifier": "%d Effect Amplifier",
 
   "spell.born_in_spellbooks.curse": "Curse",
   "spell.born_in_spellbooks.summon_skeleton_thrasher": "Raise Skeleton Thrasher",
@@ -14,6 +15,9 @@
   "entity.born_in_spellbooks.corpsefly_pathfinder": "Corpse Fly",
   "entity.born_in_spellbooks.spawned_maggot": "Maggot",
   "entity.born_in_spellbooks.summoned_bone_serpent": "Summoned Bone Serpent",
+  "entity.born_in_spellbooks.infernal_bomb": "Infernal Bomb",
+  "entity.born_in_spellbooks.infernal_bolt": "Infernal Bolt",
+
 
   "effect.born_in_spellbooks.cursed_mark": "Cursed Mark"
 }

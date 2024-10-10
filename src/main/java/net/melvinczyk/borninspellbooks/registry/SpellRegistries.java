@@ -8,6 +8,7 @@ import net.melvinczyk.borninspellbooks.spells.blood.SummonBoneSerpentSpell;
 import net.melvinczyk.borninspellbooks.spells.blood.SummonSkeletonThrasherSpell;
 import net.melvinczyk.borninspellbooks.spells.evocation.BlindSpell;
 import net.melvinczyk.borninspellbooks.spells.evocation.SummonRavagerSpell;
+import net.melvinczyk.borninspellbooks.spells.fire.InfernalBoltSpell;
 import net.melvinczyk.borninspellbooks.spells.fire.InfernalBombSpell;
 import net.melvinczyk.borninspellbooks.spells.nature.InfectHostSpell;
 import net.melvinczyk.borninspellbooks.spells.nature.ShootMaggot;
@@ -45,6 +46,8 @@ public class SpellRegistries {
 
     // Fire
     public static final RegistryObject<AbstractSpell> INFERNAL_BOMB = registerSpell(new InfernalBombSpell());
+    public static final RegistryObject<AbstractSpell> INFERNAL_BOLT = registerSpell(new InfernalBoltSpell());
+
 
     // Water
     public static final RegistryObject<AbstractSpell> LAUNCH_TRIDENT = registerSpell(new LaunchTridentSpell());

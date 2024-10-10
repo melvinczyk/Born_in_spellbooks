@@ -2,7 +2,8 @@ package net.melvinczyk.borninspellbooks;
 
 import com.mojang.logging.LogUtils;
 import net.melvinczyk.borninspellbooks.entity.mobs.render.*;
-import net.melvinczyk.borninspellbooks.entity.spells.fel_bomb.FelBombRenderer;
+import net.melvinczyk.borninspellbooks.entity.spells.infernal_bolt.InfernalBoltRenderer;
+import net.melvinczyk.borninspellbooks.entity.spells.infernal_bomb.InfernalBombRenderer;
 import net.melvinczyk.borninspellbooks.entity.spells.maggot.MaggotProjectileRenderer;
 import net.melvinczyk.borninspellbooks.entity.spells.trident.TridentRenderer;
 import net.melvinczyk.borninspellbooks.registry.*;
@@ -11,7 +12,6 @@ import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
@@ -80,8 +80,9 @@ public class BornInSpellbooks
             EntityRenderers.register(MAEntityRegistry.SCARLET_PERSECUTOR.get(), MAScarletPersecutorRenderer::new);
             EntityRenderers.register(MAEntityRegistry.CORPSEFLY_PATHFINDER.get(), CorpseFlyPathFinderRenderer::new);
             EntityRenderers.register(MAEntityRegistry.SPAWNED_MAGGOT.get(), SpawnedMaggotRenderer::new);
-            EntityRenderers.register(MAEntityRegistry.INFERNAL_BOMB.get(), FelBombRenderer::new);
+            EntityRenderers.register(MAEntityRegistry.INFERNAL_BOMB.get(), InfernalBombRenderer::new);
             EntityRenderers.register(MAEntityRegistry.INFERNAL_FIRE.get(), NoopRenderer::new);
+            EntityRenderers.register(MAEntityRegistry.INFERNAL_BOLT_PROJECTILE.get(), InfernalBoltRenderer::new);
 
 
             EntityRenderers.register(MAEntityRegistry.MAGGOT_PROJECTILE.get(), MaggotProjectileRenderer::new);

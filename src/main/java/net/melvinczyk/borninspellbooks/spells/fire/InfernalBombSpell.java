@@ -6,18 +6,22 @@ import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import io.redspace.ironsspellbooks.api.spells.*;
 import io.redspace.ironsspellbooks.api.util.AnimationHolder;
+import io.redspace.ironsspellbooks.registries.SoundRegistry;
 import net.melvinczyk.borninspellbooks.BornInSpellbooks;
-import net.melvinczyk.borninspellbooks.entity.spells.fel_bomb.FelBombEntity;
+import net.melvinczyk.borninspellbooks.entity.spells.infernal_bomb.InfernalBombEntity;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import io.redspace.ironsspellbooks.api.util.Utils;
 
 import java.util.List;
+import java.util.Optional;
 
 
+// Based on magma bomb spell
 @AutoSpellConfig
 public class InfernalBombSpell extends AbstractSpell {
     private final ResourceLocation spellId = new ResourceLocation(BornInSpellbooks.MODID, "infernal_bomb");
@@ -33,7 +37,7 @@ public class InfernalBombSpell extends AbstractSpell {
 
     @Override
     public void onCast(Level level, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
-        FelBombEntity orb = new FelBombEntity(level, entity);
+        InfernalBombEntity orb = new InfernalBombEntity(level, entity);
         orb.setPos(entity.position().add(0, entity.getEyeHeight() - orb.getBoundingBox().getYsize() * .5f, 0).add(entity.getForward()));
         orb.shoot(entity.getLookAngle());
         orb.setDeltaMovement(orb.getDeltaMovement().add(0, 0.2, 0));
@@ -60,6 +64,11 @@ public class InfernalBombSpell extends AbstractSpell {
     }
 
     @Override
+    public Optional<SoundEvent> getCastStartSound() {
+        return Optional.of(SoundRegistry.FIRE_BOMB_CHARGE.get());
+    }
+
+    @Override
     public ResourceLocation getSpellResource() {
         return spellId;
     }
@@ -75,7 +84,7 @@ public class InfernalBombSpell extends AbstractSpell {
     }
 
     public float getRadius(int spellLevel, LivingEntity caster) {
-        return 3 + getEntityPowerMultiplier(caster);
+        return 2;
     }
 
     public float getDamage(int spellLevel, LivingEntity caster) {
@@ -83,7 +92,7 @@ public class InfernalBombSpell extends AbstractSpell {
     }
 
     public float getAoeDamage(int spellLevel, LivingEntity caster) {
-        return 1 + getSpellPower(spellLevel, caster) * .1f;
+        return 3 + getSpellPower(spellLevel, caster) * .1f;
     }
 
     @Override

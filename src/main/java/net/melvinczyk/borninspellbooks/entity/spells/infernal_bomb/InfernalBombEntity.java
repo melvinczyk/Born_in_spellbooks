@@ -1,4 +1,4 @@
-package net.melvinczyk.borninspellbooks.entity.spells.fel_bomb;
+package net.melvinczyk.borninspellbooks.entity.spells.infernal_bomb;
 
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
@@ -8,6 +8,8 @@ import net.melvinczyk.borninspellbooks.registry.MAEntityRegistry;
 import net.melvinczyk.borninspellbooks.registry.SpellRegistries;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -18,19 +20,19 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.registries.ForgeRegistries;
 
-public class FelBombEntity extends FireBomb {
-    public FelBombEntity(EntityType<? extends Projectile> pEntityType, Level pLevel) {
+public class InfernalBombEntity extends FireBomb {
+    public InfernalBombEntity(EntityType<? extends Projectile> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 
-    public FelBombEntity(Level level, LivingEntity shooter) {
+    public InfernalBombEntity(Level level, LivingEntity shooter) {
         this(MAEntityRegistry.INFERNAL_BOMB.get(), level);
         setOwner(shooter);
     }
 
     @Override
     public void impactParticles(double x, double y, double z) {
-        MagicManager.spawnParticles(level(),(ParticleOptions)ForgeRegistries.PARTICLE_TYPES.getValue(new ResourceLocation("born_in_chaos_v1", "infernal_surge")), x, y, z, 30, 1.5, .1, 1.5, 1, false);
+        MagicManager.spawnParticles(level(),(ParticleOptions)ForgeRegistries.PARTICLE_TYPES.getValue(new ResourceLocation("minecraft", "explosion")), x, y, z, 10, 1.5, .1, 1.5, 1, false);
     }
 
     @Override
@@ -79,6 +81,11 @@ public class FelBombEntity extends FireBomb {
     @Override
     public float getSpeed() {
         return .5f;
+    }
+
+    @Override
+    protected void doImpactSound(SoundEvent sound) {
+        level().playSound(null, getX(), getY(), getZ(), sound, SoundSource.NEUTRAL, 2, 0.5f + Utils.random.nextFloat() * .2f);
     }
 
     public void setAoeDamage(float damage) {

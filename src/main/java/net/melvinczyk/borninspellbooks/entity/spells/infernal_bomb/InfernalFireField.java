@@ -1,4 +1,4 @@
-package net.melvinczyk.borninspellbooks.entity.spells.fel_bomb;
+package net.melvinczyk.borninspellbooks.entity.spells.infernal_bomb;
 
 import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.damage.ISSDamageTypes;
