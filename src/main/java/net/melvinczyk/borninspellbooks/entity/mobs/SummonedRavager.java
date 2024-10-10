@@ -4,7 +4,7 @@ import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
 import io.redspace.ironsspellbooks.entity.mobs.MagicSummon;
 import net.melvinczyk.borninspellbooks.registry.MAEntityRegistry;
 import net.melvinczyk.borninspellbooks.registry.MAMobEffectRegistry;
-import net.melvinczyk.borninspellbooks.registry.SpellRegistries;
+import net.melvinczyk.borninspellbooks.registry.MASpellRegistry;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.*;
@@ -98,7 +98,7 @@ public class SummonedRavager extends Ravager implements MagicSummon {
 
     @Override
     public boolean doHurtTarget(Entity pEntity) {
-        return Utils.doMeleeAttack(this, pEntity, SpellRegistries.SUMMON_RAVAGER.get().getDamageSource(this, getSummoner()));
+        return Utils.doMeleeAttack(this, pEntity, MASpellRegistry.SUMMON_RAVAGER.get().getDamageSource(this, getSummoner()));
     }
 
     @Override

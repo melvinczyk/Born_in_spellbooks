@@ -1,17 +1,12 @@
 package net.melvinczyk.borninspellbooks.entity.spells.infernal_bolt;
 
-import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
 import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.entity.spells.AbstractMagicProjectile;
-import io.redspace.ironsspellbooks.entity.spells.firebolt.FireboltProjectile;
-import io.redspace.ironsspellbooks.registries.EntityRegistry;
-import io.redspace.ironsspellbooks.util.ParticleHelper;
 import net.melvinczyk.borninspellbooks.registry.MAEntityRegistry;
-import net.melvinczyk.borninspellbooks.registry.SpellRegistries;
+import net.melvinczyk.borninspellbooks.registry.MASpellRegistry;
 import net.minecraft.core.particles.ParticleOptions;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -68,7 +63,7 @@ public class InfernalBoltProjectile extends AbstractMagicProjectile {
     protected void onHitEntity(EntityHitResult entityHitResult) {
         super.onHitEntity(entityHitResult);
         var target = entityHitResult.getEntity();
-        DamageSources.applyDamage(target, getDamage(), SpellRegistries.INFERNAL_BOLT.get().getDamageSource(this, getOwner()));
+        DamageSources.applyDamage(target, getDamage(), MASpellRegistry.INFERNAL_BOLT.get().getDamageSource(this, getOwner()));
         int time = 40 + (20 * effectAmplifier);
         MobEffectInstance infernalFlameEffect = new MobEffectInstance(ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation("born_in_chaos_v1", "infernal_flame")), time, effectAmplifier);
         ((LivingEntity) target).addEffect(infernalFlameEffect);

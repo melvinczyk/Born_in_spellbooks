@@ -3,6 +3,7 @@ package net.melvinczyk.borninspellbooks.events;
 
 import net.melvinczyk.borninspellbooks.BornInSpellbooks;
 import net.melvinczyk.borninspellbooks.entity.mobs.*;
+import net.melvinczyk.borninspellbooks.entity.spells.gnaw.GluttonFishGnawEntity;
 import net.melvinczyk.borninspellbooks.registry.MAEntityRegistry;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -21,5 +22,7 @@ public class ModSetup {
         event.put(MAEntityRegistry.SCARLET_PERSECUTOR.get(), ScarletPersecutor.setAttributes());
         event.put(MAEntityRegistry.CORPSEFLY_PATHFINDER.get(), ScarletPersecutor.setAttributes());
         event.put(MAEntityRegistry.SPAWNED_MAGGOT.get(), SpawnedMaggot.setAttributes());
+        event.put(MAEntityRegistry.GLUTTON_FISH_GNAW.get(), GluttonFishGnawEntity.setAttributes());
+
     }
 }

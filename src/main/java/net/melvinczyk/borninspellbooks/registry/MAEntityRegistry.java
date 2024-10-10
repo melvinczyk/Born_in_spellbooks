@@ -2,6 +2,7 @@ package net.melvinczyk.borninspellbooks.registry;
 
 import net.melvinczyk.borninspellbooks.BornInSpellbooks;
 import net.melvinczyk.borninspellbooks.entity.mobs.*;
+import net.melvinczyk.borninspellbooks.entity.spells.gnaw.GluttonFishGnawEntity;
 import net.melvinczyk.borninspellbooks.entity.spells.infernal_bolt.InfernalBoltProjectile;
 import net.melvinczyk.borninspellbooks.entity.spells.infernal_bomb.InfernalBombEntity;
 import net.melvinczyk.borninspellbooks.entity.spells.infernal_bomb.InfernalFireField;
@@ -98,6 +99,13 @@ public class MAEntityRegistry {
                     .sized(1f, 1f)
                     .clientTrackingRange(64)
                     .build(new ResourceLocation(BornInSpellbooks.MODID, "infernal_bolt_projectile").toString()));
+
+
+    public static final RegistryObject<EntityType<GluttonFishGnawEntity>> GLUTTON_FISH_GNAW =
+            ENTITIES.register("glutton_fish_gnaw", () -> EntityType.Builder.<GluttonFishGnawEntity>of(GluttonFishGnawEntity::new, MobCategory.MISC)
+                    .sized(1f, 1f)
+                    .clientTrackingRange(10)
+                    .build(new ResourceLocation(BornInSpellbooks.MODID, "glutton_fish_gnaw").toString()));
 
     // Misc
 

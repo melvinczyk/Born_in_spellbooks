@@ -2,6 +2,7 @@ package net.melvinczyk.borninspellbooks;
 
 import com.mojang.logging.LogUtils;
 import net.melvinczyk.borninspellbooks.entity.mobs.render.*;
+import net.melvinczyk.borninspellbooks.entity.spells.gnaw.GluttonFishGnawRenderer;
 import net.melvinczyk.borninspellbooks.entity.spells.infernal_bolt.InfernalBoltRenderer;
 import net.melvinczyk.borninspellbooks.entity.spells.infernal_bomb.InfernalBombRenderer;
 import net.melvinczyk.borninspellbooks.entity.spells.maggot.MaggotProjectileRenderer;
@@ -34,7 +35,7 @@ public class BornInSpellbooks
     {
         IEventBus modEventBus = context.getModEventBus();
         modEventBus.addListener(this::commonSetup);
-        SpellRegistries.register(modEventBus);
+        MASpellRegistry.register(modEventBus);
         MAEntityRegistry.register(modEventBus);
         MAMobEffectRegistry.register(modEventBus);
         MAAttributeRegistry.register(modEventBus);
@@ -83,6 +84,7 @@ public class BornInSpellbooks
             EntityRenderers.register(MAEntityRegistry.INFERNAL_BOMB.get(), InfernalBombRenderer::new);
             EntityRenderers.register(MAEntityRegistry.INFERNAL_FIRE.get(), NoopRenderer::new);
             EntityRenderers.register(MAEntityRegistry.INFERNAL_BOLT_PROJECTILE.get(), InfernalBoltRenderer::new);
+            EntityRenderers.register(MAEntityRegistry.GLUTTON_FISH_GNAW.get(), GluttonFishGnawRenderer::new);
 
 
             EntityRenderers.register(MAEntityRegistry.MAGGOT_PROJECTILE.get(), MaggotProjectileRenderer::new);

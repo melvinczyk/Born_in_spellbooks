@@ -8,7 +8,7 @@ import io.redspace.ironsspellbooks.util.OwnerHelper;
 import net.mcreator.borninchaosv.entity.SkeletonThrasherEntity;
 import net.melvinczyk.borninspellbooks.registry.MAEntityRegistry;
 import net.melvinczyk.borninspellbooks.registry.MAMobEffectRegistry;
-import net.melvinczyk.borninspellbooks.registry.SpellRegistries;
+import net.melvinczyk.borninspellbooks.registry.MASpellRegistry;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.tags.DamageTypeTags;
@@ -96,7 +96,7 @@ public class SummonedSkeletonThrasher extends SkeletonThrasherEntity implements 
 
     @Override
     public boolean doHurtTarget(Entity pEntity) {
-        return Utils.doMeleeAttack(this, pEntity, SpellRegistries.SUMMON_SKELETON_THRASHER.get().getDamageSource(this, getSummoner()));
+        return Utils.doMeleeAttack(this, pEntity, MASpellRegistry.SUMMON_SKELETON_THRASHER.get().getDamageSource(this, getSummoner()));
     }
 
     @Override

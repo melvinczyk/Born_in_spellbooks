@@ -8,7 +8,7 @@ import io.redspace.ironsspellbooks.util.OwnerHelper;
 import net.mcreator.borninchaosv.entity.DreadHoundEntity;
 import net.melvinczyk.borninspellbooks.registry.MAEntityRegistry;
 import net.melvinczyk.borninspellbooks.registry.MAMobEffectRegistry;
-import net.melvinczyk.borninspellbooks.registry.SpellRegistries;
+import net.melvinczyk.borninspellbooks.registry.MASpellRegistry;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.damagesource.DamageSource;
@@ -99,7 +99,7 @@ public class SummonedDreadHound extends DreadHoundEntity implements MagicSummon 
 
     @Override
     public boolean doHurtTarget(Entity pEntity) {
-        return Utils.doMeleeAttack(this, pEntity, SpellRegistries.SUMMON_DREAD_HOUND.get().getDamageSource(this, getSummoner()));
+        return Utils.doMeleeAttack(this, pEntity, MASpellRegistry.SUMMON_DREAD_HOUND.get().getDamageSource(this, getSummoner()));
     }
 
     @Override

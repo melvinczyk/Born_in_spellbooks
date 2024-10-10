@@ -5,7 +5,7 @@ import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
 import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.entity.spells.magma_ball.FireBomb;
 import net.melvinczyk.borninspellbooks.registry.MAEntityRegistry;
-import net.melvinczyk.borninspellbooks.registry.SpellRegistries;
+import net.melvinczyk.borninspellbooks.registry.MASpellRegistry;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
@@ -47,7 +47,7 @@ public class InfernalBombEntity extends FireBomb {
                 if (Utils.hasLineOfSight(level(), hitresult.getLocation(), entity.position().add(0, entity.getEyeHeight() * .5f, 0), true)) {
                     double p = (1 - Math.pow(Math.sqrt(distance) / (explosionRadius), 3));
                     float damage = (float) (this.damage * p);
-                    DamageSources.applyDamage(entity, damage, SpellRegistries.INFERNAL_BOMB.get().getDamageSource(this, getOwner()));
+                    DamageSources.applyDamage(entity, damage, MASpellRegistry.INFERNAL_BOMB.get().getDamageSource(this, getOwner()));
                     if (entity instanceof LivingEntity livingEntity)
                     {
                         MobEffectInstance infernalFlame = new MobEffectInstance(ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation("born_in_chaos_v1", "infernal_flame")), 120, 1);

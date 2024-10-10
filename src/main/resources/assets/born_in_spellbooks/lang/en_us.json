@@ -3,11 +3,15 @@
   "ui.born_in_spellbooks.effect_amplifier": "%d Effect Amplifier",
 
   "spell.born_in_spellbooks.curse": "Curse",
+  "spell.born_in_spellbooks.summon_bone_serpent": "Summon Bone Serpent",
+  "spell.born_in_spellbooks.summon_ravager": "Summon Ravager",
   "spell.born_in_spellbooks.summon_skeleton_thrasher": "Raise Skeleton Thrasher",
   "spell.born_in_spellbooks.blind": "Blind",
   "spell.born_in_spellbooks.infect_host": "Infect Host",
-  "spell.born_in_spellbooks.shoot_maggot": "Infest",
+  "spell.born_in_spellbooks.shoot_maggot": "Shoot Maggot",
   "spell.born_in_spellbooks.summon_dread_hound": "Pack Leader",
+  "spell.born_in_spellbooks.infernal_bomb": "Infernal Bomb",
+  "spell.born_in_spellbooks.infernal_bolt": "Infernal Bolt",
 
   "entity.born_in_spellbooks.summoned_skeleton_thrasher": "Summoned Skeleton Thrasher",
   "entity.born_in_spellbooks.summoned_dread_hound": "Summoned Dread Hound",

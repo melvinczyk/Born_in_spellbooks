@@ -5,7 +5,7 @@ import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
 import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.entity.spells.AbstractMagicProjectile;
 import net.melvinczyk.borninspellbooks.registry.MAEntityRegistry;
-import net.melvinczyk.borninspellbooks.registry.SpellRegistries;
+import net.melvinczyk.borninspellbooks.registry.MASpellRegistry;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -56,13 +56,13 @@ public class TridentProjectile extends AbstractMagicProjectile {
         discard();
     }
 
-    @Override
-    protected void onHitEntity(EntityHitResult entityHitResult) {
-        super.onHitEntity(entityHitResult);
-        var target = entityHitResult.getEntity();
-        DamageSources.applyDamage(target, getDamage(), SpellRegistries.LAUNCH_TRIDENT.get().getDamageSource(this, getOwner()));
-        discard();
-    }
+//    @Override
+//    protected void onHitEntity(EntityHitResult entityHitResult) {
+//        super.onHitEntity(entityHitResult);
+//        var target = entityHitResult.getEntity();
+//        DamageSources.applyDamage(target, getDamage(), MASpellRegistry.LAUNCH_TRIDENT.get().getDamageSource(this, getOwner()));
+//        discard();
+//    }
 
     @Override
     public void trailParticles() {

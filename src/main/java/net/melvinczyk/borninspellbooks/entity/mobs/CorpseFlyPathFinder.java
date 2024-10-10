@@ -1,15 +1,13 @@
 package net.melvinczyk.borninspellbooks.entity.mobs;
 
-import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
 import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.entity.mobs.goals.WispAttackGoal;
-import io.redspace.ironsspellbooks.spells.holy.WispSpell;
 import io.redspace.ironsspellbooks.util.ParticleHelper;
 import net.mcreator.borninchaosv.entity.CorpseFlyEntity;
 import net.melvinczyk.borninspellbooks.registry.MAEntityRegistry;
-import net.melvinczyk.borninspellbooks.registry.SpellRegistries;
+import net.melvinczyk.borninspellbooks.registry.MASpellRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
@@ -119,7 +117,7 @@ public class CorpseFlyPathFinder extends CorpseFlyEntity implements GeoEntity {
                 }
             } else {
                 if (this.getBoundingBox().intersects(target.getBoundingBox())) {
-                    DamageSources.applyDamage(target, damageAmount, SpellRegistries.INFECT_HOST.get().getDamageSource(this, cachedOwner));
+                    DamageSources.applyDamage(target, damageAmount, MASpellRegistry.INFECT_HOST.get().getDamageSource(this, cachedOwner));
                     var p = target.getEyePosition();
                     MagicManager.spawnParticles(level(), ParticleHelper.BLOOD, p.x, p.y, p.z, 25, 0, 0, 0, .18, true);
                     if (!target.isAlive())

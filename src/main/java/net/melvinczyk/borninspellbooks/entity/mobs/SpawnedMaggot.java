@@ -3,9 +3,7 @@ package net.melvinczyk.borninspellbooks.entity.mobs;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.util.OwnerHelper;
 import net.mcreator.borninchaosv.entity.MaggotEntity;
-import net.mcreator.borninchaosv.entity.ScarletPersecutorEntity;
-import net.melvinczyk.borninspellbooks.registry.MAEntityRegistry;
-import net.melvinczyk.borninspellbooks.registry.SpellRegistries;
+import net.melvinczyk.borninspellbooks.registry.MASpellRegistry;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -53,7 +51,7 @@ public class SpawnedMaggot extends MaggotEntity {
 
     @Override
     public boolean doHurtTarget(Entity pEntity) {
-        return Utils.doMeleeAttack(this, pEntity, SpellRegistries.INFECT_HOST.get().getDamageSource(this, getSummoner()));
+        return Utils.doMeleeAttack(this, pEntity, MASpellRegistry.INFECT_HOST.get().getDamageSource(this, getSummoner()));
     }
 
     @Override
