@@ -47,7 +47,7 @@ public class InfernalFireField extends AoeEntity {
     @Override
     public float getRadius()
     {
-        return 2;
+        return 3;
     }
 
     @Override
