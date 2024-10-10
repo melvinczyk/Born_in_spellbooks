@@ -8,6 +8,7 @@ import net.melvinczyk.borninspellbooks.spells.blood.SummonBoneSerpentSpell;
 import net.melvinczyk.borninspellbooks.spells.blood.SummonSkeletonThrasherSpell;
 import net.melvinczyk.borninspellbooks.spells.evocation.BlindSpell;
 import net.melvinczyk.borninspellbooks.spells.evocation.SummonRavagerSpell;
+import net.melvinczyk.borninspellbooks.spells.fire.InfernalArrowSpell;
 import net.melvinczyk.borninspellbooks.spells.fire.InfernalBoltSpell;
 import net.melvinczyk.borninspellbooks.spells.fire.InfernalBombSpell;
 import net.melvinczyk.borninspellbooks.spells.nature.GnawSpell;
@@ -55,6 +56,8 @@ public class MASpellRegistry {
     // Fire
     public static final RegistryObject<AbstractSpell> INFERNAL_BOMB = registerSpell(new InfernalBombSpell());
     public static final RegistryObject<AbstractSpell> INFERNAL_BOLT = registerSpell(new InfernalBoltSpell());
+    public static final RegistryObject<AbstractSpell> INFERNAL_ARROW = registerSpell(new InfernalArrowSpell());
+
     // TODO: Infernal magic arrow - Inflicts infernal flame and explodes on contact
 
     // Water
