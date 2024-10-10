@@ -5,11 +5,14 @@ import net.melvinczyk.borninspellbooks.entity.mobs.render.*;
 import net.melvinczyk.borninspellbooks.entity.spells.fel_bomb.FelBombRenderer;
 import net.melvinczyk.borninspellbooks.entity.spells.maggot.MaggotProjectileRenderer;
 import net.melvinczyk.borninspellbooks.entity.spells.trident.TridentRenderer;
+import net.melvinczyk.borninspellbooks.particle.InfernalFireParticle;
 import net.melvinczyk.borninspellbooks.registry.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
@@ -38,6 +41,7 @@ public class BornInSpellbooks
         MAAttributeRegistry.register(modEventBus);
         MASchoolRegistry.register(modEventBus);
         MAItemRegistry.register(modEventBus);
+        MAParticleRegistry.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
 
@@ -78,11 +82,18 @@ public class BornInSpellbooks
             EntityRenderers.register(MAEntityRegistry.CORPSEFLY_PATHFINDER.get(), CorpseFlyPathFinderRenderer::new);
             EntityRenderers.register(MAEntityRegistry.SPAWNED_MAGGOT.get(), SpawnedMaggotRenderer::new);
             EntityRenderers.register(MAEntityRegistry.FEL_BOMB.get(), FelBombRenderer::new);
+            EntityRenderers.register(MAEntityRegistry.FEL_FIRE.get(), NoopRenderer::new);
 
 
             EntityRenderers.register(MAEntityRegistry.MAGGOT_PROJECTILE.get(), MaggotProjectileRenderer::new);
             LOGGER.info("HELLO FROM CLIENT SETUP");
             LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
+        }
+
+        @SubscribeEvent
+        public static void registerParticles(RegisterParticleProvidersEvent event)
+        {
+            event.registerSpriteSet(MAParticleRegistry.INFERNAL_FIRE_PARTICLE.get(), InfernalFireParticle.Provider::new);
         }
     }
 }

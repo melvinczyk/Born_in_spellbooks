@@ -1,6 +1,5 @@
 package net.melvinczyk.borninspellbooks.registry;
 
-import io.redspace.ironsspellbooks.spells.blood.BloodNeedlesSpell;
 import net.melvinczyk.borninspellbooks.BornInSpellbooks;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
@@ -54,5 +53,5 @@ public class SpellRegistries {
     // TODO: Wave Push Back spell - Summon a wave in front of you that pushes entities away
     // TODO: Erode spell - Water beam that hits target and destroys stone
     // TODO: Summon Coralsus - Summons a Cataclysm coralsus
-    
+
 }

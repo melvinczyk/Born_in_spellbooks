@@ -13,6 +13,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 
 public class FelBombEntity extends FireBomb {
     public FelBombEntity(EntityType<? extends Projectile> pEntityType, Level pLevel) {
@@ -42,6 +43,24 @@ public class FelBombEntity extends FireBomb {
         }
         discard();
     }
+
+    @Override
+    public void createFireField(Vec3 location) {
+        if (!level().isClientSide) {
+            FelFire fire = new FelFire(level());
+            fire.setOwner(getOwner());
+            fire.setDuration(200);
+            fire.setDamage(aoeDamage);
+            fire.setRadius(getExplosionRadius());
+            fire.setCircular();
+            fire.moveTo(location);
+            level().addFreshEntity(fire);
+        }
+    }
+
+    float aoeDamage;
+
+
 
     @Override
     public float getSpeed() {

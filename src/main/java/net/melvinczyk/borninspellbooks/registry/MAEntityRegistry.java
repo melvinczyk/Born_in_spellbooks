@@ -4,6 +4,7 @@ import net.melvinczyk.borninspellbooks.BornInSpellbooks;
 import net.melvinczyk.borninspellbooks.entity.mobs.*;
 import net.melvinczyk.borninspellbooks.entity.spells.fel_bomb.FelBombEntity;
 import net.melvinczyk.borninspellbooks.entity.spells.fel_bomb.FelBombRenderer;
+import net.melvinczyk.borninspellbooks.entity.spells.fel_bomb.FelFire;
 import net.melvinczyk.borninspellbooks.entity.spells.maggot.MaggotProjectile;
 import net.melvinczyk.borninspellbooks.entity.spells.trident.TridentProjectile;
 import net.minecraft.resources.ResourceLocation;
@@ -57,7 +58,7 @@ public class MAEntityRegistry {
 
 
     public static final RegistryObject<EntityType<CorpseFlyPathFinder>> CORPSEFLY_PATHFINDER =
-            ENTITIES.register("corpsefly_pathfinder", () -> EntityType.Builder.<CorpseFlyPathFinder>of(CorpseFlyPathFinder::new, MobCategory.MISC)
+            ENTITIES.register("corpsefly_pathfinder", () -> EntityType.Builder.<CorpseFlyPathFinder>of(CorpseFlyPathFinder::new, MobCategory.MONSTER)
                     .sized(1f, 1f)
                     .clientTrackingRange(64)
                     .build(new ResourceLocation(BornInSpellbooks.MODID, "corpsefly_pathfinder").toString()));
@@ -65,7 +66,7 @@ public class MAEntityRegistry {
 
 
     public static final RegistryObject<EntityType<SpawnedMaggot>> SPAWNED_MAGGOT =
-            ENTITIES.register("spawned_maggot", () -> EntityType.Builder.<SpawnedMaggot>of(SpawnedMaggot::new, MobCategory.MISC)
+            ENTITIES.register("spawned_maggot", () -> EntityType.Builder.<SpawnedMaggot>of(SpawnedMaggot::new, MobCategory.MONSTER)
                     .sized(1f, 1f)
                     .clientTrackingRange(64)
                     .build(new ResourceLocation(BornInSpellbooks.MODID, "spawned_maggot").toString()));
@@ -90,4 +91,13 @@ public class MAEntityRegistry {
                     .sized(1f, 1f)
                     .clientTrackingRange(64)
                     .build(new ResourceLocation(BornInSpellbooks.MODID, "maggot_projectile").toString()));
+
+    // Misc
+
+    public static final RegistryObject<EntityType<FelFire>> FEL_FIRE =
+            ENTITIES.register("fel_fire", () -> EntityType.Builder.<FelFire>of(FelFire::new, MobCategory.MISC)
+                    .sized(1f, 1f)
+                    .clientTrackingRange(64)
+                    .build(new ResourceLocation(BornInSpellbooks.MODID, "fel_fire").toString()));
+
 }

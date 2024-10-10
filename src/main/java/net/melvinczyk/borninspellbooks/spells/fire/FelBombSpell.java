@@ -1,14 +1,11 @@
 package net.melvinczyk.borninspellbooks.spells.fire;
 
 
-import io.redspace.ironsspellbooks.IronsSpellbooks;
 import io.redspace.ironsspellbooks.api.config.DefaultConfig;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import io.redspace.ironsspellbooks.api.spells.*;
 import io.redspace.ironsspellbooks.api.util.AnimationHolder;
-import io.redspace.ironsspellbooks.entity.spells.magma_ball.FireBomb;
-import io.redspace.ironsspellbooks.spells.fire.MagmaBombSpell;
 import net.melvinczyk.borninspellbooks.BornInSpellbooks;
 import net.melvinczyk.borninspellbooks.entity.spells.fel_bomb.FelBombEntity;
 import net.minecraft.network.chat.Component;
