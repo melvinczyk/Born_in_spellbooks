@@ -21,7 +21,7 @@ import java.util.List;
 
 @AutoSpellConfig
 public class InfernalArrowSpell extends MagicArrowSpell {
-    private final ResourceLocation spellId = new ResourceLocation(BornInSpellbooks.MODID, "magic_arrow");
+    private final ResourceLocation spellId = new ResourceLocation(BornInSpellbooks.MODID, "infernal_arrow");
 
     @Override
     public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {

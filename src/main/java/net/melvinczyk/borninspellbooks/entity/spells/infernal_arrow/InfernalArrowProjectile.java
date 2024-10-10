@@ -27,6 +27,7 @@ import java.util.List;
 public class InfernalArrowProjectile extends MagicArrowProjectile {
     private final List<Entity> victims = new ArrayList<>();
     private int hitsPerTick;
+
     @Override
     public void trailParticles() {
         Vec3 vec3 = this.position().subtract(getDeltaMovement());
@@ -40,7 +41,7 @@ public class InfernalArrowProjectile extends MagicArrowProjectile {
 
     public InfernalArrowProjectile(EntityType<? extends MagicArrowProjectile> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
-        this.setNoGravity(true);
+        this.setNoGravity(false);
     }
 
     public InfernalArrowProjectile(Level levelIn, LivingEntity shooter) {

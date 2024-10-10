@@ -7,6 +7,7 @@ import net.melvinczyk.borninspellbooks.spells.blood.CurseSpell;
 import net.melvinczyk.borninspellbooks.spells.blood.SummonBoneSerpentSpell;
 import net.melvinczyk.borninspellbooks.spells.blood.SummonSkeletonThrasherSpell;
 import net.melvinczyk.borninspellbooks.spells.evocation.BlindSpell;
+import net.melvinczyk.borninspellbooks.spells.evocation.DeathWishSpell;
 import net.melvinczyk.borninspellbooks.spells.evocation.SummonRavagerSpell;
 import net.melvinczyk.borninspellbooks.spells.fire.InfernalArrowSpell;
 import net.melvinczyk.borninspellbooks.spells.fire.InfernalBoltSpell;
@@ -43,6 +44,10 @@ public class MASpellRegistry {
     // Evocation
     public static final RegistryObject<AbstractSpell> SUMMON_RAVAGER = registerSpell(new SummonRavagerSpell());
     public static final RegistryObject<AbstractSpell> BLIND = registerSpell(new BlindSpell());
+    public static final RegistryObject<AbstractSpell> DEATH_WISH = registerSpell(new DeathWishSpell());
+
+    // TODO: Nightmare rend - Similar to flame strike but it is black and inflicts the nightmare stalker effect
+    // TODO: Death wish - Gives the skeleton demoman effect if you die you explode. Spell constantly ticks down your health until you explode and then you will be at 10% max health.
 
     // Nature
     public static final RegistryObject<AbstractSpell> SUMMON_DREAD_HOUND = registerSpell(new SummonDreadHoundSpell());
@@ -57,8 +62,6 @@ public class MASpellRegistry {
     public static final RegistryObject<AbstractSpell> INFERNAL_BOMB = registerSpell(new InfernalBombSpell());
     public static final RegistryObject<AbstractSpell> INFERNAL_BOLT = registerSpell(new InfernalBoltSpell());
     public static final RegistryObject<AbstractSpell> INFERNAL_ARROW = registerSpell(new InfernalArrowSpell());
-
-    // TODO: Infernal magic arrow - Inflicts infernal flame and explodes on contact
 
     // Water
     //public static final RegistryObject<AbstractSpell> LAUNCH_TRIDENT = registerSpell(new LaunchTridentSpell());

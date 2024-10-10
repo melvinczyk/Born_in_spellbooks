@@ -4,6 +4,7 @@ package net.melvinczyk.borninspellbooks.registry;
 import io.redspace.ironsspellbooks.effect.*;
 import net.melvinczyk.borninspellbooks.BornInSpellbooks;
 import net.melvinczyk.borninspellbooks.effect.CursedMarkEffect;
+import net.melvinczyk.borninspellbooks.effect.DeathWishEffect;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -27,4 +28,6 @@ public class MAMobEffectRegistry {
 
 
     public static final RegistryObject<MobEffect> CURSED_MARK = MOB_EFFECT_DEFERRED_REGISTER.register("cursed_mark", () -> new CursedMarkEffect(MobEffectCategory.HARMFUL, 0xed0707));
+    public static final RegistryObject<MobEffect> DEATH_WISH = MOB_EFFECT_DEFERRED_REGISTER.register("death_wish", () -> new DeathWishEffect(MobEffectCategory.HARMFUL, 0xed0707));
+
 }
