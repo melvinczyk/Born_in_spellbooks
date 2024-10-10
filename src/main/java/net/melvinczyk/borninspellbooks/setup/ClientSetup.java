@@ -25,9 +25,4 @@ import javax.annotation.Nullable;
 
 public class ClientSetup {
 
-    @SubscribeEvent
-    public static void registerParticles(RegisterParticleProvidersEvent event)
-    {
-        event.registerSpriteSet(MAParticleRegistry.INFERNAL_FIRE_PARTICLE.get(), InfernalFireParticle.Provider::new);
-    }
 }

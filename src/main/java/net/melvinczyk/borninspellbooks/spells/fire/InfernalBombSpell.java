@@ -19,8 +19,8 @@ import java.util.List;
 
 
 @AutoSpellConfig
-public class FelBombSpell extends AbstractSpell {
-    private final ResourceLocation spellId = new ResourceLocation(BornInSpellbooks.MODID, "fel_bomb");
+public class InfernalBombSpell extends AbstractSpell {
+    private final ResourceLocation spellId = new ResourceLocation(BornInSpellbooks.MODID, "infernal_bomb");
 
     @Override
     public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
@@ -51,7 +51,7 @@ public class FelBombSpell extends AbstractSpell {
             .setCooldownSeconds(12)
             .build();
 
-    public FelBombSpell() {
+    public InfernalBombSpell() {
         this.manaCostPerLevel = 5;
         this.baseSpellPower = 8;
         this.spellPowerPerLevel = 3;

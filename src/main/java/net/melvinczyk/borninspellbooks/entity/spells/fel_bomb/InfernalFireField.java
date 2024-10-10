@@ -3,30 +3,30 @@ package net.melvinczyk.borninspellbooks.entity.spells.fel_bomb;
 import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.damage.ISSDamageTypes;
 import io.redspace.ironsspellbooks.entity.spells.AoeEntity;
-import io.redspace.ironsspellbooks.entity.spells.magma_ball.FireField;
-import io.redspace.ironsspellbooks.util.ParticleHelper;
 import net.melvinczyk.borninspellbooks.registry.MAEntityRegistry;
-import net.melvinczyk.borninspellbooks.util.MAParticleHelper;
 import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Optional;
 
-public class FelFire extends AoeEntity {
+public class InfernalFireField extends AoeEntity {
 
-    public FelFire(EntityType<? extends Projectile> pEntityType, Level pLevel) {
+    public InfernalFireField(EntityType<? extends Projectile> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 
     private DamageSource damageSource;
 
 
-    public FelFire(Level level) {
-        this(MAEntityRegistry.FEL_FIRE.get(), level);
+    public InfernalFireField(Level level) {
+        this(MAEntityRegistry.INFERNAL_FIRE.get(), level);
     }
 
     @Override
@@ -36,7 +36,18 @@ public class FelFire extends AoeEntity {
         }
         DamageSources.ignoreNextKnockback(target);
         target.hurt(damageSource, getDamage());
-        target.setSecondsOnFire(3);
+
+        MobEffectInstance infernalFlame = new MobEffectInstance(ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation("born_in_chaos_v1", "infernal_flame")), 120, 1);
+        if (infernalFlame != null)
+        {
+            target.addEffect(infernalFlame);
+        }
+    }
+
+    @Override
+    public float getRadius()
+    {
+        return 2;
     }
 
     @Override
@@ -51,11 +62,14 @@ public class FelFire extends AoeEntity {
 
     @Override
     protected float getParticleSpeedModifier() {
-        return 1.4f;
+        return 1.3f;
     }
 
     @Override
     public Optional<ParticleOptions> getParticle() {
-        return Optional.of(MAParticleHelper.INFERNAL_FIRE);
+        var infernalSurge = ForgeRegistries.PARTICLE_TYPES.getValue(new ResourceLocation("born_in_chaos_v1", "infernal_surge"));
+        if (infernalSurge != null)
+            return Optional.of((ParticleOptions) infernalSurge);
+        return Optional.empty();
     }
 }

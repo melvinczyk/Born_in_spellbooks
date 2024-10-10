@@ -30,6 +30,9 @@ public class FelBombRenderer extends EntityRenderer<FelBombEntity> {
 
     public void render(FelBombEntity entity, float yaw, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int light) {
         poseStack.pushPose();
+
+        float scaleFactor = 2.0F;
+        poseStack.scale(scaleFactor, scaleFactor, scaleFactor);
         poseStack.translate(0, entity.getBoundingBox().getYsize() * .5f, 0);
 
         Vec3 motion = entity.getDeltaMovement();

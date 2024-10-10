@@ -3,8 +3,7 @@ package net.melvinczyk.borninspellbooks.registry;
 import net.melvinczyk.borninspellbooks.BornInSpellbooks;
 import net.melvinczyk.borninspellbooks.entity.mobs.*;
 import net.melvinczyk.borninspellbooks.entity.spells.fel_bomb.FelBombEntity;
-import net.melvinczyk.borninspellbooks.entity.spells.fel_bomb.FelBombRenderer;
-import net.melvinczyk.borninspellbooks.entity.spells.fel_bomb.FelFire;
+import net.melvinczyk.borninspellbooks.entity.spells.fel_bomb.InfernalFireField;
 import net.melvinczyk.borninspellbooks.entity.spells.maggot.MaggotProjectile;
 import net.melvinczyk.borninspellbooks.entity.spells.trident.TridentProjectile;
 import net.minecraft.resources.ResourceLocation;
@@ -79,7 +78,7 @@ public class MAEntityRegistry {
                     .clientTrackingRange(64)
                     .build(new ResourceLocation(BornInSpellbooks.MODID, "summoned_trident").toString()));
 
-    public static final RegistryObject<EntityType<FelBombEntity>> FEL_BOMB =
+    public static final RegistryObject<EntityType<FelBombEntity>> INFERNAL_BOMB =
             ENTITIES.register("fel_bomb", () -> EntityType.Builder.<FelBombEntity>of(FelBombEntity::new, MobCategory.MISC)
                     .sized(1f, 1f)
                     .clientTrackingRange(64)
@@ -94,8 +93,8 @@ public class MAEntityRegistry {
 
     // Misc
 
-    public static final RegistryObject<EntityType<FelFire>> FEL_FIRE =
-            ENTITIES.register("fel_fire", () -> EntityType.Builder.<FelFire>of(FelFire::new, MobCategory.MISC)
+    public static final RegistryObject<EntityType<InfernalFireField>> INFERNAL_FIRE =
+            ENTITIES.register("fel_fire", () -> EntityType.Builder.<InfernalFireField>of(InfernalFireField::new, MobCategory.MISC)
                     .sized(1f, 1f)
                     .clientTrackingRange(64)
                     .build(new ResourceLocation(BornInSpellbooks.MODID, "fel_fire").toString()));
