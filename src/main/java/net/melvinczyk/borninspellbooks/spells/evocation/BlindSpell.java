@@ -27,7 +27,7 @@ public class BlindSpell extends AbstractSpell {
     public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster)
     {
         return List.of(
-                Component.translatable("ui.irons_spellbooks.damage", Utils.stringTruncation(getDamage(spellLevel, caster), 2)),
+                Component.translatable("ui.irons_spellbooks.damage", Utils.stringTruncation(Math.floor((getDamage(spellLevel, caster) * 1.5F) + (getDamage(spellLevel, caster) / 6)), 2)),
                 Component.translatable("ui.born_in_spellbooks.knockback", Utils.stringTruncation(getKnockback(spellLevel, caster), 2))
         );
     }
@@ -69,14 +69,10 @@ public class BlindSpell extends AbstractSpell {
         return Optional.empty();
     }
 
-    @Override
-    public Optional<SoundEvent> getCastFinishSound() {
-        return Optional.of(SoundEvents.SLIME_SQUISH);
-    }
 
     @Override
     public void onCast(Level world, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
-        StaffofBlindnessProjectileEntity blindnessProjectile = StaffofBlindnessProjectileEntity.shoot(world, entity, world.getRandom(), 0, getDamage(spellLevel, entity) , getKnockback(spellLevel, entity));
+        StaffofBlindnessProjectileEntity blindnessProjectile = StaffofBlindnessProjectileEntity.shoot(world, entity, world.getRandom(), 0.75F, getDamage(spellLevel, entity) , getKnockback(spellLevel, entity));
         blindnessProjectile.setPos(entity.position().add(0, entity.getEyeHeight() , 0));
         blindnessProjectile.setNoGravity(false);
         world.addFreshEntity(blindnessProjectile);

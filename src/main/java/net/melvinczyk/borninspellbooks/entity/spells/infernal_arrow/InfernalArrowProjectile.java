@@ -3,16 +3,23 @@ package net.melvinczyk.borninspellbooks.entity.spells.infernal_arrow;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
 import io.redspace.ironsspellbooks.damage.DamageSources;
+import io.redspace.ironsspellbooks.entity.spells.AbstractMagicProjectile;
 import io.redspace.ironsspellbooks.entity.spells.magic_arrow.MagicArrowProjectile;
+import io.redspace.ironsspellbooks.registries.SoundRegistry;
 import io.redspace.ironsspellbooks.util.ParticleHelper;
+import net.melvinczyk.borninspellbooks.entity.spells.infernal_bomb.InfernalFireField;
 import net.melvinczyk.borninspellbooks.registry.MAEntityRegistry;
 import net.melvinczyk.borninspellbooks.registry.MASpellRegistry;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
@@ -23,10 +30,15 @@ import net.minecraftforge.registries.ForgeRegistries;
 import java.text.Format;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-public class InfernalArrowProjectile extends MagicArrowProjectile {
-    private final List<Entity> victims = new ArrayList<>();
-    private int hitsPerTick;
+public class InfernalArrowProjectile extends AbstractMagicProjectile {
+    private BlockPos lastHitBlock = BlockPos.ZERO;
+
+    @Override
+    public float getSpeed() {
+        return 3.0f;
+    }
 
     @Override
     public void trailParticles() {
@@ -35,34 +47,88 @@ public class InfernalArrowProjectile extends MagicArrowProjectile {
     }
 
     @Override
+    public Optional<SoundEvent> getImpactSound() {
+        return Optional.empty();
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+    }
+
+    @Override
+    protected boolean shouldPierceShields() {
+        return false;
+    }
+
+    @Override
     public void impactParticles(double x, double y, double z) {
         MagicManager.spawnParticles(level(), (ParticleOptions) ForgeRegistries.PARTICLE_TYPES.getValue(new ResourceLocation("born_in_chaos_v1", "infernal_surge")), x, y, z, 15, .1, .1, .1, .5, false);
     }
 
-    public InfernalArrowProjectile(EntityType<? extends MagicArrowProjectile> pEntityType, Level pLevel) {
+    public InfernalArrowProjectile(EntityType<? extends Projectile> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
         this.setNoGravity(false);
     }
 
     public InfernalArrowProjectile(Level levelIn, LivingEntity shooter) {
         this(MAEntityRegistry.INFERNAL_ARROW_PROJECTILE.get(), levelIn);
+        this.setNoGravity(false);
         setOwner(shooter);
     }
 
     @Override
     protected void onHitEntity(EntityHitResult entityHitResult) {
         Entity entity = entityHitResult.getEntity();
-        if (!victims.contains(entity)) {
-            DamageSources.applyDamage(entity, damage, MASpellRegistry.INFERNAL_ARROW.get().getDamageSource(this, getOwner()));
-            MobEffectInstance infernalFlameEffect = new MobEffectInstance(ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation("born_in_chaos_v1", "infernal_flame")), 80, 1);
-            ((LivingEntity) entity).addEffect(infernalFlameEffect);
-            victims.add(entity);
-        }
-        if (hitsPerTick++ < 5) {
-            HitResult hitresult = ProjectileUtil.getHitResultOnMoveVector(this, this::canHitEntity);
-            if (hitresult.getType() != HitResult.Type.MISS && !net.minecraftforge.event.ForgeEventFactory.onProjectileImpact(this, hitresult)) {
-                onHit(hitresult);
+
+        DamageSources.applyDamage(entity, damage, MASpellRegistry.INFERNAL_ARROW.get().getDamageSource(this, getOwner()));
+
+        MobEffectInstance infernalFlameEffect = new MobEffectInstance(
+                ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation("born_in_chaos_v1", "infernal_flame")),
+                80,
+                1
+        );
+        ((LivingEntity) entity).addEffect(infernalFlameEffect);
+
+        explodeAtEntity(entity);
+        discard();
+    }
+
+    @Override
+    protected void onHit(HitResult result) {
+        if (!level().isClientSide) {
+            var blockPos = BlockPos.containing(result.getLocation());
+
+            if (result.getType() == HitResult.Type.BLOCK) {
+                if (!blockPos.equals(lastHitBlock)) {
+                    lastHitBlock = blockPos;
+                    createFireField(new Vec3(blockPos.getX(), blockPos.getY(), blockPos.getZ()));
+                }
+            } else if (result.getType() == HitResult.Type.ENTITY) {
+                level().playSound(null, BlockPos.containing(position()), SoundRegistry.FORCE_IMPACT.get(), SoundSource.NEUTRAL, 2, .65f);
             }
+        }
+        super.onHit(result);
+    }
+
+    private void explodeAtEntity(Entity entity) {
+        Vec3 position = entity.position();
+
+        entity.level().explode(entity, entity.getX(), entity.getY(), entity.getZ(), 2.0F, Level.ExplosionInteraction.NONE);
+        createFireField(position);
+    }
+
+    public void createFireField(Vec3 location) {
+        if (!level().isClientSide) {
+            InfernalFireField fire = new InfernalFireField(level());
+            fire.setOwner(getOwner());
+            fire.setDuration(40);
+            fire.setEffectDuration(40);
+            fire.setDamage(damage / 5);
+            fire.setRadius(10);
+            fire.setCircular();
+            fire.moveTo(location);
+            level().addFreshEntity(fire);
         }
     }
 }

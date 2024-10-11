@@ -7,6 +7,8 @@ import io.redspace.ironsspellbooks.api.spells.*;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.capabilities.magic.TargetEntityCastData;
 import io.redspace.ironsspellbooks.entity.spells.target_area.TargetedAreaEntity;
+import io.redspace.ironsspellbooks.network.spell.ClientboundOakskinParticles;
+import io.redspace.ironsspellbooks.setup.Messages;
 import io.redspace.ironsspellbooks.spells.TargetedTargetAreaCastData;
 import net.melvinczyk.borninspellbooks.BornInSpellbooks;
 import net.melvinczyk.borninspellbooks.registry.MAMobEffectRegistry;
@@ -17,6 +19,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
@@ -41,7 +44,7 @@ public class DeathWishSpell extends AbstractSpell {
     private final DefaultConfig defaultConfig = new DefaultConfig()
             .setMinRarity(SpellRarity.UNCOMMON)
             .setSchoolResource(SchoolRegistry.EVOCATION_RESOURCE)
-            .setMaxLevel(10)
+            .setMaxLevel(5)
             .setCooldownSeconds(180)
             .build();
 
@@ -75,23 +78,13 @@ public class DeathWishSpell extends AbstractSpell {
     }
 
     @Override
-    public boolean checkPreCastConditions(Level level, int spellLevel, LivingEntity entity, MagicData playerMagicData) {
-        if (Utils.preCastTargetHelper(level, entity, playerMagicData, this, 32, .35f)) {
-            float radius = 3f;
-            var target = ((TargetEntityCastData) playerMagicData.getAdditionalCastData()).getTarget((ServerLevel) level);
-            var area = TargetedAreaEntity.createTargetAreaEntity(level, target.position(), radius, MobEffects.MOVEMENT_SLOWDOWN.getColor(), target);
-            playerMagicData.setAdditionalCastData(new TargetedTargetAreaCastData(target, area));
-            return true;
-        }
-        return false;
+    public Optional<SoundEvent> getCastFinishSound() {
+        return Optional.of(SoundEvents.CREEPER_PRIMED);
     }
 
     @Override
     public void onCast(Level world, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
-        if (playerMagicData.getAdditionalCastData() instanceof TargetedTargetAreaCastData targetData) {
-            var targetEntity = targetData.getTarget((ServerLevel) world);
-            targetEntity.addEffect(new MAMobEffectInstance(MAMobEffectRegistry.DEATH_WISH.get(), getDuration(spellLevel, entity), getAmplifier(spellLevel, entity), entity));
-        }
+        entity.addEffect(new MobEffectInstance(MAMobEffectRegistry.DEATH_WISH.get(), (int) (getSpellPower(spellLevel, entity) * 20), spellLevel - 1, false, false, true));
         super.onCast(world, spellLevel, entity, castSource, playerMagicData);
     }
 
@@ -99,18 +92,9 @@ public class DeathWishSpell extends AbstractSpell {
         return spellLevel - 1;
     }
 
-    public int getDuration(int spellLevel, LivingEntity caster) {
-        return (int) (getSpellPower(spellLevel, caster) * 2);
-    }
-
     @Override
     public Vector3f getTargetingColor() {
         return Utils.deconstructRGB(MobEffects.MOVEMENT_SLOWDOWN.getColor());
-    }
-
-    private float getScarletPersecutorHealth(int spellLevel)
-    {
-        return 14 + spellLevel;
     }
 
     private float getScarletPersecutorDamage(int spellLevel)

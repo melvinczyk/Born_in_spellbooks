@@ -23,6 +23,7 @@ public class InfernalFireField extends AoeEntity {
     }
 
     private DamageSource damageSource;
+    private int effectDuration = 0;
 
 
     public InfernalFireField(Level level) {
@@ -37,11 +38,16 @@ public class InfernalFireField extends AoeEntity {
         DamageSources.ignoreNextKnockback(target);
         target.hurt(damageSource, getDamage());
 
-        MobEffectInstance infernalFlame = new MobEffectInstance(ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation("born_in_chaos_v1", "infernal_flame")), 120, 1);
+        MobEffectInstance infernalFlame = new MobEffectInstance(ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation("born_in_chaos_v1", "infernal_flame")), effectDuration, 1);
         if (infernalFlame != null)
         {
             target.addEffect(infernalFlame);
         }
+    }
+
+    public void setEffectDuration(int duration)
+    {
+        this.effectDuration = duration;
     }
 
     @Override

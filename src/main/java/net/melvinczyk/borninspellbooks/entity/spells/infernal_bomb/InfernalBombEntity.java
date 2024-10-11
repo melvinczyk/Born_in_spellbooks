@@ -68,6 +68,7 @@ public class InfernalBombEntity extends FireBomb {
             InfernalFireField fire = new InfernalFireField(level());
             fire.setOwner(getOwner());
             fire.setDuration(200);
+            fire.setEffectDuration(120);
             fire.setDamage(aoeDamage);
             fire.setRadius(getExplosionRadius());
             fire.setCircular();

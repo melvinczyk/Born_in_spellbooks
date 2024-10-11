@@ -4,6 +4,8 @@ import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.effect.MagicMobEffect;
 import net.melvinczyk.borninspellbooks.entity.mobs.ScarletPersecutor;
 import net.melvinczyk.borninspellbooks.registry.MAEntityRegistry;
+import net.melvinczyk.borninspellbooks.registry.MAMobEffectRegistry;
+import net.melvinczyk.borninspellbooks.util.MAMobEffectInstance;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
@@ -19,6 +21,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class CursedMarkEffect extends MagicMobEffect {
+    private LivingEntity caster;
     public CursedMarkEffect(MobEffectCategory pCategory, int pColor)
     {
         super(pCategory, pColor);
@@ -27,6 +30,7 @@ public class CursedMarkEffect extends MagicMobEffect {
     public CursedMarkEffect(MobEffectCategory pCategory, int pColor, LivingEntity caster)
     {
         super(pCategory, pColor);
+        this.caster = caster;
     }
 
     @Override
@@ -52,7 +56,7 @@ public class CursedMarkEffect extends MagicMobEffect {
             {
                 if(i % 2 == 0)
                 {
-                    ScarletPersecutor scarletPersecutor = MAEntityRegistry.SCARLET_PERSECUTOR.get().create(level);
+                    ScarletPersecutor scarletPersecutor = new ScarletPersecutor(level, caster);
                     if (scarletPersecutor != null) {
                         scarletPersecutor.finalizeSpawn((ServerLevel) level, level.getCurrentDifficultyAt(scarletPersecutor.getOnPos()), MobSpawnType.MOB_SUMMONED, null, null);
                         var yrot = 6.281f / 8 * i + targetEntity.getYRot() * Mth.DEG_TO_RAD;
