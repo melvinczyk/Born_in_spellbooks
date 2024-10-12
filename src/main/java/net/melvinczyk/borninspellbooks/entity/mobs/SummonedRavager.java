@@ -96,10 +96,10 @@ public class SummonedRavager extends Ravager implements MagicSummon {
         OwnerHelper.serializeOwner(compoundTag, summonerUUID);
     }
 
-    @Override
-    public boolean doHurtTarget(Entity pEntity) {
-        return Utils.doMeleeAttack(this, pEntity, MASpellRegistry.SUMMON_RAVAGER.get().getDamageSource(this, getSummoner()));
-    }
+//    @Override
+//    public boolean doHurtTarget(Entity pEntity) {
+//        return Utils.doMeleeAttack(this, pEntity, MASpellRegistry.SUMMON_RAVAGER.get().getDamageSource(this, getSummoner()));
+//    }
 
     @Override
     public boolean isPushable() {

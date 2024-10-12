@@ -6,10 +6,13 @@ import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.entity.spells.AbstractMagicProjectile;
 import net.melvinczyk.borninspellbooks.registry.MAEntityRegistry;
 import net.melvinczyk.borninspellbooks.registry.MASpellRegistry;
-import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
@@ -38,12 +41,12 @@ public class MaggotProjectile extends AbstractMagicProjectile implements GeoAnim
 
     @Override
     public float getSpeed() {
-        return 1.75f;
+        return 0.7f;
     }
 
     @Override
     public Optional<SoundEvent> getImpactSound() {
-        return Optional.of(ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("born_in_chaos_v1:swarmer_death")));
+        return Optional.of(SoundEvents.SLIME_DEATH_SMALL);
     }
 
     @Override
@@ -62,6 +65,9 @@ public class MaggotProjectile extends AbstractMagicProjectile implements GeoAnim
         super.onHitEntity(entityHitResult);
         var target = entityHitResult.getEntity();
         DamageSources.applyDamage(target, getDamage(), MASpellRegistry.INFECT.get().getDamageSource(this, getOwner()));
+        if (target instanceof LivingEntity livingEntity) {
+            livingEntity.addEffect(new MobEffectInstance(MobEffects.HUNGER, 200, 0));
+        }
         discard();
     }
 
@@ -71,7 +77,7 @@ public class MaggotProjectile extends AbstractMagicProjectile implements GeoAnim
 
     @Override
     public void impactParticles(double x, double y, double z) {
-        MagicManager.spawnParticles(level(), ParticleTypes.SPLASH, x, y, z, 20, .1, .1, .1, .25, true);
+        MagicManager.spawnParticles(level(), (ParticleOptions) ForgeRegistries.PARTICLE_TYPES.getValue(new ResourceLocation("born_in_chaos_v1", "fleshsplash")), x, y, z, 20, .1, .1, .1, .25, true);
     }
 
     @Override

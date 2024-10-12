@@ -42,6 +42,7 @@ public class BornInSpellbooks
         MAAttributeRegistry.register(modEventBus);
         MASchoolRegistry.register(modEventBus);
         MAItemRegistry.register(modEventBus);
+
         //MAParticleRegistry.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
@@ -87,7 +88,7 @@ public class BornInSpellbooks
             EntityRenderers.register(MAEntityRegistry.INFERNAL_BOLT_PROJECTILE.get(), InfernalBoltRenderer::new);
             EntityRenderers.register(MAEntityRegistry.GLUTTON_FISH_GNAW.get(), GluttonFishGnawRenderer::new);
             EntityRenderers.register(MAEntityRegistry.INFERNAL_ARROW_PROJECTILE.get(), InfernalArrowRenderer::new);
-
+            EntityRenderers.register(MAEntityRegistry.SUMMONED_BARREL_ZOMBIE.get(), SummonedBarrelZombieRenderer::new);
 
 
             EntityRenderers.register(MAEntityRegistry.MAGGOT_PROJECTILE.get(), MaggotProjectileRenderer::new);

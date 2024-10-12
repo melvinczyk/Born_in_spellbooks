@@ -39,8 +39,8 @@ public class CurseSpell extends AbstractSpell {
         int summons = (int)Math.ceil((double)spellLevel / 2);
         return List.of(
                 Component.translatable("ui.irons_spellbooks.summon_count", summons),
-                Component.translatable("ui.irons_spellbooks.hp", getScarletPersecutorHealth(spellLevel)),
-                Component.translatable("ui.irons_spellbooks.damage", getScarletPersecutorDamage(spellLevel))
+                Component.translatable("ui.irons_spellbooks.hp", getScarletPersecutorHealth(spellLevel, caster)),
+                Component.translatable("ui.irons_spellbooks.damage", getScarletPersecutorDamage(spellLevel, caster))
         );
     }
 
@@ -83,9 +83,9 @@ public class CurseSpell extends AbstractSpell {
     @Override
     public boolean checkPreCastConditions(Level level, int spellLevel, LivingEntity entity, MagicData playerMagicData) {
         if (Utils.preCastTargetHelper(level, entity, playerMagicData, this, 32, .35f)) {
-            float radius = 3f;
+            float radius = 1f;
             var target = ((TargetEntityCastData) playerMagicData.getAdditionalCastData()).getTarget((ServerLevel) level);
-            var area = TargetedAreaEntity.createTargetAreaEntity(level, target.position(), radius, MobEffects.MOVEMENT_SLOWDOWN.getColor(), target);
+            var area = TargetedAreaEntity.createTargetAreaEntity(level, target.position(), radius, MobEffects.HARM.getColor(), target);
             playerMagicData.setAdditionalCastData(new TargetedTargetAreaCastData(target, area));
             return true;
         }
@@ -114,14 +114,14 @@ public class CurseSpell extends AbstractSpell {
         return Utils.deconstructRGB(MobEffects.MOVEMENT_SLOWDOWN.getColor());
     }
 
-    private float getScarletPersecutorHealth(int spellLevel)
+    private float getScarletPersecutorHealth(int spellLevel, LivingEntity caster)
     {
-        return 14 + spellLevel;
+        return 10 + (getSpellPower(spellLevel, caster) * 0.1F);
     }
 
-    private float getScarletPersecutorDamage(int spellLevel)
+    private float getScarletPersecutorDamage(int spellLevel, LivingEntity caster)
     {
-        return 4 + spellLevel;
+        return 3 + (getSpellPower(spellLevel, caster) * 0.1F);
     }
 
 }

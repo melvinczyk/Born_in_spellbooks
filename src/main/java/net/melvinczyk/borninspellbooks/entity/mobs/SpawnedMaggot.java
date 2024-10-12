@@ -1,9 +1,11 @@
 package net.melvinczyk.borninspellbooks.entity.mobs;
 
 import io.redspace.ironsspellbooks.api.util.Utils;
+import io.redspace.ironsspellbooks.entity.mobs.MagicSummon;
 import io.redspace.ironsspellbooks.util.OwnerHelper;
 import net.mcreator.borninchaosv.entity.MaggotEntity;
 import net.melvinczyk.borninspellbooks.registry.MASpellRegistry;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -16,7 +18,7 @@ import net.minecraft.world.level.Level;
 import javax.annotation.Nullable;
 import java.util.UUID;
 
-public class SpawnedMaggot extends MaggotEntity {
+public class SpawnedMaggot extends MaggotEntity implements MagicSummon {
     public SpawnedMaggot(EntityType<? extends MaggotEntity> pEntityType, Level pLevel) {
         super((EntityType<MaggotEntity>) pEntityType, pLevel);
         xpReward = 0;
@@ -50,7 +52,32 @@ public class SpawnedMaggot extends MaggotEntity {
     }
 
     @Override
+    public void onUnSummon() {
+
+    }
+
+    @Override
+    public void readAdditionalSaveData(CompoundTag compoundTag) {
+        super.readAdditionalSaveData(compoundTag);
+        this.summonerUUID = OwnerHelper.deserializeOwner(compoundTag);
+    }
+
+    @Override
+    public void addAdditionalSaveData(CompoundTag compoundTag) {
+        super.addAdditionalSaveData(compoundTag);
+        OwnerHelper.serializeOwner(compoundTag, summonerUUID);
+    }
+
+    @Override
+    public boolean isAlliedTo(Entity pEntity) {
+        return super.isAlliedTo(pEntity) || this.isAlliedHelper(pEntity);
+    }
+
+    @Override
     public boolean doHurtTarget(Entity pEntity) {
+        if (pEntity instanceof LivingEntity && pEntity.getUUID().equals(this.getSummoner().getUUID())) {
+            return false;
+        }
         return Utils.doMeleeAttack(this, pEntity, MASpellRegistry.INFECT_HOST.get().getDamageSource(this, getSummoner()));
     }
 

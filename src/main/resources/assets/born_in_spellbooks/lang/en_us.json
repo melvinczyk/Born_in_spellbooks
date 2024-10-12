@@ -1,6 +1,8 @@
 {
   "ui.born_in_spellbooks.knockback": "%d Knockback",
   "ui.born_in_spellbooks.effect_amplifier": "%d Effect Amplifier",
+  "ui.born_in_spellbooks.explosion_radius": "%f Explosion Radius",
+
 
   "spell.born_in_spellbooks.curse": "Curse",
   "spell.born_in_spellbooks.summon_bone_serpent": "Summon Bone Serpent",

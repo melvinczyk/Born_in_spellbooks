@@ -285,6 +285,11 @@ public class CorpseFlyPathFinder extends CorpseFlyEntity implements GeoEntity {
     }
 
     @Override
+    protected boolean shouldDespawnInPeaceful() {
+        return false;
+    }
+
+    @Override
     public HumanoidArm getMainArm() {
         return HumanoidArm.LEFT;
     }

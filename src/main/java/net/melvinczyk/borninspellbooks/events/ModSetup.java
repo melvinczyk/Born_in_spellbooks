@@ -23,6 +23,6 @@ public class ModSetup {
         event.put(MAEntityRegistry.CORPSEFLY_PATHFINDER.get(), ScarletPersecutor.setAttributes());
         event.put(MAEntityRegistry.SPAWNED_MAGGOT.get(), SpawnedMaggot.setAttributes());
         event.put(MAEntityRegistry.GLUTTON_FISH_GNAW.get(), GluttonFishGnawEntity.setAttributes());
-
+        event.put(MAEntityRegistry.SUMMONED_BARREL_ZOMBIE.get(), SummonedBarrelZombie.setAttributes());
     }
 }

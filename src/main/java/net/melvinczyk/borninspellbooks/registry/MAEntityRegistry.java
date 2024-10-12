@@ -45,6 +45,7 @@ public class MAEntityRegistry {
                     .clientTrackingRange(10)
                     .build(new ResourceLocation(BornInSpellbooks.MODID, "summoned_dread_hound").toString()));
 
+
     public static final RegistryObject<EntityType<SummonedSkeletonThrasher>> SUMMONED_SKELETON_THRASHER =
             ENTITIES.register("summoned_skeleton_thrasher", () -> EntityType.Builder.<SummonedSkeletonThrasher>of(SummonedSkeletonThrasher::new, MobCategory.MONSTER)
                     .sized(1f, 1f)
@@ -66,12 +67,19 @@ public class MAEntityRegistry {
                     .build(new ResourceLocation(BornInSpellbooks.MODID, "corpsefly_pathfinder").toString()));
 
 
-
     public static final RegistryObject<EntityType<SpawnedMaggot>> SPAWNED_MAGGOT =
             ENTITIES.register("spawned_maggot", () -> EntityType.Builder.<SpawnedMaggot>of(SpawnedMaggot::new, MobCategory.MONSTER)
                     .sized(1f, 1f)
                     .clientTrackingRange(64)
                     .build(new ResourceLocation(BornInSpellbooks.MODID, "spawned_maggot").toString()));
+
+
+    public static final RegistryObject<EntityType<SummonedBarrelZombie>> SUMMONED_BARREL_ZOMBIE =
+            ENTITIES.register("summoned_barrel_zombie", () -> EntityType.Builder.<SummonedBarrelZombie>of(SummonedBarrelZombie::new, MobCategory.MONSTER)
+                    .sized(1f, 1f)
+                    .clientTrackingRange(64)
+                    .build(new ResourceLocation(BornInSpellbooks.MODID, "summoned_barrel_zombie").toString()));
+
 
 
     // Projectiles
@@ -80,6 +88,7 @@ public class MAEntityRegistry {
                     .sized(1f, 1f)
                     .clientTrackingRange(64)
                     .build(new ResourceLocation(BornInSpellbooks.MODID, "summoned_trident").toString()));
+
 
     public static final RegistryObject<EntityType<InfernalBombEntity>> INFERNAL_BOMB =
             ENTITIES.register("fel_bomb", () -> EntityType.Builder.<InfernalBombEntity>of(InfernalBombEntity::new, MobCategory.MISC)
@@ -114,6 +123,8 @@ public class MAEntityRegistry {
                     .sized(1f, 1f)
                     .clientTrackingRange(10)
                     .build(new ResourceLocation(BornInSpellbooks.MODID, "infernal_arrow_projectile").toString()));
+
+
 
     // Misc
 

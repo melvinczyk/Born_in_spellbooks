@@ -35,9 +35,9 @@ public class DeathWishSpell extends AbstractSpell {
     @Override
     public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster)
     {
-        int summons = (int)Math.ceil((double)spellLevel / 2);
         return List.of(
-                Component.translatable("ui.irons_spellbooks.damage", getScarletPersecutorDamage(spellLevel))
+                Component.translatable("ui.born_in_spellbooks.explosion_radius", Utils.stringTruncation(1.0F + getSpellPower(spellLevel, caster) * (0.02F * (spellLevel - 1)), 2)),
+                Component.translatable("ui.irons_spellbooks.effect_length", Utils.stringTruncation((getSpellPower(spellLevel, caster) * 10) / 20, 2))
         );
     }
 
@@ -84,22 +84,12 @@ public class DeathWishSpell extends AbstractSpell {
 
     @Override
     public void onCast(Level world, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
-        entity.addEffect(new MobEffectInstance(MAMobEffectRegistry.DEATH_WISH.get(), (int) (getSpellPower(spellLevel, entity) * 20), spellLevel - 1, false, false, true));
+        entity.addEffect(new MobEffectInstance(MAMobEffectRegistry.DEATH_WISH.get(), (int) (getSpellPower(spellLevel, entity) * 10), spellLevel - 1, false, false, true));
         super.onCast(world, spellLevel, entity, castSource, playerMagicData);
-    }
-
-    public int getAmplifier(int spellLevel, LivingEntity caster) {
-        return spellLevel - 1;
     }
 
     @Override
     public Vector3f getTargetingColor() {
         return Utils.deconstructRGB(MobEffects.MOVEMENT_SLOWDOWN.getColor());
     }
-
-    private float getScarletPersecutorDamage(int spellLevel)
-    {
-        return 4 + spellLevel;
-    }
-
 }

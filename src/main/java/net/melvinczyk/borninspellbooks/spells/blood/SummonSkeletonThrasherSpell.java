@@ -101,10 +101,10 @@ public class SummonSkeletonThrasherSpell extends AbstractSpell
 
     private float getThrasherHealth(int spellLevel, LivingEntity caster)
     {
-        return 30 + spellLevel * 2;
+        return 10 + spellLevel * 2;
     }
 
     private float getThrasherDamage(int spellLevel, LivingEntity caster) {
-        return getSpellPower(spellLevel, caster);
+        return getSpellPower(spellLevel, caster) * 0.2F;
     }
 }

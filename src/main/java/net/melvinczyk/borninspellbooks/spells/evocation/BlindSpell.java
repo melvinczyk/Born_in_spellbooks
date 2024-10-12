@@ -6,13 +6,11 @@ import io.redspace.ironsspellbooks.api.spells.*;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import net.mcreator.borninchaosv.entity.StaffofBlindnessProjectileEntity;
 import net.melvinczyk.borninspellbooks.BornInSpellbooks;
-import net.melvinczyk.borninspellbooks.entity.spells.blind.BlindnessProjectile;
 import net.melvinczyk.borninspellbooks.registry.MASchoolRegistry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 
@@ -85,6 +83,6 @@ public class BlindSpell extends AbstractSpell {
 
     private int getKnockback(int spellLevel, LivingEntity caster)
     {
-        return (int)(getSpellPower(spellLevel, caster) * .2F);
+        return (int)(getSpellPower(spellLevel, caster) * .1F);
     }
 }

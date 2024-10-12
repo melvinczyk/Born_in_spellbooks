@@ -1,10 +1,12 @@
 package net.melvinczyk.borninspellbooks.entity.mobs;
 
 import io.redspace.ironsspellbooks.api.util.Utils;
+import io.redspace.ironsspellbooks.entity.mobs.MagicSummon;
 import io.redspace.ironsspellbooks.util.OwnerHelper;
 import net.mcreator.borninchaosv.entity.ScarletPersecutorEntity;
 import net.melvinczyk.borninspellbooks.registry.MAEntityRegistry;
 import net.melvinczyk.borninspellbooks.registry.MASpellRegistry;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -18,7 +20,7 @@ import javax.annotation.Nullable;
 import java.util.UUID;
 
 
-public class ScarletPersecutor extends ScarletPersecutorEntity {
+public class ScarletPersecutor extends ScarletPersecutorEntity implements MagicSummon {
     public ScarletPersecutor(EntityType<? extends ScarletPersecutorEntity> pEntityType, Level pLevel) {
         super((EntityType<ScarletPersecutorEntity>) pEntityType, pLevel);
         xpReward = 0;
@@ -36,8 +38,8 @@ public class ScarletPersecutor extends ScarletPersecutorEntity {
 
     public static AttributeSupplier setAttributes() {
         return Mob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 30)
-                .add(Attributes.FLYING_SPEED, 0.4D)
+                .add(Attributes.MAX_HEALTH, 40)
+                .add(Attributes.FLYING_SPEED, 1.0D)
                 .add(Attributes.MOVEMENT_SPEED, 1.0D)
                 .add(Attributes.ATTACK_DAMAGE, 5.0D)
                 .build();
@@ -47,6 +49,11 @@ public class ScarletPersecutor extends ScarletPersecutorEntity {
     protected LivingEntity cachedSummoner;
     protected UUID summonerUUID;
 
+    @Override
+    public boolean isAlliedTo(Entity pEntity) {
+        return super.isAlliedTo(pEntity) || this.isAlliedHelper(pEntity);
+    }
+
     public void setSummoner(@Nullable LivingEntity owner) {
         if (owner != null) {
             this.summonerUUID = owner.getUUID();
@@ -54,12 +61,31 @@ public class ScarletPersecutor extends ScarletPersecutorEntity {
         }
     }
 
+    @Override
+    public void readAdditionalSaveData(CompoundTag compoundTag) {
+        super.readAdditionalSaveData(compoundTag);
+        this.summonerUUID = OwnerHelper.deserializeOwner(compoundTag);
+    }
+
+    @Override
+    public void addAdditionalSaveData(CompoundTag compoundTag) {
+        super.addAdditionalSaveData(compoundTag);
+        OwnerHelper.serializeOwner(compoundTag, summonerUUID);
+    }
+
     public LivingEntity getSummoner() {
         return OwnerHelper.getAndCacheOwner(level(), cachedSummoner, summonerUUID);
     }
 
     @Override
+    public void onUnSummon() {
+    }
+
+    @Override
     public boolean doHurtTarget(Entity pEntity) {
+        if (pEntity instanceof LivingEntity && pEntity.getUUID().equals(this.getSummoner().getUUID())) {
+            return false;
+        }
         return Utils.doMeleeAttack(this, pEntity, MASpellRegistry.CURSE.get().getDamageSource(this, getSummoner()));
     }
 
@@ -70,6 +96,11 @@ public class ScarletPersecutor extends ScarletPersecutorEntity {
 
     @Override
     protected boolean shouldDropLoot() {
+        return false;
+    }
+
+    @Override
+    protected boolean shouldDespawnInPeaceful() {
         return false;
     }
 
