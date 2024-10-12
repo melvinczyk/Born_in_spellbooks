@@ -116,7 +116,7 @@ public class SummonedSkeletonThrasher extends SkeletonThrasherEntity implements 
                 .add(Attributes.MAX_HEALTH, 100)
                 .add(Attributes.JUMP_STRENGTH, 2.0)
                 .add(Attributes.FOLLOW_RANGE, 32.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.25)
+                .add(Attributes.MOVEMENT_SPEED, 0.2)
                 .add(Attributes.ATTACK_DAMAGE, 12.0D)
                 .build();
     }

@@ -1,13 +1,12 @@
 package net.melvinczyk.borninspellbooks.effect;
 
+import io.redspace.ironsspellbooks.config.ServerConfigs;
 import io.redspace.ironsspellbooks.effect.MagicMobEffect;
 import net.melvinczyk.borninspellbooks.registry.MASpellRegistry;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.level.Level;
 
@@ -46,7 +45,14 @@ public class DeathWishEffect extends MagicMobEffect {
         float baseRadius = 1.0F;
         float radiusMultiplier = spellPower * (0.02F * amplifier);
         float explosionRadius = baseRadius + radiusMultiplier;
-        entity.level().explode(entity, entity.getX(), entity.getY(), entity.getZ(), explosionRadius, Level.ExplosionInteraction.NONE);
+        if (ServerConfigs.SPELL_GREIFING.get())
+        {
+            entity.level().explode(entity, entity.getX(), entity.getY(), entity.getZ(), explosionRadius, Level.ExplosionInteraction.MOB);
+        }
+        else
+        {
+            entity.level().explode(entity, entity.getX(), entity.getY(), entity.getZ(), explosionRadius, Level.ExplosionInteraction.NONE);
+        }
 
         float maxHealth = entity.getMaxHealth();
         float explosionDamage = (maxHealth * 0.2F) + (amplifier * 2.0F);

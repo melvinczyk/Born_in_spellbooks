@@ -2,7 +2,6 @@ package net.melvinczyk.borninspellbooks.entity.spells.gnaw;
 
 import net.mcreator.borninchaosv.entity.GluttonFishEntity;
 import net.melvinczyk.borninspellbooks.registry.MAEntityRegistry;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;

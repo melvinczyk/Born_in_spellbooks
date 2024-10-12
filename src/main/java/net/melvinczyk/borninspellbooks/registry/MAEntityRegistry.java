@@ -8,6 +8,7 @@ import net.melvinczyk.borninspellbooks.entity.spells.infernal_bolt.InfernalBoltP
 import net.melvinczyk.borninspellbooks.entity.spells.infernal_bomb.InfernalBombEntity;
 import net.melvinczyk.borninspellbooks.entity.spells.infernal_bomb.InfernalFireField;
 import net.melvinczyk.borninspellbooks.entity.spells.maggot.MaggotProjectile;
+import net.melvinczyk.borninspellbooks.entity.spells.swarm.SwarmProjectile;
 import net.melvinczyk.borninspellbooks.entity.spells.trident.TridentProjectile;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
@@ -81,6 +82,13 @@ public class MAEntityRegistry {
                     .build(new ResourceLocation(BornInSpellbooks.MODID, "summoned_barrel_zombie").toString()));
 
 
+    public static final RegistryObject<EntityType<CorpseFlyBarrier>> CORPSE_FLY_BARRIER =
+            ENTITIES.register("corpse_fly_barrier", () -> EntityType.Builder.<CorpseFlyBarrier>of(CorpseFlyBarrier::new, MobCategory.MONSTER)
+                    .sized(1f, 1f)
+                    .clientTrackingRange(64)
+                    .build(new ResourceLocation(BornInSpellbooks.MODID, "corpse_fly_barrier").toString()));
+
+
 
     // Projectiles
     public static final RegistryObject<EntityType<TridentProjectile>> TRIDENT_PROJECTILE =
@@ -123,6 +131,13 @@ public class MAEntityRegistry {
                     .sized(1f, 1f)
                     .clientTrackingRange(10)
                     .build(new ResourceLocation(BornInSpellbooks.MODID, "infernal_arrow_projectile").toString()));
+
+
+    public static final RegistryObject<EntityType<SwarmProjectile>> SWARM_PROJECTILE =
+            ENTITIES.register("swarm_projectile", () -> EntityType.Builder.<SwarmProjectile>of(SwarmProjectile::new, MobCategory.MISC)
+                    .sized(1f, 1f)
+                    .clientTrackingRange(64)
+                    .build(new ResourceLocation(BornInSpellbooks.MODID, "swarm_projectile").toString()));
 
 
 

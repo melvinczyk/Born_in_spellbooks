@@ -89,6 +89,8 @@ public class BornInSpellbooks
             EntityRenderers.register(MAEntityRegistry.GLUTTON_FISH_GNAW.get(), GluttonFishGnawRenderer::new);
             EntityRenderers.register(MAEntityRegistry.INFERNAL_ARROW_PROJECTILE.get(), InfernalArrowRenderer::new);
             EntityRenderers.register(MAEntityRegistry.SUMMONED_BARREL_ZOMBIE.get(), SummonedBarrelZombieRenderer::new);
+            EntityRenderers.register(MAEntityRegistry.CORPSE_FLY_BARRIER.get(), CorpseFlyBarrierRenderer::new);
+            EntityRenderers.register(MAEntityRegistry.SWARM_PROJECTILE.get(), NoopRenderer::new);
 
 
             EntityRenderers.register(MAEntityRegistry.MAGGOT_PROJECTILE.get(), MaggotProjectileRenderer::new);

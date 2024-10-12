@@ -20,7 +20,7 @@ import java.util.Optional;
 
 
 @AutoSpellConfig
-public class ShootMaggot extends AbstractSpell {
+public class ShootMaggotSpell extends AbstractSpell {
     private final ResourceLocation spellId = new ResourceLocation(BornInSpellbooks.MODID, "shoot_maggot");
 
     @Override
@@ -39,7 +39,7 @@ public class ShootMaggot extends AbstractSpell {
             .setCooldownSeconds(1)
             .build();
 
-    public ShootMaggot()
+    public ShootMaggotSpell()
     {
         this.manaCostPerLevel = 2;
         this.baseSpellPower = 12;

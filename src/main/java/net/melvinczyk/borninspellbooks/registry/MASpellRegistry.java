@@ -8,15 +8,10 @@ import net.melvinczyk.borninspellbooks.spells.blood.SummonBoneSerpentSpell;
 import net.melvinczyk.borninspellbooks.spells.blood.SummonSkeletonThrasherSpell;
 import net.melvinczyk.borninspellbooks.spells.evocation.BlindSpell;
 import net.melvinczyk.borninspellbooks.spells.evocation.DeathWishSpell;
-import net.melvinczyk.borninspellbooks.spells.evocation.SummonRavagerSpell;
 import net.melvinczyk.borninspellbooks.spells.fire.InfernalArrowSpell;
 import net.melvinczyk.borninspellbooks.spells.fire.InfernalBoltSpell;
 import net.melvinczyk.borninspellbooks.spells.fire.InfernalBombSpell;
-import net.melvinczyk.borninspellbooks.spells.nature.GnawSpell;
-import net.melvinczyk.borninspellbooks.spells.nature.InfectHostSpell;
-import net.melvinczyk.borninspellbooks.spells.nature.ShootMaggot;
-import net.melvinczyk.borninspellbooks.spells.nature.SummonDreadHoundSpell;
-import net.melvinczyk.borninspellbooks.spells.water.LaunchTridentSpell;
+import net.melvinczyk.borninspellbooks.spells.nature.*;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
@@ -50,8 +45,11 @@ public class MASpellRegistry {
 
     // Nature
     public static final RegistryObject<AbstractSpell> SUMMON_DREAD_HOUND = registerSpell(new SummonDreadHoundSpell());
-    public static final RegistryObject<AbstractSpell> INFECT = registerSpell(new ShootMaggot());
+    public static final RegistryObject<AbstractSpell> INFECT = registerSpell(new ShootMaggotSpell());
     public static final RegistryObject<AbstractSpell> INFECT_HOST = registerSpell(new InfectHostSpell());
+    public static final RegistryObject<AbstractSpell> FLY_BARRIER = registerSpell(new FlyBarrierSpell());
+    public static final RegistryObject<AbstractSpell> SWARM = registerSpell(new SwarmSpell());
+
     // TODO: Fly swarm - Similar to fire breath but with fly particles
     // TODO: Gnaw - Summons a glutton fish in front of you that takes a big bite and disappears
     // TODO: Fly Shield - Adds a circle of flies that work like a barrier
