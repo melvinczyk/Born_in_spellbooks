@@ -4,7 +4,10 @@ import io.redspace.ironsspellbooks.entity.mobs.MagicSummon;
 import io.redspace.ironsspellbooks.util.OwnerHelper;
 import net.mcreator.borninchaosv.entity.CorpseFlyEntity;
 import net.melvinczyk.borninspellbooks.registry.MAEntityRegistry;
+import net.minecraft.commands.arguments.EntityAnchorArgument;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -21,28 +24,21 @@ import javax.annotation.Nullable;
 import java.util.UUID;
 
 public class CorpseFlyBarrier extends CorpseFlyEntity implements MagicSummon {
-    @Nullable
-    private UUID ownerUUID;
-    @Nullable
-    private LivingEntity owner;
 
     protected LivingEntity cachedSummoner;
     protected UUID summonerUUID;
-    private double orbitRadius = 2.0;
-    private double orbitSpeed = 0.05;
-    private float angle;
 
     public CorpseFlyBarrier(EntityType<? extends CorpseFlyEntity> entityType, Level level) {
         super((EntityType<CorpseFlyEntity>) entityType, level);
         this.setNoGravity(true);
         this.moveControl = new FlyingMoveControl(this, 10, true);
         this.refreshDimensions();
+        xpReward = 0;
     }
 
     public CorpseFlyBarrier(Level level, LivingEntity owner) {
         this(MAEntityRegistry.CORPSEFLY_PATHFINDER.get(), level);
-        this.owner = owner;
-        this.ownerUUID = owner.getUUID();
+        setSummoner(owner);
     }
 
     public static AttributeSupplier setAttributes() {
@@ -55,31 +51,65 @@ public class CorpseFlyBarrier extends CorpseFlyEntity implements MagicSummon {
                 .build();
     }
 
+    public void setSummoner(@Nullable LivingEntity owner) {
+        if (owner != null) {
+            this.summonerUUID = owner.getUUID();
+            this.cachedSummoner = owner;
+        }
+    }
+
+    @Override
+    public void readAdditionalSaveData(CompoundTag compoundTag) {
+        super.readAdditionalSaveData(compoundTag);
+        this.summonerUUID = OwnerHelper.deserializeOwner(compoundTag);
+    }
+
+    @Override
+    public void addAdditionalSaveData(CompoundTag compoundTag) {
+        super.addAdditionalSaveData(compoundTag);
+        OwnerHelper.serializeOwner(compoundTag, summonerUUID);
+    }
+
+    @Override
+    public boolean isAlliedTo(Entity pEntity) {
+        return super.isAlliedTo(pEntity) || this.isAlliedHelper(pEntity);
+    }
+
+
+    @Override
+    protected boolean shouldDropLoot() {
+        return false;
+    }
+
     @Override
     public void tick() {
+        if (!level().isClientSide) {
+            LivingEntity owner = getSummoner();
+            if (owner == null || !owner.isAlive()) {
+                this.discard();
+                return;
+            }
+
+            float rotationSpeed = 1.0F;
+            float orbitRadius = 2.0F;
+            float tick = owner.tickCount + this.level().getGameTime();
+
+            float angle = tick * rotationSpeed;
+
+            double offsetX = orbitRadius * Math.cos(angle);
+            double offsetZ = orbitRadius * Math.sin(angle);
+
+            Vec3 ownerPos = owner.position();
+
+            this.setPos(ownerPos.x + offsetX, ownerPos.y, ownerPos.z + offsetZ);
+
+            this.setYRot((tick * rotationSpeed * 360F) % 360F);
+        }
+
         super.tick();
-
-        if (this.owner == null || !this.owner.isAlive()) {
-            this.discard();
-            return;
-        }
-
-        angle += orbitSpeed;
-        if (angle >= 2 * Math.PI) {
-            angle -= 2 * Math.PI;
-        }
-
-        Vec3 ownerPos = owner.position();
-
-        double offsetX = orbitRadius * Mth.cos((float) angle);
-        double offsetZ = orbitRadius * Mth.sin((float) angle);
-
-        this.setPos(ownerPos.x + offsetX, ownerPos.y, ownerPos.z + offsetZ);
-
-        double movementYaw = Mth.atan2(offsetZ, offsetX) * (180F / (float) Math.PI) - 90F;
-        this.setYRot((float) movementYaw);
-        this.setYHeadRot((float) movementYaw);
     }
+
+
 
     @Override
     protected @NotNull PathNavigation createNavigation(Level pLevel) {

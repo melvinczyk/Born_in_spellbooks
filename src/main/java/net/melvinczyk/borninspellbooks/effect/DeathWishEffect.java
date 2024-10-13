@@ -42,7 +42,7 @@ public class DeathWishEffect extends MagicMobEffect {
     }
 
     private void explode(LivingEntity entity, int amplifier) {
-        float baseRadius = 1.0F;
+        float baseRadius = 2.0F;
         float radiusMultiplier = spellPower * (0.02F * amplifier);
         float explosionRadius = baseRadius + radiusMultiplier;
         if (ServerConfigs.SPELL_GREIFING.get())

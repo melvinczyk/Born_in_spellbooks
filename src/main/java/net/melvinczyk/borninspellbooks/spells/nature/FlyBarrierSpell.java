@@ -64,21 +64,13 @@ public class FlyBarrierSpell extends AbstractSpell {
 
     @Override
     public void onCast(Level world, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
-        float radius = 1.0f + .185f * spellLevel;
-        for (int i = 0; i < spellLevel; i++) {
                 CorpseFlyBarrier thrasher = new CorpseFlyBarrier(world, entity);
                 thrasher.finalizeSpawn((ServerLevel) world, world.getCurrentDifficultyAt(thrasher.getOnPos()), MobSpawnType.MOB_SUMMONED, null, null);
-                var yrot = 6.281f / spellLevel * i + entity.getYRot() * Mth.DEG_TO_RAD;
-                Vec3 spawn = Utils.moveToRelativeGroundLevel(world, entity.getEyePosition().add(new Vec3(radius * Mth.cos(yrot), 0, radius * Mth.sin(yrot))), 10);
-                thrasher.setPos(spawn.x, spawn.y, spawn.z);
-                thrasher.setYRot(entity.getYRot());
-                thrasher.setOldPosAndRot();
-                thrasher.setPos(entity.position());
 
                 world.addFreshEntity(thrasher);
                 super.onCast(world, spellLevel, entity, castSource, playerMagicData);
 
-        }
+
     }
 
     private int getFlyCount(int spellLevel)

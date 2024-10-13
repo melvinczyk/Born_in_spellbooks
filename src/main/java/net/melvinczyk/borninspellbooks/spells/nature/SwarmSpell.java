@@ -84,7 +84,7 @@ public class SwarmSpell extends AbstractSpell {
     }
 
     public float getDamage(int spellLevel, LivingEntity caster) {
-        return 1.25f + getSpellPower(spellLevel, caster) * .75f;
+        return 1.1f + getSpellPower(spellLevel, caster) * .75f;
     }
 
     @Override

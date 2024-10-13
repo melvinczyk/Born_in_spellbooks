@@ -14,6 +14,12 @@
   "spell.born_in_spellbooks.summon_dread_hound": "Pack Leader",
   "spell.born_in_spellbooks.infernal_bomb": "Infernal Bomb",
   "spell.born_in_spellbooks.infernal_bolt": "Infernal Bolt",
+  "spell.born_in_spellbooks.swarm": "Swarm",
+  "spell.born_in_spellbooks.death_wish": "Death Wish",
+  "spell.born_in_spellbooks.fly_barrier": "Fly Barrier",
+  "spell.born_in_spellbooks.infernal_arrow": "Infernal Arrow",
+
+
 
   "entity.born_in_spellbooks.summoned_skeleton_thrasher": "Summoned Skeleton Thrasher",
   "entity.born_in_spellbooks.summoned_dread_hound": "Summoned Dread Hound",
