@@ -2,108 +2,122 @@ package net.melvinczyk.borninspellbooks.entity.spells.gnaw;
 
 import net.mcreator.borninchaosv.entity.GluttonFishEntity;
 import net.melvinczyk.borninspellbooks.registry.MAEntityRegistry;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobType;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
+import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.animatable.GeoEntity;
+import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
+import software.bernie.geckolib.core.animation.AnimationController;
 
+
+import java.util.Collections;
 import java.util.List;
 
-public class GluttonFishGnawEntity extends GluttonFishEntity implements GeoEntity {
-    private int biteTimer = 0;
-    private final int biteDuration = 20;
-    private final RawAnimation attackAnimation = RawAnimation.begin().thenPlay("attack");
+public class GluttonFishGnawEntity extends LivingEntity implements GeoEntity {
 
-    public GluttonFishGnawEntity(EntityType<? extends GluttonFishEntity> pEntityType, Level pLevel) {
-        super((EntityType<GluttonFishEntity>) pEntityType, pLevel);
-        xpReward = 0;
-        this.noPhysics = true;  // Makes the entity stay in place
+    private Player owner;
+    private boolean playSwingAnimation = true;
+
+
+    public GluttonFishGnawEntity(EntityType<? extends GluttonFishGnawEntity> entityType, Level level)
+    {
+        super(entityType, level);
+        this.setNoGravity(true);
+        this.setInvulnerable(true);
     }
 
-    public GluttonFishGnawEntity(Level pLevel, LivingEntity owner) {
-        this(MAEntityRegistry.GLUTTON_FISH_GNAW.get(), pLevel);
+    public GluttonFishGnawEntity(Level levelIn, LivingEntity owner)
+    {
+        this(MAEntityRegistry.GLUTTON_FISH_GNAW.get(), levelIn);
+        if (owner instanceof Player player)
+        {
+            this.owner = player;
+        }
+    }
+
+    public Player getOwner()
+    {
+        return this.owner;
     }
 
     @Override
-    public void tick() {
-        super.tick();
-
-        // Keep the entity in place by setting its motion to zero
-        this.setDeltaMovement(0, 0, 0);
-        this.setNoGravity(true);  // Disable gravity so it stays floating in the air
-
-        if (biteTimer == 0) {
-            // Trigger animation (adjust depending on your animation library)
-            startBiteAnimation();
-        }
-
-        // Damage logic at mid-animation
-        if (biteTimer == biteDuration / 2) {
-            dealAoEDamage();
-        }
-
-        // Despawn after the bite
-        if (biteTimer >= biteDuration) {
-            this.remove(RemovalReason.DISCARDED);
-        }
-
-        biteTimer++;
+    public boolean isPushable() {
+        return false;
     }
-    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
+    @Override
+    public boolean isInvulnerable() {
+        return true;
+    }
+
+    protected float getStandingEyeHeight(Pose pPose, EntityDimensions pDimensions) {
+        return pDimensions.height * 0.6F;
+    }
+
+    @Override
+    public boolean isNoGravity() {
+        return true;
+    }
+
+    public static AttributeSupplier.Builder prepareAttributes() {
+        return LivingEntity.createLivingAttributes();
+    }
+
+    @Override
+    public Iterable<ItemStack> getArmorSlots() {
+        return Collections.singleton(ItemStack.EMPTY);
+    }
+
+    @Override
+    public ItemStack getItemBySlot(EquipmentSlot pSlot) {
+        return ItemStack.EMPTY;
+    }
+
+    @Override
+    public void setItemSlot(EquipmentSlot pSlot, ItemStack pStack) {
+
+    }
+
+    @Override
+    public HumanoidArm getMainArm() {
+        return HumanoidArm.LEFT;
+    }
+
+
+    private final RawAnimation animationBuilder = RawAnimation.begin().thenPlay("attack");
+    private final AnimationController animationController = new AnimationController(this, "controller", 0, this::predicate);
+
+    private PlayState predicate(software.bernie.geckolib.core.animation.AnimationState event) {
+
+        if (event.getController().getAnimationState() == AnimationController.State.STOPPED) {
+            if (playSwingAnimation) {
+                event.getController().setAnimation(animationBuilder);
+                event.getController().setAnimationSpeed(0.75F); // Normal animation speed
+                playSwingAnimation = false;
+            }
+        }
+
+        return PlayState.CONTINUE;
+    }
+
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
+        controllerRegistrar.add(animationController);
+    }
 
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return this.cache;
     }
 
-    private void startBiteAnimation() {
-        // Start the attack animation (using GeckoLib for this example)
-
-    }
-
-    private void dealAoEDamage() {
-        // Define AoE size and damage
-        int damageRadius = 3; // Example: 3 block radius
-        int damageAmount = 6; // Example: 6 damage points
-
-        AABB aoeBox = new AABB(this.blockPosition().offset(-damageRadius, -damageRadius, -damageRadius),
-                this.blockPosition().offset(damageRadius, damageRadius, damageRadius));
-
-        List<LivingEntity> targets = this.level().getEntitiesOfClass(LivingEntity.class, aoeBox);
-
-        for (LivingEntity target : targets) {
-            if (target != this) { // Exclude self from damage
-                target.kill();
-            }
-        }
-    }
-
-    public static AttributeSupplier setAttributes() {
-        return Mob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 20)
-                .add(Attributes.JUMP_STRENGTH, 2.0)
-                .add(Attributes.FOLLOW_RANGE, 32.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.0)  // No movement speed, since it's stationary
-                .add(Attributes.ATTACK_DAMAGE, 5.0D)
-                .build();
-    }
-
-    @Override
-    public MobType getMobType() {
-        return MobType.WATER; // Fits with the Glutton Fish theme
-    }
-
-    @Override
-    protected void registerGoals() {
-        // No goals, since this is a simple, stationary entity
-    }
+    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 }
