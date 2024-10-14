@@ -8,6 +8,7 @@ import net.melvinczyk.borninspellbooks.entity.spells.infernal_bolt.InfernalBoltP
 import net.melvinczyk.borninspellbooks.entity.spells.infernal_bomb.InfernalBombEntity;
 import net.melvinczyk.borninspellbooks.entity.spells.infernal_bomb.InfernalFireField;
 import net.melvinczyk.borninspellbooks.entity.spells.maggot.MaggotProjectile;
+import net.melvinczyk.borninspellbooks.entity.spells.nightmare_rend.NightmareRend;
 import net.melvinczyk.borninspellbooks.entity.spells.swarm.SwarmProjectile;
 import net.melvinczyk.borninspellbooks.entity.spells.trident.TridentProjectile;
 import net.minecraft.resources.ResourceLocation;
@@ -148,5 +149,12 @@ public class MAEntityRegistry {
                     .sized(1f, 1f)
                     .clientTrackingRange(64)
                     .build(new ResourceLocation(BornInSpellbooks.MODID, "fel_fire").toString()));
+
+
+    public static final RegistryObject<EntityType<NightmareRend>> NIGHTMARE_REND =
+            ENTITIES.register("nightmare_rend", () -> EntityType.Builder.<NightmareRend>of(NightmareRend::new, MobCategory.MISC)
+                    .sized(1f, 1f)
+                    .clientTrackingRange(64)
+                    .build(new ResourceLocation(BornInSpellbooks.MODID, "nightmare_rend").toString()));
 
 }

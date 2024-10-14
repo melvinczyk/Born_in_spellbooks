@@ -4,6 +4,7 @@ import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.entity.mobs.MagicSummon;
 import io.redspace.ironsspellbooks.util.OwnerHelper;
 import net.mcreator.borninchaosv.entity.MaggotEntity;
+import net.melvinczyk.borninspellbooks.registry.MAEntityRegistry;
 import net.melvinczyk.borninspellbooks.registry.MASpellRegistry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.damagesource.DamageSource;
@@ -22,6 +23,12 @@ public class SpawnedMaggot extends MaggotEntity implements MagicSummon {
     public SpawnedMaggot(EntityType<? extends MaggotEntity> pEntityType, Level pLevel) {
         super((EntityType<MaggotEntity>) pEntityType, pLevel);
         xpReward = 0;
+    }
+
+    public SpawnedMaggot(Level level, LivingEntity owner)
+    {
+        this(MAEntityRegistry.SPAWNED_MAGGOT.get(), level);
+        setSummoner(owner);
     }
 
     public void assignTarget(LivingEntity target) {

@@ -8,6 +8,7 @@ import net.melvinczyk.borninspellbooks.spells.blood.SummonBoneSerpentSpell;
 import net.melvinczyk.borninspellbooks.spells.blood.SummonSkeletonThrasherSpell;
 import net.melvinczyk.borninspellbooks.spells.evocation.BlindSpell;
 import net.melvinczyk.borninspellbooks.spells.evocation.DeathWishSpell;
+import net.melvinczyk.borninspellbooks.spells.evocation.NightmareRendSpell;
 import net.melvinczyk.borninspellbooks.spells.fire.InfernalArrowSpell;
 import net.melvinczyk.borninspellbooks.spells.fire.InfernalBoltSpell;
 import net.melvinczyk.borninspellbooks.spells.fire.InfernalBombSpell;
@@ -46,6 +47,7 @@ public class MASpellRegistry {
     //public static final RegistryObject<AbstractSpell> SUMMON_RAVAGER = registerSpell(new SummonRavagerSpell());
     public static final RegistryObject<AbstractSpell> BLIND = registerSpell(new BlindSpell());
     public static final RegistryObject<AbstractSpell> DEATH_WISH = registerSpell(new DeathWishSpell());
+    public static final RegistryObject<AbstractSpell> NIGHTMARE_REND = registerSpell(new NightmareRendSpell());
     // TODO: Nightmare rend - Similar to flame strike but it is black and inflicts the nightmare stalker effect
 
 

@@ -48,11 +48,10 @@ public class CorpseFlyPathFinder extends CorpseFlyEntity implements GeoEntity {
     private UUID ownerUUID;
 
     @Nullable
-    private Entity cachedOwner;
+    private LivingEntity cachedOwner;
 
     private final RawAnimation animation = RawAnimation.begin().thenPlay("walk") ;
 
-    private Vec3 targetSearchStart;
     private Vec3 lastTickPos;
     private float damageAmount;
 
@@ -136,7 +135,7 @@ public class CorpseFlyPathFinder extends CorpseFlyEntity implements GeoEntity {
                         float radius = .5f + .185f * 3;
                         for (int i = 0; i < 3; i++)
                         {
-                            SpawnedMaggot maggot = MAEntityRegistry.SPAWNED_MAGGOT.get().create(level);
+                            SpawnedMaggot maggot = new SpawnedMaggot(level, this.cachedOwner);
                             if (maggot != null)
                             {
                                 var yrot = 6.281f / 6 * i + target.getYRot() * Mth.DEG_TO_RAD;
@@ -160,11 +159,10 @@ public class CorpseFlyPathFinder extends CorpseFlyEntity implements GeoEntity {
 
     }
 
-    public void setOwner(@Nullable Entity pOwner) {
+    public void setOwner(@Nullable LivingEntity pOwner) {
         if (pOwner != null) {
             this.ownerUUID = pOwner.getUUID();
             this.cachedOwner = pOwner;
-
         }
     }
 
@@ -250,8 +248,8 @@ public class CorpseFlyPathFinder extends CorpseFlyEntity implements GeoEntity {
                 .add(Attributes.ATTACK_DAMAGE, 3.0)
                 .add(Attributes.MAX_HEALTH, 20.0)
                 .add(Attributes.FOLLOW_RANGE, 40.0)
-                .add(Attributes.FLYING_SPEED, .2)
-                .add(Attributes.MOVEMENT_SPEED, .2);
+                .add(Attributes.FLYING_SPEED, .5)
+                .add(Attributes.MOVEMENT_SPEED, .5);
 
     }
 
