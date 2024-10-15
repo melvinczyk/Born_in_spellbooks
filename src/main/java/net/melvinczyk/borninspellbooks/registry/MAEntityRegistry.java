@@ -1,5 +1,6 @@
 package net.melvinczyk.borninspellbooks.registry;
 
+import io.redspace.ironsspellbooks.entity.spells.flame_strike.FlameStrike;
 import net.melvinczyk.borninspellbooks.BornInSpellbooks;
 import net.melvinczyk.borninspellbooks.entity.mobs.*;
 import net.melvinczyk.borninspellbooks.entity.spells.gnaw.GluttonFishGnawEntity;

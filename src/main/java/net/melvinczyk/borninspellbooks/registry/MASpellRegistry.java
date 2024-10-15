@@ -48,7 +48,6 @@ public class MASpellRegistry {
     public static final RegistryObject<AbstractSpell> BLIND = registerSpell(new BlindSpell());
     public static final RegistryObject<AbstractSpell> DEATH_WISH = registerSpell(new DeathWishSpell());
     public static final RegistryObject<AbstractSpell> NIGHTMARE_REND = registerSpell(new NightmareRendSpell());
-    // TODO: Nightmare rend - Similar to flame strike but it is black and inflicts the nightmare stalker effect
 
 
     // Nature
@@ -78,5 +77,4 @@ public class MASpellRegistry {
     // TODO: Wave Push Back spell - Summon a wave in front of you that pushes entities away
     // TODO: Erode spell - Water beam that hits target and destroys stone
     // TODO: Summon Coralsus - Summons a Cataclysm coralsus
-
 }

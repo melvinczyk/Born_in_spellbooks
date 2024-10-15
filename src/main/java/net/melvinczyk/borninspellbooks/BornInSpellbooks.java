@@ -1,6 +1,7 @@
 package net.melvinczyk.borninspellbooks;
 
 import com.mojang.logging.LogUtils;
+import io.redspace.ironsspellbooks.entity.spells.flame_strike.FlameStrikeRenderer;
 import net.melvinczyk.borninspellbooks.entity.mobs.render.*;
 import net.melvinczyk.borninspellbooks.entity.spells.gnaw.GluttonFishGnawRenderer;
 import net.melvinczyk.borninspellbooks.entity.spells.infernal_arrow.InfernalArrowRenderer;
@@ -93,7 +94,6 @@ public class BornInSpellbooks
             EntityRenderers.register(MAEntityRegistry.CORPSE_FLY_BARRIER.get(), CorpseFlyBarrierRenderer::new);
             EntityRenderers.register(MAEntityRegistry.SWARM_PROJECTILE.get(), NoopRenderer::new);
             EntityRenderers.register(MAEntityRegistry.NIGHTMARE_REND.get(), NightmareRendRenderer::new);
-
 
 
             EntityRenderers.register(MAEntityRegistry.MAGGOT_PROJECTILE.get(), MaggotProjectileRenderer::new);

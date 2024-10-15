@@ -1,5 +1,6 @@
 package net.melvinczyk.borninspellbooks.entity.spells.nightmare_rend;
 
+import io.redspace.ironsspellbooks.entity.spells.AoeEntity;
 import io.redspace.ironsspellbooks.entity.spells.flame_strike.FlameStrike;
 import net.melvinczyk.borninspellbooks.registry.MAEntityRegistry;
 import net.minecraft.core.particles.ParticleOptions;
@@ -16,14 +17,13 @@ import net.minecraftforge.network.NetworkHooks;
 
 import java.util.Optional;
 
-public class NightmareRend extends FlameStrike {
-    private static final EntityDataAccessor<Boolean> DATA_MIRRORED = SynchedEntityData.defineId(NightmareRend.class, EntityDataSerializers.BOOLEAN);
+public class NightmareRend extends AoeEntity {
+    private static final EntityDataAccessor<Boolean> DATA_MIRRORED = SynchedEntityData.defineId(FlameStrike.class, EntityDataSerializers.BOOLEAN);
 
     public NightmareRend(EntityType<? extends Projectile> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 
-    LivingEntity target;
 
     public NightmareRend(Level level, boolean mirrored) {
         this(MAEntityRegistry.NIGHTMARE_REND.get(), level);
