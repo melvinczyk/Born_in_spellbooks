@@ -17,8 +17,8 @@ import net.minecraftforge.network.NetworkHooks;
 
 import java.util.Optional;
 
-public class NightmareRend extends AoeEntity {
-    private static final EntityDataAccessor<Boolean> DATA_MIRRORED = SynchedEntityData.defineId(FlameStrike.class, EntityDataSerializers.BOOLEAN);
+public class NightmareRend extends FlameStrike {
+    private static final EntityDataAccessor<Boolean> DATA_MIRRORED = SynchedEntityData.defineId(NightmareRend.class, EntityDataSerializers.BOOLEAN);
 
     public NightmareRend(EntityType<? extends Projectile> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -37,54 +37,4 @@ public class NightmareRend extends AoeEntity {
     }
 
     public final int ticksPerFrame = 2;
-    public final int deathTime = ticksPerFrame * 4;
-
-    @Override
-    public void tick() {
-        if (!firstTick) {
-            firstTick = true;
-        }
-        if (tickCount >= deathTime)
-            discard();
-    }
-
-    @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.getEntityData().define(DATA_MIRRORED, false);
-    }
-
-    public boolean isMirrored() {
-        return this.getEntityData().get(DATA_MIRRORED);
-    }
-
-    @Override
-    public boolean shouldBeSaved() {
-        return false;
-    }
-
-    @Override
-    public void refreshDimensions() {
-        return;
-    }
-
-    @Override
-    public void ambientParticles() {
-        return;
-    }
-
-    @Override
-    public float getParticleCount() {
-        return 0;
-    }
-
-    @Override
-    public Optional<ParticleOptions> getParticle() {
-        return Optional.empty();
-    }
-
-    @Override
-    public Packet<ClientGamePacketListener> getAddEntityPacket() {
-        return NetworkHooks.getEntitySpawningPacket(this);
-    }
 }

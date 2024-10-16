@@ -18,6 +18,7 @@ import java.util.Random;
 
 public class NightmareRendRenderer extends EntityRenderer<NightmareRend> {
     private static final ResourceLocation[] TEXTURES = {
+            // Placeholder
             IronsSpellbooks.id("textures/entity/flame_strike/flame_strike_1.png"),
             IronsSpellbooks.id("textures/entity/flame_strike/flame_strike_2.png"),
             IronsSpellbooks.id("textures/entity/flame_strike/flame_strike_3.png"),
@@ -33,10 +34,9 @@ public class NightmareRendRenderer extends EntityRenderer<NightmareRend> {
         poseStack.pushPose();
 
         Pose pose = poseStack.last();
-        poseStack.mulPose(Axis.YP.rotationDegrees(90 - entity.getYRot()));
-        poseStack.mulPose(Axis.ZP.rotationDegrees(entity.getXRot()));
-        float randomZ = new Random(31L * entity.getId()).nextInt(-8, 8);
-        poseStack.mulPose(Axis.XP.rotationDegrees(randomZ));
+        poseStack.mulPose(Axis.YP.rotationDegrees(180- entity.getYRot()));
+        poseStack.mulPose(Axis.ZP.rotationDegrees(270 + entity.getXRot()));
+        poseStack.mulPose(Axis.XP.rotationDegrees(90));
 
         drawSlash(pose, entity, bufferSource, entity.getBbWidth() * 1.5f, entity.isMirrored());
 
@@ -51,9 +51,8 @@ public class NightmareRendRenderer extends EntityRenderer<NightmareRend> {
         Matrix3f normalMatrix = pose.normal();
 
         VertexConsumer consumer = bufferSource.getBuffer(RenderType.entityCutoutNoCull(getTextureLocation(entity)));
-        float halfWidth = width * .5f;
+        float halfWidth = width * 1.5f;
         float height = entity.getBbHeight() * .5f;
-        //old color: 125, 0, 10
         consumer.vertex(poseMatrix, -halfWidth, height, -halfWidth).color(255, 255, 255, 255).uv(0f, mirrored ? 0f : 1f).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(LightTexture.FULL_BRIGHT).normal(normalMatrix, 0f, 1f, 0f).endVertex();
         consumer.vertex(poseMatrix, halfWidth, height, -halfWidth).color(255, 255, 255, 255).uv(1f, mirrored ? 0f : 1f).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(LightTexture.FULL_BRIGHT).normal(normalMatrix, 0f, 1f, 0f).endVertex();
         consumer.vertex(poseMatrix, halfWidth, height, halfWidth).color(255, 255, 255, 255).uv(1f, mirrored ? 1f : 0f).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(LightTexture.FULL_BRIGHT).normal(normalMatrix, 0f, 1f, 0f).endVertex();
@@ -64,6 +63,5 @@ public class NightmareRendRenderer extends EntityRenderer<NightmareRend> {
     public ResourceLocation getTextureLocation(NightmareRend entity) {
         int frame = (entity.tickCount / entity.ticksPerFrame) % TEXTURES.length;
         return TEXTURES[frame];
-        //return TEXTURE;
     }
 }

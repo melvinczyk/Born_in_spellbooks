@@ -17,13 +17,14 @@ import io.redspace.ironsspellbooks.registries.SoundRegistry;
 import io.redspace.ironsspellbooks.util.ParticleHelper;
 import net.melvinczyk.borninspellbooks.BornInSpellbooks;
 import net.melvinczyk.borninspellbooks.entity.spells.nightmare_rend.NightmareRend;
-import net.melvinczyk.borninspellbooks.entity.spells.nightmare_rend.NightmareRendRenderer;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobType;
@@ -45,9 +46,10 @@ public class NightmareRendSpell extends AbstractSpell {
 
     @Override
     public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
-        return List.of(Component.translatable("ui.irons_spellbooks.damage", getDamageText(spellLevel, caster)));
+        return List.of(
+                Component.translatable("ui.irons_spellbooks.damage", getDamageText(spellLevel, caster)),
+                Component.translatable("ui.irons_spellbooks.effect_length", Utils.stringTruncation((spellLevel + 1), 2)));
     }
-
     private final DefaultConfig defaultConfig = new DefaultConfig()
             .setMinRarity(SpellRarity.UNCOMMON)
             .setSchoolResource(SchoolRegistry.EVOCATION_RESOURCE)
@@ -95,7 +97,6 @@ public class NightmareRendSpell extends AbstractSpell {
 
     @Override
     public int getEffectiveCastTime(int spellLevel, @Nullable LivingEntity entity) {
-        //due to animation timing, we do not want cast time attribute to affect this spell
         return getCastTime(spellLevel);
     }
 
@@ -113,17 +114,19 @@ public class NightmareRendSpell extends AbstractSpell {
                 if (offsetVector.dot(forward) >= 0) {
                     if (DamageSources.applyDamage(targetEntity, getDamage(spellLevel, entity), damageSource)) {
                         MagicManager.spawnParticles(level, (ParticleOptions) ForgeRegistries.PARTICLE_TYPES.getValue(new ResourceLocation("born_in_chaos_v1", "dimanim")), targetEntity.getX(), targetEntity.getY() + targetEntity.getBbHeight() * .5f, targetEntity.getZ(), 50, targetEntity.getBbWidth() * .5f, targetEntity.getBbHeight() * .5f, targetEntity.getBbWidth() * .5f, .03, false);
+                        ((LivingEntity) targetEntity).addEffect(new MobEffectInstance(ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation("born_in_chaos_v1", "gaze_of_terror")), (spellLevel + 1) * 20, 1, false, false));
+                        ((LivingEntity) targetEntity).addEffect(new MobEffectInstance(MobEffects.WITHER, (spellLevel + 1) * 20, 1, false, false));
                         EnchantmentHelper.doPostDamageEffects(entity, targetEntity);
                     }
                 }
             }
         }
         boolean mirrored = playerMagicData.getCastingEquipmentSlot().equals(SpellSelectionManager.OFFHAND);
-        NightmareRend flameStrike = new NightmareRend(level, mirrored);
-        flameStrike.moveTo(hitLocation);
-        flameStrike.setYRot(entity.getYRot());
-        flameStrike.setXRot(entity.getXRot());
-        level.addFreshEntity(flameStrike);
+        NightmareRend rend = new NightmareRend(level, mirrored);
+        rend.moveTo(hitLocation);
+        rend.setYRot(entity.getYRot());
+        rend.setXRot(entity.getXRot());
+        level.addFreshEntity(rend);
         super.onCast(level, spellLevel, entity, castSource, playerMagicData);
     }
 
