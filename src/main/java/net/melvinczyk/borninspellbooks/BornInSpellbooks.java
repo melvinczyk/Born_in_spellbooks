@@ -21,6 +21,7 @@ import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -77,7 +78,8 @@ public class BornInSpellbooks
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {
-            EntityRenderers.register(MAEntityRegistry.SUMMONED_BONE_SERPENT.get(), SummonedBoneSerpentRenderer::new);
+
+            //EntityRenderers.register(MAEntityRegistry.SUMMONED_BONE_SERPENT.get(), SummonedBoneSerpentRenderer::new);
             EntityRenderers.register(MAEntityRegistry.SUMMONED_RAVAGER.get(), SummonedRavagerRenderer::new);
             EntityRenderers.register(MAEntityRegistry.TRIDENT_PROJECTILE.get(), TridentRenderer::new);
             EntityRenderers.register(MAEntityRegistry.SUMMONED_DREAD_HOUND.get(), SummonedDreadHoundRenderer::new);

@@ -28,11 +28,11 @@ public class MAEntityRegistry {
     }
 
     // Mobs
-    public static final RegistryObject<EntityType<SummonedBoneSerpent>> SUMMONED_BONE_SERPENT =
-            ENTITIES.register("summoned_bone_serpent", () -> EntityType.Builder.<SummonedBoneSerpent>of(SummonedBoneSerpent::new, MobCategory.MONSTER)
-                    .sized(1f, 1f)
-                    .clientTrackingRange(10)
-                    .build(new ResourceLocation(BornInSpellbooks.MODID, "summoned_bone_serpent").toString()));
+//    public static final RegistryObject<EntityType<SummonedBoneSerpent>> SUMMONED_BONE_SERPENT =
+//            ENTITIES.register("summoned_bone_serpent", () -> EntityType.Builder.<SummonedBoneSerpent>of(SummonedBoneSerpent::new, MobCategory.MONSTER)
+//                    .sized(1f, 1f)
+//                    .clientTrackingRange(10)
+//                    .build(new ResourceLocation(BornInSpellbooks.MODID, "summoned_bone_serpent").toString()));
 
 
     public static final RegistryObject<EntityType<SummonedRavager>> SUMMONED_RAVAGER =

@@ -15,7 +15,7 @@ public class ModSetup {
     @SubscribeEvent
     public static void entityAttributeEvent(EntityAttributeCreationEvent event)
     {
-        event.put(MAEntityRegistry.SUMMONED_BONE_SERPENT.get(), SummonedBoneSerpent.setAttributes());
+        //event.put(MAEntityRegistry.SUMMONED_BONE_SERPENT.get(), SummonedBoneSerpent.setAttributes());
         event.put(MAEntityRegistry.SUMMONED_RAVAGER.get(), SummonedRavager.setAttributes());
         event.put(MAEntityRegistry.SUMMONED_DREAD_HOUND.get(), SummonedDreadHound.setAttributes());
         event.put(MAEntityRegistry.SUMMONED_SKELETON_THRASHER.get(), SummonedSkeletonThrasher.setAttributes());
