@@ -41,7 +41,7 @@ public class MaggotProjectile extends AbstractMagicProjectile implements GeoAnim
 
     @Override
     public float getSpeed() {
-        return 0.7f;
+        return 0.9f;
     }
 
     @Override

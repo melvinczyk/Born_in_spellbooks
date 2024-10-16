@@ -4,6 +4,7 @@ import io.redspace.ironsspellbooks.api.config.DefaultConfig;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import io.redspace.ironsspellbooks.api.spells.*;
+import io.redspace.ironsspellbooks.api.util.Utils;
 import net.melvinczyk.borninspellbooks.BornInSpellbooks;
 import net.melvinczyk.borninspellbooks.entity.mobs.SummonedSkeletonThrasher;
 import net.melvinczyk.borninspellbooks.registry.MAMobEffectRegistry;
@@ -29,8 +30,8 @@ public class SummonSkeletonThrasherSpell extends AbstractSpell
     public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster)
     {
         return List.of(
-                Component.translatable("ui.irons_spellbooks.hp", getThrasherHealth(spellLevel, caster)),
-                Component.translatable("ui.irons_spellbooks.damage", getThrasherDamage(spellLevel, caster))
+                Component.translatable("ui.irons_spellbooks.hp", Utils.stringTruncation(getThrasherHealth(spellLevel, caster), 2)),
+                Component.translatable("ui.irons_spellbooks.damage", Utils.stringTruncation(getThrasherDamage(spellLevel, caster), 2))
         );
     }
 
@@ -105,6 +106,6 @@ public class SummonSkeletonThrasherSpell extends AbstractSpell
     }
 
     private float getThrasherDamage(int spellLevel, LivingEntity caster) {
-        return getSpellPower(spellLevel, caster) * 0.2F;
+        return getSpellPower(spellLevel, caster) * 0.5F;
     }
 }

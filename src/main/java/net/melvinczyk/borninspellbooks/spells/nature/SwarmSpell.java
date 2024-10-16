@@ -73,12 +73,12 @@ public class SwarmSpell extends AbstractSpell {
                 && entityCastData.getCastingEntity() instanceof AbstractConeProjectile cone) {
             cone.setDealDamageActive();
         } else {
-            SwarmProjectile fireBreathProjectile = new SwarmProjectile(world, entity);
-            fireBreathProjectile.setPos(entity.position().add(0, entity.getEyeHeight() * .7, 0));
-            fireBreathProjectile.setDamage(getDamage(spellLevel, entity));
-            world.addFreshEntity(fireBreathProjectile);
+            SwarmProjectile swarmProjectile = new SwarmProjectile(world, entity);
+            swarmProjectile.setPos(entity.position().add(0, entity.getEyeHeight() * .7, 0));
+            swarmProjectile.setDamage(getDamage(spellLevel, entity));
+            world.addFreshEntity(swarmProjectile);
 
-            playerMagicData.setAdditionalCastData(new EntityCastData(fireBreathProjectile));
+            playerMagicData.setAdditionalCastData(new EntityCastData(swarmProjectile));
         }
         super.onCast(world, spellLevel, entity, castSource, playerMagicData);
     }

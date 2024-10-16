@@ -4,6 +4,7 @@ import io.redspace.ironsspellbooks.api.config.DefaultConfig;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.spells.*;
 import io.redspace.ironsspellbooks.api.util.Utils;
+import io.redspace.ironsspellbooks.capabilities.magic.RecastInstance;
 import net.melvinczyk.borninspellbooks.BornInSpellbooks;
 import net.melvinczyk.borninspellbooks.entity.spells.maggot.MaggotProjectile;
 import net.melvinczyk.borninspellbooks.registry.MASchoolRegistry;
@@ -15,6 +16,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,7 +37,7 @@ public class ShootMaggotSpell extends AbstractSpell {
     private final DefaultConfig defaultConfig = new DefaultConfig()
             .setMinRarity(SpellRarity.UNCOMMON)
             .setSchoolResource(MASchoolRegistry.NATURE_RESOURCE)
-            .setMaxLevel(10)
+            .setMaxLevel(7)
             .setCooldownSeconds(1)
             .build();
 
@@ -75,7 +77,14 @@ public class ShootMaggotSpell extends AbstractSpell {
     }
 
     @Override
+    public int getRecastCount(int spellLevel, @Nullable LivingEntity entity) {
+        return spellLevel;
+    }
+    @Override
     public void onCast(Level world, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
+        if (!playerMagicData.getPlayerRecasts().hasRecastForSpell(getSpellId())) {
+            playerMagicData.getPlayerRecasts().addRecast(new RecastInstance(getSpellId(), spellLevel, getRecastCount(spellLevel, entity), 80, castSource, null), playerMagicData);
+        }
         MaggotProjectile maggot = new MaggotProjectile(world, entity);
         maggot.setPos(entity.position().add(0, entity.getEyeHeight() , 0));
         maggot.shoot(entity.getLookAngle());
