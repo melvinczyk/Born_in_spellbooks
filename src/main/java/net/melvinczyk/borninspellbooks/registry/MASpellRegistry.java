@@ -3,10 +3,8 @@ package net.melvinczyk.borninspellbooks.registry;
 import net.melvinczyk.borninspellbooks.BornInSpellbooks;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
-import net.melvinczyk.borninspellbooks.spells.blood.CurseSpell;
+import net.melvinczyk.borninspellbooks.spells.blood.*;
 //import net.melvinczyk.borninspellbooks.spells.blood.SummonBoneSerpentSpell;
-import net.melvinczyk.borninspellbooks.spells.blood.RitualSpell;
-import net.melvinczyk.borninspellbooks.spells.blood.SummonSkeletonThrasherSpell;
 import net.melvinczyk.borninspellbooks.spells.evocation.BlindSpell;
 import net.melvinczyk.borninspellbooks.spells.evocation.DeathWishSpell;
 import net.melvinczyk.borninspellbooks.spells.evocation.NightmareRendSpell;
@@ -35,6 +33,8 @@ public class MASpellRegistry {
     public static final RegistryObject<AbstractSpell> SUMMON_SKELETON_THRASHER = registerSpell(new SummonSkeletonThrasherSpell());
     public static final RegistryObject<AbstractSpell> CURSE = registerSpell(new CurseSpell());
     public static final RegistryObject<AbstractSpell> RITUAl = registerSpell(new RitualSpell());
+    public static final RegistryObject<AbstractSpell> SUMMON_ZOMBIE_BRUISER = registerSpell(new SummonZombieBruiserSpell());
+    public static final RegistryObject<AbstractSpell> LINGERING_STAIN = registerSpell(new LingeringStainSpell());
     // TODO: Summon barrel zombie - Summon a barrel zombie with a built in inventory
     // TODO: Imbue Chaos - Spirit of Chaos goes into self and get th obsession effect
     // TODO: Baby skeleton Summon - Summons two baby skeletons but changes depending on the biomes casted in: baby skeleton/imp/mini spirit guide

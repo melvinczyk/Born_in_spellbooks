@@ -8,6 +8,7 @@ import net.melvinczyk.borninspellbooks.entity.spells.infernal_arrow.InfernalArro
 import net.melvinczyk.borninspellbooks.entity.spells.infernal_bolt.InfernalBoltProjectile;
 import net.melvinczyk.borninspellbooks.entity.spells.infernal_bomb.InfernalBombEntity;
 import net.melvinczyk.borninspellbooks.entity.spells.infernal_bomb.InfernalFireField;
+import net.melvinczyk.borninspellbooks.entity.spells.lingering_stain.LingeringStainField;
 import net.melvinczyk.borninspellbooks.entity.spells.maggot.MaggotProjectile;
 import net.melvinczyk.borninspellbooks.entity.spells.nightmare_rend.NightmareRend;
 import net.melvinczyk.borninspellbooks.entity.spells.swarm.SwarmProjectile;
@@ -90,6 +91,13 @@ public class MAEntityRegistry {
                     .clientTrackingRange(64)
                     .build(new ResourceLocation(BornInSpellbooks.MODID, "corpse_fly_barrier").toString()));
 
+    public static final RegistryObject<EntityType<SummonedZombieBruiser>> ZOMBIE_BRUISER =
+            ENTITIES.register("summoned_zombie_bruiser", () -> EntityType.Builder.<SummonedZombieBruiser>of(SummonedZombieBruiser::new, MobCategory.MONSTER)
+                    .sized(1f, 1f)
+                    .clientTrackingRange(64)
+                    .build(new ResourceLocation(BornInSpellbooks.MODID, "summoned_zombie_bruiser").toString()));
+
+
 
 
     // Projectiles
@@ -150,6 +158,12 @@ public class MAEntityRegistry {
                     .sized(1f, 1f)
                     .clientTrackingRange(64)
                     .build(new ResourceLocation(BornInSpellbooks.MODID, "fel_fire").toString()));
+
+    public static final RegistryObject<EntityType<LingeringStainField>> LINGERING_STAIN =
+            ENTITIES.register("lingering_stain", () -> EntityType.Builder.<LingeringStainField>of(LingeringStainField::new, MobCategory.MISC)
+                    .sized(1f, 1f)
+                    .clientTrackingRange(64)
+                    .build(new ResourceLocation(BornInSpellbooks.MODID, "lingering_stain").toString()));
 
 
     public static final RegistryObject<EntityType<NightmareRend>> NIGHTMARE_REND =

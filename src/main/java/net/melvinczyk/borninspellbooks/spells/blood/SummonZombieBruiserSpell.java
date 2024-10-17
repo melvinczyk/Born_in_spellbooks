@@ -9,6 +9,7 @@ import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.registries.SoundRegistry;
 import net.melvinczyk.borninspellbooks.BornInSpellbooks;
 import net.melvinczyk.borninspellbooks.entity.mobs.SummonedSkeletonThrasher;
+import net.melvinczyk.borninspellbooks.entity.mobs.SummonedZombieBruiser;
 import net.melvinczyk.borninspellbooks.registry.MAMobEffectRegistry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -24,16 +25,16 @@ import java.util.List;
 import java.util.Optional;
 
 @AutoSpellConfig
-public class SummonSkeletonThrasherSpell extends AbstractSpell
+public class SummonZombieBruiserSpell extends AbstractSpell
 {
-    private final ResourceLocation spellId = new ResourceLocation(BornInSpellbooks.MODID, "summon_skeleton_thrasher");
+    private final ResourceLocation spellId = new ResourceLocation(BornInSpellbooks.MODID, "summon_zombie_bruiser");
 
     @Override
     public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster)
     {
         return List.of(
-                Component.translatable("ui.irons_spellbooks.hp", Utils.stringTruncation(getThrasherHealth(spellLevel, caster), 2)),
-                Component.translatable("ui.irons_spellbooks.damage", Utils.stringTruncation(getThrasherDamage(spellLevel, caster), 2))
+                Component.translatable("ui.irons_spellbooks.hp", Utils.stringTruncation(getBruiserHealth(spellLevel, caster), 2)),
+                Component.translatable("ui.irons_spellbooks.damage", Utils.stringTruncation(getBruiserDamage(spellLevel, caster), 2))
         );
     }
 
@@ -44,12 +45,12 @@ public class SummonSkeletonThrasherSpell extends AbstractSpell
             .setCooldownSeconds(300)
             .build();
 
-    public SummonSkeletonThrasherSpell() {
+    public SummonZombieBruiserSpell() {
         this.manaCostPerLevel = 20;
         this.baseSpellPower = 9;
         this.spellPowerPerLevel = 1;
         this.castTime = 30;
-        this.baseManaCost = 200;
+        this.baseManaCost = 175;
     }
 
     @Override
@@ -89,30 +90,30 @@ public class SummonSkeletonThrasherSpell extends AbstractSpell
     {
         int summonTime = 20 * 60 * 10;
 
-        SummonedSkeletonThrasher thrasher = new SummonedSkeletonThrasher(world, entity);
+        SummonedZombieBruiser thrasher = new SummonedZombieBruiser(world, entity);
         thrasher.setPos(entity.position());
 
 
-        thrasher.getAttributes().getInstance(Attributes.ATTACK_DAMAGE).setBaseValue(getThrasherDamage(spellLevel, entity));
-        thrasher.getAttributes().getInstance(Attributes.MAX_HEALTH).setBaseValue(getThrasherHealth(spellLevel, entity));
+        thrasher.getAttributes().getInstance(Attributes.ATTACK_DAMAGE).setBaseValue(getBruiserDamage(spellLevel, entity));
+        thrasher.getAttributes().getInstance(Attributes.MAX_HEALTH).setBaseValue(getBruiserHealth(spellLevel, entity));
         thrasher.setHealth(thrasher.getMaxHealth());
         world.addFreshEntity(thrasher);
 
-        thrasher.addEffect(new MobEffectInstance(MAMobEffectRegistry.SKELETON_THRASHER_TIMER.get(), summonTime, 0, false, false, false));
+        thrasher.addEffect(new MobEffectInstance(MAMobEffectRegistry.ZOMBIE_BRUISER_TIMER.get(), summonTime, 0, false, false, false));
         int effectAmplifier = 0;
-        if (entity.hasEffect(MAMobEffectRegistry.SKELETON_THRASHER_TIMER.get()))
-            effectAmplifier += entity.getEffect(MAMobEffectRegistry.SKELETON_THRASHER_TIMER.get()).getAmplifier() + 1;
-        entity.addEffect(new MobEffectInstance(MAMobEffectRegistry.SKELETON_THRASHER_TIMER.get(), summonTime, effectAmplifier, false, false, true));
+        if (entity.hasEffect(MAMobEffectRegistry.ZOMBIE_BRUISER_TIMER.get()))
+            effectAmplifier += entity.getEffect(MAMobEffectRegistry.ZOMBIE_BRUISER_TIMER.get()).getAmplifier() + 1;
+        entity.addEffect(new MobEffectInstance(MAMobEffectRegistry.ZOMBIE_BRUISER_TIMER.get(), summonTime, effectAmplifier, false, false, true));
 
         super.onCast(world, spellLevel, entity, castSource, playerMagicData);
     }
 
-    private float getThrasherHealth(int spellLevel, LivingEntity caster)
+    private float getBruiserHealth(int spellLevel, LivingEntity caster)
     {
         return 30 + spellLevel * 2;
     }
 
-    private float getThrasherDamage(int spellLevel, LivingEntity caster) {
-        return getSpellPower(spellLevel, caster) * 0.5F;
+    private float getBruiserDamage(int spellLevel, LivingEntity caster) {
+        return getSpellPower(spellLevel, caster) * 0.35F;
     }
 }

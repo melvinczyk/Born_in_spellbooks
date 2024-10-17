@@ -30,7 +30,7 @@ public class ShootMaggotSpell extends AbstractSpell {
     {
         return List.of(
                 Component.translatable("ui.irons_spellbooks.damage", Utils.stringTruncation(getDamage(spellLevel, caster), 2)),
-                Component.translatable("ui.irons_spellbooks.distance", Utils.stringTruncation(getRange(spellLevel, caster), 1))
+                Component.translatable("ui.irons_spellbooks.blast_count", (int) (getRecastCount(spellLevel, caster)))
         );
     }
 
@@ -38,7 +38,7 @@ public class ShootMaggotSpell extends AbstractSpell {
             .setMinRarity(SpellRarity.UNCOMMON)
             .setSchoolResource(MASchoolRegistry.NATURE_RESOURCE)
             .setMaxLevel(7)
-            .setCooldownSeconds(1)
+            .setCooldownSeconds(70)
             .build();
 
     public ShootMaggotSpell()
@@ -99,6 +99,6 @@ public class ShootMaggotSpell extends AbstractSpell {
     }
 
     private float getDamage(int spellLevel, LivingEntity caster) {
-        return getSpellPower(spellLevel, caster) * .5f;
+        return getSpellPower(spellLevel, caster) * .4f;
     }
 }

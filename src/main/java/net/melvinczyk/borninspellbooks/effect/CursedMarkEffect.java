@@ -7,6 +7,7 @@ import net.melvinczyk.borninspellbooks.entity.mobs.ScarletPersecutor;
 import net.melvinczyk.borninspellbooks.registry.MAEntityRegistry;
 import net.melvinczyk.borninspellbooks.registry.MAMobEffectRegistry;
 import net.melvinczyk.borninspellbooks.util.MAMobEffectInstance;
+import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -63,6 +64,7 @@ public class CursedMarkEffect extends MagicMobEffect {
             playSound(targetEntity);
             int spellLevel = amplifier + 1;
             float attributeModifier = (this.spellPower) * 0.1f;
+            MagicManager.spawnParticles(level, (ParticleOptions) ForgeRegistries.PARTICLE_TYPES.getValue(new ResourceLocation("born_in_chaos_v1", "srirst_part")), targetEntity.getX(), targetEntity.getY() + targetEntity.getBbHeight() * .5f, targetEntity.getZ(), 20, targetEntity.getBbWidth() * .5f, targetEntity.getBbHeight() * .5f, targetEntity.getBbWidth() * .5f, .03, false);
             for (int i = 0; i <  spellLevel; i++)
             {
                 if(i % 2 == 0)

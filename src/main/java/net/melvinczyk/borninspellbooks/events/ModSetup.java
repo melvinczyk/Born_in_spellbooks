@@ -23,6 +23,7 @@ public class ModSetup {
         event.put(MAEntityRegistry.CORPSEFLY_PATHFINDER.get(), CorpseFlyPathFinder.prepareAttributes().build());
         event.put(MAEntityRegistry.SPAWNED_MAGGOT.get(), SpawnedMaggot.setAttributes());
         event.put(MAEntityRegistry.SUMMONED_BARREL_ZOMBIE.get(), SummonedBarrelZombie.setAttributes());
+        event.put(MAEntityRegistry.ZOMBIE_BRUISER.get(), SummonedZombieBruiser.setAttributes());
         event.put(MAEntityRegistry.CORPSE_FLY_BARRIER.get(), CorpseFlyBarrier.setAttributes());
         event.put(MAEntityRegistry.GLUTTON_FISH_GNAW.get(), GluttonFishGnawEntity.prepareAttributes().build());
     }

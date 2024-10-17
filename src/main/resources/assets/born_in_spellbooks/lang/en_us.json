@@ -8,6 +8,7 @@
   "spell.born_in_spellbooks.summon_bone_serpent": "Summon Bone Serpent",
   "spell.born_in_spellbooks.summon_ravager": "Summon Ravager",
   "spell.born_in_spellbooks.summon_skeleton_thrasher": "Raise Skeleton Thrasher",
+  "spell.born_in_spellbooks.summon_zombie_bruiser": "Raise Zombie Bruiser",
   "spell.born_in_spellbooks.blind": "Blind",
   "spell.born_in_spellbooks.infect_host": "Infect Host",
   "spell.born_in_spellbooks.shoot_maggot": "Shoot Maggot",
@@ -20,10 +21,10 @@
   "spell.born_in_spellbooks.infernal_arrow": "Infernal Arrow",
   "spell.born_in_spellbooks.nightmare_rend": "Nightmare Rend",
   "spell.born_in_spellbooks.ritual": "Ritual",
-
-
+  "spell.born_in_spellbooks.lingering_stain": "Lingering Stain",
 
   "entity.born_in_spellbooks.summoned_skeleton_thrasher": "Summoned Skeleton Thrasher",
+  "entity.born_in_spellbooks.summoned_zombie_bruiser": "Summoned Zombie Bruiser",
   "entity.born_in_spellbooks.summoned_dread_hound": "Summoned Dread Hound",
   "entity.born_in_spellbooks.scarlet_persecutor": "Scarlet Persecutor",
   "entity.born_in_spellbooks.corpsefly_pathfinder": "Corpse Fly",
@@ -33,5 +34,6 @@
   "entity.born_in_spellbooks.infernal_bolt": "Infernal Bolt",
 
 
-  "effect.born_in_spellbooks.cursed_mark": "Cursed Mark"
+  "effect.born_in_spellbooks.cursed_mark": "Cursed Mark",
+  "effect.born_in_spellbooks.death_wish": "Detonation"
 }

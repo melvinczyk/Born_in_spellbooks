@@ -96,6 +96,9 @@ public class BornInSpellbooks
             EntityRenderers.register(MAEntityRegistry.CORPSE_FLY_BARRIER.get(), CorpseFlyBarrierRenderer::new);
             EntityRenderers.register(MAEntityRegistry.SWARM_PROJECTILE.get(), NoopRenderer::new);
             EntityRenderers.register(MAEntityRegistry.NIGHTMARE_REND.get(), NightmareRendRenderer::new);
+            EntityRenderers.register(MAEntityRegistry.ZOMBIE_BRUISER.get(), SummonedZombieBruiserRenderer::new);
+            EntityRenderers.register(MAEntityRegistry.LINGERING_STAIN.get(), NoopRenderer::new);
+
 
 
             EntityRenderers.register(MAEntityRegistry.MAGGOT_PROJECTILE.get(), MaggotProjectileRenderer::new);

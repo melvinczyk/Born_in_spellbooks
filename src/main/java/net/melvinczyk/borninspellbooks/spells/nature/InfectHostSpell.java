@@ -88,22 +88,4 @@ public class InfectHostSpell extends AbstractSpell {
         }
         super.onCast(world, spellLevel, entity, castSource, playerMagicData);
     }
-
-    @Nullable
-    private LivingEntity findTarget(LivingEntity caster) {
-        var target = Utils.raycastForEntity(caster.level(), caster, 64, true, 0.35f);
-        if (target instanceof EntityHitResult entityHit && entityHit.getEntity() instanceof LivingEntity livingTarget) {
-            return livingTarget;
-        } else {
-            return null;
-        }
-    }
-
-    private float getDistance(int spellLevel, LivingEntity sourceEntity) {
-        return getSpellPower(spellLevel, sourceEntity) * 5;
-    }
-
-    private float getDuration(int spellLevel, LivingEntity sourceEntity) {
-        return ((getSpellPower(spellLevel, sourceEntity)) * 10);
-    }
 }
