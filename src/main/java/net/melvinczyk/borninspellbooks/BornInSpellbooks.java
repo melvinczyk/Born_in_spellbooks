@@ -35,9 +35,9 @@ public class BornInSpellbooks
     public static final String MODID = "born_in_spellbooks";
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    public BornInSpellbooks(FMLJavaModLoadingContext context)
+    public BornInSpellbooks()
     {
-        IEventBus modEventBus = context.getModEventBus();
+        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         modEventBus.addListener(this::commonSetup);
         MASpellRegistry.register(modEventBus);
         MAEntityRegistry.register(modEventBus);
@@ -45,8 +45,6 @@ public class BornInSpellbooks
         MAAttributeRegistry.register(modEventBus);
         MASchoolRegistry.register(modEventBus);
         MAItemRegistry.register(modEventBus);
-
-        //MAParticleRegistry.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
 
