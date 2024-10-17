@@ -115,7 +115,7 @@ public class LingeringStainSpell extends AbstractSpell {
                     bloodStain.setOwner(entity);
                     bloodStain.setDuration(amplifier);
                     bloodStain.setEffectDuration(40);
-                    bloodStain.setDamage(getSpellPower(spellLevel, entity) * 0.1f);
+                    bloodStain.setDamage(getSpellPower(spellLevel, entity) * 0.1f + 1);
                     bloodStain.setCircular();
                     bloodStain.moveTo( new Vec3(targetEntity.getX(), targetEntity.getY(), targetEntity.getZ()));
                     world.addFreshEntity(bloodStain);
