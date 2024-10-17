@@ -89,6 +89,7 @@ public class SummonSkeletonThrasherSpell extends AbstractSpell
 
         thrasher.getAttributes().getInstance(Attributes.ATTACK_DAMAGE).setBaseValue(getThrasherDamage(spellLevel, entity));
         thrasher.getAttributes().getInstance(Attributes.MAX_HEALTH).setBaseValue(getThrasherHealth(spellLevel, entity));
+        thrasher.setHealth(thrasher.getMaxHealth());
         world.addFreshEntity(thrasher);
 
         thrasher.addEffect(new MobEffectInstance(MAMobEffectRegistry.SKELETON_THRASHER_TIMER.get(), summonTime, 0, false, false, false));

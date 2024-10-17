@@ -43,7 +43,7 @@ public class RitualSpell extends AbstractSpell {
         return List.of(
                 Component.translatable("ui.irons_spellbooks.healing", Utils.stringTruncation(1+ getSpellPower(spellLevel, caster) * 0.1F, 1)),
                 Component.translatable("ui.irons_spellbooks.damage", Utils.stringTruncation(getSpellPower(spellLevel, caster) * 0.25F, 1)),
-                Component.translatable("ui.irons_spellbooks.effect_length", Utils.stringTruncation(getDuration(spellLevel, caster) * 0.2f, 2))
+                Component.translatable("ui.irons_spellbooks.effect_length", Utils.stringTruncation(getSpellPower(spellLevel, caster) * 0.55f, 2))
         );
     }
 
@@ -115,23 +115,27 @@ public class RitualSpell extends AbstractSpell {
             var targetEntity = targetData.getTarget((ServerLevel) world);
             if (targetEntity instanceof MagicSummon summon && summon.getSummoner().getUUID().equals(entity.getUUID())) {
                 MagicManager.spawnParticles(world, (ParticleOptions) ForgeRegistries.PARTICLE_TYPES.getValue(new ResourceLocation("born_in_chaos_v1", "fleshsplash")), targetEntity.getX(), targetEntity.getY() + targetEntity.getBbHeight() * .5f, targetEntity.getZ(), 20, targetEntity.getBbWidth() * .5f, targetEntity.getBbHeight() * .5f, targetEntity.getBbWidth() * .5f, .03, false);
-                for (int i = 0; i < 30; i++) {
+                for (int i = 0; i < 36; i++) {
                     double x, z;
-                    double theta = Math.toRadians((double) 360 / 30) * i;
+                    double theta = Math.toRadians((double) 360 / 36) * i;
                     x = Math.cos(theta) * 1.5f;
                     z = Math.sin(theta) * 1.5f;
                     MagicManager.spawnParticles(world, (ParticleOptions) ForgeRegistries.PARTICLE_TYPES.getValue(new ResourceLocation("born_in_chaos_v1", "ritual")), entity.position().x + x, entity.position().y, entity.position().z + z, 1, 0, 0, 0, 0.1, false);
                     MagicManager.spawnParticles(world, (ParticleOptions) ForgeRegistries.PARTICLE_TYPES.getValue(new ResourceLocation("born_in_chaos_v1", "ritual")), targetEntity.position().x + x, targetEntity.position().y, targetEntity.position().z + z, 1, 0, 0, 0, 0.1, false);
                 }
-                entity.addEffect(new MobEffectInstance(MobEffects.HEALTH_BOOST, getDuration(spellLevel, entity), 1, false, false));
+                float health = targetEntity.getHealth();
+                int amplifier = (int)Math.floor(health * 0.05f);
+                entity.addEffect(new MobEffectInstance(MobEffects.HEALTH_BOOST, (getDuration(spellLevel, entity)) * 20, amplifier, false, false));
+                entity.addEffect(new MobEffectInstance(MobEffects.REGENERATION, (getDuration(spellLevel, entity)) * 20, amplifier, false, false));
+                entity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, (getDuration(spellLevel, entity)) * 20, amplifier, false, false));
                 entity.heal(1+ getSpellPower(spellLevel, entity) * 0.1f);
-                targetEntity.hurt(targetEntity.damageSources().magic(), getSpellPower(spellLevel, entity) * 0.25f);
+                targetEntity.kill();
             }
         }
         super.onCast(world, spellLevel, entity, castSource, playerMagicData);
     }
 
     public int getDuration(int spellLevel, LivingEntity caster) {
-        return (int) (getSpellPower(spellLevel, caster) * 20);
+        return (int) (getSpellPower(spellLevel, caster) * 0.55f);
     }
 }
