@@ -6,6 +6,9 @@ import net.mcreator.borninchaosv.entity.CorpseFlyEntity;
 import net.melvinczyk.borninspellbooks.registry.MAEntityRegistry;
 import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -83,30 +86,21 @@ public class CorpseFlyBarrier extends CorpseFlyEntity implements MagicSummon {
 
     @Override
     public void tick() {
-        if (!level().isClientSide) {
-            LivingEntity owner = getSummoner();
-            if (owner == null || !owner.isAlive()) {
-                this.discard();
-                return;
-            }
-
-            float rotationSpeed = 1.0F;
-            float orbitRadius = 2.0F;
-            float tick = owner.tickCount + this.level().getGameTime();
-
-            float angle = tick * rotationSpeed;
-
-            double offsetX = orbitRadius * Math.cos(angle);
-            double offsetZ = orbitRadius * Math.sin(angle);
-
-            Vec3 ownerPos = owner.position();
-
-            this.setPos(ownerPos.x + offsetX, ownerPos.y, ownerPos.z + offsetZ);
-
-            this.setYRot((tick * rotationSpeed * 360F) % 360F);
-        }
-
         super.tick();
+        updateMotion();
+    }
+
+
+    private void updateMotion() {
+        Entity owner = getSummoner();
+        if(owner !=null) {
+                Vec3 center = owner.position().add(0.0, 0, 0.0);
+                float radius = 2;
+                float speed = this.tickCount * 0.04f;
+                float offset = 1;
+                Vec3 orbit = new Vec3(center.x + Math.cos((double) (speed + offset)) * (double) radius, center.y, center.z + Math.sin((double) (speed + offset)) * (double) radius);
+                this.moveTo(orbit);
+        }
     }
 
 

@@ -41,14 +41,14 @@ public class SummonSkeletonThrasherSpell extends AbstractSpell
             .setMinRarity(SpellRarity.LEGENDARY)
             .setSchoolResource(SchoolRegistry.BLOOD_RESOURCE)
             .setMaxLevel(10)
-            .setCooldownSeconds(300)
+            .setCooldownSeconds(240)
             .build();
 
     public SummonSkeletonThrasherSpell() {
         this.manaCostPerLevel = 20;
         this.baseSpellPower = 9;
         this.spellPowerPerLevel = 1;
-        this.castTime = 30;
+        this.castTime = 50;
         this.baseManaCost = 200;
     }
 
@@ -109,7 +109,7 @@ public class SummonSkeletonThrasherSpell extends AbstractSpell
 
     private float getThrasherHealth(int spellLevel, LivingEntity caster)
     {
-        return 30 + spellLevel * 2;
+        return 40 + spellLevel * 2;
     }
 
     private float getThrasherDamage(int spellLevel, LivingEntity caster) {

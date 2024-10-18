@@ -49,7 +49,7 @@ public class SummonZombieBruiserSpell extends AbstractSpell
         this.manaCostPerLevel = 20;
         this.baseSpellPower = 9;
         this.spellPowerPerLevel = 1;
-        this.castTime = 30;
+        this.castTime = 50;
         this.baseManaCost = 175;
     }
 
@@ -110,7 +110,7 @@ public class SummonZombieBruiserSpell extends AbstractSpell
 
     private float getBruiserHealth(int spellLevel, LivingEntity caster)
     {
-        return 30 + spellLevel * 2;
+        return 40 + spellLevel * 2;
     }
 
     private float getBruiserDamage(int spellLevel, LivingEntity caster) {

@@ -1,6 +1,0 @@
-{
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "born_in_spellbooks:item/soaked_spell_book"
-  }
-}

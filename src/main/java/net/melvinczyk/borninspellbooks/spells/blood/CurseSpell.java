@@ -36,8 +36,8 @@ public class CurseSpell extends AbstractSpell {
         int summons = (int)Math.ceil((double)spellLevel / 2);
         return List.of(
                 Component.translatable("ui.irons_spellbooks.summon_count", summons),
-                Component.translatable("ui.irons_spellbooks.hp", getScarletPersecutorHealth(spellLevel, caster)),
-                Component.translatable("ui.irons_spellbooks.damage", getScarletPersecutorDamage(spellLevel, caster))
+                Component.translatable("ui.irons_spellbooks.hp",Utils.stringTruncation(getScarletPersecutorHealth(spellLevel, caster), 2)),
+                Component.translatable("ui.irons_spellbooks.damage", Utils.stringTruncation(getScarletPersecutorDamage(spellLevel, caster), 2))
         );
     }
 

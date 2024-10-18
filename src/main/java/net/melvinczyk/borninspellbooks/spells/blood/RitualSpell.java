@@ -46,7 +46,7 @@ public class RitualSpell extends AbstractSpell {
         return List.of(
                 Component.translatable("ui.irons_spellbooks.healing", Utils.stringTruncation(1+ getSpellPower(spellLevel, caster) * 0.1F, 1)),
                 Component.translatable("ui.irons_spellbooks.damage", Utils.stringTruncation(getSpellPower(spellLevel, caster) * 0.25F, 1)),
-                Component.translatable("ui.irons_spellbooks.effect_length", Utils.stringTruncation(getSpellPower(spellLevel, caster) * 0.55f, 2))
+                Component.translatable("ui.irons_spellbooks.effect_length", Utils.stringTruncation(getSpellPower(spellLevel, caster) * 0.6f, 2))
         );
     }
 
@@ -54,7 +54,7 @@ public class RitualSpell extends AbstractSpell {
             .setMinRarity(SpellRarity.RARE)
             .setSchoolResource(SchoolRegistry.BLOOD_RESOURCE)
             .setMaxLevel(10)
-            .setCooldownSeconds(180)
+            .setCooldownSeconds(120)
             .build();
 
     public RitualSpell()
@@ -135,7 +135,7 @@ public class RitualSpell extends AbstractSpell {
                     MagicManager.spawnParticles(world, (ParticleOptions) ForgeRegistries.PARTICLE_TYPES.getValue(new ResourceLocation("born_in_chaos_v1", "ritual")), targetEntity.position().x + x, targetEntity.position().y, targetEntity.position().z + z, 1, 0, 0, 0, 0.1, false);
                 }
                 float health = targetEntity.getHealth();
-                int amplifier = (int)Math.floor(health * 0.05f);
+                int amplifier = (int)Math.floor(health * 0.025f);
                 entity.addEffect(new MobEffectInstance(MobEffects.HEALTH_BOOST, (getDuration(spellLevel, entity)) * 20, amplifier, false, false));
                 entity.addEffect(new MobEffectInstance(MobEffects.REGENERATION, (getDuration(spellLevel, entity)) * 20, amplifier, false, false));
                 entity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, (getDuration(spellLevel, entity)) * 20, amplifier, false, false));
@@ -147,6 +147,6 @@ public class RitualSpell extends AbstractSpell {
     }
 
     public int getDuration(int spellLevel, LivingEntity caster) {
-        return (int) (getSpellPower(spellLevel, caster) * 0.55f);
+        return (int) (getSpellPower(spellLevel, caster) * 0.6f);
     }
 }

@@ -84,7 +84,6 @@ public class GnawSpell extends AbstractSpell {
 
     @Override
     public int getEffectiveCastTime(int spellLevel, @Nullable LivingEntity entity) {
-        //due to animation timing, we do not want cast time attribute to affect this spell
         return getCastTime(spellLevel);
     }
 
@@ -92,7 +91,6 @@ public class GnawSpell extends AbstractSpell {
     public void onCast(Level world, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
             GluttonFishGnawEntity gnawEntity = new GluttonFishGnawEntity(world, entity);
 
-            // Summon the entity slightly in front of the caster
             Vec3 lookVec = entity.getLookAngle();
             gnawEntity.setPos(entity.getX() + lookVec.x * 2, entity.getY() + lookVec.y * 5, entity.getZ() + lookVec.z * 2);
 

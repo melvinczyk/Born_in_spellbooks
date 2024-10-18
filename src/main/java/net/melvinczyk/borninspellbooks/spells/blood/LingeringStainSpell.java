@@ -41,7 +41,7 @@ public class LingeringStainSpell extends AbstractSpell {
     public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster)
     {
         return List.of(
-                Component.translatable("ui.irons_spellbooks.damage", Utils.stringTruncation(getSpellPower(spellLevel, caster) * 0.1F, 1))
+                Component.translatable("ui.irons_spellbooks.damage", Utils.stringTruncation(getSpellPower(spellLevel, caster) * 0.1F + 2, 1))
         );
     }
 
@@ -49,16 +49,16 @@ public class LingeringStainSpell extends AbstractSpell {
             .setMinRarity(SpellRarity.EPIC)
             .setSchoolResource(SchoolRegistry.BLOOD_RESOURCE)
             .setMaxLevel(5)
-            .setCooldownSeconds(180)
+            .setCooldownSeconds(8)
             .build();
 
     public LingeringStainSpell()
     {
-        this.manaCostPerLevel = 10;
+        this.manaCostPerLevel = 5;
         this.baseSpellPower = 20;
         this.spellPowerPerLevel = 4;
-        this.castTime = 30;
-        this.baseManaCost = 150;
+        this.castTime = 0;
+        this.baseManaCost = 30;
     }
 
     @Override
@@ -115,7 +115,7 @@ public class LingeringStainSpell extends AbstractSpell {
                     bloodStain.setOwner(entity);
                     bloodStain.setDuration(amplifier);
                     bloodStain.setEffectDuration(40);
-                    bloodStain.setDamage(getSpellPower(spellLevel, entity) * 0.1f + 1);
+                    bloodStain.setDamage(getSpellPower(spellLevel, entity) * 0.1f + 2);
                     bloodStain.setCircular();
                     bloodStain.moveTo( new Vec3(targetEntity.getX(), targetEntity.getY(), targetEntity.getZ()));
                     world.addFreshEntity(bloodStain);
