@@ -5,6 +5,7 @@ import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
 import net.melvinczyk.borninspellbooks.spells.blood.*;
 //import net.melvinczyk.borninspellbooks.spells.blood.SummonBoneSerpentSpell;
+import net.melvinczyk.borninspellbooks.spells.ender.PhantomSplitSpell;
 import net.melvinczyk.borninspellbooks.spells.evocation.BlindSpell;
 import net.melvinczyk.borninspellbooks.spells.evocation.DeathWishSpell;
 import net.melvinczyk.borninspellbooks.spells.evocation.NightmareRendSpell;
@@ -37,11 +38,11 @@ public class MASpellRegistry {
     public static final RegistryObject<AbstractSpell> LINGERING_STAIN = registerSpell(new LingeringStainSpell());
     // TODO: Summon barrel zombie - Summon a barrel zombie with a built in inventory
     // TODO: Imbue Chaos - Spirit of Chaos goes into self and get th obsession effect
-    // TODO: Baby skeleton Summon - Summons two baby skeletons but changes depending on the biomes casted in: baby skeleton/imp/mini spirit guide
     // TODO: Vampiric Sacrifice - Sacrifice all summons and become a vampire like lifestealer. Plan to change eyes and skin layer to be lifestealer
 
 
     // Ender
+    public static final RegistryObject<AbstractSpell> PHANTOM_SPLIT = registerSpell(new PhantomSplitSpell());
     // TODO: Ender Creeper Split - Split yourself and summons a copy of you that explodes
 
 
@@ -59,6 +60,7 @@ public class MASpellRegistry {
     public static final RegistryObject<AbstractSpell> FLY_BARRIER = registerSpell(new FlyBarrierSpell());
     public static final RegistryObject<AbstractSpell> SWARM = registerSpell(new SwarmSpell());
     public static final RegistryObject<AbstractSpell> GNAW = registerSpell(new GnawSpell());
+    public static final RegistryObject<AbstractSpell> PUMPKIN_SMASH = registerSpell(new PumpkinSmashSpell());
     // TODO: Gnaw - Summons a glutton fish in front of you that takes a big bite and disappears
     // TODO: Fly Shield - Adds a circle of flies that work like a barrier
 

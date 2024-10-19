@@ -171,31 +171,4 @@ public class SummonedDreadHound extends DreadHoundEntity implements MagicSummon 
     public boolean isInvulnerableTo(DamageSource source) {
         return source.is(DamageTypes.IN_WALL)  || super.isInvulnerableTo(source);
     }
-
-
-    class DreadHoundAttackGoal extends MeleeAttackGoal {
-        public DreadHoundAttackGoal() {
-            super(SummonedDreadHound.this, 1.25D, true);
-        }
-
-        protected void checkAndPerformAttack(LivingEntity pEnemy, double pDistToEnemySqr) {
-            double d0 = this.getAttackReachSqr(pEnemy);
-            if (pDistToEnemySqr <= d0 && this.isTimeToAttack()) {
-                this.resetAttackCooldown();
-                this.mob.doHurtTarget(pEnemy);
-            } else if (pDistToEnemySqr <= d0 * 2.0D) {
-                if (this.isTimeToAttack()) {
-                    this.resetAttackCooldown();
-                }
-
-            } else {
-                this.resetAttackCooldown();
-            }
-        }
-
-        @Override
-        public void stop() {
-            super.stop();
-        }
-    }
 }

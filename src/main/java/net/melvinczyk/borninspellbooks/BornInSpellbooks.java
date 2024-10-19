@@ -9,6 +9,8 @@ import net.melvinczyk.borninspellbooks.entity.spells.infernal_bolt.InfernalBoltR
 import net.melvinczyk.borninspellbooks.entity.spells.infernal_bomb.InfernalBombRenderer;
 import net.melvinczyk.borninspellbooks.entity.spells.maggot.MaggotProjectileRenderer;
 import net.melvinczyk.borninspellbooks.entity.spells.nightmare_rend.NightmareRendRenderer;
+import net.melvinczyk.borninspellbooks.entity.spells.phantom_copy.PhantomCopyRenderer;
+import net.melvinczyk.borninspellbooks.entity.spells.pumpkin_smash.PumpkinProjectileRenderer;
 import net.melvinczyk.borninspellbooks.entity.spells.trident.TridentRenderer;
 import net.melvinczyk.borninspellbooks.registry.*;
 import net.minecraft.client.Minecraft;
@@ -96,7 +98,9 @@ public class BornInSpellbooks
             EntityRenderers.register(MAEntityRegistry.NIGHTMARE_REND.get(), NightmareRendRenderer::new);
             EntityRenderers.register(MAEntityRegistry.ZOMBIE_BRUISER.get(), SummonedZombieBruiserRenderer::new);
             EntityRenderers.register(MAEntityRegistry.LINGERING_STAIN.get(), NoopRenderer::new);
+            EntityRenderers.register(MAEntityRegistry.PHANTOM_COPY.get(), PhantomCopyRenderer::new);
 
+            //EntityRenderers.register(MAEntityRegistry.PUMPKIN_PROJECTILE.get(), PumpkinProjectileRenderer::new);
 
 
             EntityRenderers.register(MAEntityRegistry.MAGGOT_PROJECTILE.get(), MaggotProjectileRenderer::new);

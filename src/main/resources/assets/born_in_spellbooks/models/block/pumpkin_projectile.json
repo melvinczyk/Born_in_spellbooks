@@ -1,0 +1,11 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "born_in_chaos_v1:block/ticwawerh",
+    "up": "born_in_chaos_v1:block/ticwaniz",
+    "north": "born_in_chaos_v1:block/ticwa",
+    "south": "born_in_chaos_v1:block/ticwa",
+    "west": "born_in_chaos_v1:block/ticwa",
+    "east": "born_in_chaos_v1:block/ticwa"
+  }
+}

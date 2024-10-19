@@ -11,6 +11,8 @@ import net.melvinczyk.borninspellbooks.entity.spells.infernal_bomb.InfernalFireF
 import net.melvinczyk.borninspellbooks.entity.spells.lingering_stain.LingeringStainField;
 import net.melvinczyk.borninspellbooks.entity.spells.maggot.MaggotProjectile;
 import net.melvinczyk.borninspellbooks.entity.spells.nightmare_rend.NightmareRend;
+import net.melvinczyk.borninspellbooks.entity.spells.phantom_copy.PhantomCopyHumanoid;
+import net.melvinczyk.borninspellbooks.entity.spells.pumpkin_smash.PumpkinProjectile;
 import net.melvinczyk.borninspellbooks.entity.spells.swarm.SwarmProjectile;
 import net.melvinczyk.borninspellbooks.entity.spells.trident.TridentProjectile;
 import net.minecraft.resources.ResourceLocation;
@@ -150,6 +152,13 @@ public class MAEntityRegistry {
                     .build(new ResourceLocation(BornInSpellbooks.MODID, "swarm_projectile").toString()));
 
 
+    public static final RegistryObject<EntityType<PumpkinProjectile>> PUMPKIN_PROJECTILE =
+            ENTITIES.register("pumpkin_projectile", () -> EntityType.Builder.<PumpkinProjectile>of(PumpkinProjectile::new, MobCategory.MISC)
+                    .sized(1f, 1f)
+                    .clientTrackingRange(64)
+                    .build(new ResourceLocation(BornInSpellbooks.MODID, "pumpkin_projectile").toString()));
+
+
 
     // Misc
 
@@ -172,4 +181,10 @@ public class MAEntityRegistry {
                     .clientTrackingRange(64)
                     .build(new ResourceLocation(BornInSpellbooks.MODID, "nightmare_rend").toString()));
 
+
+    public static final RegistryObject<EntityType<PhantomCopyHumanoid>> PHANTOM_COPY =
+            ENTITIES.register("phantom_copy", () -> EntityType.Builder.<PhantomCopyHumanoid>of(PhantomCopyHumanoid::new, MobCategory.MISC)
+                    .sized(0.6F, 1.8F)
+                    .clientTrackingRange(64)
+                    .build(new ResourceLocation(BornInSpellbooks.MODID, "phantom_copy").toString()));
 }

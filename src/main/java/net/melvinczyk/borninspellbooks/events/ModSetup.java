@@ -4,6 +4,7 @@ package net.melvinczyk.borninspellbooks.events;
 import net.melvinczyk.borninspellbooks.BornInSpellbooks;
 import net.melvinczyk.borninspellbooks.entity.mobs.*;
 import net.melvinczyk.borninspellbooks.entity.spells.gnaw.GluttonFishGnawEntity;
+import net.melvinczyk.borninspellbooks.entity.spells.phantom_copy.PhantomCopyHumanoid;
 import net.melvinczyk.borninspellbooks.registry.MAEntityRegistry;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -26,5 +27,6 @@ public class ModSetup {
         event.put(MAEntityRegistry.ZOMBIE_BRUISER.get(), SummonedZombieBruiser.setAttributes());
         event.put(MAEntityRegistry.CORPSE_FLY_BARRIER.get(), CorpseFlyBarrier.setAttributes());
         event.put(MAEntityRegistry.GLUTTON_FISH_GNAW.get(), GluttonFishGnawEntity.prepareAttributes().build());
+        event.put(MAEntityRegistry.PHANTOM_COPY.get(), PhantomCopyHumanoid.prepareAttributes().build());
     }
 }
