@@ -17,6 +17,7 @@ public class PhantomCopyRenderer extends LivingEntityRenderer<PhantomCopyHumanoi
 
     public PhantomCopyRenderer(EntityRendererProvider.Context context) {
         super(context, new HumanoidModel<>(context.bakeLayer(ModelLayers.PLAYER)), 0.36f);
+        this.addLayer(new PhantomCopyLayer<>(this));
     }
 
     @Override

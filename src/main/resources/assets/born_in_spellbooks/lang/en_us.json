@@ -22,6 +22,7 @@
   "spell.born_in_spellbooks.nightmare_rend": "Nightmare Rend",
   "spell.born_in_spellbooks.ritual": "Ritual",
   "spell.born_in_spellbooks.lingering_stain": "Lingering Stain",
+  "spell.born_in_spellbooks.phantom_split": "Phantom Split",
 
   "entity.born_in_spellbooks.summoned_skeleton_thrasher": "Summoned Skeleton Thrasher",
   "entity.born_in_spellbooks.summoned_zombie_bruiser": "Summoned Zombie Bruiser",
@@ -35,5 +36,8 @@
 
 
   "effect.born_in_spellbooks.cursed_mark": "Cursed Mark",
-  "effect.born_in_spellbooks.death_wish": "Detonation"
+  "effect.born_in_spellbooks.death_wish": "Detonation",
+  "effect.born_in_spellbooks.phantom_split": "Phantom Split",
+
+  "tooltip.born_in_spellbooks.phantom_split_description": "Summons a Phantom Double with %d Explosion Damage"
 }
