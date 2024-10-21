@@ -1,6 +1,5 @@
 package net.melvinczyk.borninspellbooks.registry;
 
-import io.redspace.ironsspellbooks.entity.spells.flame_strike.FlameStrike;
 import net.melvinczyk.borninspellbooks.BornInSpellbooks;
 import net.melvinczyk.borninspellbooks.entity.mobs.*;
 import net.melvinczyk.borninspellbooks.entity.spells.gnaw.GluttonFishGnawEntity;
@@ -10,6 +9,7 @@ import net.melvinczyk.borninspellbooks.entity.spells.infernal_bomb.InfernalBombE
 import net.melvinczyk.borninspellbooks.entity.spells.infernal_bomb.InfernalFireField;
 import net.melvinczyk.borninspellbooks.entity.spells.lingering_stain.LingeringStainField;
 import net.melvinczyk.borninspellbooks.entity.spells.maggot.MaggotProjectile;
+import net.melvinczyk.borninspellbooks.entity.spells.malevolent_shrine.Domain;
 import net.melvinczyk.borninspellbooks.entity.spells.nightmare_rend.NightmareRend;
 import net.melvinczyk.borninspellbooks.entity.spells.phantom_copy.PhantomCopyHumanoid;
 import net.melvinczyk.borninspellbooks.entity.spells.pumpkin_smash.PumpkinProjectile;
@@ -180,6 +180,12 @@ public class MAEntityRegistry {
                     .sized(1f, 1f)
                     .clientTrackingRange(64)
                     .build(new ResourceLocation(BornInSpellbooks.MODID, "nightmare_rend").toString()));
+
+    public static final RegistryObject<EntityType<Domain>> DOMAIN =
+            ENTITIES.register("domain", () -> EntityType.Builder.<Domain>of(Domain::new, MobCategory.MISC)
+                    .sized(0.6F, 1.8F)
+                    .clientTrackingRange(64)
+                    .build(new ResourceLocation(BornInSpellbooks.MODID, "domain").toString()));
 
 
     public static final RegistryObject<EntityType<PhantomCopyHumanoid>> PHANTOM_COPY =

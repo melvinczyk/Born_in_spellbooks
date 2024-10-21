@@ -8,6 +8,7 @@ import net.melvinczyk.borninspellbooks.entity.spells.infernal_arrow.InfernalArro
 import net.melvinczyk.borninspellbooks.entity.spells.infernal_bolt.InfernalBoltRenderer;
 import net.melvinczyk.borninspellbooks.entity.spells.infernal_bomb.InfernalBombRenderer;
 import net.melvinczyk.borninspellbooks.entity.spells.maggot.MaggotProjectileRenderer;
+import net.melvinczyk.borninspellbooks.entity.spells.malevolent_shrine.DomainRenderer;
 import net.melvinczyk.borninspellbooks.entity.spells.nightmare_rend.NightmareRendRenderer;
 import net.melvinczyk.borninspellbooks.entity.spells.phantom_copy.PhantomCopyRenderer;
 import net.melvinczyk.borninspellbooks.entity.spells.pumpkin_smash.PumpkinProjectileRenderer;
@@ -99,6 +100,7 @@ public class BornInSpellbooks
             EntityRenderers.register(MAEntityRegistry.ZOMBIE_BRUISER.get(), SummonedZombieBruiserRenderer::new);
             EntityRenderers.register(MAEntityRegistry.LINGERING_STAIN.get(), NoopRenderer::new);
             EntityRenderers.register(MAEntityRegistry.PHANTOM_COPY.get(), PhantomCopyRenderer::new);
+            EntityRenderers.register(MAEntityRegistry.DOMAIN.get(), DomainRenderer::new);
 
             //EntityRenderers.register(MAEntityRegistry.PUMPKIN_PROJECTILE.get(), PumpkinProjectileRenderer::new);
 

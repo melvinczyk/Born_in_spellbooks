@@ -39,5 +39,5 @@
   "effect.born_in_spellbooks.death_wish": "Detonation",
   "effect.born_in_spellbooks.phantom_split": "Phantom Split",
 
-  "tooltip.born_in_spellbooks.phantom_split_description": "Summons a Phantom Double with %d Explosion Damage"
+  "tooltip.born_in_spellbooks.phantom_split_description": "Evade One Hit and Summon a Phantom Double with %d Explosion Radius"
 }

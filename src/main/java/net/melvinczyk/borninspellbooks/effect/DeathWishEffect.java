@@ -23,7 +23,7 @@ public class DeathWishEffect extends MagicMobEffect {
         MobEffectInstance effectInstance = pLivingEntity.getEffect(this);
         if (effectInstance != null)
         {
-            pLivingEntity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, effectInstance.getDuration(), 1, false, false));
+            pLivingEntity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, effectInstance.getDuration(), 1, false, false, false));
         }
         //pLivingEntity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, (int)(spellPower * 10), 1, false, false));
     }
@@ -42,7 +42,7 @@ public class DeathWishEffect extends MagicMobEffect {
     }
 
     private void explode(LivingEntity entity, int amplifier) {
-        float baseRadius = 2.0F;
+        float baseRadius = 3.0F;
         float radiusMultiplier = spellPower * (0.02F * amplifier);
         float explosionRadius = baseRadius + radiusMultiplier;
         if (ServerConfigs.SPELL_GREIFING.get())

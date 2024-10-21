@@ -18,7 +18,6 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.player.Player;
@@ -31,9 +30,12 @@ public class PhantomSplitEffect extends CustomDescriptionMobEffect {
         super(mobEffectCategory, color);
     }
 
+    protected static int amplifier = 0;
+    protected static int duration = 0;
+
     @Override
     public Component getDescriptionLine(MobEffectInstance instance) {
-        int amp = instance.getAmplifier() + 1;
+        int amp = instance.getAmplifier() + 2;
         return Component.translatable("tooltip.born_in_spellbooks.phantom_split_description", amp).withStyle(ChatFormatting.WHITE);
     }
 
@@ -46,6 +48,12 @@ public class PhantomSplitEffect extends CustomDescriptionMobEffect {
     @Override
     public void addAttributeModifiers(LivingEntity pLivingEntity, AttributeMap pAttributeMap, int pAmplifier) {
         super.addAttributeModifiers(pLivingEntity, pAttributeMap, pAmplifier);
+        MobEffectInstance effectInstance = pLivingEntity.getEffect(this);
+        if (effectInstance != null)
+        {
+            amplifier = effectInstance.getAmplifier() + 2;
+            duration = effectInstance.getDuration();
+        }
         MagicData.getPlayerMagicData(pLivingEntity).getSyncedData().addEffects(MASynchedSpellData.PHANTOM_SPLIT);
     }
 
@@ -84,7 +92,8 @@ public class PhantomSplitEffect extends CustomDescriptionMobEffect {
                  damager = projectileOwner;
                 }
             }
-            PhantomCopyHumanoid copy = new PhantomCopyHumanoid(level, livingEntity, (Player) livingEntity, damager);
+
+            PhantomCopyHumanoid copy = new PhantomCopyHumanoid(level, livingEntity, (Player) livingEntity, damager, amplifier, duration);
             level.addFreshEntity(copy);
 
             if (dest == null) {

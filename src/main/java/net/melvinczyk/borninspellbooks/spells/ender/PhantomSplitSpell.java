@@ -28,8 +28,9 @@ public class PhantomSplitSpell extends AbstractSpell {
     @Override
     public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
         return List.of(
-                Component.translatable("ui.irons_spellbooks.distance", Utils.stringTruncation(getDistance(spellLevel, caster), 1)),
-                Component.translatable("ui.irons_spellbooks.shatter_damage", Utils.stringTruncation(getDamage(spellLevel, caster), 1))
+                Component.translatable("ui.irons_spellbooks.damage", Utils.stringTruncation(getDuration(spellLevel, caster) * 0.05f, 2)),
+                Component.translatable("ui.born_in_spellbooks.explosion_radius", Utils.stringTruncation(spellLevel + 2, 1)),
+                Component.translatable("ui.irons_spellbooks.effect_length", Utils.stringTruncation((getDuration(spellLevel, caster)), 0))
         );
     }
 
@@ -75,16 +76,12 @@ public class PhantomSplitSpell extends AbstractSpell {
 
     @Override
     public void onCast(Level level, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
-        entity.addEffect(new MobEffectInstance(MAMobEffectRegistry.PHANTOM_SPLIT.get(), (int) (getSpellPower(spellLevel, entity) * 10), spellLevel - 1, false, false, true));
+        entity.addEffect(new MobEffectInstance(MAMobEffectRegistry.PHANTOM_SPLIT.get(), getDuration(spellLevel, entity), spellLevel, false, false, true));
         super.onCast(level, spellLevel, entity, castSource, playerMagicData);
     }
 
-    private float getDistance(int spellLevel, LivingEntity sourceEntity) {
-        return (float) (Utils.softCapFormula(getEntityPowerMultiplier(sourceEntity)) * getSpellPower(spellLevel, null)) * .65f;
-    }
-
-    private float getDamage(int spellLevel, LivingEntity caster) {
-        return this.getSpellPower(spellLevel, caster) / 3;
+    private int getDuration(int spellLevel, LivingEntity sourceEntity) {
+        return (int) (getSpellPower(spellLevel, sourceEntity) * 20);
     }
 
     @Override

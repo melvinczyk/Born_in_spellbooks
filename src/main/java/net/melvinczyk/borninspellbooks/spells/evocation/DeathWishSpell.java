@@ -29,8 +29,8 @@ public class DeathWishSpell extends AbstractSpell {
     public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster)
     {
         return List.of(
-                Component.translatable("ui.born_in_spellbooks.explosion_radius", Utils.stringTruncation(1.0F + getSpellPower(spellLevel, caster) * (0.02F * (spellLevel - 1)), 2)),
-                Component.translatable("ui.irons_spellbooks.effect_length", Utils.stringTruncation((getSpellPower(spellLevel, caster) * 10) / 20, 2))
+                Component.translatable("ui.born_in_spellbooks.explosion_radius", Utils.stringTruncation(3.0F + getSpellPower(spellLevel, caster) * (0.02F * (spellLevel - 1)), 2)),
+                Component.translatable("ui.irons_spellbooks.effect_length", Utils.stringTruncation((getSpellPower(spellLevel, caster) * 10) / 20, 0))
         );
     }
 

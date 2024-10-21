@@ -36,6 +36,7 @@ public class MASpellRegistry {
     public static final RegistryObject<AbstractSpell> RITUAl = registerSpell(new RitualSpell());
     public static final RegistryObject<AbstractSpell> SUMMON_ZOMBIE_BRUISER = registerSpell(new SummonZombieBruiserSpell());
     public static final RegistryObject<AbstractSpell> LINGERING_STAIN = registerSpell(new LingeringStainSpell());
+    public static final RegistryObject<AbstractSpell> MALEVOLENT_SHRINE = registerSpell(new MalevolentShrineSpell());
     // TODO: Summon barrel zombie - Summon a barrel zombie with a built in inventory
     // TODO: Imbue Chaos - Spirit of Chaos goes into self and get th obsession effect
     // TODO: Vampiric Sacrifice - Sacrifice all summons and become a vampire like lifestealer. Plan to change eyes and skin layer to be lifestealer

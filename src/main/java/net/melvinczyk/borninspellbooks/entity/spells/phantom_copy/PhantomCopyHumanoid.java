@@ -9,6 +9,8 @@ import net.melvinczyk.borninspellbooks.registry.MAEntityRegistry;
 import net.melvinczyk.borninspellbooks.registry.MASpellRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.commands.arguments.EntityAnchorArgument;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -24,7 +26,6 @@ import net.minecraft.world.level.Level;
 import java.util.Optional;
 import java.util.UUID;
 
-import static java.nio.file.Files.getOwner;
 
 public class PhantomCopyHumanoid extends FrozenHumanoid {
 
@@ -40,6 +41,8 @@ public class PhantomCopyHumanoid extends FrozenHumanoid {
     private static final int LIFETIME_TICKS = 2 * 20;
     private int deathTimer = LIFETIME_TICKS;
     private UUID summonerUUID;
+    protected int spellPower = 0;
+    protected int radius = 0;
 
     public PhantomCopyHumanoid(EntityType<? extends LivingEntity> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -88,11 +91,13 @@ public class PhantomCopyHumanoid extends FrozenHumanoid {
     private boolean isAutoSpinAttack;
     private HumanoidArm mainArm = HumanoidArm.RIGHT;
 
-    public PhantomCopyHumanoid(Level level, LivingEntity entityToCopy, Player caster, Entity target) {
+    public PhantomCopyHumanoid(Level level, LivingEntity entityToCopy, Player caster, Entity target, int amplifier, int duration) {
         this(MAEntityRegistry.PHANTOM_COPY.get(), level);
         setPlayer(caster);
         setTarget(target);
         this.entityData.set(DATA_PLAYER_UUID, Optional.of(caster.getUUID()));
+        this.spellPower = (int)(duration * 0.05f);
+        this.radius = amplifier;
         this.moveTo(entityToCopy.getX(), entityToCopy.getY(), entityToCopy.getZ(), entityToCopy.getYRot(), entityToCopy.getXRot());
         if (entityToCopy.isBaby())
             this.entityData.set(DATA_IS_BABY, true);
@@ -137,8 +142,9 @@ public class PhantomCopyHumanoid extends FrozenHumanoid {
     @Override
     public void tick() {
         super.tick();
+        spawnMovementParticles();
 
-        if (this.player != null && this.player.isAlive() && this.target != null) {
+        if (this.player != null && this.player.isAlive() && this.target != null && this.target.isAlive()) {
             followTarget(this.target);
         }
 
@@ -155,27 +161,49 @@ public class PhantomCopyHumanoid extends FrozenHumanoid {
 
 
     private void followTarget(Entity target) {
-        double speed = 0.3; // Set movement speed
+        double speed = 0.25;
         double dx = target.getX() - this.getX();
         double dy = target.getY() - this.getY();
         double dz = target.getZ() - this.getZ();
 
         double distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
 
-        if (distance > 0.1) { // Avoid jitter when already at the target
+        if (distance > 0.1) {
             this.setDeltaMovement(dx / distance * speed, dy / distance * speed, dz / distance * speed);
-            this.lookAt(EntityAnchorArgument.Anchor.FEET, target.position()); // Make the entity look at the target
+            this.lookAt(EntityAnchorArgument.Anchor.FEET, target.position());
+
         } else {
-            this.setDeltaMovement(0, 0, 0); // Stop moving when close to the target
+            this.setDeltaMovement(0, 0, 0);
         }
     }
 
+    private void spawnMovementParticles() {
+        int particleCount = 5;
+
+        ParticleOptions particleType = ParticleTypes.PORTAL;
+
+        double posX = this.getX();
+        double posY = this.getY() + 0.5;
+        double posZ = this.getZ();
+
+        for (int i = 0; i < particleCount; i++) {
+            double offsetX = (this.level().random.nextDouble() - 0.5) * 0.2;
+            double offsetY = (this.level().random.nextDouble() - 0.5) * 0.2;
+            double offsetZ = (this.level().random.nextDouble() - 0.5) * 0.2;
+
+            this.level().addParticle(particleType,
+                    posX + offsetX,
+                    posY + offsetY,
+                    posZ + offsetZ,
+                    0, 0, 0);
+        }
+    }
 
     private boolean hasExploded = false;
     private void explodeOnDeath() {
         if (!hasExploded) {
             hasExploded = true;
-            float explosionRadius = 3.0F;
+            float explosionRadius = this.radius;
             DamageSource explosionSource = MASpellRegistry.PHANTOM_SPLIT.get().getDamageSource(this, getSummoner());
             var entities = level().getEntities(this, this.getBoundingBox().inflate(explosionRadius));
             Player player = getPlayer();
@@ -186,12 +214,15 @@ public class PhantomCopyHumanoid extends FrozenHumanoid {
 
                 double distance = entity.position().distanceTo(this.position());
                 if (distance < explosionRadius) {
-                    float damage = (float) (20 * (1 - Math.pow(distance / (explosionRadius), 2)));
+                    float damage = (float) this.spellPower;
                     DamageSources.applyDamage(entity, damage, explosionSource);
                     entity.invulnerableTime = 0;
                 }
             }
             this.level().explode(this, this.getX(), this.getY(), this.getZ(), 0.0f, Level.ExplosionInteraction.NONE);
+            for (Entity entity : entities) {
+                entity.invulnerableTime = 0;
+            }
         }
     }
 
