@@ -24,7 +24,7 @@ public class DomainRenderer extends EntityRenderer<Domain> {
         poseStack.pushPose();
         poseStack.translate(0, entity.getBoundingBox().getYsize() / 2, 0);
 
-        float radius = entity.getRadius() + 2;
+        float radius = entity.getRadius() + 1;
         int latitudeBands = 16;
         int longitudeBands = 16;
 
@@ -60,37 +60,31 @@ public class DomainRenderer extends EntityRenderer<Domain> {
                 float sinNextPhi = (float) Math.sin(nextPhi);
                 float cosNextPhi = (float) Math.cos(nextPhi);
 
-                // Current vertex
                 float x1 = radius * cosPhi * sinTheta;
                 float y1 = radius * cosTheta;
                 float z1 = radius * sinPhi * sinTheta;
 
-                // Next vertex (same latitude, next longitude)
                 float x2 = radius * cosNextPhi * sinTheta;
                 float y2 = radius * cosTheta;
                 float z2 = radius * sinNextPhi * sinTheta;
 
-                // Next vertex in the next latitude band
                 float x3 = radius * cosPhi * sinNextTheta;
                 float y3 = radius * cosNextTheta;
                 float z3 = radius * sinPhi * sinNextTheta;
 
-                // Next vertex (next latitude and next longitude)
                 float x4 = radius * cosNextPhi * sinNextTheta;
                 float y4 = radius * cosNextTheta;
                 float z4 = radius * sinNextPhi * sinNextTheta;
 
-                // UV coordinates
                 float u = (float) lon / longitudeBands;
                 float v = (float) lat / latitudeBands;
                 float uNext = (float) (lon + 1) / longitudeBands;
                 float vNext = (float) (lat + 1) / latitudeBands;
 
                 if (lon == longitudeBands - 1) {
-                    uNext = 1.0f; // Wrap around the UV
+                    uNext = 1.0f;
                 }
 
-                // First triangle (v1, v2, v3)
                 vertexConsumer.vertex(poseMatrix, x1, y1, z1)
                         .color(255, 255, 255, 255)
                         .uv(u, v)
@@ -115,7 +109,6 @@ public class DomainRenderer extends EntityRenderer<Domain> {
                         .normal(normalMatrix, x3 / radius, y3 / radius, z3 / radius)
                         .endVertex();
 
-                // Second triangle (v2, v4, v3)
                 vertexConsumer.vertex(poseMatrix, x2, y2, z2)
                         .color(255, 255, 255, 255)
                         .uv(uNext, v)
@@ -144,66 +137,54 @@ public class DomainRenderer extends EntityRenderer<Domain> {
     }
 
     private void renderCircle(PoseStack poseStack, VertexConsumer vertexConsumer, float radius) {
-        float yOffset = 0; // Height of the circle
-        int segments = 12; // Number of segments (Increase for smoother circles)
+        float yOffset = 0.01f;
+        int segments = 16;
 
         PoseStack.Pose pose = poseStack.last();
         Matrix4f poseMatrix = pose.pose();
         Matrix3f normalMatrix = pose.normal();
 
-        // Calculate the angle increment
         float angleIncrement = (float) (2 * Math.PI / segments);
 
-        // Draw the circle as a filled shape
         for (int i = 0; i < segments; i++) {
-            float theta1 = i * angleIncrement;           // Angle for the first vertex
-            float theta2 = (i + 1) * angleIncrement;     // Angle for the next vertex (or loop back at the end)
+            float theta1 = i * angleIncrement;
+            float theta2 = (i + 1) * angleIncrement;
 
-            // Calculate vertex positions for the outer circle
             float x1 = radius * (float) Math.cos(theta1);
             float z1 = radius * (float) Math.sin(theta1);
             float x2 = radius * (float) Math.cos(theta2);
             float z2 = radius * (float) Math.sin(theta2);
 
-            // Adjust UV coordinates based on theta (for correct texture mapping)
             float u1 = 0.5f + 0.5f * (float) Math.cos(theta1);
             float v1 = 0.5f + 0.5f * (float) Math.sin(theta1);
             float u2 = 0.5f + 0.5f * (float) Math.cos(theta2);
             float v2 = 0.5f + 0.5f * (float) Math.sin(theta2);
 
-            // Create triangle with counterclockwise vertex order:
-            // Triangle (center -> x2, z2 -> x1, z1) to ensure correct winding order
-            vertexConsumer.vertex(poseMatrix, 0, yOffset, 0) // Center vertex
+            vertexConsumer.vertex(poseMatrix, 0, yOffset, 0)
                     .color(255, 255, 255, 255)
-                    .uv(0.5f, 0.5f) // Center UV coordinates
-                    .overlayCoords(OverlayTexture.NO_OVERLAY)
-                    .uv2(LightTexture.FULL_BRIGHT)
-                    .normal(normalMatrix, 0, 1, 0) // Normal pointing upwards
-                    .endVertex();
-
-            vertexConsumer.vertex(poseMatrix, x2, yOffset, z2) // Second outer vertex first (flipping order)
-                    .color(255, 255, 255, 255)
-                    .uv(u2, v2) // Outer vertex 2 UV coordinates
+                    .uv(0.5f, 0.5f)
                     .overlayCoords(OverlayTexture.NO_OVERLAY)
                     .uv2(LightTexture.FULL_BRIGHT)
                     .normal(normalMatrix, 0, 1, 0)
                     .endVertex();
 
-            vertexConsumer.vertex(poseMatrix, x1, yOffset, z1) // First outer vertex last (flipping order)
+            vertexConsumer.vertex(poseMatrix, x2, yOffset, z2)
                     .color(255, 255, 255, 255)
-                    .uv(u1, v1) // Outer vertex 1 UV coordinates
+                    .uv(u2, v2)
+                    .overlayCoords(OverlayTexture.NO_OVERLAY)
+                    .uv2(LightTexture.FULL_BRIGHT)
+                    .normal(normalMatrix, 0, 1, 0)
+                    .endVertex();
+
+            vertexConsumer.vertex(poseMatrix, x1, yOffset, z1)
+                    .color(255, 255, 255, 255)
+                    .uv(u1, v1)
                     .overlayCoords(OverlayTexture.NO_OVERLAY)
                     .uv2(LightTexture.FULL_BRIGHT)
                     .normal(normalMatrix, 0, 1, 0)
                     .endVertex();
         }
     }
-
-
-
-
-
-
 
     @Override
     public ResourceLocation getTextureLocation(Domain pEntity) {
