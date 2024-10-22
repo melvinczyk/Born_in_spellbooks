@@ -1,4 +1,4 @@
-package net.melvinczyk.borninspellbooks.entity.spells.cluster_pump;
+package net.melvinczyk.borninspellbooks.entity.spells.pumpkins;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;

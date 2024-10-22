@@ -1,4 +1,4 @@
-package net.melvinczyk.borninspellbooks.entity.spells.cluster_pump;
+package net.melvinczyk.borninspellbooks.entity.spells.pumpkins;
 
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
@@ -6,7 +6,6 @@ import io.redspace.ironsspellbooks.entity.mobs.MagicSummon;
 import io.redspace.ironsspellbooks.entity.mobs.goals.*;
 import io.redspace.ironsspellbooks.util.OwnerHelper;
 import net.mcreator.borninchaosv.entity.PumpkinBombEntity;
-import net.mcreator.borninchaosv.entity.SkeletonThrasherEntity;
 import net.melvinczyk.borninspellbooks.registry.MAEntityRegistry;
 import net.melvinczyk.borninspellbooks.registry.MASpellRegistry;
 import net.minecraft.core.particles.ParticleTypes;
@@ -26,7 +25,6 @@ import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.network.PlayMessages;
 
 import javax.annotation.Nullable;
 import java.util.UUID;
@@ -131,6 +129,17 @@ public class PumpkinFriend extends PumpkinBombEntity implements MagicSummon {
 
         } else {
             super.travel(travelVector);
+        }
+    }
+
+    @Override
+    public void tick()
+    {
+        super.tick();
+        if (this.getHealth() <= 0)
+        {
+            this.level().explode(this, this.getX(), this.getY(), this.getZ(), 10.0F, Level.ExplosionInteraction.NONE);
+
         }
     }
 }

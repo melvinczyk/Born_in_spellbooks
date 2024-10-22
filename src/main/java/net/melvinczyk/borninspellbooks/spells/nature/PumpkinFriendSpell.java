@@ -6,8 +6,7 @@ import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import io.redspace.ironsspellbooks.api.spells.*;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import net.melvinczyk.borninspellbooks.BornInSpellbooks;
-import net.melvinczyk.borninspellbooks.entity.spells.cluster_pump.PumpkinBombProjectile;
-import net.melvinczyk.borninspellbooks.entity.spells.cluster_pump.PumpkinProjectile;
+import net.melvinczyk.borninspellbooks.entity.spells.pumpkins.PumpkinBombProjectile;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -19,26 +18,27 @@ import java.util.List;
 import java.util.Optional;
 
 @AutoSpellConfig
-public class ClusterPumpSpell extends AbstractSpell {
-    private final ResourceLocation spellId = new ResourceLocation(BornInSpellbooks.MODID, "cluster_pump");
+public class PumpkinFriendSpell extends AbstractSpell {
+    private final ResourceLocation spellId = new ResourceLocation(BornInSpellbooks.MODID, "pumpkin_friend");
 
     @Override
     public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
         return List.of(
                 Component.translatable("ui.irons_spellbooks.damage", Utils.stringTruncation(getDamage(spellLevel, caster), 2)),
-                Component.translatable("ui.irons_spellbooks.aoe_damage", Utils.stringTruncation(getAoeDamage(spellLevel, caster), 1)),
-                Component.translatable("ui.irons_spellbooks.radius", Utils.stringTruncation(getRadius(spellLevel, caster), 1))
+                Component.translatable("ui.born_in_spellbooks.explosion_radius", Utils.stringTruncation(getExplosionRadius(spellLevel, caster), 1)),
+                Component.translatable("ui.born_in_spellbooks.friend_damage", Utils.stringTruncation(getFriendDamage(spellLevel, caster), 2)),
+                Component.translatable("ui.born_in_spellbooks.friend_health", Utils.stringTruncation(getFriendHealth(spellLevel, caster), 2), 1)
         );
     }
 
     private final DefaultConfig defaultConfig = new DefaultConfig()
-            .setMinRarity(SpellRarity.UNCOMMON)
+            .setMinRarity(SpellRarity.RARE)
             .setSchoolResource(SchoolRegistry.NATURE_RESOURCE)
             .setMaxLevel(8)
             .setCooldownSeconds(12)
             .build();
 
-    public ClusterPumpSpell() {
+    public PumpkinFriendSpell() {
         this.manaCostPerLevel = 5;
         this.baseSpellPower = 8;
         this.spellPowerPerLevel = 3;
@@ -77,15 +77,20 @@ public class ClusterPumpSpell extends AbstractSpell {
         super.onCast(level, spellLevel, entity, castSource, playerMagicData);
     }
 
-    public float getRadius(int spellLevel, LivingEntity caster) {
-        return 3 + getEntityPowerMultiplier(caster);
-    }
-
     public float getDamage(int spellLevel, LivingEntity caster) {
         return baseSpellPower * getEntityPowerMultiplier(caster);
     }
 
-    public float getAoeDamage(int spellLevel, LivingEntity caster) {
-        return 1 + getSpellPower(spellLevel, caster) * .1f;
+    public float getExplosionRadius(int spellLevel, LivingEntity caster) {
+        return 1 + spellLevel;
+    }
+
+    private float getFriendHealth(int spellLevel, LivingEntity caster)
+    {
+        return 12 + spellLevel;
+    }
+
+    private float getFriendDamage(int spellLevel, LivingEntity caster) {
+        return getSpellPower(spellLevel, caster) * 0.1F;
     }
 }

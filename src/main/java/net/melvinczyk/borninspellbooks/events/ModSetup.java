@@ -3,7 +3,7 @@ package net.melvinczyk.borninspellbooks.events;
 
 import net.melvinczyk.borninspellbooks.BornInSpellbooks;
 import net.melvinczyk.borninspellbooks.entity.mobs.*;
-import net.melvinczyk.borninspellbooks.entity.spells.cluster_pump.PumpkinFriend;
+import net.melvinczyk.borninspellbooks.entity.spells.pumpkins.PumpkinFriend;
 import net.melvinczyk.borninspellbooks.entity.spells.gnaw.GluttonFishGnawEntity;
 import net.melvinczyk.borninspellbooks.entity.spells.phantom_copy.PhantomCopyHumanoid;
 import net.melvinczyk.borninspellbooks.registry.MAEntityRegistry;

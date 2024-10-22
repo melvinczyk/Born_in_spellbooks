@@ -2,8 +2,8 @@ package net.melvinczyk.borninspellbooks;
 
 import com.mojang.logging.LogUtils;
 import net.melvinczyk.borninspellbooks.entity.mobs.render.*;
-import net.melvinczyk.borninspellbooks.entity.spells.cluster_pump.PumpkinBombRenderer;
-import net.melvinczyk.borninspellbooks.entity.spells.cluster_pump.PumpkinFriendRenderer;
+import net.melvinczyk.borninspellbooks.entity.spells.pumpkins.PumpkinBombRenderer;
+import net.melvinczyk.borninspellbooks.entity.spells.pumpkins.PumpkinFriendRenderer;
 import net.melvinczyk.borninspellbooks.entity.spells.gnaw.GluttonFishGnawRenderer;
 import net.melvinczyk.borninspellbooks.entity.spells.infernal_arrow.InfernalArrowRenderer;
 import net.melvinczyk.borninspellbooks.entity.spells.infernal_bolt.InfernalBoltRenderer;
@@ -12,7 +12,7 @@ import net.melvinczyk.borninspellbooks.entity.spells.maggot.MaggotProjectileRend
 import net.melvinczyk.borninspellbooks.entity.spells.malevolent_shrine.DomainRenderer;
 import net.melvinczyk.borninspellbooks.entity.spells.nightmare_rend.NightmareRendRenderer;
 import net.melvinczyk.borninspellbooks.entity.spells.phantom_copy.PhantomCopyRenderer;
-import net.melvinczyk.borninspellbooks.entity.spells.cluster_pump.PumpkinProjectileRenderer;
+import net.melvinczyk.borninspellbooks.entity.spells.pumpkins.PumpkinProjectileRenderer;
 import net.melvinczyk.borninspellbooks.entity.spells.trident.TridentRenderer;
 import net.melvinczyk.borninspellbooks.registry.*;
 import net.minecraft.client.Minecraft;

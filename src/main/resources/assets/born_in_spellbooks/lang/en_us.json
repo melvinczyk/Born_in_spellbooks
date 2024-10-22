@@ -4,6 +4,10 @@
   "ui.born_in_spellbooks.explosion_radius": "%f Explosion Radius",
   "ui.born_in_spellbooks.radius": "%f Domain Radius",
   "ui.born_in_spellbooks.domain_duration": "%f Domain Duration",
+  "ui.born_in_spellbooks.friend_health": "%f Pumpkin Friend Health",
+  "ui.born_in_spellbooks.friend_damage": "%f Pumpkin Friend Damage",
+
+
 
 
   "spell.born_in_spellbooks.curse": "Curse",

@@ -1,4 +1,4 @@
-package net.melvinczyk.borninspellbooks.entity.spells.cluster_pump;
+package net.melvinczyk.borninspellbooks.entity.spells.pumpkins;
 
 import net.mcreator.borninchaosv.client.renderer.PumpkinBombRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;

@@ -1,4 +1,4 @@
-package net.melvinczyk.borninspellbooks.entity.spells.cluster_pump;
+package net.melvinczyk.borninspellbooks.entity.spells.pumpkins;
 
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.model.GeoModel;

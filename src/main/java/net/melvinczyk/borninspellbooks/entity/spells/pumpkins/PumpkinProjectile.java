@@ -1,16 +1,12 @@
-package net.melvinczyk.borninspellbooks.entity.spells.cluster_pump;
+package net.melvinczyk.borninspellbooks.entity.spells.pumpkins;
 
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.entity.spells.AbstractMagicProjectile;
-import net.mcreator.borninchaosv.entity.PumpkinBombEntity;
 import net.melvinczyk.borninspellbooks.registry.MAEntityRegistry;
 import net.melvinczyk.borninspellbooks.registry.MASpellRegistry;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.Projectile;
@@ -67,7 +63,7 @@ public class PumpkinProjectile extends AbstractMagicProjectile implements GeoAni
         super.onHitEntity(entityHitResult);
 
         var target = entityHitResult.getEntity();
-        DamageSources.applyDamage(target, getDamage(), MASpellRegistry.CLUSTER_PUMPKIN.get().getDamageSource(this, getOwner()));
+        DamageSources.applyDamage(target, getDamage(), MASpellRegistry.PUMPKIN_FRIEND.get().getDamageSource(this, getOwner()));
         this.impactParticles(this.getX(), this.getY(), this.getZ());
         this.setDeltaMovement(0, 0, 0);
     }

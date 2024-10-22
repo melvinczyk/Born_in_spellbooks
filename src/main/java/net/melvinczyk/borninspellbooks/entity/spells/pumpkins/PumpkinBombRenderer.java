@@ -1,11 +1,8 @@
-package net.melvinczyk.borninspellbooks.entity.spells.cluster_pump;
+package net.melvinczyk.borninspellbooks.entity.spells.pumpkins;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Axis;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.util.Mth;
-import net.minecraft.world.phys.Vec3;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
 public class PumpkinBombRenderer extends GeoEntityRenderer<PumpkinBombProjectile> {

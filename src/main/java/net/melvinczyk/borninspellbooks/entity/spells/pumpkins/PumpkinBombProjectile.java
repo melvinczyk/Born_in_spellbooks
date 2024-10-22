@@ -1,10 +1,9 @@
-package net.melvinczyk.borninspellbooks.entity.spells.cluster_pump;
+package net.melvinczyk.borninspellbooks.entity.spells.pumpkins;
 
+import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.entity.spells.AbstractMagicProjectile;
-import net.mcreator.borninchaosv.BornInChaosV1Mod;
-import net.mcreator.borninchaosv.entity.PumpkinBombEntity;
-import net.mcreator.borninchaosv.init.BornInChaosV1ModEntities;
 import net.melvinczyk.borninspellbooks.registry.MAEntityRegistry;
+import net.melvinczyk.borninspellbooks.registry.MASpellRegistry;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EntityType;
@@ -20,7 +19,10 @@ import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.core.object.PlayState;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 
+
+import java.util.Objects;
 import java.util.Optional;
 
 public class PumpkinBombProjectile extends AbstractMagicProjectile implements GeoAnimatable {
@@ -55,15 +57,19 @@ public class PumpkinBombProjectile extends AbstractMagicProjectile implements Ge
         super.onHitBlock(blockHitResult);
         this.setDeltaMovement(0, 0, 0);
         Vec3 position = this.getPosition(0);
-        PumpkinFriend pumpkinBombEntity = new PumpkinFriend(level(),(LivingEntity) this.getOwner());
-        pumpkinBombEntity.setPos(position);
-        level().addFreshEntity(pumpkinBombEntity);
+        PumpkinFriend pumpkinFriend = new PumpkinFriend(level(),(LivingEntity) this.getOwner());
+        pumpkinFriend.setPos(position);
+        Objects.requireNonNull(pumpkinFriend.getAttributes().getInstance(Attributes.MAX_HEALTH)).setBaseValue(12);
+        level().addFreshEntity(pumpkinFriend);
         this.discard();
     }
 
     @Override
     protected void onHitEntity(EntityHitResult entityHitResult) {
         super.onHitEntity(entityHitResult);
+        var target = entityHitResult.getEntity();
+        DamageSources.applyDamage(target, getDamage(), MASpellRegistry.PUMPKIN_FRIEND.get().getDamageSource(this, getOwner()));
+        this.impactParticles(this.getX(), this.getY(), this.getZ());
         this.setDeltaMovement(0, 0, 0);
     }
 

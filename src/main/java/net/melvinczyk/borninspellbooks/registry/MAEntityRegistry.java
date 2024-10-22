@@ -2,9 +2,9 @@ package net.melvinczyk.borninspellbooks.registry;
 
 import net.melvinczyk.borninspellbooks.BornInSpellbooks;
 import net.melvinczyk.borninspellbooks.entity.mobs.*;
-import net.melvinczyk.borninspellbooks.entity.spells.cluster_pump.PumpkinBombProjectile;
-import net.melvinczyk.borninspellbooks.entity.spells.cluster_pump.PumpkinFriend;
-import net.melvinczyk.borninspellbooks.entity.spells.cluster_pump.PumpkinProjectile;
+import net.melvinczyk.borninspellbooks.entity.spells.pumpkins.PumpkinBombProjectile;
+import net.melvinczyk.borninspellbooks.entity.spells.pumpkins.PumpkinFriend;
+import net.melvinczyk.borninspellbooks.entity.spells.pumpkins.PumpkinProjectile;
 import net.melvinczyk.borninspellbooks.entity.spells.gnaw.GluttonFishGnawEntity;
 import net.melvinczyk.borninspellbooks.entity.spells.infernal_arrow.InfernalArrowProjectile;
 import net.melvinczyk.borninspellbooks.entity.spells.infernal_bolt.InfernalBoltProjectile;
