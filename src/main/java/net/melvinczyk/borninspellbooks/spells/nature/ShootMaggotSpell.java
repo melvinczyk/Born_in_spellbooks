@@ -80,6 +80,7 @@ public class ShootMaggotSpell extends AbstractSpell {
     public int getRecastCount(int spellLevel, @Nullable LivingEntity entity) {
         return spellLevel;
     }
+
     @Override
     public void onCast(Level world, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
         if (!playerMagicData.getPlayerRecasts().hasRecastForSpell(getSpellId())) {

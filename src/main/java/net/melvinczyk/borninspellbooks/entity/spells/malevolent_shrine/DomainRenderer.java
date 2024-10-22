@@ -137,7 +137,7 @@ public class DomainRenderer extends EntityRenderer<Domain> {
     }
 
     private void renderCircle(PoseStack poseStack, VertexConsumer vertexConsumer, float radius) {
-        float yOffset = 0.01f;
+        float yOffset = -0.93f;
         int segments = 16;
 
         PoseStack.Pose pose = poseStack.last();

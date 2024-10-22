@@ -2,6 +2,9 @@ package net.melvinczyk.borninspellbooks.registry;
 
 import net.melvinczyk.borninspellbooks.BornInSpellbooks;
 import net.melvinczyk.borninspellbooks.entity.mobs.*;
+import net.melvinczyk.borninspellbooks.entity.spells.cluster_pump.PumpkinBombProjectile;
+import net.melvinczyk.borninspellbooks.entity.spells.cluster_pump.PumpkinFriend;
+import net.melvinczyk.borninspellbooks.entity.spells.cluster_pump.PumpkinProjectile;
 import net.melvinczyk.borninspellbooks.entity.spells.gnaw.GluttonFishGnawEntity;
 import net.melvinczyk.borninspellbooks.entity.spells.infernal_arrow.InfernalArrowProjectile;
 import net.melvinczyk.borninspellbooks.entity.spells.infernal_bolt.InfernalBoltProjectile;
@@ -12,7 +15,6 @@ import net.melvinczyk.borninspellbooks.entity.spells.maggot.MaggotProjectile;
 import net.melvinczyk.borninspellbooks.entity.spells.malevolent_shrine.Domain;
 import net.melvinczyk.borninspellbooks.entity.spells.nightmare_rend.NightmareRend;
 import net.melvinczyk.borninspellbooks.entity.spells.phantom_copy.PhantomCopyHumanoid;
-import net.melvinczyk.borninspellbooks.entity.spells.pumpkin_smash.PumpkinProjectile;
 import net.melvinczyk.borninspellbooks.entity.spells.swarm.SwarmProjectile;
 import net.melvinczyk.borninspellbooks.entity.spells.trident.TridentProjectile;
 import net.minecraft.resources.ResourceLocation;
@@ -100,6 +102,13 @@ public class MAEntityRegistry {
                     .build(new ResourceLocation(BornInSpellbooks.MODID, "summoned_zombie_bruiser").toString()));
 
 
+    public static final RegistryObject<EntityType<PumpkinFriend>> PUMPKIN_FRIEND =
+            ENTITIES.register("pumpkin_friend", () -> EntityType.Builder.<PumpkinFriend>of(PumpkinFriend::new, MobCategory.MONSTER)
+                    .sized(1f, 1f)
+                    .clientTrackingRange(64)
+                    .build(new ResourceLocation(BornInSpellbooks.MODID, "pumpkin_friend").toString()));
+
+
 
 
     // Projectiles
@@ -158,6 +167,12 @@ public class MAEntityRegistry {
                     .clientTrackingRange(64)
                     .build(new ResourceLocation(BornInSpellbooks.MODID, "pumpkin_projectile").toString()));
 
+
+    public static final RegistryObject<EntityType<PumpkinBombProjectile>> PUMPKIN_BOMB =
+            ENTITIES.register("pumpkin_bomb", () -> EntityType.Builder.<PumpkinBombProjectile>of(PumpkinBombProjectile::new, MobCategory.MISC)
+                    .sized(1f, 1f)
+                    .clientTrackingRange(64)
+                    .build(new ResourceLocation(BornInSpellbooks.MODID, "pumpkin_bomb").toString()));
 
 
     // Misc

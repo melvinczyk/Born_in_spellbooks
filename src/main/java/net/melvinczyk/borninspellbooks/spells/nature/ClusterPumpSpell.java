@@ -4,11 +4,10 @@ import io.redspace.ironsspellbooks.api.config.DefaultConfig;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import io.redspace.ironsspellbooks.api.spells.*;
-import io.redspace.ironsspellbooks.api.util.AnimationHolder;
 import io.redspace.ironsspellbooks.api.util.Utils;
-import io.redspace.ironsspellbooks.registries.SoundRegistry;
 import net.melvinczyk.borninspellbooks.BornInSpellbooks;
-import net.melvinczyk.borninspellbooks.entity.spells.pumpkin_smash.PumpkinProjectile;
+import net.melvinczyk.borninspellbooks.entity.spells.cluster_pump.PumpkinBombProjectile;
+import net.melvinczyk.borninspellbooks.entity.spells.cluster_pump.PumpkinProjectile;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -20,8 +19,8 @@ import java.util.List;
 import java.util.Optional;
 
 @AutoSpellConfig
-public class PumpkinSmashSpell extends AbstractSpell {
-    private final ResourceLocation spellId = new ResourceLocation(BornInSpellbooks.MODID, "pumpkin_smash");
+public class ClusterPumpSpell extends AbstractSpell {
+    private final ResourceLocation spellId = new ResourceLocation(BornInSpellbooks.MODID, "cluster_pump");
 
     @Override
     public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
@@ -39,17 +38,17 @@ public class PumpkinSmashSpell extends AbstractSpell {
             .setCooldownSeconds(12)
             .build();
 
-    public PumpkinSmashSpell() {
+    public ClusterPumpSpell() {
         this.manaCostPerLevel = 5;
         this.baseSpellPower = 8;
         this.spellPowerPerLevel = 3;
-        this.castTime = 20;
+        this.castTime = 0;
         this.baseManaCost = 30;
     }
 
     @Override
     public CastType getCastType() {
-        return CastType.LONG;
+        return CastType.INSTANT;
     }
 
     @Override
@@ -64,24 +63,17 @@ public class PumpkinSmashSpell extends AbstractSpell {
 
     @Override
     public Optional<SoundEvent> getCastStartSound() {
-        return Optional.of(SoundRegistry.FIRE_BOMB_CHARGE.get());
-    }
-
-    @Override
-    public Optional<SoundEvent> getCastFinishSound() {
-        return Optional.of(SoundRegistry.FIRE_BOMB_CAST.get());
+        return Optional.empty();
     }
 
     @Override
     public void onCast(Level level, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
-        PumpkinProjectile orb = new PumpkinProjectile(level, entity);
-        orb.setPos(entity.position().add(0, entity.getEyeHeight() - orb.getBoundingBox().getYsize() * .5f, 0).add(entity.getForward()));
-        orb.shoot(entity.getLookAngle());
-        orb.setDeltaMovement(orb.getDeltaMovement().add(0, 0.2, 0));
-        orb.setExplosionRadius(getRadius(spellLevel, entity));
-        orb.setDamage(getDamage(spellLevel, entity));
-        orb.setAoeDamage(getAoeDamage(spellLevel, entity));
-        level.addFreshEntity(orb);
+        PumpkinBombProjectile maggot = new PumpkinBombProjectile(level, entity);
+        maggot.setPos(entity.position().add(0, entity.getEyeHeight() , 0));
+        maggot.shoot(entity.getLookAngle());
+        maggot.setDamage(getDamage(spellLevel, entity));
+        maggot.setNoGravity(false);
+        level.addFreshEntity(maggot);
         super.onCast(level, spellLevel, entity, castSource, playerMagicData);
     }
 
@@ -95,10 +87,5 @@ public class PumpkinSmashSpell extends AbstractSpell {
 
     public float getAoeDamage(int spellLevel, LivingEntity caster) {
         return 1 + getSpellPower(spellLevel, caster) * .1f;
-    }
-
-    @Override
-    public AnimationHolder getCastStartAnimation() {
-        return SpellAnimations.ANIMATION_CHARGED_CAST;
     }
 }

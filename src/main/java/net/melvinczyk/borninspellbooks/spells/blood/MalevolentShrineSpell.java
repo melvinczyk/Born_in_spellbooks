@@ -30,7 +30,7 @@ public class MalevolentShrineSpell extends AbstractSpell {
     {
         return List.of(
                 Component.translatable("ui.irons_spellbooks.damage", Utils.stringTruncation(getSpellPower(spellLevel, caster) * 0.1F + 2, 1)),
-                Component.translatable("ui.born_in_spellbooks.radius", Utils.stringTruncation(spellLevel + 3, 1)),
+                Component.translatable("ui.born_in_spellbooks.radius", Utils.stringTruncation(spellLevel + 4, 1)),
                 Component.translatable("ui.born_in_spellbooks.domain_duration", Utils.stringTruncation(30, 1))
         );
     }
@@ -87,7 +87,7 @@ public class MalevolentShrineSpell extends AbstractSpell {
         {
             Domain domain = new Domain(world, entity, getDamage(spellLevel, entity));
             domain.setPos(entity.position().subtract(0, spellLevel + 3, 0));
-            domain.setRadius(spellLevel + 3);
+            domain.setRadius(spellLevel + 4);
             world.addFreshEntity(domain);
         }
         super.onCast(world, spellLevel, entity, castSource, playerMagicData);

@@ -1,13 +1,13 @@
-package net.melvinczyk.borninspellbooks.entity.mobs;
+package net.melvinczyk.borninspellbooks.entity.spells.cluster_pump;
 
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
 import io.redspace.ironsspellbooks.entity.mobs.MagicSummon;
 import io.redspace.ironsspellbooks.entity.mobs.goals.*;
 import io.redspace.ironsspellbooks.util.OwnerHelper;
+import net.mcreator.borninchaosv.entity.PumpkinBombEntity;
 import net.mcreator.borninchaosv.entity.SkeletonThrasherEntity;
 import net.melvinczyk.borninspellbooks.registry.MAEntityRegistry;
-import net.melvinczyk.borninspellbooks.registry.MAMobEffectRegistry;
 import net.melvinczyk.borninspellbooks.registry.MASpellRegistry;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -26,18 +26,19 @@ import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.network.PlayMessages;
 
 import javax.annotation.Nullable;
 import java.util.UUID;
 
-public class SummonedSkeletonThrasher extends SkeletonThrasherEntity implements MagicSummon {
-    public SummonedSkeletonThrasher(EntityType<? extends SkeletonThrasherEntity> pEntityType, Level pLevel) {
-        super((EntityType<SkeletonThrasherEntity>) pEntityType, pLevel);
+public class PumpkinFriend extends PumpkinBombEntity implements MagicSummon {
+    public PumpkinFriend(EntityType<? extends PumpkinBombEntity> pEntityType, Level pLevel) {
+        super((EntityType<PumpkinBombEntity>) pEntityType, pLevel);
         xpReward = 0;
     }
 
-    public SummonedSkeletonThrasher(Level pLevel, LivingEntity owner) {
-        this(MAEntityRegistry.SUMMONED_SKELETON_THRASHER.get(), pLevel);
+    public PumpkinFriend(Level pLevel, LivingEntity owner) {
+        this(MAEntityRegistry.PUMPKIN_FRIEND.get(), pLevel);
         setSummoner(owner);
     }
 
@@ -55,31 +56,15 @@ public class SummonedSkeletonThrasher extends SkeletonThrasherEntity implements 
         this.targetSelector.addGoal(4, (new GenericHurtByTargetGoal(this, (entity) -> entity == getSummoner())).setAlertOthers());
     }
 
+
     protected LivingEntity cachedSummoner;
     protected UUID summonerUUID;
-
-    @Override
-    public float getStepHeight() {
-        return 1.5f;
-    }
 
     public void setSummoner(@Nullable LivingEntity owner) {
         if (owner != null) {
             this.summonerUUID = owner.getUUID();
             this.cachedSummoner = owner;
         }
-    }
-
-    @Override
-    public void die(DamageSource pDamageSource) {
-        this.onDeathHelper();
-        super.die(pDamageSource);
-    }
-
-    @Override
-    public void onRemovedFromWorld() {
-        this.onRemovedHelper(this, MAMobEffectRegistry.SKELETON_THRASHER_TIMER.get());
-        super.onRemovedFromWorld();
     }
 
     @Override
@@ -122,27 +107,6 @@ public class SummonedSkeletonThrasher extends SkeletonThrasherEntity implements 
     }
 
     @Override
-    public boolean fireImmune() {
-        return true;
-    }
-
-
-    @Override
-    protected boolean isSunBurnTick() {
-        return false;
-    }
-
-    @Override
-    protected boolean shouldDropLoot() {
-        return false;
-    }
-
-    @Override
-    public boolean isPreventingPlayerRest(Player pPlayer) {
-        return !this.isAlliedTo(pPlayer);
-    }
-
-    @Override
     public LivingEntity getSummoner() {
         return OwnerHelper.getAndCacheOwner(level(), cachedSummoner, summonerUUID);
     }
@@ -153,17 +117,6 @@ public class SummonedSkeletonThrasher extends SkeletonThrasherEntity implements 
             discard();
         }
     }
-
-    @Nullable
-    public LivingEntity getControllingPassenger() {
-        return null;
-    }
-
-    @Override
-    protected boolean shouldDespawnInPeaceful() {
-        return false;
-    }
-
 
     @Override
     public void travel(Vec3 travelVector) {

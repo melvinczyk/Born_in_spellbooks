@@ -147,14 +147,18 @@ public class Domain extends AoeEntity {
             for (var entity : entities) {
                 if (entity instanceof LivingEntity target) {
                     if (target.equals(owner)) {
-                        MobEffectInstance resist = new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 1, false, false, true);
+                        MobEffectInstance resist = new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 100, 1, false, false, true);
+                        MobEffectInstance strength = new MobEffectInstance(MobEffects.DAMAGE_BOOST, 100, 1, false, false, true);
                         target.addEffect(resist);
+                        target.addEffect(strength);
                         continue;
                     }
                     MagicManager.spawnParticles(level(), (ParticleOptions) ForgeRegistries.PARTICLE_TYPES.getValue(new ResourceLocation("born_in_chaos_v1", "fleshsplash")), target.getX(), target.getY() + target.getBbHeight() * .5f, target.getZ(), 50, target.getBbWidth() * .25f, target.getBbHeight() * .25f, target.getBbWidth() * .25f, .03, false);
 
-                    MobEffectInstance slowness = new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 160, 1, false, false, false);
+                    MobEffectInstance slowness = new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 160, 2, false, false, false);
+                    MobEffectInstance weakness = new MobEffectInstance(MobEffects.WEAKNESS, 160, 1, false, false, false);
                     target.addEffect(slowness);
+                    target.addEffect(weakness);
                     double offsetX = random.nextDouble() * 6 - 3;
                     double offsetY = Math.max(random.nextDouble() * 6 - 3, 0.5);
                     double offsetZ = random.nextDouble() * 6 - 3;

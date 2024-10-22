@@ -1,10 +1,8 @@
 package net.melvinczyk.borninspellbooks.entity.spells.maggot;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
@@ -32,14 +30,8 @@ public class MaggotProjectileRenderer extends GeoEntityRenderer<MaggotProjectile
         poseStack.mulPose(Axis.YP.rotationDegrees(yRot));
         poseStack.mulPose(Axis.XP.rotationDegrees(xRot));
 
-        VertexConsumer vertexConsumer = bufferSource.getBuffer(RenderType.entityCutoutNoCull(TEXTURE));
         super.render(entity, yaw ,partialTicks, poseStack, bufferSource, light);
 
         poseStack.popPose();
-    }
-
-    @Override
-    public ResourceLocation getTextureLocation(MaggotProjectile pEntity) {
-        return TEXTURE;
     }
 }

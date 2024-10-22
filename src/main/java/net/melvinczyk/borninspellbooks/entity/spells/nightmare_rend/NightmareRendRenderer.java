@@ -5,6 +5,7 @@ import com.mojang.blaze3d.vertex.PoseStack.Pose;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import io.redspace.ironsspellbooks.IronsSpellbooks;
+import net.melvinczyk.borninspellbooks.BornInSpellbooks;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -19,10 +20,10 @@ import java.util.Random;
 public class NightmareRendRenderer extends EntityRenderer<NightmareRend> {
     private static final ResourceLocation[] TEXTURES = {
             // Placeholder
-            IronsSpellbooks.id("textures/entity/flame_strike/flame_strike_1.png"),
-            IronsSpellbooks.id("textures/entity/flame_strike/flame_strike_2.png"),
-            IronsSpellbooks.id("textures/entity/flame_strike/flame_strike_3.png"),
-            IronsSpellbooks.id("textures/entity/flame_strike/flame_strike_4.png")
+            BornInSpellbooks.id("textures/entity/spell/nightmare_rend_1.png"),
+            BornInSpellbooks.id("textures/entity/spell/nightmare_rend_2.png"),
+            BornInSpellbooks.id("textures/entity/spell/nightmare_rend_3.png"),
+            BornInSpellbooks.id("textures/entity/spell/nightmare_rend_4.png")
     };
 
     public NightmareRendRenderer(Context context) {

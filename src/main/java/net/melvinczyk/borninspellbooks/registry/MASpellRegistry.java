@@ -58,12 +58,11 @@ public class MASpellRegistry {
     public static final RegistryObject<AbstractSpell> SUMMON_DREAD_HOUND = registerSpell(new SummonDreadHoundSpell());
     public static final RegistryObject<AbstractSpell> INFECT = registerSpell(new ShootMaggotSpell());
     public static final RegistryObject<AbstractSpell> INFECT_HOST = registerSpell(new InfectHostSpell());
-    public static final RegistryObject<AbstractSpell> FLY_BARRIER = registerSpell(new FlyBarrierSpell());
+    //public static final RegistryObject<AbstractSpell> FLY_BARRIER = registerSpell(new FlyBarrierSpell());
     public static final RegistryObject<AbstractSpell> SWARM = registerSpell(new SwarmSpell());
-    public static final RegistryObject<AbstractSpell> GNAW = registerSpell(new GnawSpell());
-    public static final RegistryObject<AbstractSpell> PUMPKIN_SMASH = registerSpell(new PumpkinSmashSpell());
+    //public static final RegistryObject<AbstractSpell> GNAW = registerSpell(new GnawSpell());
+    public static final RegistryObject<AbstractSpell> CLUSTER_PUMPKIN = registerSpell(new ClusterPumpSpell());
     // TODO: Gnaw - Summons a glutton fish in front of you that takes a big bite and disappears
-    // TODO: Fly Shield - Adds a circle of flies that work like a barrier
 
 
     // Fire

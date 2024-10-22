@@ -1,8 +1,9 @@
 package net.melvinczyk.borninspellbooks;
 
 import com.mojang.logging.LogUtils;
-import io.redspace.ironsspellbooks.entity.spells.flame_strike.FlameStrikeRenderer;
 import net.melvinczyk.borninspellbooks.entity.mobs.render.*;
+import net.melvinczyk.borninspellbooks.entity.spells.cluster_pump.PumpkinBombRenderer;
+import net.melvinczyk.borninspellbooks.entity.spells.cluster_pump.PumpkinFriendRenderer;
 import net.melvinczyk.borninspellbooks.entity.spells.gnaw.GluttonFishGnawRenderer;
 import net.melvinczyk.borninspellbooks.entity.spells.infernal_arrow.InfernalArrowRenderer;
 import net.melvinczyk.borninspellbooks.entity.spells.infernal_bolt.InfernalBoltRenderer;
@@ -11,7 +12,7 @@ import net.melvinczyk.borninspellbooks.entity.spells.maggot.MaggotProjectileRend
 import net.melvinczyk.borninspellbooks.entity.spells.malevolent_shrine.DomainRenderer;
 import net.melvinczyk.borninspellbooks.entity.spells.nightmare_rend.NightmareRendRenderer;
 import net.melvinczyk.borninspellbooks.entity.spells.phantom_copy.PhantomCopyRenderer;
-import net.melvinczyk.borninspellbooks.entity.spells.pumpkin_smash.PumpkinProjectileRenderer;
+import net.melvinczyk.borninspellbooks.entity.spells.cluster_pump.PumpkinProjectileRenderer;
 import net.melvinczyk.borninspellbooks.entity.spells.trident.TridentRenderer;
 import net.melvinczyk.borninspellbooks.registry.*;
 import net.minecraft.client.Minecraft;
@@ -24,7 +25,6 @@ import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -102,7 +102,9 @@ public class BornInSpellbooks
             EntityRenderers.register(MAEntityRegistry.PHANTOM_COPY.get(), PhantomCopyRenderer::new);
             EntityRenderers.register(MAEntityRegistry.DOMAIN.get(), DomainRenderer::new);
 
-            //EntityRenderers.register(MAEntityRegistry.PUMPKIN_PROJECTILE.get(), PumpkinProjectileRenderer::new);
+            EntityRenderers.register(MAEntityRegistry.PUMPKIN_PROJECTILE.get(), PumpkinProjectileRenderer::new);
+            EntityRenderers.register(MAEntityRegistry.PUMPKIN_BOMB.get(), PumpkinBombRenderer::new);
+            EntityRenderers.register(MAEntityRegistry.PUMPKIN_FRIEND.get(), PumpkinFriendRenderer::new);
 
 
             EntityRenderers.register(MAEntityRegistry.MAGGOT_PROJECTILE.get(), MaggotProjectileRenderer::new);

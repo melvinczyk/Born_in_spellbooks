@@ -21,7 +21,6 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.FlyingMoveControl;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
-import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
@@ -79,7 +78,6 @@ public class CorpseFlyPathFinder extends CorpseFlyEntity implements GeoEntity {
         this.setYHeadRot(yHeadRot);
         this.lastTickPos = this.position();
     }
-
 
     @Override
     protected void registerGoals() {
@@ -251,9 +249,14 @@ public class CorpseFlyPathFinder extends CorpseFlyEntity implements GeoEntity {
 
     private void popAndDie() {
         this.playSound(SoundEvents.SHULKER_BULLET_HURT, 1.0F, 1.0F);
-        ((ServerLevel) this.level()).sendParticles(ParticleTypes.CRIT, this.getX(), this.getY(), this.getZ(), 15, 0.2D, 0.2D, 0.2D, 0.0D);
-        this.discard();
+
+        if (!this.level().isClientSide()) {
+            ServerLevel serverLevel = (ServerLevel) this.level();
+            serverLevel.sendParticles(ParticleTypes.CRIT, this.getX(), this.getY(), this.getZ(), 15, 0.2D, 0.2D, 0.2D, 0.0D);
+            this.discard();
+        }
     }
+
 
     @Override
     protected boolean shouldDespawnInPeaceful() {
