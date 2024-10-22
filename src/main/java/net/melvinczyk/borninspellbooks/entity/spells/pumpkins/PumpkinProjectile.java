@@ -52,8 +52,6 @@ public class PumpkinProjectile extends AbstractMagicProjectile implements GeoAni
     protected void onHitBlock(BlockHitResult blockHitResult) {
         super.onHitBlock(blockHitResult);
         this.setDeltaMovement(0, 0, 0);
-
-        this.hasHitBlock = true;
     }
 
 
@@ -94,51 +92,4 @@ public class PumpkinProjectile extends AbstractMagicProjectile implements GeoAni
     public double getTick(Object o) {
         return 0;
     }
-
-    private int tickCounter = 0; // Counter to track ticks
-    private boolean hasHitBlock = false; // Track if the projectile has hit a block
-    private static final int BOMB_COUNT = 3; // Number of bombs to spawn
-    private int currentAngleIndex = 0;
-
-    @Override
-    public void tick() {
-        super.tick(); // Call the superclass tick method
-
-        if (hasHitBlock) {
-            tickCounter++; // Increment the tick counter
-
-            // Check if 40 ticks have passed
-            if (tickCounter % 40 == 0) {
-                spawnPumpkinBombs();
-                currentAngleIndex = (currentAngleIndex + 1) % BOMB_COUNT; // Move to the next angle
-            }
-
-            // Optional: Stop ticking after a certain number of bomb spawns
-            if (tickCounter > 160) { // Example: Stop after 4 bomb spawns
-                this.discard();
-            }
-        }
-    }
-
-    private void spawnPumpkinBombs() {
-        int degreesPerPumpkin = 360 / BOMB_COUNT; // Degrees between each projectile
-        Vec3 origin = this.position();
-        for (int i = 0; i < BOMB_COUNT; i++) {
-
-            Vec3 motion = new Vec3(0, 0, .3 + BOMB_COUNT * .01f);
-            motion = motion.xRot(75 * Mth.DEG_TO_RAD);
-            motion = motion.yRot(degreesPerPumpkin * i * Mth.DEG_TO_RAD);
-
-
-            PumpkinBombProjectile head = new PumpkinBombProjectile(level(), (LivingEntity) this.getOwner());
-
-            Vec3 spawn = origin.add(motion.multiply(1, 0, 1).normalize().scale(.3f));
-            var angle = Utils.rotationFromDirection(motion);
-
-            head.moveTo(spawn.x, spawn.y - head.getBoundingBox().getYsize() / 2, spawn.z, angle.y, angle.x);
-            level().addFreshEntity(head);
-        }
-    }
-
-
 }

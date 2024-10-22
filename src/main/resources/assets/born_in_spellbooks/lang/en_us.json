@@ -30,6 +30,7 @@
   "spell.born_in_spellbooks.lingering_stain": "Lingering Stain",
   "spell.born_in_spellbooks.phantom_split": "Phantom Split",
   "spell.born_in_spellbooks.malevolent_shrine": "Malevolent Shrine",
+  "spell.born_in_spellbooks.pumpkin_friend": "Pumpkin Friend",
 
   "entity.born_in_spellbooks.summoned_skeleton_thrasher": "Summoned Skeleton Thrasher",
   "entity.born_in_spellbooks.summoned_zombie_bruiser": "Summoned Zombie Bruiser",
@@ -40,6 +41,7 @@
   "entity.born_in_spellbooks.summoned_bone_serpent": "Summoned Bone Serpent",
   "entity.born_in_spellbooks.infernal_bomb": "Infernal Bomb",
   "entity.born_in_spellbooks.infernal_bolt": "Infernal Bolt",
+  "entity.born_in_spellbooks.pumpkin_friend": "Pumpkin Friend",
 
 
   "effect.born_in_spellbooks.cursed_mark": "Cursed Mark",

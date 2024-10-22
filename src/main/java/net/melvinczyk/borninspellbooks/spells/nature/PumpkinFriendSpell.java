@@ -32,9 +32,9 @@ public class PumpkinFriendSpell extends AbstractSpell {
     }
 
     private final DefaultConfig defaultConfig = new DefaultConfig()
-            .setMinRarity(SpellRarity.RARE)
+            .setMinRarity(SpellRarity.UNCOMMON)
             .setSchoolResource(SchoolRegistry.NATURE_RESOURCE)
-            .setMaxLevel(8)
+            .setMaxLevel(10)
             .setCooldownSeconds(12)
             .build();
 
@@ -68,12 +68,12 @@ public class PumpkinFriendSpell extends AbstractSpell {
 
     @Override
     public void onCast(Level level, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
-        PumpkinBombProjectile maggot = new PumpkinBombProjectile(level, entity);
-        maggot.setPos(entity.position().add(0, entity.getEyeHeight() , 0));
-        maggot.shoot(entity.getLookAngle());
-        maggot.setDamage(getDamage(spellLevel, entity));
-        maggot.setNoGravity(false);
-        level.addFreshEntity(maggot);
+        PumpkinBombProjectile friend_projectile = new PumpkinBombProjectile(level, entity, getFriendHealth(spellLevel, entity), getFriendDamage(spellLevel, entity), getExplosionRadius(spellLevel, entity));
+        friend_projectile.setPos(entity.position().add(0, entity.getEyeHeight() , 0));
+        friend_projectile.shoot(entity.getLookAngle());
+        friend_projectile.setDamage(getDamage(spellLevel, entity));
+        friend_projectile.setNoGravity(false);
+        level.addFreshEntity(friend_projectile);
         super.onCast(level, spellLevel, entity, castSource, playerMagicData);
     }
 
@@ -82,12 +82,12 @@ public class PumpkinFriendSpell extends AbstractSpell {
     }
 
     public float getExplosionRadius(int spellLevel, LivingEntity caster) {
-        return 1 + spellLevel;
+        return 1 + spellLevel * 0.5f;
     }
 
     private float getFriendHealth(int spellLevel, LivingEntity caster)
     {
-        return 12 + spellLevel;
+        return 10 + spellLevel;
     }
 
     private float getFriendDamage(int spellLevel, LivingEntity caster) {

@@ -3,22 +3,24 @@ package net.melvinczyk.borninspellbooks.entity.spells.pumpkins;
 import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.entity.spells.AbstractMagicProjectile;
 import net.melvinczyk.borninspellbooks.registry.MAEntityRegistry;
+import net.melvinczyk.borninspellbooks.registry.MAMobEffectRegistry;
 import net.melvinczyk.borninspellbooks.registry.MASpellRegistry;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.RawAnimation;
-import software.bernie.geckolib.core.object.PlayState;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 
 
@@ -31,9 +33,16 @@ public class PumpkinBombProjectile extends AbstractMagicProjectile implements Ge
         super(pEntityType, Level);
     }
 
-    public PumpkinBombProjectile(Level pLevel, LivingEntity shooter) {
+    protected float friendHealth = 1;
+    protected float friendDamage = 0;
+    protected float explosionRadius = 1;
+
+    public PumpkinBombProjectile(Level pLevel, LivingEntity shooter, float friendHealth, float friendDamage, float explosionRadius) {
         this(MAEntityRegistry.PUMPKIN_BOMB.get(), pLevel);
         setOwner(shooter);
+        this.friendHealth = friendHealth;
+        this.friendDamage = friendDamage;
+        this.explosionRadius = explosionRadius;
     }
 
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
@@ -45,7 +54,7 @@ public class PumpkinBombProjectile extends AbstractMagicProjectile implements Ge
 
     @Override
     public Optional<SoundEvent> getImpactSound() {
-        return Optional.of(SoundEvents.SLIME_DEATH_SMALL);
+        return Optional.of(SoundEvents.WOOD_BREAK);
     }
 
     @Override
@@ -53,14 +62,25 @@ public class PumpkinBombProjectile extends AbstractMagicProjectile implements Ge
     }
 
     @Override
-    protected void onHitBlock(BlockHitResult blockHitResult) {
+    protected void onHitBlock(@NotNull BlockHitResult blockHitResult) {
         super.onHitBlock(blockHitResult);
         this.setDeltaMovement(0, 0, 0);
+
+        int summonTime = 20 * 60;
+
+        LivingEntity player = (LivingEntity) this.getOwner();
         Vec3 position = this.getPosition(0);
-        PumpkinFriend pumpkinFriend = new PumpkinFriend(level(),(LivingEntity) this.getOwner());
+        PumpkinFriend pumpkinFriend = new PumpkinFriend(level(),(LivingEntity) player, explosionRadius);
         pumpkinFriend.setPos(position);
-        Objects.requireNonNull(pumpkinFriend.getAttributes().getInstance(Attributes.MAX_HEALTH)).setBaseValue(12);
+        Objects.requireNonNull(pumpkinFriend.getAttributes().getInstance(Attributes.MAX_HEALTH)).setBaseValue(friendHealth);
+        Objects.requireNonNull(pumpkinFriend.getAttributes().getInstance(Attributes.ATTACK_DAMAGE)).setBaseValue(friendDamage);
         level().addFreshEntity(pumpkinFriend);
+        playSound(pumpkinFriend);
+
+        pumpkinFriend.addEffect(new MobEffectInstance(MAMobEffectRegistry.PUMPKIN_FRIEND_TIMER.get(), summonTime, 0, false, false, false));
+        int effectAmplifier = 0;
+        player.addEffect(new MobEffectInstance(MAMobEffectRegistry.PUMPKIN_FRIEND_TIMER.get(), summonTime, effectAmplifier, false, false, true));
+
         this.discard();
     }
 
@@ -83,7 +103,6 @@ public class PumpkinBombProjectile extends AbstractMagicProjectile implements Ge
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-        controllerRegistrar.add(animationController);
     }
 
     @Override
@@ -96,20 +115,8 @@ public class PumpkinBombProjectile extends AbstractMagicProjectile implements Ge
         return 0;
     }
 
-    private boolean playSwingAnimation = true;
-    private final RawAnimation animationBuilder = RawAnimation.begin().thenPlay("idle");
-    private final AnimationController animationController = new AnimationController(this, "controller", 0, this::predicate);
-
-    private PlayState predicate(software.bernie.geckolib.core.animation.AnimationState event) {
-
-        if (event.getController().getAnimationState() == AnimationController.State.STOPPED) {
-            if (playSwingAnimation) {
-                event.getController().setAnimation(animationBuilder);
-                event.getController().setAnimationSpeed(0.75F);
-                playSwingAnimation = false;
-            }
-        }
-
-        return PlayState.CONTINUE;
+    private void playSound(LivingEntity targetEntity)
+    {
+        targetEntity.level().playSound(null, targetEntity.getX(), targetEntity.getY(), targetEntity.getZ(), SoundEvents.BEEHIVE_EXIT, SoundSource.HOSTILE, 1.0F, 1.0F);
     }
 }

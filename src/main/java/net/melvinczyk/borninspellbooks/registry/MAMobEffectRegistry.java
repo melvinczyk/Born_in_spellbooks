@@ -26,6 +26,8 @@ public class MAMobEffectRegistry {
     public static final RegistryObject<SummonTimer> DREAD_HOUND_TIMER = MOB_EFFECT_DEFERRED_REGISTER.register("dread_hound_timer", () -> new SummonTimer(MobEffectCategory.BENEFICIAL, 0xbea925));
     public static final RegistryObject<SummonTimer> SKELETON_THRASHER_TIMER = MOB_EFFECT_DEFERRED_REGISTER.register("skeleton_thrasher_timer", () -> new SummonTimer(MobEffectCategory.BENEFICIAL, 0xbea925));
     public static final RegistryObject<SummonTimer> ZOMBIE_BRUISER_TIMER = MOB_EFFECT_DEFERRED_REGISTER.register("zombie_bruiser_timer", () -> new SummonTimer(MobEffectCategory.BENEFICIAL, 0xbea925));
+    public static final RegistryObject<SummonTimer> PUMPKIN_FRIEND_TIMER = MOB_EFFECT_DEFERRED_REGISTER.register("pumpkin_friend_timer", () -> new SummonTimer(MobEffectCategory.BENEFICIAL, 0xbea925));
+
 
 
     public static final RegistryObject<MobEffect> CURSED_MARK = MOB_EFFECT_DEFERRED_REGISTER.register("cursed_mark", () -> new CursedMarkEffect(MobEffectCategory.HARMFUL, 0xed0707));

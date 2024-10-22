@@ -35,9 +35,12 @@ public class PumpkinFriend extends PumpkinBombEntity implements MagicSummon {
         xpReward = 0;
     }
 
-    public PumpkinFriend(Level pLevel, LivingEntity owner) {
+    protected float explosionRadius = 1;
+
+    public PumpkinFriend(Level pLevel, LivingEntity owner, float explosionRadius) {
         this(MAEntityRegistry.PUMPKIN_FRIEND.get(), pLevel);
         setSummoner(owner);
+        this.explosionRadius = explosionRadius;
     }
 
     public void registerGoals() {
@@ -132,14 +135,15 @@ public class PumpkinFriend extends PumpkinBombEntity implements MagicSummon {
         }
     }
 
+    private boolean hasExploded = false;
     @Override
     public void tick()
     {
         super.tick();
-        if (this.getHealth() <= 0)
+        if (this.getHealth() <= 0 && !hasExploded)
         {
-            this.level().explode(this, this.getX(), this.getY(), this.getZ(), 10.0F, Level.ExplosionInteraction.NONE);
-
+            hasExploded = true;
+            this.level().explode(this, this.getX(), this.getY(), this.getZ(), explosionRadius, Level.ExplosionInteraction.NONE);
         }
     }
 }
