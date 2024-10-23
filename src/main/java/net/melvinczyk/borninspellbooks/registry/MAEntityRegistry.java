@@ -56,14 +56,13 @@ public class MAEntityRegistry {
 
     public static final RegistryObject<EntityType<SummonedSkeletonThrasher>> SUMMONED_SKELETON_THRASHER =
             ENTITIES.register("summoned_skeleton_thrasher", () -> EntityType.Builder.<SummonedSkeletonThrasher>of(SummonedSkeletonThrasher::new, MobCategory.MONSTER)
-                    .sized(1f, 1f)
+                    .sized(1f, 2.65f)
                     .clientTrackingRange(10)
                     .build(new ResourceLocation(BornInSpellbooks.MODID, "summoned_skeleton_thrasher").toString()));
 
 
     public static final RegistryObject<EntityType<ScarletPersecutor>> SCARLET_PERSECUTOR =
             ENTITIES.register("scarlet_persecutor", () -> EntityType.Builder.<ScarletPersecutor>of(ScarletPersecutor::new, MobCategory.MONSTER)
-                    .sized(1f, 1f)
                     .clientTrackingRange(10)
                     .build(new ResourceLocation(BornInSpellbooks.MODID, "scarlet_persecutor").toString()));
 
@@ -77,7 +76,7 @@ public class MAEntityRegistry {
 
     public static final RegistryObject<EntityType<SpawnedMaggot>> SPAWNED_MAGGOT =
             ENTITIES.register("spawned_maggot", () -> EntityType.Builder.<SpawnedMaggot>of(SpawnedMaggot::new, MobCategory.MONSTER)
-                    .sized(1f, 1f)
+                    .sized(0.25f, 0.25f)
                     .clientTrackingRange(64)
                     .build(new ResourceLocation(BornInSpellbooks.MODID, "spawned_maggot").toString()));
 
@@ -97,14 +96,14 @@ public class MAEntityRegistry {
 
     public static final RegistryObject<EntityType<SummonedZombieBruiser>> ZOMBIE_BRUISER =
             ENTITIES.register("summoned_zombie_bruiser", () -> EntityType.Builder.<SummonedZombieBruiser>of(SummonedZombieBruiser::new, MobCategory.MONSTER)
-                    .sized(1f, 1f)
+                    .sized(1f, 2.65f)
                     .clientTrackingRange(64)
                     .build(new ResourceLocation(BornInSpellbooks.MODID, "summoned_zombie_bruiser").toString()));
 
 
     public static final RegistryObject<EntityType<PumpkinFriend>> PUMPKIN_FRIEND =
             ENTITIES.register("pumpkin_friend", () -> EntityType.Builder.<PumpkinFriend>of(PumpkinFriend::new, MobCategory.MONSTER)
-                    .sized(1f, 1f)
+                    .sized(1.1f, 1.1f)
                     .clientTrackingRange(64)
                     .build(new ResourceLocation(BornInSpellbooks.MODID, "pumpkin_friend").toString()));
 
@@ -128,14 +127,14 @@ public class MAEntityRegistry {
 
     public static final RegistryObject<EntityType<MaggotProjectile>> MAGGOT_PROJECTILE =
             ENTITIES.register("maggot_projectile", () -> EntityType.Builder.<MaggotProjectile>of(MaggotProjectile::new, MobCategory.MISC)
-                    .sized(1f, 1f)
+                    .sized(0.25f, 0.25f)
                     .clientTrackingRange(64)
                     .build(new ResourceLocation(BornInSpellbooks.MODID, "maggot_projectile").toString()));
 
 
     public static final RegistryObject<EntityType<InfernalBoltProjectile>> INFERNAL_BOLT_PROJECTILE =
             ENTITIES.register("infernal_bolt_projectile", () -> EntityType.Builder.<InfernalBoltProjectile>of(InfernalBoltProjectile::new, MobCategory.MISC)
-                    .sized(1f, 1f)
+                    .sized(0.5f, 0.5f)
                     .clientTrackingRange(64)
                     .build(new ResourceLocation(BornInSpellbooks.MODID, "infernal_bolt_projectile").toString()));
 
@@ -149,7 +148,7 @@ public class MAEntityRegistry {
 
     public static final RegistryObject<EntityType<InfernalArrowProjectile>> INFERNAL_ARROW_PROJECTILE =
             ENTITIES.register("infernal_arrow_projectile", () -> EntityType.Builder.<InfernalArrowProjectile>of(InfernalArrowProjectile::new, MobCategory.MISC)
-                    .sized(1f, 1f)
+                    .sized(0.8f, 0.8f)
                     .clientTrackingRange(10)
                     .build(new ResourceLocation(BornInSpellbooks.MODID, "infernal_arrow_projectile").toString()));
 
@@ -179,20 +178,18 @@ public class MAEntityRegistry {
 
     public static final RegistryObject<EntityType<InfernalFireField>> INFERNAL_FIRE =
             ENTITIES.register("fel_fire", () -> EntityType.Builder.<InfernalFireField>of(InfernalFireField::new, MobCategory.MISC)
-                    .sized(1f, 1f)
                     .clientTrackingRange(64)
                     .build(new ResourceLocation(BornInSpellbooks.MODID, "fel_fire").toString()));
 
     public static final RegistryObject<EntityType<LingeringStainField>> LINGERING_STAIN =
             ENTITIES.register("lingering_stain", () -> EntityType.Builder.<LingeringStainField>of(LingeringStainField::new, MobCategory.MISC)
-                    .sized(1f, 1f)
                     .clientTrackingRange(64)
                     .build(new ResourceLocation(BornInSpellbooks.MODID, "lingering_stain").toString()));
 
 
     public static final RegistryObject<EntityType<NightmareRend>> NIGHTMARE_REND =
             ENTITIES.register("nightmare_rend", () -> EntityType.Builder.<NightmareRend>of(NightmareRend::new, MobCategory.MISC)
-                    .sized(1f, 1f)
+                    .sized(5f, 1f)
                     .clientTrackingRange(64)
                     .build(new ResourceLocation(BornInSpellbooks.MODID, "nightmare_rend").toString()));
 

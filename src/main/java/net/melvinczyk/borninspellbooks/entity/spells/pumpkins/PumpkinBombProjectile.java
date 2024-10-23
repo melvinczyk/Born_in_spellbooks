@@ -1,11 +1,15 @@
 package net.melvinczyk.borninspellbooks.entity.spells.pumpkins;
 
+import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
 import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.entity.spells.AbstractMagicProjectile;
 import net.melvinczyk.borninspellbooks.registry.MAEntityRegistry;
 import net.melvinczyk.borninspellbooks.registry.MAMobEffectRegistry;
 import net.melvinczyk.borninspellbooks.registry.MASpellRegistry;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -16,6 +20,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -66,7 +71,7 @@ public class PumpkinBombProjectile extends AbstractMagicProjectile implements Ge
         super.onHitBlock(blockHitResult);
         this.setDeltaMovement(0, 0, 0);
 
-        int summonTime = 20 * 60;
+        int summonTime = 20 * 30;
 
         LivingEntity player = (LivingEntity) this.getOwner();
         Vec3 position = this.getPosition(0);
@@ -77,6 +82,10 @@ public class PumpkinBombProjectile extends AbstractMagicProjectile implements Ge
         level().addFreshEntity(pumpkinFriend);
         playSound(pumpkinFriend);
 
+        if (!this.level().isClientSide()) {
+            ServerLevel serverLevel = (ServerLevel) this.level();
+            MagicManager.spawnParticles(serverLevel, ParticleTypes.HAPPY_VILLAGER, pumpkinFriend.getX(), pumpkinFriend.getY() + pumpkinFriend.getBbHeight() * .5f, pumpkinFriend.getZ(), 25, pumpkinFriend.getBbWidth() * .5f, pumpkinFriend.getBbHeight() * .5f, pumpkinFriend.getBbWidth() * .5f, .03, false);
+        }
         pumpkinFriend.addEffect(new MobEffectInstance(MAMobEffectRegistry.PUMPKIN_FRIEND_TIMER.get(), summonTime, 0, false, false, false));
         int effectAmplifier = 0;
         player.addEffect(new MobEffectInstance(MAMobEffectRegistry.PUMPKIN_FRIEND_TIMER.get(), summonTime, effectAmplifier, false, false, true));

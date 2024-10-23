@@ -6,6 +6,7 @@ import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import io.redspace.ironsspellbooks.api.spells.*;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.capabilities.magic.TargetEntityCastData;
+import io.redspace.ironsspellbooks.entity.mobs.MagicSummon;
 import io.redspace.ironsspellbooks.entity.spells.target_area.TargetedAreaEntity;
 import io.redspace.ironsspellbooks.spells.TargetedTargetAreaCastData;
 import net.melvinczyk.borninspellbooks.BornInSpellbooks;
@@ -45,7 +46,7 @@ public class CurseSpell extends AbstractSpell {
             .setMinRarity(SpellRarity.COMMON)
             .setSchoolResource(SchoolRegistry.BLOOD_RESOURCE)
             .setMaxLevel(10)
-            .setCooldownSeconds(180)
+            .setCooldownSeconds(60)
             .build();
 
     public CurseSpell()
@@ -82,7 +83,7 @@ public class CurseSpell extends AbstractSpell {
         if (Utils.preCastTargetHelper(level, entity, playerMagicData, this, 32, .35f)) {
             float radius = 1f;
             var target = ((TargetEntityCastData) playerMagicData.getAdditionalCastData()).getTarget((ServerLevel) level);
-            var area = TargetedAreaEntity.createTargetAreaEntity(level, target.position(), radius, MobEffects.HARM.getColor(), target);
+            var area = TargetedAreaEntity.createTargetAreaEntity(level, target.position(), radius, MobEffects.BAD_OMEN.getColor(), target);
             playerMagicData.setAdditionalCastData(new TargetedTargetAreaCastData(target, area));
             return true;
         }
@@ -118,7 +119,7 @@ public class CurseSpell extends AbstractSpell {
 
     private float getScarletPersecutorDamage(int spellLevel, LivingEntity caster)
     {
-        return 3 + (getSpellPower(spellLevel, caster) * 0.1F);
+        return 4 + (getSpellPower(spellLevel, caster) * 0.1F);
     }
 
 }

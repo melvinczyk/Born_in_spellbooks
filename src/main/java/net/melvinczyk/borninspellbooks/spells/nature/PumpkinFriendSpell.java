@@ -35,7 +35,7 @@ public class PumpkinFriendSpell extends AbstractSpell {
             .setMinRarity(SpellRarity.UNCOMMON)
             .setSchoolResource(SchoolRegistry.NATURE_RESOURCE)
             .setMaxLevel(10)
-            .setCooldownSeconds(12)
+            .setCooldownSeconds(25)
             .build();
 
     public PumpkinFriendSpell() {
