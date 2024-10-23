@@ -37,21 +37,21 @@ public class PumpkinBombProjectile extends AbstractMagicProjectile implements Ge
 
     protected float friendHealth = 1;
     protected float friendDamage = 0;
-    protected float explosionRadius = 1;
+    protected float explosionDamage = 1;
 
-    public PumpkinBombProjectile(Level pLevel, LivingEntity shooter, float friendHealth, float friendDamage, float explosionRadius) {
+    public PumpkinBombProjectile(Level pLevel, LivingEntity shooter, float friendHealth, float friendDamage, float explosionDamage) {
         this(MAEntityRegistry.PUMPKIN_BOMB.get(), pLevel);
         setOwner(shooter);
         this.friendHealth = friendHealth;
         this.friendDamage = friendDamage;
-        this.explosionRadius = explosionRadius;
+        this.explosionDamage = explosionRadius;
     }
 
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
     @Override
     public float getSpeed() {
-        return 0.9f;
+        return 0.7f;
     }
 
     @Override
@@ -72,7 +72,7 @@ public class PumpkinBombProjectile extends AbstractMagicProjectile implements Ge
 
         LivingEntity player = (LivingEntity) this.getOwner();
         Vec3 position = this.getPosition(0);
-        PumpkinFriend pumpkinFriend = new PumpkinFriend(level(),(LivingEntity) player, explosionRadius);
+        PumpkinFriend pumpkinFriend = new PumpkinFriend(level(),(LivingEntity) player, explosionDamage);
         pumpkinFriend.setPos(position);
         Objects.requireNonNull(pumpkinFriend.getAttributes().getInstance(Attributes.MAX_HEALTH)).setBaseValue(friendHealth);
         Objects.requireNonNull(pumpkinFriend.getAttributes().getInstance(Attributes.ATTACK_DAMAGE)).setBaseValue(friendDamage);

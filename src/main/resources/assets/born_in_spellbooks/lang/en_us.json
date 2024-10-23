@@ -2,6 +2,7 @@
   "ui.born_in_spellbooks.knockback": "%d Knockback",
   "ui.born_in_spellbooks.effect_amplifier": "%d Effect Amplifier",
   "ui.born_in_spellbooks.explosion_radius": "%f Explosion Radius",
+  "ui.born_in_spellbooks.explosion_damage": "%f Explosion Damage",
   "ui.born_in_spellbooks.radius": "%f Domain Radius",
   "ui.born_in_spellbooks.domain_duration": "%f Domain Duration",
   "ui.born_in_spellbooks.friend_health": "%f Pumpkin Friend Health",

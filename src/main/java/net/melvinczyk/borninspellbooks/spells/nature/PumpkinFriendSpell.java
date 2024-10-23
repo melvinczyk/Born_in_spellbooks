@@ -25,7 +25,7 @@ public class PumpkinFriendSpell extends AbstractSpell {
     public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
         return List.of(
                 Component.translatable("ui.irons_spellbooks.damage", Utils.stringTruncation(getDamage(spellLevel, caster), 2)),
-                Component.translatable("ui.born_in_spellbooks.explosion_radius", Utils.stringTruncation(getExplosionRadius(spellLevel, caster), 1)),
+                Component.translatable("ui.born_in_spellbooks.explosion_damage", Utils.stringTruncation(getExplosionDamage(spellLevel,caster), 2)),
                 Component.translatable("ui.born_in_spellbooks.friend_damage", Utils.stringTruncation(getFriendDamage(spellLevel, caster), 2)),
                 Component.translatable("ui.born_in_spellbooks.friend_health", Utils.stringTruncation(getFriendHealth(spellLevel, caster), 2), 1)
         );
@@ -35,7 +35,7 @@ public class PumpkinFriendSpell extends AbstractSpell {
             .setMinRarity(SpellRarity.UNCOMMON)
             .setSchoolResource(SchoolRegistry.NATURE_RESOURCE)
             .setMaxLevel(10)
-            .setCooldownSeconds(25)
+            .setCooldownSeconds(20)
             .build();
 
     public PumpkinFriendSpell() {
@@ -68,7 +68,7 @@ public class PumpkinFriendSpell extends AbstractSpell {
 
     @Override
     public void onCast(Level level, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
-        PumpkinBombProjectile friend_projectile = new PumpkinBombProjectile(level, entity, getFriendHealth(spellLevel, entity), getFriendDamage(spellLevel, entity), getExplosionRadius(spellLevel, entity));
+        PumpkinBombProjectile friend_projectile = new PumpkinBombProjectile(level, entity, getFriendHealth(spellLevel, entity), getFriendDamage(spellLevel, entity), getExplosionDamage(spellLevel, entity));
         friend_projectile.setPos(entity.position().add(0, entity.getEyeHeight() , 0));
         friend_projectile.shoot(entity.getLookAngle());
         friend_projectile.setDamage(getDamage(spellLevel, entity));
@@ -78,11 +78,12 @@ public class PumpkinFriendSpell extends AbstractSpell {
     }
 
     public float getDamage(int spellLevel, LivingEntity caster) {
-        return baseSpellPower * getEntityPowerMultiplier(caster);
+        return getSpellPower(spellLevel, caster) * 0.2f + 1;
     }
 
-    public float getExplosionRadius(int spellLevel, LivingEntity caster) {
-        return 1 + spellLevel * 0.5f;
+    public float getExplosionDamage(int spellLevel, LivingEntity caster)
+    {
+        return getSpellPower(spellLevel, caster) * 0.25f + 3;
     }
 
     private float getFriendHealth(int spellLevel, LivingEntity caster)

@@ -44,7 +44,6 @@ public class MASpellRegistry {
 
     // Ender
     public static final RegistryObject<AbstractSpell> PHANTOM_SPLIT = registerSpell(new PhantomSplitSpell());
-    // TODO: Ender Creeper Split - Split yourself and summons a copy of you that explodes
 
 
     // Evocation

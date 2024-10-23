@@ -1,9 +1,6 @@
 package net.melvinczyk.borninspellbooks.entity.spells.phantom_copy;
 
-import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
-import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.damage.DamageSources;
-import io.redspace.ironsspellbooks.entity.mobs.MagicSummon;
 import io.redspace.ironsspellbooks.entity.mobs.frozen_humanoid.FrozenHumanoid;
 import net.melvinczyk.borninspellbooks.registry.MAEntityRegistry;
 import net.melvinczyk.borninspellbooks.registry.MASpellRegistry;
@@ -220,9 +217,6 @@ public class PhantomCopyHumanoid extends FrozenHumanoid {
                 }
             }
             this.level().explode(this, this.getX(), this.getY(), this.getZ(), 0.0f, Level.ExplosionInteraction.NONE);
-            for (Entity entity : entities) {
-                entity.invulnerableTime = 0;
-            }
         }
     }
 

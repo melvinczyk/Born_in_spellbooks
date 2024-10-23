@@ -2,14 +2,20 @@ package net.melvinczyk.borninspellbooks.entity.spells.pumpkins;
 
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
+import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.entity.mobs.MagicSummon;
 import io.redspace.ironsspellbooks.entity.mobs.goals.*;
 import io.redspace.ironsspellbooks.util.OwnerHelper;
 import net.mcreator.borninchaosv.entity.PumpkinBombEntity;
 import net.melvinczyk.borninspellbooks.registry.MAEntityRegistry;
 import net.melvinczyk.borninspellbooks.registry.MASpellRegistry;
+import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
@@ -25,7 +31,10 @@ import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.registries.ForgeRegistries;
+
 import javax.annotation.Nullable;
+import java.util.Random;
 import java.util.UUID;
 
 public class PumpkinFriend extends PumpkinBombEntity implements MagicSummon {
@@ -34,12 +43,12 @@ public class PumpkinFriend extends PumpkinBombEntity implements MagicSummon {
         xpReward = 0;
     }
 
-    protected float explosionRadius = 1;
+    protected float explosionDamage = 1;
 
-    public PumpkinFriend(Level pLevel, LivingEntity owner, float explosionRadius) {
+    public PumpkinFriend(Level pLevel, LivingEntity owner, float explosionDamage) {
         this(MAEntityRegistry.PUMPKIN_FRIEND.get(), pLevel);
         setSummoner(owner);
-        this.explosionRadius = explosionRadius;
+        this.explosionDamage = explosionDamage;
     }
 
     public void registerGoals() {
@@ -142,7 +151,57 @@ public class PumpkinFriend extends PumpkinBombEntity implements MagicSummon {
         if (this.getHealth() <= 0 && !hasExploded)
         {
             hasExploded = true;
-            this.level().explode(this, this.getX(), this.getY(), this.getZ(), explosionRadius, Level.ExplosionInteraction.NONE);
+            explodeOnDeath();
         }
+    }
+
+    private void explodeOnDeath()
+    {
+        float explosionRadius = 5;
+        DamageSource explosionSource = MASpellRegistry.PUMPKIN_FRIEND.get().getDamageSource(this, getSummoner());
+        var entities = level().getEntities(this, this.getBoundingBox().inflate(explosionRadius));
+        LivingEntity player = getSummoner();
+        for (Entity entity : entities) {
+            if (entity.equals(player))
+            {
+                continue;
+            }
+
+            double distance = entity.position().distanceTo(this.position());
+            if (distance < explosionRadius) {
+                DamageSources.applyDamage(entity, this.explosionDamage, explosionSource);
+                entity.invulnerableTime = 0;
+            }
+        }
+        Random random = new Random();
+
+        if (!this.level().isClientSide()) {
+            ServerLevel serverLevel = (ServerLevel) this.level();
+            for (int i = 0; i < 100; i++) {
+                double xOffset = (random.nextDouble() - 0.5) * 5;
+                double yOffset = (random.nextDouble() - 0.5) * 5;
+                double zOffset = (random.nextDouble() - 0.5) * 5;
+
+                MagicManager.spawnParticles(
+                        serverLevel,
+                        (ParticleOptions) ForgeRegistries.PARTICLE_TYPES.getValue(new ResourceLocation("born_in_chaos_v1", "infernal_surge")),
+                        getX() + xOffset,
+                        getY() + yOffset,
+                        getZ() + zOffset,
+                        1,
+                        0.1, 0.1, 0.1,
+                        0.03,
+                        false
+                );
+            }
+        }
+
+        playSound(this);
+        this.discard();
+    }
+
+    private void playSound(LivingEntity targetEntity)
+    {
+        targetEntity.level().playSound(null, targetEntity.getX(), targetEntity.getY(), targetEntity.getZ(), SoundEvents.GENERIC_EXPLODE, SoundSource.HOSTILE, 1.0F, 1.0F);
     }
 }
