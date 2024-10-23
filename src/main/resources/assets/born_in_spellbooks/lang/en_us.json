@@ -8,8 +8,6 @@
   "ui.born_in_spellbooks.friend_damage": "%f Pumpkin Friend Damage",
 
 
-
-
   "spell.born_in_spellbooks.curse": "Curse",
   "spell.born_in_spellbooks.summon_bone_serpent": "Summon Bone Serpent",
   "spell.born_in_spellbooks.summon_ravager": "Summon Ravager",
@@ -21,7 +19,7 @@
   "spell.born_in_spellbooks.summon_dread_hound": "Pack Leader",
   "spell.born_in_spellbooks.infernal_bomb": "Infernal Bomb",
   "spell.born_in_spellbooks.infernal_bolt": "Infernal Bolt",
-  "spell.born_in_spellbooks.swarm": "Swarm",
+  "spell.born_in_spellbooks.swarm": "Rotten Breath",
   "spell.born_in_spellbooks.death_wish": "Death Wish",
   "spell.born_in_spellbooks.fly_barrier": "Fly Barrier",
   "spell.born_in_spellbooks.infernal_arrow": "Infernal Arrow",

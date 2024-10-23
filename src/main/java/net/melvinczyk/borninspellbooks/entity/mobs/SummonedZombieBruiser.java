@@ -150,7 +150,7 @@ public class SummonedZombieBruiser extends ZombieBruiserEntity implements MagicS
 
     public void onUnSummon() {
         if (!level().isClientSide) {
-            MagicManager.spawnParticles(level(), ParticleTypes.ASH, getX(), getY(), getZ(), 25, .4, .8, .4, .03, false);
+            MagicManager.spawnParticles(level(), ParticleTypes.POOF, getX(), getY(), getZ(), 50, .4, .8, .4, .03, false);
             discard();
         }
     }

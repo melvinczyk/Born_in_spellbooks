@@ -1,6 +1,7 @@
 package net.melvinczyk.borninspellbooks.entity.spells.swarm;
 
 import io.redspace.ironsspellbooks.damage.DamageSources;
+import io.redspace.ironsspellbooks.entity.mobs.MagicSummon;
 import io.redspace.ironsspellbooks.entity.spells.AbstractConeProjectile;
 import net.melvinczyk.borninspellbooks.registry.MAEntityRegistry;
 import net.melvinczyk.borninspellbooks.registry.MASpellRegistry;
@@ -60,10 +61,12 @@ public class SwarmProjectile extends AbstractConeProjectile {
         var entity = entityHitResult.getEntity();
         DamageSources.applyDamage(entity, damage, MASpellRegistry.SWARM.get().getDamageSource(this, getOwner()));
 
-        if (entity instanceof LivingEntity livingEntity)
+        if (entity instanceof LivingEntity livingEntity &&
+                !(entity instanceof MagicSummon summon && summon.getSummoner().equals(getOwner())))
         {
             livingEntity.addEffect(new MobEffectInstance(ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation("born_in_chaos_v1", "rotten_smell")), 260, 1));
             livingEntity.addEffect(new MobEffectInstance(MobEffects.HUNGER, 200, 1));
         }
+
     }
 }

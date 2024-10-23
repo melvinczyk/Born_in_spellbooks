@@ -1,6 +1,7 @@
 package net.melvinczyk.borninspellbooks.entity.spells.malevolent_shrine;
 
 import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
+import io.redspace.ironsspellbooks.entity.mobs.MagicSummon;
 import io.redspace.ironsspellbooks.entity.spells.AoeEntity;
 import io.redspace.ironsspellbooks.entity.spells.blood_slash.BloodSlashProjectile;
 import io.redspace.ironsspellbooks.registries.SoundRegistry;
@@ -152,6 +153,13 @@ public class Domain extends AoeEntity {
                         target.addEffect(resist);
                         target.addEffect(strength);
                         continue;
+                    }
+                    if (target instanceof MagicSummon)
+                    {
+                        if (((MagicSummon) target).getSummoner().equals(owner))
+                        {
+                            continue;
+                        }
                     }
                     MagicManager.spawnParticles(level(), (ParticleOptions) ForgeRegistries.PARTICLE_TYPES.getValue(new ResourceLocation("born_in_chaos_v1", "fleshsplash")), target.getX(), target.getY() + target.getBbHeight() * .5f, target.getZ(), 50, target.getBbWidth() * .25f, target.getBbHeight() * .25f, target.getBbWidth() * .25f, .03, false);
 

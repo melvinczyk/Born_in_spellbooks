@@ -1,6 +1,7 @@
 package net.melvinczyk.borninspellbooks.entity.spells.blind;
 
 import io.redspace.ironsspellbooks.damage.DamageSources;
+import io.redspace.ironsspellbooks.entity.mobs.MagicSummon;
 import net.mcreator.borninchaosv.entity.StaffofBlindnessProjectileEntity;
 import net.melvinczyk.borninspellbooks.registry.MASpellRegistry;
 import net.minecraft.world.level.Level;
@@ -19,6 +20,13 @@ public class BlindnessProjectile extends StaffofBlindnessProjectileEntity {
     {
         super.onHitEntity(entityHitResult);
         var target = entityHitResult.getEntity();
+        if (target instanceof MagicSummon)
+        {
+            if (((MagicSummon) target).getSummoner().equals(getOwner()))
+            {
+                return;
+            }
+        }
         DamageSources.applyDamage(target, getDamage(), MASpellRegistry.BLIND.get().getDamageSource(this, getOwner()));
         discard();
     }
