@@ -59,7 +59,7 @@ public class MASpellRegistry {
     public static final RegistryObject<AbstractSpell> INFECT_HOST = registerSpell(new InfectHostSpell());
     //public static final RegistryObject<AbstractSpell> FLY_BARRIER = registerSpell(new FlyBarrierSpell());
     public static final RegistryObject<AbstractSpell> SWARM = registerSpell(new SwarmSpell());
-    //public static final RegistryObject<AbstractSpell> GNAW = registerSpell(new GnawSpell());
+    public static final RegistryObject<AbstractSpell> GREAT_GLUTTON = registerSpell(new GreatGluttonSpell());
     public static final RegistryObject<AbstractSpell> PUMPKIN_FRIEND = registerSpell(new PumpkinFriendSpell());
     // TODO: Gnaw - Summons a glutton fish in front of you that takes a big bite and disappears
 

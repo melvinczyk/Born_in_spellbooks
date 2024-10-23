@@ -2,10 +2,11 @@ package net.melvinczyk.borninspellbooks.registry;
 
 import net.melvinczyk.borninspellbooks.BornInSpellbooks;
 import net.melvinczyk.borninspellbooks.entity.mobs.*;
+import net.melvinczyk.borninspellbooks.entity.spells.great_glutton.GreatGluttonProjectile;
+import net.melvinczyk.borninspellbooks.entity.spells.great_glutton.WaterEffect;
 import net.melvinczyk.borninspellbooks.entity.spells.pumpkins.PumpkinBombProjectile;
 import net.melvinczyk.borninspellbooks.entity.spells.pumpkins.PumpkinFriend;
 import net.melvinczyk.borninspellbooks.entity.spells.pumpkins.PumpkinProjectile;
-import net.melvinczyk.borninspellbooks.entity.spells.gnaw.GluttonFishGnawEntity;
 import net.melvinczyk.borninspellbooks.entity.spells.infernal_arrow.InfernalArrowProjectile;
 import net.melvinczyk.borninspellbooks.entity.spells.infernal_bolt.InfernalBoltProjectile;
 import net.melvinczyk.borninspellbooks.entity.spells.infernal_bomb.InfernalBombEntity;
@@ -139,9 +140,9 @@ public class MAEntityRegistry {
                     .build(new ResourceLocation(BornInSpellbooks.MODID, "infernal_bolt_projectile").toString()));
 
 
-    public static final RegistryObject<EntityType<GluttonFishGnawEntity>> GLUTTON_FISH_GNAW =
-            ENTITIES.register("glutton_fish_gnaw", () -> EntityType.Builder.<GluttonFishGnawEntity>of(GluttonFishGnawEntity::new, MobCategory.MISC)
-                    .sized(1f, 1f)
+    public static final RegistryObject<EntityType<GreatGluttonProjectile>> GREAT_GLUTTON =
+            ENTITIES.register("great_glutton", () -> EntityType.Builder.<GreatGluttonProjectile>of(GreatGluttonProjectile::new, MobCategory.MISC)
+                    .sized(3.0f, 3.0f)
                     .clientTrackingRange(10)
                     .build(new ResourceLocation(BornInSpellbooks.MODID, "glutton_fish_gnaw").toString()));
 
@@ -198,6 +199,13 @@ public class MAEntityRegistry {
                     .sized(0.6F, 1.8F)
                     .clientTrackingRange(64)
                     .build(new ResourceLocation(BornInSpellbooks.MODID, "domain").toString()));
+
+    public static final RegistryObject<EntityType<WaterEffect>> WATER_FIELD =
+            ENTITIES.register("water_field", () -> EntityType.Builder.<WaterEffect>of(WaterEffect::new, MobCategory.MISC)
+                    .sized(2.0F, 0.25F)
+                    .clientTrackingRange(64)
+                    .build(new ResourceLocation(BornInSpellbooks.MODID, "water_field").toString()));
+
 
 
     public static final RegistryObject<EntityType<PhantomCopyHumanoid>> PHANTOM_COPY =

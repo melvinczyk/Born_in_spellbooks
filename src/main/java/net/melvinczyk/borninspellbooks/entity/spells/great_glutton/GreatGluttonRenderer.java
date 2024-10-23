@@ -1,21 +1,27 @@
-package net.melvinczyk.borninspellbooks.entity.spells.maggot;
+package net.melvinczyk.borninspellbooks.entity.spells.great_glutton;
+
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
+import io.redspace.ironsspellbooks.render.GeoLivingEntityRenderer;
+import net.melvinczyk.borninspellbooks.entity.spells.maggot.MaggotProjectile;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
+import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
-public class MaggotProjectileRenderer extends GeoEntityRenderer<MaggotProjectile> {
-    public MaggotProjectileRenderer(EntityRendererProvider.Context context)
-    {
-        super(context, new MaggotProjectileModel());
+public class GreatGluttonRenderer extends GeoEntityRenderer<GreatGluttonProjectile> {
+
+    public GreatGluttonRenderer(EntityRendererProvider.Context context) {
+        super(context, new GreatGluttonModel());
     }
 
     @Override
-    public void render(MaggotProjectile entity, float yaw, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int light)
+    public void render(GreatGluttonProjectile entity, float yaw, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int light)
     {
         poseStack.pushPose();
         Vec3 motion = entity.getDeltaMovement();

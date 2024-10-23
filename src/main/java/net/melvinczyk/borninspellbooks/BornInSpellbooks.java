@@ -2,9 +2,10 @@ package net.melvinczyk.borninspellbooks;
 
 import com.mojang.logging.LogUtils;
 import net.melvinczyk.borninspellbooks.entity.mobs.render.*;
+import net.melvinczyk.borninspellbooks.entity.spells.great_glutton.WaterEffectRenderer;
 import net.melvinczyk.borninspellbooks.entity.spells.pumpkins.PumpkinBombRenderer;
 import net.melvinczyk.borninspellbooks.entity.spells.pumpkins.PumpkinFriendRenderer;
-import net.melvinczyk.borninspellbooks.entity.spells.gnaw.GluttonFishGnawRenderer;
+import net.melvinczyk.borninspellbooks.entity.spells.great_glutton.GreatGluttonRenderer;
 import net.melvinczyk.borninspellbooks.entity.spells.infernal_arrow.InfernalArrowRenderer;
 import net.melvinczyk.borninspellbooks.entity.spells.infernal_bolt.InfernalBoltRenderer;
 import net.melvinczyk.borninspellbooks.entity.spells.infernal_bomb.InfernalBombRenderer;
@@ -91,7 +92,7 @@ public class BornInSpellbooks
             EntityRenderers.register(MAEntityRegistry.INFERNAL_BOMB.get(), InfernalBombRenderer::new);
             EntityRenderers.register(MAEntityRegistry.INFERNAL_FIRE.get(), NoopRenderer::new);
             EntityRenderers.register(MAEntityRegistry.INFERNAL_BOLT_PROJECTILE.get(), InfernalBoltRenderer::new);
-            EntityRenderers.register(MAEntityRegistry.GLUTTON_FISH_GNAW.get(), GluttonFishGnawRenderer::new);
+            EntityRenderers.register(MAEntityRegistry.GREAT_GLUTTON.get(), GreatGluttonRenderer::new);
             EntityRenderers.register(MAEntityRegistry.INFERNAL_ARROW_PROJECTILE.get(), InfernalArrowRenderer::new);
             EntityRenderers.register(MAEntityRegistry.SUMMONED_BARREL_ZOMBIE.get(), SummonedBarrelZombieRenderer::new);
             EntityRenderers.register(MAEntityRegistry.CORPSE_FLY_BARRIER.get(), CorpseFlyBarrierRenderer::new);
@@ -101,6 +102,8 @@ public class BornInSpellbooks
             EntityRenderers.register(MAEntityRegistry.LINGERING_STAIN.get(), NoopRenderer::new);
             EntityRenderers.register(MAEntityRegistry.PHANTOM_COPY.get(), PhantomCopyRenderer::new);
             EntityRenderers.register(MAEntityRegistry.DOMAIN.get(), DomainRenderer::new);
+            EntityRenderers.register(MAEntityRegistry.WATER_FIELD.get(), WaterEffectRenderer::new);
+
 
             EntityRenderers.register(MAEntityRegistry.PUMPKIN_PROJECTILE.get(), PumpkinProjectileRenderer::new);
             EntityRenderers.register(MAEntityRegistry.PUMPKIN_BOMB.get(), PumpkinBombRenderer::new);
