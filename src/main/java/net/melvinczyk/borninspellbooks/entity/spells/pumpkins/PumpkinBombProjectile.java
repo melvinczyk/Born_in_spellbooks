@@ -44,7 +44,7 @@ public class PumpkinBombProjectile extends AbstractMagicProjectile implements Ge
         setOwner(shooter);
         this.friendHealth = friendHealth;
         this.friendDamage = friendDamage;
-        this.explosionDamage = explosionRadius;
+        this.explosionDamage = explosionDamage;
     }
 
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);

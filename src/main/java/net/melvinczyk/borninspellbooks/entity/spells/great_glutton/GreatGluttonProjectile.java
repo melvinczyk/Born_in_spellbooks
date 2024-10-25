@@ -23,20 +23,23 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraftforge.registries.ForgeRegistries;
+import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.RawAnimation;
+import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.animatable.GeoEntity;
+import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
-import software.bernie.geckolib.core.animation.AnimationController;
 
 
 import java.util.Collections;
 import java.util.Optional;
 
 public class GreatGluttonProjectile extends AbstractMagicProjectile implements GeoEntity {
+    private boolean playAttackAnimation = false;
+    private static final RawAnimation WALK_ANIMATION = RawAnimation.begin().thenLoop("walk");
+
     public GreatGluttonProjectile(EntityType<? extends GreatGluttonProjectile> entityType, Level level)
     {
         super(entityType, level);
@@ -79,6 +82,7 @@ public class GreatGluttonProjectile extends AbstractMagicProjectile implements G
         super.onHitEntity(entityHitResult);
         var target = entityHitResult.getEntity();
         DamageSources.applyDamage(target, getDamage(), MASpellRegistry.GREAT_GLUTTON.get().getDamageSource(this, getOwner()));
+        playAttackAnimation = true;
     }
 
     @Override
@@ -92,7 +96,17 @@ public class GreatGluttonProjectile extends AbstractMagicProjectile implements G
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
+        controllerRegistrar.add(new AnimationController<>(this, "walk_controller", 4, this::predicate));
     }
+
+    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> event) {
+        if (!playAttackAnimation) {
+            playAttackAnimation = true;
+            return event.setAndContinue(RawAnimation.begin().thenLoop("walk"));
+        }
+        return PlayState.STOP;
+    }
+
 
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
@@ -102,5 +116,10 @@ public class GreatGluttonProjectile extends AbstractMagicProjectile implements G
     @Override
     public double getTick(Object o) {
         return 0;
+    }
+
+    @Override
+    public boolean isNoGravity() {
+        return false;
     }
 }

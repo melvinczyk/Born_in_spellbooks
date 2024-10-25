@@ -46,7 +46,7 @@ public class GreatGluttonSpell extends AbstractSpell {
     }
 
     private final DefaultConfig defaultConfig = new DefaultConfig()
-            .setMinRarity(SpellRarity.UNCOMMON)
+            .setMinRarity(SpellRarity.RARE)
             .setSchoolResource(SchoolRegistry.NATURE_RESOURCE)
             .setMaxLevel(5)
             .setCooldownSeconds(15)
@@ -106,7 +106,7 @@ public class GreatGluttonSpell extends AbstractSpell {
         {
             var target = targetEntityCastData.getTarget((ServerLevel) world);
             if (target != null) {
-                MobEffectInstance slowness = new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 5, false, false, false);
+                MobEffectInstance slowness = new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 6, false, false, false);
                 target.addEffect(slowness);
                 WaterEffect water = new WaterEffect(world, entity);
                 world.addFreshEntity(water);
@@ -126,7 +126,7 @@ public class GreatGluttonSpell extends AbstractSpell {
     }
 
     private float getDamage(int spellLevel, LivingEntity entity) {
-        return getSpellPower(spellLevel, entity) + Utils.getWeaponDamage(entity, MobType.UNDEFINED);
+        return getSpellPower(spellLevel, entity);
     }
 
 

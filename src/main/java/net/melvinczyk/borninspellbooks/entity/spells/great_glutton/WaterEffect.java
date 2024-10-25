@@ -71,10 +71,10 @@ public class WaterEffect extends AoeEntity {
     public void tick() {
         super.tick();
         tickCounter++;
-        if (tickCounter >= 60 && !shotFish) {
+        if (tickCounter >= 40 && !shotFish) {
             shotFish = true;
             GreatGluttonProjectile fish = new GreatGluttonProjectile(level(), getDomainUser());
-            fish.setPos(this.position().add(0, -3, 0));
+            fish.setPos(this.position().add(0, -1, 0));
             fish.shoot(new Vec3(0, 1.2f, 0));
             fish.setDamage(20);
             level().addFreshEntity(fish);
