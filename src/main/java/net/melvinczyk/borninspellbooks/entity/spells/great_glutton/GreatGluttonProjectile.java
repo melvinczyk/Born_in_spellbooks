@@ -38,8 +38,7 @@ import java.util.Optional;
 
 public class GreatGluttonProjectile extends AbstractMagicProjectile implements GeoEntity {
     private boolean playAttackAnimation = false;
-    private static final RawAnimation WALK_ANIMATION = RawAnimation.begin().thenLoop("walk");
-
+    private int lifetime = 47;
     public GreatGluttonProjectile(EntityType<? extends GreatGluttonProjectile> entityType, Level level)
     {
         super(entityType, level);
@@ -82,6 +81,7 @@ public class GreatGluttonProjectile extends AbstractMagicProjectile implements G
         super.onHitEntity(entityHitResult);
         var target = entityHitResult.getEntity();
         DamageSources.applyDamage(target, getDamage(), MASpellRegistry.GREAT_GLUTTON.get().getDamageSource(this, getOwner()));
+        level().playSound(null, this.getX(), this.getY(), this.getZ(), (SoundEvent) ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("born_in_chaos_v1:glutton_fish_attack")), SoundSource.HOSTILE, 1.0F, 1.0F);
         playAttackAnimation = true;
     }
 
@@ -100,13 +100,9 @@ public class GreatGluttonProjectile extends AbstractMagicProjectile implements G
     }
 
     private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> event) {
-        if (!playAttackAnimation) {
-            playAttackAnimation = true;
-            return event.setAndContinue(RawAnimation.begin().thenLoop("walk"));
-        }
-        return PlayState.STOP;
+        event.getController().setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
+        return PlayState.CONTINUE;
     }
-
 
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
@@ -121,5 +117,16 @@ public class GreatGluttonProjectile extends AbstractMagicProjectile implements G
     @Override
     public boolean isNoGravity() {
         return false;
+    }
+
+    @Override
+    public void tick()
+    {
+        super.tick();
+        lifetime-= 1;
+        if (lifetime <= 0)
+        {
+            this.discard();
+        }
     }
 }

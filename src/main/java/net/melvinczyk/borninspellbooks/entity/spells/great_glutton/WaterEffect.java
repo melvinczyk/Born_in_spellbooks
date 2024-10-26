@@ -27,15 +27,17 @@ public class WaterEffect extends AoeEntity {
     private LivingEntity cachedSummoner;
     private int tickCounter = 0;
     public final int ticksPerFrame = 2;
+    private float damage = 0;
 
 
     public WaterEffect(EntityType<? extends Projectile> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 
-    public WaterEffect(Level level, LivingEntity entity) {
+    public WaterEffect(Level level, LivingEntity entity, float damage) {
         this(MAEntityRegistry.WATER_FIELD.get(), level);
         setDomainUser(entity);
+        this.damage = damage;
     }
 
     public void setDomainUser(@Nullable LivingEntity owner) {
@@ -74,10 +76,11 @@ public class WaterEffect extends AoeEntity {
         if (tickCounter >= 40 && !shotFish) {
             shotFish = true;
             GreatGluttonProjectile fish = new GreatGluttonProjectile(level(), getDomainUser());
-            fish.setPos(this.position().add(0, -1, 0));
-            fish.shoot(new Vec3(0, 1.2f, 0));
-            fish.setDamage(20);
+            fish.setPos(this.position().add(0, -2, 0));
+            fish.shoot(new Vec3(0, 1.1f, 0));
+            fish.setDamage(this.damage);
             level().addFreshEntity(fish);
+            playSound();
         }
     }
 
@@ -106,8 +109,8 @@ public class WaterEffect extends AoeEntity {
         return Optional.of(ParticleTypes.RAIN);
     }
 
-    private void playSound(LivingEntity targetEntity)
+    private void playSound()
     {
-        targetEntity.level().playSound(null, targetEntity.getX(), targetEntity.getY(), targetEntity.getZ(), (SoundEvent) ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("born_in_chaos_v1:glutton_fish_ambient")), SoundSource.HOSTILE, 1.0F, 1.0F);
+        level().playSound(null, this.getX(), this.getY(), this.getZ(), (SoundEvent) ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("born_in_chaos_v1:glutton_fish_death")), SoundSource.HOSTILE, 1.0F, 1.0F);
     }
 }
