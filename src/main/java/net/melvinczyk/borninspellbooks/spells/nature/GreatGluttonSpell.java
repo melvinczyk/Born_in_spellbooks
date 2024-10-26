@@ -43,7 +43,7 @@ public class GreatGluttonSpell extends AbstractSpell {
             .setMinRarity(SpellRarity.EPIC)
             .setSchoolResource(SchoolRegistry.NATURE_RESOURCE)
             .setMaxLevel(5)
-            .setCooldownSeconds(60)
+            .setCooldownSeconds(45)
             .build();
 
     public GreatGluttonSpell() {
@@ -120,6 +120,6 @@ public class GreatGluttonSpell extends AbstractSpell {
     }
 
     private float getDamage(int spellLevel, LivingEntity entity) {
-        return getSpellPower(spellLevel, entity) + 11;
+        return getSpellPower(spellLevel, entity) + 13;
     }
 }

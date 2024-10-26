@@ -24,9 +24,9 @@ public class DomainRenderer extends EntityRenderer<Domain> {
         poseStack.pushPose();
         poseStack.translate(0, entity.getBoundingBox().getYsize() / 2, 0);
 
-        float radius = entity.getRadius() + 1;
-        int latitudeBands = 16;
-        int longitudeBands = 16;
+        float radius = entity.getRadius() + 1.25f;
+        int latitudeBands = 32;
+        int longitudeBands = 32;
 
         PoseStack.Pose pose = poseStack.last();
         Matrix4f poseMatrix = pose.pose();
@@ -137,8 +137,8 @@ public class DomainRenderer extends EntityRenderer<Domain> {
     }
 
     private void renderCircle(PoseStack poseStack, VertexConsumer vertexConsumer, float radius) {
-        float yOffset = -0.93f;
-        int segments = 16;
+        float yOffset = -0.97f;
+        int segments = 32;
 
         PoseStack.Pose pose = poseStack.last();
         Matrix4f poseMatrix = pose.pose();

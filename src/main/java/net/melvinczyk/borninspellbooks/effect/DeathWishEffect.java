@@ -1,13 +1,17 @@
 package net.melvinczyk.borninspellbooks.effect;
 
 import io.redspace.ironsspellbooks.config.ServerConfigs;
+import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.effect.MagicMobEffect;
 import net.melvinczyk.borninspellbooks.registry.MASpellRegistry;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
 public class DeathWishEffect extends MagicMobEffect {
@@ -52,6 +56,20 @@ public class DeathWishEffect extends MagicMobEffect {
         else
         {
             entity.level().explode(entity, entity.getX(), entity.getY(), entity.getZ(), explosionRadius, Level.ExplosionInteraction.NONE);
+        }
+        DamageSource explosionSource = MASpellRegistry.DEATH_WISH.get().getDamageSource(entity, entity);
+        var entities = entity.level().getEntities(entity, entity.getBoundingBox().inflate(explosionRadius));
+        for (Entity target : entities) {
+            if (target != null && target.equals(entity)) {
+                continue;
+            }
+
+            double distance = entity.position().distanceTo(entity.position());
+            if (distance < explosionRadius) {
+                float damage = 5;
+                DamageSources.applyDamage(entity, damage, explosionSource);
+                entity.invulnerableTime = 0;
+            }
         }
 
         float maxHealth = entity.getMaxHealth();

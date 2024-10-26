@@ -161,8 +161,6 @@ public class SummonedDreadHound extends DreadHoundEntity implements MagicSummon 
         }
     }
 
-
-
     public boolean canBreatheUnderwater() {
         return false;
     }

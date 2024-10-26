@@ -2,7 +2,6 @@ package net.melvinczyk.borninspellbooks.entity.spells.infernal_arrow;
 
 import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
 import io.redspace.ironsspellbooks.damage.DamageSources;
-import io.redspace.ironsspellbooks.entity.mobs.MagicSummon;
 import io.redspace.ironsspellbooks.entity.spells.AbstractMagicProjectile;
 import io.redspace.ironsspellbooks.registries.SoundRegistry;
 import net.melvinczyk.borninspellbooks.entity.spells.infernal_bomb.InfernalFireField;
@@ -118,7 +117,7 @@ public class InfernalArrowProjectile extends AbstractMagicProjectile {
             fire.setOwner(getOwner());
             fire.setDuration(40);
             fire.setEffectDuration(40);
-            fire.setDamage(damage / 5);
+            fire.setDamage(damage * 0.2f);
             fire.setRadius(10);
             fire.setCircular();
             fire.moveTo(location);

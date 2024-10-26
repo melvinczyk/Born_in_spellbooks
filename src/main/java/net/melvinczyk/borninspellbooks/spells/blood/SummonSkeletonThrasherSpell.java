@@ -87,7 +87,7 @@ public class SummonSkeletonThrasherSpell extends AbstractSpell
     @Override
     public void onCast(Level world, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData)
     {
-        int summonTime = 20 * 60 * 10;
+        int summonTime = 20 * 60 * 5;
 
         SummonedSkeletonThrasher thrasher = new SummonedSkeletonThrasher(world, entity);
         thrasher.setPos(entity.position());

@@ -76,7 +76,7 @@ public class CursedMarkEffect extends MagicMobEffect {
                     scarletPersecutor.setOldPosAndRot();
                     scarletPersecutor.assignTarget(targetEntity);
 
-                    scarletPersecutor.getAttributes().getInstance(Attributes.ATTACK_DAMAGE).setBaseValue(3 + attributeModifier);
+                    scarletPersecutor.getAttributes().getInstance(Attributes.ATTACK_DAMAGE).setBaseValue(4 + attributeModifier);
                     scarletPersecutor.getAttributes().getInstance(Attributes.MAX_HEALTH).setBaseValue(10 + attributeModifier);
 
                     level.addFreshEntity(scarletPersecutor);

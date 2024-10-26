@@ -18,6 +18,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
@@ -34,7 +35,9 @@ public class SummonDreadHoundSpell extends AbstractSpell {
     {
         int summons = (int) Math.ceil((float)spellLevel / 2);
         return List.of(
-                Component.translatable("ui.irons_spellbooks.summon_count", summons)
+                Component.translatable("ui.irons_spellbooks.summon_count", summons),
+                Component.translatable("ui.irons_spellbooks.hp", Utils.stringTruncation(getDreadHoundHealth(spellLevel, caster), 2)),
+                Component.translatable("ui.irons_spellbooks.damage", Utils.stringTruncation(getDreadHoundDamage(spellLevel, caster), 2))
         );
 
     }
@@ -85,7 +88,7 @@ public class SummonDreadHoundSpell extends AbstractSpell {
     @Override
     public void onCast(Level world, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData)
     {
-        int summonTime = 20 * 60 * 10;
+        int summonTime = 20 * 60 * 5;
 
         float radius = 1.0f + .185f * spellLevel;
         for (int i = 0; i < spellLevel; i++)
@@ -101,8 +104,8 @@ public class SummonDreadHoundSpell extends AbstractSpell {
                 dreadHound.setYRot(entity.getYRot());
                 dreadHound.setOldPosAndRot();
 
-                //dreadHound.getAttributes().getInstance(Attributes.ATTACK_DAMAGE).setBaseValue(getDreadHoundDamage(spellLevel, entity));
-                //dreadHound.getAttributes().getInstance(Attributes.MAX_HEALTH).setBaseValue(getDreadHoundHealth(spellLevel, entity));
+                dreadHound.getAttributes().getInstance(Attributes.ATTACK_DAMAGE).setBaseValue(getDreadHoundDamage(spellLevel, entity));
+                dreadHound.getAttributes().getInstance(Attributes.MAX_HEALTH).setBaseValue(getDreadHoundHealth(spellLevel, entity));
                 world.addFreshEntity(dreadHound);
             }
         }
@@ -116,7 +119,7 @@ public class SummonDreadHoundSpell extends AbstractSpell {
 
     private float getDreadHoundHealth(int spellLevel, LivingEntity caster)
     {
-        return 10 + spellLevel * 2;
+        return 10 + spellLevel;
     }
 
     private float getDreadHoundDamage(int spellLevel, LivingEntity caster) {

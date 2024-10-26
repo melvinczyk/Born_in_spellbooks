@@ -36,7 +36,7 @@ public class InfectHostSpell extends AbstractSpell {
             .setMinRarity(SpellRarity.UNCOMMON)
             .setSchoolResource(SchoolRegistry.NATURE_RESOURCE)
             .setMaxLevel(10)
-            .setCooldownSeconds(3)
+            .setCooldownSeconds(10)
             .build();
 
     public InfectHostSpell() {

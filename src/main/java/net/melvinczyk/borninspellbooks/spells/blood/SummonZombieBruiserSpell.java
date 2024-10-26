@@ -40,7 +40,7 @@ public class SummonZombieBruiserSpell extends AbstractSpell
             .setMinRarity(SpellRarity.LEGENDARY)
             .setSchoolResource(SchoolRegistry.BLOOD_RESOURCE)
             .setMaxLevel(10)
-            .setCooldownSeconds(300)
+            .setCooldownSeconds(240)
             .build();
 
     public SummonZombieBruiserSpell() {

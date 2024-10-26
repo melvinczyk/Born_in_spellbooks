@@ -45,10 +45,10 @@ public class PumpkinFriend extends PumpkinBombEntity implements MagicSummon {
 
     protected float explosionDamage = 1;
 
-    public PumpkinFriend(Level pLevel, LivingEntity owner, float explosionDamage) {
+    public PumpkinFriend(Level pLevel, LivingEntity owner, float newDamage) {
         this(MAEntityRegistry.PUMPKIN_FRIEND.get(), pLevel);
         setSummoner(owner);
-        this.explosionDamage = explosionDamage;
+        this.explosionDamage = newDamage;
     }
 
     public void registerGoals() {

@@ -24,7 +24,7 @@ public class CorpseFlyPathFinderRenderer extends CorpseFlyRenderer {
 
         ResourceLocation texture = getTextureLocation(entity);
         VertexConsumer vertexConsumer = bufferSource.getBuffer(RenderType.entityTranslucent(texture));
-        ResourceLocation modelResource = new ResourceLocation("born_in_chaos_v1", "geo/corpsefly.geo.json");
+        ResourceLocation modelResource = new ResourceLocation("born_in_chaos_v1", "geo/bloodygadfly.geo.json");
         BakedGeoModel model = this.getGeoModel().getBakedModel(modelResource);
 
         super.preRender(poseStack, entity, model, bufferSource, vertexConsumer, false, partialTicks, packedLight, 0, 1.0F, 1.0F, 1.0F, 0);

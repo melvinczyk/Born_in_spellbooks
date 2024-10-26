@@ -104,7 +104,7 @@ public class ScarletPersecutor extends ScarletPersecutorEntity implements MagicS
         return false;
     }
 
-    private int lifetime = 100;
+    private int lifetime = 140;
     @Override
     public void tick() {
         super.tick();

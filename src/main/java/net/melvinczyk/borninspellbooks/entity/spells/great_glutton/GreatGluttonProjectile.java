@@ -38,7 +38,10 @@ import java.util.Optional;
 
 public class GreatGluttonProjectile extends AbstractMagicProjectile implements GeoEntity {
     private boolean playAttackAnimation = false;
+    private boolean isAnimationStarted = false;
     private int lifetime = 47;
+    private final RawAnimation animation = RawAnimation.begin().thenPlay("walk");
+
     public GreatGluttonProjectile(EntityType<? extends GreatGluttonProjectile> entityType, Level level)
     {
         super(entityType, level);
@@ -96,11 +99,11 @@ public class GreatGluttonProjectile extends AbstractMagicProjectile implements G
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-        controllerRegistrar.add(new AnimationController<>(this, "walk_controller", 4, this::predicate));
+        controllerRegistrar.add(new AnimationController(this, "controller", 0, this::predicate));
     }
 
-    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> event) {
-        event.getController().setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
+    private PlayState predicate(AnimationState event) {
+        event.getController().setAnimation(animation);
         return PlayState.CONTINUE;
     }
 

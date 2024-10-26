@@ -30,7 +30,7 @@ public class MalevolentShrineSpell extends AbstractSpell {
     {
         return List.of(
                 Component.translatable("ui.irons_spellbooks.damage", Utils.stringTruncation(getSpellPower(spellLevel, caster) * 0.1F + 2, 1)),
-                Component.translatable("ui.born_in_spellbooks.radius", Utils.stringTruncation(spellLevel + 4, 1)),
+                Component.translatable("ui.born_in_spellbooks.radius", Utils.stringTruncation(spellLevel + 6, 1)),
                 Component.translatable("ui.born_in_spellbooks.domain_duration", Utils.stringTruncation(30, 1))
         );
     }
@@ -39,7 +39,7 @@ public class MalevolentShrineSpell extends AbstractSpell {
             .setMinRarity(SpellRarity.LEGENDARY)
             .setSchoolResource(SchoolRegistry.BLOOD_RESOURCE)
             .setMaxLevel(10)
-            .setCooldownSeconds(360)
+            .setCooldownSeconds(300)
             .build();
 
     public MalevolentShrineSpell()
@@ -86,8 +86,8 @@ public class MalevolentShrineSpell extends AbstractSpell {
     public void onCast(Level world, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
         {
             Domain domain = new Domain(world, entity, getDamage(spellLevel, entity));
-            domain.setPos(entity.position().subtract(0, spellLevel + 3, 0));
-            domain.setRadius(spellLevel + 4);
+            domain.setPos(entity.position().subtract(0, spellLevel + 5, 0));
+            domain.setRadius(spellLevel + 6);
             world.addFreshEntity(domain);
         }
         super.onCast(world, spellLevel, entity, castSource, playerMagicData);
@@ -95,11 +95,6 @@ public class MalevolentShrineSpell extends AbstractSpell {
 
     public float getDamage(int spellLevel, LivingEntity caster)
     {
-        return getSpellPower(spellLevel, caster) * 0.1F + 2;
-    }
-
-    public int getDuration(int spellLevel, LivingEntity caster)
-    {
-        return (int)getSpellPower(spellLevel, caster);
+        return getSpellPower(spellLevel, caster) * 0.1F + 1;
     }
 }

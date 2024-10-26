@@ -43,11 +43,11 @@ public class ShootMaggotSpell extends AbstractSpell {
 
     public ShootMaggotSpell()
     {
-        this.manaCostPerLevel = 2;
+        this.manaCostPerLevel = 5;
         this.baseSpellPower = 12;
         this.spellPowerPerLevel = 1;
         this.castTime = 0;
-        this.baseManaCost = 10;
+        this.baseManaCost = 50;
     }
 
     @Override
@@ -95,11 +95,7 @@ public class ShootMaggotSpell extends AbstractSpell {
         super.onCast(world, spellLevel, entity, castSource, playerMagicData);
     }
 
-    public static float getRange(int level, LivingEntity caster) {
-        return 10;
-    }
-
     private float getDamage(int spellLevel, LivingEntity caster) {
-        return getSpellPower(spellLevel, caster) * .4f;
+        return getSpellPower(spellLevel, caster) * .35f;
     }
 }

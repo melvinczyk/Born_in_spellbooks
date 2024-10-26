@@ -47,7 +47,7 @@ public class NightmareRendSpell extends AbstractSpell {
     @Override
     public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
         return List.of(
-                Component.translatable("ui.irons_spellbooks.damage", getDamageText(spellLevel, caster)),
+                Component.translatable("ui.irons_spellbooks.damage", Utils.stringTruncation(getDamage(spellLevel, caster), 2)),
                 Component.translatable("ui.irons_spellbooks.effect_length", Utils.stringTruncation((spellLevel + 1), 2)));
     }
     private final DefaultConfig defaultConfig = new DefaultConfig()
@@ -136,21 +136,7 @@ public class NightmareRendSpell extends AbstractSpell {
     }
 
     private float getDamage(int spellLevel, LivingEntity entity) {
-        return getSpellPower(spellLevel, entity) + Utils.getWeaponDamage(entity, MobType.UNDEFINED) + EnchantmentHelper.getFireAspect(entity);
-    }
-
-
-    private String getDamageText(int spellLevel, LivingEntity entity) {
-        if (entity != null) {
-            float weaponDamage = Utils.getWeaponDamage(entity, MobType.UNDEFINED);
-            String plus = "";
-            if (weaponDamage > 0) {
-                plus = String.format(" (+%s)", Utils.stringTruncation(weaponDamage, 1));
-            }
-            String damage = Utils.stringTruncation(getDamage(spellLevel, entity), 1);
-            return damage + plus;
-        }
-        return "" + getSpellPower(spellLevel, entity);
+        return getSpellPower(spellLevel, entity) - 2;
     }
 
     @Override

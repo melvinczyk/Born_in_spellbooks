@@ -38,7 +38,7 @@ public class SpawnedMaggot extends MaggotEntity implements MagicSummon {
     public static AttributeSupplier setAttributes() {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 6)
-                .add(Attributes.MOVEMENT_SPEED, 0.4D)
+                .add(Attributes.MOVEMENT_SPEED, 0.3D)
                 .add(Attributes.ATTACK_DAMAGE, 1.0D)
                 .build();
     }

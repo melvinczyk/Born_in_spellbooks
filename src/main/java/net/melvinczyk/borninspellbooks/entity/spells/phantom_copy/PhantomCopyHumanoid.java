@@ -88,13 +88,12 @@ public class PhantomCopyHumanoid extends FrozenHumanoid {
     private boolean isAutoSpinAttack;
     private HumanoidArm mainArm = HumanoidArm.RIGHT;
 
-    public PhantomCopyHumanoid(Level level, LivingEntity entityToCopy, Player caster, Entity target, int amplifier, int duration) {
+    public PhantomCopyHumanoid(Level level, LivingEntity entityToCopy, Player caster, Entity target, int duration) {
         this(MAEntityRegistry.PHANTOM_COPY.get(), level);
         setPlayer(caster);
         setTarget(target);
         this.entityData.set(DATA_PLAYER_UUID, Optional.of(caster.getUUID()));
         this.spellPower = (int)(duration * 0.05f);
-        this.radius = amplifier;
         this.moveTo(entityToCopy.getX(), entityToCopy.getY(), entityToCopy.getZ(), entityToCopy.getYRot(), entityToCopy.getXRot());
         if (entityToCopy.isBaby())
             this.entityData.set(DATA_IS_BABY, true);
@@ -158,7 +157,7 @@ public class PhantomCopyHumanoid extends FrozenHumanoid {
 
 
     private void followTarget(Entity target) {
-        double speed = 0.25;
+        double speed = 0.2;
         double dx = target.getX() - this.getX();
         double dy = target.getY() - this.getY();
         double dz = target.getZ() - this.getZ();
@@ -200,7 +199,7 @@ public class PhantomCopyHumanoid extends FrozenHumanoid {
     private void explodeOnDeath() {
         if (!hasExploded) {
             hasExploded = true;
-            float explosionRadius = this.radius;
+            float explosionRadius = 4;
             DamageSource explosionSource = MASpellRegistry.PHANTOM_SPLIT.get().getDamageSource(this, getSummoner());
             var entities = level().getEntities(this, this.getBoundingBox().inflate(explosionRadius));
             Player player = getPlayer();

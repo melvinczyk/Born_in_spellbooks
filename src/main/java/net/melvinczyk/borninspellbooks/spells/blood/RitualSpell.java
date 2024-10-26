@@ -42,7 +42,6 @@ public class RitualSpell extends AbstractSpell {
     {
         return List.of(
                 Component.translatable("ui.irons_spellbooks.healing", Utils.stringTruncation(1+ getSpellPower(spellLevel, caster) * 0.1F, 1)),
-                Component.translatable("ui.irons_spellbooks.damage", Utils.stringTruncation(getSpellPower(spellLevel, caster) * 0.25F, 1)),
                 Component.translatable("ui.irons_spellbooks.effect_length", Utils.stringTruncation(getSpellPower(spellLevel, caster) * 0.6f, 2))
         );
     }
@@ -51,7 +50,7 @@ public class RitualSpell extends AbstractSpell {
             .setMinRarity(SpellRarity.UNCOMMON)
             .setSchoolResource(SchoolRegistry.BLOOD_RESOURCE)
             .setMaxLevel(8)
-            .setCooldownSeconds(120)
+            .setCooldownSeconds(100)
             .build();
 
     public RitualSpell()

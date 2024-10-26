@@ -93,7 +93,7 @@ public class PhantomSplitEffect extends CustomDescriptionMobEffect {
                 }
             }
 
-            PhantomCopyHumanoid copy = new PhantomCopyHumanoid(level, livingEntity, (Player) livingEntity, damager, amplifier, duration);
+            PhantomCopyHumanoid copy = new PhantomCopyHumanoid(level, livingEntity, (Player) livingEntity, damager, duration);
             level.addFreshEntity(copy);
 
             if (dest == null) {
