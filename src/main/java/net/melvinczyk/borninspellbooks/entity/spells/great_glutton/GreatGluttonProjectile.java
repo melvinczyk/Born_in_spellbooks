@@ -38,7 +38,6 @@ import java.util.Optional;
 
 public class GreatGluttonProjectile extends AbstractMagicProjectile implements GeoEntity {
     private boolean playAttackAnimation = false;
-    private boolean isAnimationStarted = false;
     private int lifetime = 47;
     private final RawAnimation animation = RawAnimation.begin().thenPlay("walk");
 

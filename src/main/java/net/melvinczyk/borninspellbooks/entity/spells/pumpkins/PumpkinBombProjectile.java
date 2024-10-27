@@ -51,7 +51,7 @@ public class PumpkinBombProjectile extends AbstractMagicProjectile implements Ge
 
     @Override
     public float getSpeed() {
-        return 0.7f;
+        return 0.8f;
     }
 
     @Override

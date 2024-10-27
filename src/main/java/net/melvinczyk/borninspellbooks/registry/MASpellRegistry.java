@@ -47,7 +47,6 @@ public class MASpellRegistry {
 
 
     // Evocation
-    //public static final RegistryObject<AbstractSpell> SUMMON_RAVAGER = registerSpell(new SummonRavagerSpell());
     public static final RegistryObject<AbstractSpell> BLIND = registerSpell(new BlindSpell());
     public static final RegistryObject<AbstractSpell> DEATH_WISH = registerSpell(new DeathWishSpell());
     public static final RegistryObject<AbstractSpell> NIGHTMARE_REND = registerSpell(new NightmareRendSpell());
@@ -57,7 +56,6 @@ public class MASpellRegistry {
     public static final RegistryObject<AbstractSpell> SUMMON_DREAD_HOUND = registerSpell(new SummonDreadHoundSpell());
     public static final RegistryObject<AbstractSpell> INFECT = registerSpell(new ShootMaggotSpell());
     public static final RegistryObject<AbstractSpell> INFECT_HOST = registerSpell(new InfectHostSpell());
-    //public static final RegistryObject<AbstractSpell> FLY_BARRIER = registerSpell(new FlyBarrierSpell());
     public static final RegistryObject<AbstractSpell> SWARM = registerSpell(new SwarmSpell());
     public static final RegistryObject<AbstractSpell> GREAT_GLUTTON = registerSpell(new GreatGluttonSpell());
     public static final RegistryObject<AbstractSpell> PUMPKIN_FRIEND = registerSpell(new PumpkinFriendSpell());

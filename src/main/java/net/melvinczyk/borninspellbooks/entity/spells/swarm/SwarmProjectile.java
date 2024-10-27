@@ -64,8 +64,8 @@ public class SwarmProjectile extends AbstractConeProjectile {
         if (entity instanceof LivingEntity livingEntity &&
                 !(entity instanceof MagicSummon summon && summon.getSummoner().equals(getOwner())))
         {
-            livingEntity.addEffect(new MobEffectInstance(ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation("born_in_chaos_v1", "rotten_smell")), 260, 1));
-            livingEntity.addEffect(new MobEffectInstance(MobEffects.HUNGER, 200, 1));
+            livingEntity.addEffect(new MobEffectInstance(ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation("born_in_chaos_v1", "rotten_smell")), 400, 1));
+            livingEntity.addEffect(new MobEffectInstance(MobEffects.HUNGER, 400, 1));
         }
 
     }

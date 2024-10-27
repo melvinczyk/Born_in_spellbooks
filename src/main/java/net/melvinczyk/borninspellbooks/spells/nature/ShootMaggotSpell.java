@@ -35,7 +35,7 @@ public class ShootMaggotSpell extends AbstractSpell {
     }
 
     private final DefaultConfig defaultConfig = new DefaultConfig()
-            .setMinRarity(SpellRarity.UNCOMMON)
+            .setMinRarity(SpellRarity.COMMON)
             .setSchoolResource(MASchoolRegistry.NATURE_RESOURCE)
             .setMaxLevel(7)
             .setCooldownSeconds(70)
@@ -84,7 +84,7 @@ public class ShootMaggotSpell extends AbstractSpell {
     @Override
     public void onCast(Level world, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
         if (!playerMagicData.getPlayerRecasts().hasRecastForSpell(getSpellId())) {
-            playerMagicData.getPlayerRecasts().addRecast(new RecastInstance(getSpellId(), spellLevel, getRecastCount(spellLevel, entity), 80, castSource, null), playerMagicData);
+            playerMagicData.getPlayerRecasts().addRecast(new RecastInstance(getSpellId(), spellLevel, getRecastCount(spellLevel, entity), 100, castSource, null), playerMagicData);
         }
         MaggotProjectile maggot = new MaggotProjectile(world, entity);
         maggot.setPos(entity.position().add(0, entity.getEyeHeight() , 0));
@@ -96,6 +96,6 @@ public class ShootMaggotSpell extends AbstractSpell {
     }
 
     private float getDamage(int spellLevel, LivingEntity caster) {
-        return getSpellPower(spellLevel, caster) * .35f;
+        return getSpellPower(spellLevel, caster) * .3f;
     }
 }

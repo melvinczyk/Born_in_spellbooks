@@ -50,7 +50,7 @@ public class RitualSpell extends AbstractSpell {
             .setMinRarity(SpellRarity.UNCOMMON)
             .setSchoolResource(SchoolRegistry.BLOOD_RESOURCE)
             .setMaxLevel(8)
-            .setCooldownSeconds(100)
+            .setCooldownSeconds(120)
             .build();
 
     public RitualSpell()
@@ -143,6 +143,6 @@ public class RitualSpell extends AbstractSpell {
     }
 
     public int getDuration(int spellLevel, LivingEntity caster) {
-        return (int) (getSpellPower(spellLevel, caster) * 0.6f);
+        return (int) (getSpellPower(spellLevel, caster) * 0.75f);
     }
 }

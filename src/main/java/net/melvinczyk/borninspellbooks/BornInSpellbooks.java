@@ -49,6 +49,7 @@ public class BornInSpellbooks
         MAAttributeRegistry.register(modEventBus);
         MASchoolRegistry.register(modEventBus);
         MAItemRegistry.register(modEventBus);
+        MACreativeTabRegistry.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
 
@@ -71,7 +72,7 @@ public class BornInSpellbooks
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event)
     {
-        LOGGER.info("HELLO from server starting");
+        LOGGER.info("This took me too long to make...");
     }
     @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 
@@ -82,7 +83,6 @@ public class BornInSpellbooks
         {
 
             //EntityRenderers.register(MAEntityRegistry.SUMMONED_BONE_SERPENT.get(), SummonedBoneSerpentRenderer::new);
-            EntityRenderers.register(MAEntityRegistry.SUMMONED_RAVAGER.get(), SummonedRavagerRenderer::new);
             EntityRenderers.register(MAEntityRegistry.TRIDENT_PROJECTILE.get(), TridentRenderer::new);
             EntityRenderers.register(MAEntityRegistry.SUMMONED_DREAD_HOUND.get(), SummonedDreadHoundRenderer::new);
             EntityRenderers.register(MAEntityRegistry.SUMMONED_SKELETON_THRASHER.get(), SummonedSkeletonThrasherRenderer::new);
@@ -95,7 +95,6 @@ public class BornInSpellbooks
             EntityRenderers.register(MAEntityRegistry.GREAT_GLUTTON.get(), GreatGluttonRenderer::new);
             EntityRenderers.register(MAEntityRegistry.INFERNAL_ARROW_PROJECTILE.get(), InfernalArrowRenderer::new);
             EntityRenderers.register(MAEntityRegistry.SUMMONED_BARREL_ZOMBIE.get(), SummonedBarrelZombieRenderer::new);
-            EntityRenderers.register(MAEntityRegistry.CORPSE_FLY_BARRIER.get(), CorpseFlyBarrierRenderer::new);
             EntityRenderers.register(MAEntityRegistry.SWARM_PROJECTILE.get(), NoopRenderer::new);
             EntityRenderers.register(MAEntityRegistry.NIGHTMARE_REND.get(), NightmareRendRenderer::new);
             EntityRenderers.register(MAEntityRegistry.ZOMBIE_BRUISER.get(), SummonedZombieBruiserRenderer::new);
@@ -111,8 +110,6 @@ public class BornInSpellbooks
 
 
             EntityRenderers.register(MAEntityRegistry.MAGGOT_PROJECTILE.get(), MaggotProjectileRenderer::new);
-            LOGGER.info("HELLO FROM CLIENT SETUP");
-            LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
         }
     }
 }

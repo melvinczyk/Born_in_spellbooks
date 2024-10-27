@@ -1,11 +1,13 @@
 package net.melvinczyk.borninspellbooks.entity.mobs;
 
 import io.redspace.ironsspellbooks.api.util.Utils;
+import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
 import io.redspace.ironsspellbooks.entity.mobs.MagicSummon;
 import io.redspace.ironsspellbooks.util.OwnerHelper;
 import net.mcreator.borninchaosv.entity.ScarletPersecutorEntity;
 import net.melvinczyk.borninspellbooks.registry.MAEntityRegistry;
 import net.melvinczyk.borninspellbooks.registry.MASpellRegistry;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
@@ -79,6 +81,10 @@ public class ScarletPersecutor extends ScarletPersecutorEntity implements MagicS
 
     @Override
     public void onUnSummon() {
+        if (!level().isClientSide) {
+            MagicManager.spawnParticles(level(), ParticleTypes.POOF, getX(), getY(), getZ(), 25, .4, .8, .4, .03, false);
+            discard();
+        }
     }
 
     @Override
@@ -111,13 +117,13 @@ public class ScarletPersecutor extends ScarletPersecutorEntity implements MagicS
         this.lifetime--;
         if (this.lifetime <= 0)
         {
-            this.kill();
+            this.onUnSummon();
         }
         if (this.getTarget() != null) {
             LivingEntity target = this.getTarget();
 
             if (!target.isAlive()) {
-                this.kill();
+                this.onUnSummon();
             }
         }
     }

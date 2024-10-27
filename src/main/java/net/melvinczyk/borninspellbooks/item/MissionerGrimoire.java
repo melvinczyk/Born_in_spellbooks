@@ -32,8 +32,8 @@ public class MissionerGrimoire extends UniqueSpellBook {
         ), 7, () -> {
             ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
             builder.put(AttributeRegistry.MAX_MANA.get(), new AttributeModifier(UUID.fromString("667ad88f-901d-4691-b2a2-3664e42026d3"), "Weapon modifier", 200, AttributeModifier.Operation.ADDITION));
-            builder.put(AttributeRegistry.EVOCATION_SPELL_POWER.get(), new AttributeModifier(UUID.fromString("667ad88f-901d-4691-b2a2-3664e42026d3"), "Weapon modifier", 0.05, AttributeModifier.Operation.MULTIPLY_BASE));
-            builder.put(AttributeRegistry.BLOOD_SPELL_POWER.get(), new AttributeModifier(UUID.fromString("667ad88f-901d-4691-b2a2-3664e42026d3"), "Weapon modifier", 0.05, AttributeModifier.Operation.MULTIPLY_BASE));
+            builder.put(AttributeRegistry.EVOCATION_SPELL_POWER.get(), new AttributeModifier(UUID.fromString("667ad88f-901d-4691-b2a2-3664e42026d3"), "Weapon modifier", 0.075, AttributeModifier.Operation.MULTIPLY_BASE));
+            builder.put(AttributeRegistry.BLOOD_SPELL_POWER.get(), new AttributeModifier(UUID.fromString("667ad88f-901d-4691-b2a2-3664e42026d3"), "Weapon modifier", 0.075, AttributeModifier.Operation.MULTIPLY_BASE));
             return builder.build();
         });
     }
@@ -57,6 +57,7 @@ public class MissionerGrimoire extends UniqueSpellBook {
 
         super.initializeSpellContainer(itemStack);
         AffinityData.setAffinityData(itemStack, MASpellRegistry.SUMMON_ZOMBIE_BRUISER.get());
-        AffinityData.setAffinityData(itemStack, SpellRegistry.FANG_WARD_SPELL.get());
+        AffinityData.setAffinityData(itemStack, MASpellRegistry.SUMMON_SKELETON_THRASHER.get());
+
     }
 }

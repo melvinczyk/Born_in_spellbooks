@@ -50,7 +50,7 @@ public class GreatGluttonSpell extends AbstractSpell {
         this.manaCostPerLevel = 15;
         this.baseSpellPower = 5;
         this.spellPowerPerLevel = 2;
-        this.castTime = 40;
+        this.castTime = 30;
         this.baseManaCost = 30;
     }
 
@@ -120,6 +120,6 @@ public class GreatGluttonSpell extends AbstractSpell {
     }
 
     private float getDamage(int spellLevel, LivingEntity entity) {
-        return getSpellPower(spellLevel, entity) + 13;
+        return getSpellPower(spellLevel, entity) + 12;
     }
 }

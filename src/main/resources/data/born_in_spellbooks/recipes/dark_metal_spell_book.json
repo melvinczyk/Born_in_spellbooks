@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "DTT",
+    "DEH",
+    "DTT"
+  ],
+  "key":
+  {
+    "D":
+    {
+      "item": "born_in_chaos_v1:dark_metal_ingot"
+    },
+    "E":
+    {
+      "item": "born_in_chaos_v1:transformative_flower"
+    },
+    "T":
+    {
+      "item": "born_in_chaos_v1:monster_skin"
+    },
+    "H":
+    {
+      "item": "born_in_chaos_v1:nightmare_claw"
+    }
+  },
+  "result":
+  {
+    "item": "born_in_spellbooks:dark_metal_spell_book",
+    "count": 1
+  }
+}

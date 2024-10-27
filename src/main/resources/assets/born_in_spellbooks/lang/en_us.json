@@ -49,5 +49,35 @@
   "effect.born_in_spellbooks.death_wish": "Detonation",
   "effect.born_in_spellbooks.phantom_split": "Phantom Split",
 
-  "tooltip.born_in_spellbooks.phantom_split_description": "Evade One Hit and Summon a Phantom Double with %d Explosion Radius"
+  "tooltip.born_in_spellbooks.phantom_split_description": "Evade One Hit and Summon a Phantom Double with %d Explosion Radius",
+
+
+  "item.born_in_spellbooks.missioner_spell_book": "Missionary Grimoire",
+  "item.born_in_spellbooks.dark_metal_spell_book": "Dark Metal Spell Book",
+
+
+  "itemGroup.born_in_spellbooks.equipment_tab": "Born In Spellbooks Equipment",
+
+
+  "spell.born_in_spellbooks.curse.guide": "Mark a target with a curse. When the time is up, scarlet persecutors will be summoned to kill them.",
+  "spell.born_in_spellbooks.ritual.guide": "Sacrifice a summoned mob to gain back health along with gaining resistance, regeneration, and a health boost.",
+  "spell.born_in_spellbooks.lingering_stain.guide": "Explode a summoned mob to leave behind a blood soaked stain that damages entities in it. The more health of the sacrifice, the longer the stain will last.",
+  "spell.born_in_spellbooks.summon_skeleton_thrasher.guide": "Bring back to life a Skeleton Thrasher that obeys your command.",
+  "spell.born_in_spellbooks.summon_zombie_bruiser.guide": "Bring to life a Zombie Bruiser that obeys your command.",
+  "spell.born_in_spellbooks.malevolent_shrine.guide": "Cast a domain that launches blood slashes onto anything inside of it. While in your domain you get resistance and strength, and other entities get weakness and slowness.",
+  "spell.born_in_spellbooks.blind.guide": "Shoot a piece of a Dark Vortex that inflicts blindness and knocks back the target",
+  "spell.born_in_spellbooks.death_wish.guide": "Become a living bomb and set a fuse on yourself. When the time is up you explode dealing massive AOE damage but also damaging yourself.",
+  "spell.born_in_spellbooks.nightmare_rend.guide": "Harness the power of a nightmare stalker and unleash a clawed attack that inflicts wither and gaze of terror.",
+  "spell.born_in_spellbooks.phantom_split.guide": "Dodge one attack and split in two with a phantom double. This double will chase down whatever inflicted the damage and explode when its time is up",
+  "spell.born_in_spellbooks.swarm.guide": "Blow rotten breath that damages targets and inflicts rotten stench and hunger.",
+  "spell.born_in_spellbooks.summon_dread_hound.guide": "Become the alpha you always were. Summon a pack of wolves that will protect and obey your command",
+  "spell.born_in_spellbooks.shoot_maggot.guide": "Have an arsenal of maggots that you are able to shoot that inflict poison on the target or aid you in battle.",
+  "spell.born_in_spellbooks.infect_host.guide": "Release a Bloody Gadfly to a target to infect maggots into it. When hit, summons 3 maggots that aid you.",
+  "spell.born_in_spellbooks.pumpkin_friend.guide": "Shoot a pumpkin that damages targets, once on the ground it turns into a Pumpkin Friend. When the Pumpkin Friend dies it explodes with a 5 block radius.",
+  "spell.born_in_spellbooks.great_glutton.guide": "Paralyze an enemy and open an ocean portal beneath them. A Glutton Fish will appear out of the portal and damage the target.",
+  "spell.born_in_spellbooks.infernal_bolt.guide": "Shoot a small infernal bolt that damages an entity and applies infernal flame on it.",
+  "spell.born_in_spellbooks.infernal_bomb.guide": "Launch a Fel Soil bomb that explodes on contact and leaves behind an infernal flame filed that deals DOT and inflicts infernal flame.",
+  "spell.born_in_spellbooks.infernal_arrow.guide": "Shoot an explosive arrow that inflicts infernal flame on contact. If it hits the ground, it leaves behind an infernal flame field."
+
+
 }

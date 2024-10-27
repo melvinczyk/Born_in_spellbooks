@@ -17,7 +17,6 @@ public class ModSetup {
     public static void entityAttributeEvent(EntityAttributeCreationEvent event)
     {
         //event.put(MAEntityRegistry.SUMMONED_BONE_SERPENT.get(), SummonedBoneSerpent.setAttributes());
-        event.put(MAEntityRegistry.SUMMONED_RAVAGER.get(), SummonedRavager.setAttributes());
         event.put(MAEntityRegistry.SUMMONED_DREAD_HOUND.get(), SummonedDreadHound.setAttributes());
         event.put(MAEntityRegistry.SUMMONED_SKELETON_THRASHER.get(), SummonedSkeletonThrasher.setAttributes());
         event.put(MAEntityRegistry.SCARLET_PERSECUTOR.get(), ScarletPersecutor.setAttributes());
@@ -25,7 +24,6 @@ public class ModSetup {
         event.put(MAEntityRegistry.SPAWNED_MAGGOT.get(), SpawnedMaggot.setAttributes());
         event.put(MAEntityRegistry.SUMMONED_BARREL_ZOMBIE.get(), SummonedBarrelZombie.setAttributes());
         event.put(MAEntityRegistry.ZOMBIE_BRUISER.get(), SummonedZombieBruiser.setAttributes());
-        event.put(MAEntityRegistry.CORPSE_FLY_BARRIER.get(), CorpseFlyBarrier.setAttributes());
         event.put(MAEntityRegistry.PHANTOM_COPY.get(), PhantomCopyHumanoid.prepareAttributes().build());
         event.put(MAEntityRegistry.PUMPKIN_FRIEND.get(), PumpkinFriend.setAttributes());
 

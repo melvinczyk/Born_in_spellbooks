@@ -116,9 +116,9 @@ public class InfernalArrowProjectile extends AbstractMagicProjectile {
             InfernalFireField fire = new InfernalFireField(level());
             fire.setOwner(getOwner());
             fire.setDuration(40);
-            fire.setEffectDuration(40);
+            fire.setEffectDuration(80);
             fire.setDamage(damage * 0.2f);
-            fire.setRadius(10);
+            fire.setRadius(3);
             fire.setCircular();
             fire.moveTo(location);
             level().addFreshEntity(fire);

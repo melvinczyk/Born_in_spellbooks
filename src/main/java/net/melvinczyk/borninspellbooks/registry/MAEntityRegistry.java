@@ -40,14 +40,6 @@ public class MAEntityRegistry {
 //                    .clientTrackingRange(10)
 //                    .build(new ResourceLocation(BornInSpellbooks.MODID, "summoned_bone_serpent").toString()));
 
-
-    public static final RegistryObject<EntityType<SummonedRavager>> SUMMONED_RAVAGER =
-            ENTITIES.register("summoned_ravager", () -> EntityType.Builder.<SummonedRavager>of(SummonedRavager::new, MobCategory.MONSTER)
-                    .sized(1f, 1f)
-                    .clientTrackingRange(10)
-                    .build(new ResourceLocation(BornInSpellbooks.MODID, "summoned_ravager").toString()));
-
-
     public static final RegistryObject<EntityType<SummonedDreadHound>> SUMMONED_DREAD_HOUND =
             ENTITIES.register("summoned_dread_hound", () -> EntityType.Builder.<SummonedDreadHound>of(SummonedDreadHound::new, MobCategory.MONSTER)
                     .sized(1f, 1f)
@@ -88,12 +80,6 @@ public class MAEntityRegistry {
                     .clientTrackingRange(64)
                     .build(new ResourceLocation(BornInSpellbooks.MODID, "summoned_barrel_zombie").toString()));
 
-
-    public static final RegistryObject<EntityType<CorpseFlyBarrier>> CORPSE_FLY_BARRIER =
-            ENTITIES.register("corpse_fly_barrier", () -> EntityType.Builder.<CorpseFlyBarrier>of(CorpseFlyBarrier::new, MobCategory.MONSTER)
-                    .sized(1f, 1f)
-                    .clientTrackingRange(64)
-                    .build(new ResourceLocation(BornInSpellbooks.MODID, "corpse_fly_barrier").toString()));
 
     public static final RegistryObject<EntityType<SummonedZombieBruiser>> ZOMBIE_BRUISER =
             ENTITIES.register("summoned_zombie_bruiser", () -> EntityType.Builder.<SummonedZombieBruiser>of(SummonedZombieBruiser::new, MobCategory.MONSTER)

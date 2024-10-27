@@ -4,15 +4,13 @@ import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
 import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.entity.mobs.goals.WispAttackGoal;
-import io.redspace.ironsspellbooks.util.ParticleHelper;
-import net.mcreator.borninchaosv.entity.CorpseFlyEntity;
+import net.mcreator.borninchaosv.entity.BloodyGadflyEntity;
 import net.melvinczyk.borninspellbooks.registry.MAEntityRegistry;
 import net.melvinczyk.borninspellbooks.registry.MASpellRegistry;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
@@ -38,10 +36,11 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import javax.annotation.Nullable;
 
 import java.util.Collections;
+import java.util.Objects;
 import java.util.UUID;
 
 
-public class CorpseFlyPathFinder extends CorpseFlyEntity implements GeoEntity {
+public class CorpseFlyPathFinder extends BloodyGadflyEntity implements GeoEntity {
 
     @Nullable
     private UUID ownerUUID;
@@ -54,8 +53,8 @@ public class CorpseFlyPathFinder extends CorpseFlyEntity implements GeoEntity {
     private Vec3 lastTickPos;
     private float damageAmount;
 
-    public CorpseFlyPathFinder(EntityType<? extends CorpseFlyEntity> entityType, Level level) {
-        super((EntityType<CorpseFlyEntity>) entityType, level);
+    public CorpseFlyPathFinder(EntityType<? extends BloodyGadflyEntity> entityType, Level level) {
+        super((EntityType<BloodyGadflyEntity>) entityType, level);
         this.setNoGravity(true);
         this.refreshDimensions();
         //setSize(0.1F, 2.0F);
@@ -104,7 +103,7 @@ public class CorpseFlyPathFinder extends CorpseFlyEntity implements GeoEntity {
             if (this.getBoundingBox().intersects(target.getBoundingBox())) {
                 DamageSources.applyDamage(target, damageAmount, MASpellRegistry.INFECT_HOST.get().getDamageSource(this, cachedOwner));
                 var p = target.getEyePosition();
-                MagicManager.spawnParticles(level(), ParticleHelper.BLOOD, p.x, p.y, p.z, 25, 0, 0, 0, .18, true);
+                MagicManager.spawnParticles(level(), (ParticleOptions) ForgeRegistries.PARTICLE_TYPES.getValue(new ResourceLocation("born_in_chaos_v1", "fleshsplash")), p.x, p.y, p.z, 25, .5f, .5f, .5f, .3, true);
                 if (!target.isAlive()) {
                     this.playSound(ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("born_in_chaos_v1:stomach_open")), 1.0f, 1.0f);
                 } else {
@@ -116,7 +115,7 @@ public class CorpseFlyPathFinder extends CorpseFlyEntity implements GeoEntity {
                     var level = target.level();
                     float radius = .5f + .185f * 3;
                     for (int i = 0; i < 3; i++) {
-                        SpawnedMaggot maggot = new SpawnedMaggot(level, this.cachedOwner);
+                        SpawnedMaggot maggot = new SpawnedMaggot(level, this.cachedOwner, 140);
                         if (maggot != null) {
                             var yrot = 6.281f / 6 * i + target.getYRot() * Mth.DEG_TO_RAD;
                             maggot.finalizeSpawn((ServerLevel) level, level.getCurrentDifficultyAt(maggot.getOnPos()), MobSpawnType.MOB_SUMMONED, null, null);
@@ -222,8 +221,8 @@ public class CorpseFlyPathFinder extends CorpseFlyEntity implements GeoEntity {
                 .add(Attributes.ATTACK_DAMAGE, 3.0)
                 .add(Attributes.MAX_HEALTH, 20.0)
                 .add(Attributes.FOLLOW_RANGE, 40.0)
-                .add(Attributes.FLYING_SPEED, .5)
-                .add(Attributes.MOVEMENT_SPEED, .5);
+                .add(Attributes.FLYING_SPEED, .4)
+                .add(Attributes.MOVEMENT_SPEED, .4);
     }
 
     @Override
@@ -248,15 +247,14 @@ public class CorpseFlyPathFinder extends CorpseFlyEntity implements GeoEntity {
     }
 
     private void popAndDie() {
-        this.playSound(SoundEvents.SHULKER_BULLET_HURT, 1.0F, 1.0F);
+        this.playSound(ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("born_in_chaos_v1:stomach_open")), 1.0f, 1.0f);
 
         if (!this.level().isClientSide()) {
             ServerLevel serverLevel = (ServerLevel) this.level();
-            serverLevel.sendParticles(ParticleTypes.CRIT, this.getX(), this.getY(), this.getZ(), 15, 0.2D, 0.2D, 0.2D, 0.0D);
+            serverLevel.sendParticles((ParticleOptions) Objects.requireNonNull(ForgeRegistries.PARTICLE_TYPES.getValue(new ResourceLocation("born_in_chaos_v1", "fleshsplash"))), this.getX(), this.getY(), this.getZ(), 25, 0.2D, 0.2D, 0.2D, 0.0D);
             this.discard();
         }
     }
-
 
     @Override
     protected boolean shouldDespawnInPeaceful() {

@@ -1,6 +1,7 @@
 {
   "replace": "false",
   "values": [
-    "born_in_spellbooks:missioner_spell_book"
+    "born_in_spellbooks:missioner_spell_book",
+    "born_in_spellbooks:dark_metal_spell_book"
   ]
 }

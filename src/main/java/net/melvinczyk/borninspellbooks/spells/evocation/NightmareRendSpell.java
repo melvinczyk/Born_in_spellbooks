@@ -51,7 +51,7 @@ public class NightmareRendSpell extends AbstractSpell {
                 Component.translatable("ui.irons_spellbooks.effect_length", Utils.stringTruncation((spellLevel + 1), 2)));
     }
     private final DefaultConfig defaultConfig = new DefaultConfig()
-            .setMinRarity(SpellRarity.UNCOMMON)
+            .setMinRarity(SpellRarity.RARE)
             .setSchoolResource(SchoolRegistry.EVOCATION_RESOURCE)
             .setMaxLevel(5)
             .setCooldownSeconds(15)

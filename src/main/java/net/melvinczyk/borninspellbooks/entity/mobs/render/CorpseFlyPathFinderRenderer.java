@@ -2,21 +2,21 @@ package net.melvinczyk.borninspellbooks.entity.mobs.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.mcreator.borninchaosv.client.renderer.CorpseFlyRenderer;
-import net.mcreator.borninchaosv.entity.CorpseFlyEntity;
+import net.mcreator.borninchaosv.client.renderer.BloodyGadflyRenderer;
+import net.mcreator.borninchaosv.entity.BloodyGadflyEntity;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 
-public class CorpseFlyPathFinderRenderer extends CorpseFlyRenderer {
+public class CorpseFlyPathFinderRenderer extends BloodyGadflyRenderer {
     public CorpseFlyPathFinderRenderer(EntityRendererProvider.Context context) {
         super(context);
     }
 
     @Override
-    public void render(CorpseFlyEntity entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
+    public void render(BloodyGadflyEntity entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
         poseStack.pushPose();
 
         float yOffset = entity.getBbHeight();
