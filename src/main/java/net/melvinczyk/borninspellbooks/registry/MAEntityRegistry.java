@@ -127,10 +127,10 @@ public class MAEntityRegistry {
 
 
     public static final RegistryObject<EntityType<GreatGluttonProjectile>> GREAT_GLUTTON =
-            ENTITIES.register("great_glutton", () -> EntityType.Builder.<GreatGluttonProjectile>of(GreatGluttonProjectile::new, MobCategory.MISC)
+            ENTITIES.register("great_glutton_projectile", () -> EntityType.Builder.<GreatGluttonProjectile>of(GreatGluttonProjectile::new, MobCategory.MISC)
                     .sized(1.5f, 3.0f)
                     .clientTrackingRange(10)
-                    .build(new ResourceLocation(BornInSpellbooks.MODID, "glutton_fish_gnaw").toString()));
+                    .build(new ResourceLocation(BornInSpellbooks.MODID, "great_glutton_projectile").toString()));
 
 
     public static final RegistryObject<EntityType<InfernalArrowProjectile>> INFERNAL_ARROW_PROJECTILE =

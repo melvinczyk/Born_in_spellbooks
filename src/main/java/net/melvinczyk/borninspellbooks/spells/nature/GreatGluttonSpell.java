@@ -42,7 +42,7 @@ public class GreatGluttonSpell extends AbstractSpell {
     private final DefaultConfig defaultConfig = new DefaultConfig()
             .setMinRarity(SpellRarity.EPIC)
             .setSchoolResource(SchoolRegistry.NATURE_RESOURCE)
-            .setMaxLevel(5)
+            .setMaxLevel(8)
             .setCooldownSeconds(45)
             .build();
 

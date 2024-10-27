@@ -28,15 +28,15 @@ public class PhantomSplitSpell extends AbstractSpell {
     @Override
     public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
         return List.of(
-                Component.translatable("ui.irons_spellbooks.damage", Utils.stringTruncation(getDuration(spellLevel, caster) * 0.05f, 2)),
-                Component.translatable("ui.irons_spellbooks.effect_length", Utils.stringTruncation((getDuration(spellLevel, caster)), 0))
+                Component.translatable("ui.irons_spellbooks.damage", Utils.stringTruncation(getDuration(spellLevel, caster) * 0.015f, 2)),
+                Component.translatable("ui.irons_spellbooks.effect_length", Utils.stringTruncation((getDuration(spellLevel, caster) * 0.05f), 0))
         );
     }
 
     private final DefaultConfig defaultConfig = new DefaultConfig()
             .setMinRarity(SpellRarity.RARE)
             .setSchoolResource(SchoolRegistry.ENDER_RESOURCE)
-            .setMaxLevel(8)
+            .setMaxLevel(6)
             .setCooldownSeconds(120)
             .build();
 
@@ -80,7 +80,7 @@ public class PhantomSplitSpell extends AbstractSpell {
     }
 
     private int getDuration(int spellLevel, LivingEntity sourceEntity) {
-        return (int) (getSpellPower(spellLevel, sourceEntity) * 20);
+        return (int) (getSpellPower(spellLevel, sourceEntity) * 80);
     }
 
     @Override

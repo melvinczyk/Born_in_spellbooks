@@ -42,6 +42,10 @@ public class MASpellRegistry {
     // TODO: Vampiric Sacrifice - Sacrifice all summons and become a vampire like lifestealer. Plan to change eyes and skin layer to be lifestealer
 
 
+    // Electricity
+    // TODO: Chaos Bolt - A chaos infused lightning bolt that strikes ground and leaves wave of electricity
+
+
     // Ender
     public static final RegistryObject<AbstractSpell> PHANTOM_SPLIT = registerSpell(new PhantomSplitSpell());
 
@@ -52,6 +56,20 @@ public class MASpellRegistry {
     public static final RegistryObject<AbstractSpell> NIGHTMARE_REND = registerSpell(new NightmareRendSpell());
 
 
+    // Fire
+    public static final RegistryObject<AbstractSpell> INFERNAL_BOMB = registerSpell(new InfernalBombSpell());
+    public static final RegistryObject<AbstractSpell> INFERNAL_BOLT = registerSpell(new InfernalBoltSpell());
+    public static final RegistryObject<AbstractSpell> INFERNAL_ARROW = registerSpell(new InfernalArrowSpell());
+
+
+    // Holy
+
+
+
+    // Ice
+
+
+
     // Nature
     public static final RegistryObject<AbstractSpell> SUMMON_DREAD_HOUND = registerSpell(new SummonDreadHoundSpell());
     public static final RegistryObject<AbstractSpell> INFECT = registerSpell(new ShootMaggotSpell());
@@ -60,14 +78,4 @@ public class MASpellRegistry {
     public static final RegistryObject<AbstractSpell> GREAT_GLUTTON = registerSpell(new GreatGluttonSpell());
     public static final RegistryObject<AbstractSpell> PUMPKIN_FRIEND = registerSpell(new PumpkinFriendSpell());
     // TODO: Gnaw - Summons a glutton fish in front of you that takes a big bite and disappears
-
-
-    // Fire
-    public static final RegistryObject<AbstractSpell> INFERNAL_BOMB = registerSpell(new InfernalBombSpell());
-    public static final RegistryObject<AbstractSpell> INFERNAL_BOLT = registerSpell(new InfernalBoltSpell());
-    public static final RegistryObject<AbstractSpell> INFERNAL_ARROW = registerSpell(new InfernalArrowSpell());
-
-
-    // Electricity
-    // TODO: Chaos Bolt - A chaos infused lightning bolt that strikes ground and leaves wave of electricity
 }

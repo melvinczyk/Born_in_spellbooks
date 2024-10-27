@@ -63,7 +63,7 @@ public class InfernalFireField extends AoeEntity {
 
     @Override
     protected float particleYOffset() {
-        return .25f;
+        return .2f;
     }
 
     @Override

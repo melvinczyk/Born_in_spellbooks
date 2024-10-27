@@ -50,7 +50,7 @@ public class CursedMarkEffect extends MagicMobEffect {
 
     private void playSound(LivingEntity targetEntity)
     {
-        targetEntity.level().playSound(null, targetEntity.getX(), targetEntity.getY(), targetEntity.getZ(), (SoundEvent) ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("born_in_chaos_v1:persecutor_scream")), SoundSource.HOSTILE, 1.0F, 1.0F);
+        targetEntity.level().playSound(null, targetEntity.getX(), targetEntity.getY(), targetEntity.getZ(), (SoundEvent) ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("born_in_chaos_v1:persecutor_scream")), SoundSource.HOSTILE, 0.75F, 1.0F);
     }
 
 

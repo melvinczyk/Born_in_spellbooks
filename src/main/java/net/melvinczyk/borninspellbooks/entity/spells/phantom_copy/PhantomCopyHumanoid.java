@@ -1,5 +1,6 @@
 package net.melvinczyk.borninspellbooks.entity.spells.phantom_copy;
 
+import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
 import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.entity.mobs.frozen_humanoid.FrozenHumanoid;
 import net.melvinczyk.borninspellbooks.registry.MAEntityRegistry;
@@ -12,13 +13,17 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -35,7 +40,7 @@ public class PhantomCopyHumanoid extends FrozenHumanoid {
 
     protected static final EntityDataAccessor<Optional<UUID>> DATA_PLAYER_UUID = SynchedEntityData.defineId(PhantomCopyHumanoid.class, EntityDataSerializers.OPTIONAL_UUID);
 
-    private static final int LIFETIME_TICKS = 2 * 20;
+    private static final int LIFETIME_TICKS = 3 * 20;
     private int deathTimer = LIFETIME_TICKS;
     private UUID summonerUUID;
     protected int spellPower = 0;
@@ -93,7 +98,7 @@ public class PhantomCopyHumanoid extends FrozenHumanoid {
         setPlayer(caster);
         setTarget(target);
         this.entityData.set(DATA_PLAYER_UUID, Optional.of(caster.getUUID()));
-        this.spellPower = (int)(duration * 0.05f);
+        this.spellPower = (int)(duration * 0.015f);
         this.moveTo(entityToCopy.getX(), entityToCopy.getY(), entityToCopy.getZ(), entityToCopy.getYRot(), entityToCopy.getXRot());
         if (entityToCopy.isBaby())
             this.entityData.set(DATA_IS_BABY, true);
@@ -199,7 +204,7 @@ public class PhantomCopyHumanoid extends FrozenHumanoid {
     private void explodeOnDeath() {
         if (!hasExploded) {
             hasExploded = true;
-            float explosionRadius = 4;
+            float explosionRadius = 5;
             DamageSource explosionSource = MASpellRegistry.PHANTOM_SPLIT.get().getDamageSource(this, getSummoner());
             var entities = level().getEntities(this, this.getBoundingBox().inflate(explosionRadius));
             Player player = getPlayer();
@@ -215,8 +220,33 @@ public class PhantomCopyHumanoid extends FrozenHumanoid {
                     entity.invulnerableTime = 0;
                 }
             }
-            this.level().explode(this, this.getX(), this.getY(), this.getZ(), 0.0f, Level.ExplosionInteraction.NONE);
+            if (!this.level().isClientSide()) {
+                ServerLevel serverLevel = (ServerLevel) this.level();
+                for (int i = 0; i < 200; i++) {
+                    double xOffset = (random.nextDouble() - 0.5) * 5;
+                    double yOffset = (random.nextDouble() - 0.5) * 5;
+                    double zOffset = (random.nextDouble() - 0.5) * 5;
+
+                    MagicManager.spawnParticles(
+                            serverLevel,
+                             ParticleTypes.PORTAL,
+                            getX() + xOffset,
+                            getY() + yOffset,
+                            getZ() + zOffset,
+                            3,
+                            0.15, 0.15, 0.15,
+                            0.03,
+                            false
+                    );
+                }
+            }
+            playSound(this);
         }
+    }
+
+    private void playSound(LivingEntity targetEntity)
+    {
+        targetEntity.level().playSound(null, targetEntity.getX(), targetEntity.getY(), targetEntity.getZ(), SoundEvents.GENERIC_EXPLODE, SoundSource.HOSTILE, 1.0F, 1.0F);
     }
 
     @Override
