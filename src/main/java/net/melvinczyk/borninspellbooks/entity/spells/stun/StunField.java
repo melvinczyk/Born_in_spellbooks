@@ -1,6 +1,5 @@
-package net.melvinczyk.borninspellbooks.entity.spells.lingering_stain;
+package net.melvinczyk.borninspellbooks.entity.spells.stun;
 
-import io.redspace.ironsspellbooks.api.spells.AutoSpellConfig;
 import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.damage.ISSDamageTypes;
 import io.redspace.ironsspellbooks.entity.spells.AoeEntity;
@@ -17,18 +16,17 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Optional;
 
-public class LingeringStainField extends AoeEntity {
-    public LingeringStainField(EntityType<? extends Projectile> pEntityType, Level pLevel) {
+public class StunField extends AoeEntity {
+    public StunField(EntityType<? extends Projectile> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 
+    private int effectDuration = 0;
     private DamageSource damageSource;
 
-
-    public LingeringStainField(Level level) {
-        this(MAEntityRegistry.LINGERING_STAIN.get(), level);
+    public StunField(Level level) {
+        this(MAEntityRegistry.STUN_FIELD.get(), level);
     }
-
     @Override
     public void applyEffect(LivingEntity target) {
         if (damageSource == null) {
@@ -36,34 +34,27 @@ public class LingeringStainField extends AoeEntity {
         }
         DamageSources.ignoreNextKnockback(target);
         target.hurt(damageSource, getDamage());
+        MobEffectInstance stun = new MobEffectInstance(ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation("born_in_chaos_v1", "stun")), effectDuration, 0);
+        if (stun != null) {
+            target.addEffect(stun);
+        }
     }
 
-    @Override
-    public float getRadius()
+    public void setEffectDuration(int duration)
     {
-        return 3;
+        this.effectDuration = duration;
     }
 
     @Override
     public float getParticleCount() {
-        return 2.0f * getRadius();
-    }
-
-    @Override
-    protected float particleYOffset() {
-        return .15f;
-    }
-
-    @Override
-    protected float getParticleSpeedModifier() {
-        return 1.3f;
+        return 2;
     }
 
     @Override
     public Optional<ParticleOptions> getParticle() {
-        var flesh = ForgeRegistries.PARTICLE_TYPES.getValue(new ResourceLocation("born_in_chaos_v1", "fleshsplash"));
-        if (flesh != null)
-            return Optional.of((ParticleOptions) flesh);
+        var infernalSurge = ForgeRegistries.PARTICLE_TYPES.getValue(new ResourceLocation("born_in_chaos_v1", "cloudsofdust"));
+        if (infernalSurge != null)
+            return Optional.of((ParticleOptions) infernalSurge);
         return Optional.empty();
     }
 }

@@ -102,6 +102,7 @@ public class BornInSpellbooks
             EntityRenderers.register(MAEntityRegistry.PHANTOM_COPY.get(), PhantomCopyRenderer::new);
             EntityRenderers.register(MAEntityRegistry.DOMAIN.get(), DomainRenderer::new);
             EntityRenderers.register(MAEntityRegistry.WATER_FIELD.get(), WaterEffectRenderer::new);
+            EntityRenderers.register(MAEntityRegistry.STUN_FIELD.get(), NoopRenderer::new);
 
 
             EntityRenderers.register(MAEntityRegistry.PUMPKIN_PROJECTILE.get(), PumpkinProjectileRenderer::new);

@@ -16,6 +16,7 @@ import net.melvinczyk.borninspellbooks.entity.spells.maggot.MaggotProjectile;
 import net.melvinczyk.borninspellbooks.entity.spells.malevolent_shrine.Domain;
 import net.melvinczyk.borninspellbooks.entity.spells.nightmare_rend.NightmareRend;
 import net.melvinczyk.borninspellbooks.entity.spells.phantom_copy.PhantomCopyHumanoid;
+import net.melvinczyk.borninspellbooks.entity.spells.stun.StunField;
 import net.melvinczyk.borninspellbooks.entity.spells.swarm.SwarmProjectile;
 import net.melvinczyk.borninspellbooks.entity.spells.trident.TridentProjectile;
 import net.minecraft.resources.ResourceLocation;
@@ -163,6 +164,7 @@ public class MAEntityRegistry {
 
     // Misc
 
+
     public static final RegistryObject<EntityType<InfernalFireField>> INFERNAL_FIRE =
             ENTITIES.register("fel_fire", () -> EntityType.Builder.<InfernalFireField>of(InfernalFireField::new, MobCategory.MISC)
                     .clientTrackingRange(64)
@@ -172,7 +174,6 @@ public class MAEntityRegistry {
             ENTITIES.register("lingering_stain", () -> EntityType.Builder.<LingeringStainField>of(LingeringStainField::new, MobCategory.MISC)
                     .clientTrackingRange(64)
                     .build(new ResourceLocation(BornInSpellbooks.MODID, "lingering_stain").toString()));
-
 
     public static final RegistryObject<EntityType<NightmareRend>> NIGHTMARE_REND =
             ENTITIES.register("nightmare_rend", () -> EntityType.Builder.<NightmareRend>of(NightmareRend::new, MobCategory.MISC)
@@ -191,6 +192,12 @@ public class MAEntityRegistry {
                     .sized(2.0F, 0.25F)
                     .clientTrackingRange(64)
                     .build(new ResourceLocation(BornInSpellbooks.MODID, "water_field").toString()));
+
+    public static final RegistryObject<EntityType<StunField>> STUN_FIELD =
+            ENTITIES.register("stun_field", () -> EntityType.Builder.<StunField>of(StunField::new, MobCategory.MISC)
+                    .sized(2.0F, 0.25F)
+                    .clientTrackingRange(64)
+                    .build(new ResourceLocation(BornInSpellbooks.MODID, "stun_field").toString()));
 
 
 

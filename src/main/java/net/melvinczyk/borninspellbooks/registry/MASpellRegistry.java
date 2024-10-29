@@ -9,6 +9,7 @@ import net.melvinczyk.borninspellbooks.spells.ender.PhantomSplitSpell;
 import net.melvinczyk.borninspellbooks.spells.evocation.BlindSpell;
 import net.melvinczyk.borninspellbooks.spells.evocation.DeathWishSpell;
 import net.melvinczyk.borninspellbooks.spells.evocation.NightmareRendSpell;
+import net.melvinczyk.borninspellbooks.spells.evocation.StunSpell;
 import net.melvinczyk.borninspellbooks.spells.fire.InfernalArrowSpell;
 import net.melvinczyk.borninspellbooks.spells.fire.InfernalBoltSpell;
 import net.melvinczyk.borninspellbooks.spells.fire.InfernalBombSpell;
@@ -54,6 +55,7 @@ public class MASpellRegistry {
     public static final RegistryObject<AbstractSpell> BLIND = registerSpell(new BlindSpell());
     public static final RegistryObject<AbstractSpell> DEATH_WISH = registerSpell(new DeathWishSpell());
     public static final RegistryObject<AbstractSpell> NIGHTMARE_REND = registerSpell(new NightmareRendSpell());
+    public static final RegistryObject<AbstractSpell> STUN = registerSpell(new StunSpell());
 
 
     // Fire
