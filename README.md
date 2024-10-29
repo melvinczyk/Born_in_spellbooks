@@ -17,6 +17,7 @@
 - Blind: Shoot a blindness projectile that blinds entities and knocks them back.
 - Death Wish: Become a living bomb. Sets a fuse timer on you and when tha ttime is up you explode dealing massive damage around you.
 - Nightmare Rend: Lash a nightmare rend out that applies wither, and blindness on an entity
+- Dust Stun: Stomp on the ground and stun enemies in a 5 block radius while also doing damage.
 
 ### Fire
 - Infernal Arrow: Conjure an explosive arrow that explodes on contact and leaves behind an infernal fire field.
