@@ -9,6 +9,8 @@ import net.mcreator.borninchaosv.entity.SkeletonThrasherEntity;
 import net.melvinczyk.borninspellbooks.registry.MAEntityRegistry;
 import net.melvinczyk.borninspellbooks.registry.MAMobEffectRegistry;
 import net.melvinczyk.borninspellbooks.registry.MASpellRegistry;
+import net.minecraft.client.Minecraft;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.tags.DamageTypeTags;

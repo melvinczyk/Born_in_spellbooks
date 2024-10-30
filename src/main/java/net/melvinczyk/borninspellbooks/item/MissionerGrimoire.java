@@ -28,8 +28,9 @@ public class MissionerGrimoire extends UniqueSpellBook {
         super(SpellRarity.LEGENDARY, SpellDataRegistryHolder.of(
                 new SpellDataRegistryHolder(SpellRegistry.RAISE_DEAD_SPELL, 3),
                 new SpellDataRegistryHolder(SpellRegistry.FANG_STRIKE_SPELL, 5),
-                new SpellDataRegistryHolder(MASpellRegistry.RITUAl, 5)
-        ), 7, () -> {
+                new SpellDataRegistryHolder(MASpellRegistry.RITUAl, 5),
+                new SpellDataRegistryHolder(MASpellRegistry.STUN, 5)
+                ), 11, () -> {
             ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
             builder.put(AttributeRegistry.MAX_MANA.get(), new AttributeModifier(UUID.fromString("667ad88f-901d-4691-b2a2-3664e42026d3"), "Weapon modifier", 200, AttributeModifier.Operation.ADDITION));
             builder.put(AttributeRegistry.EVOCATION_SPELL_POWER.get(), new AttributeModifier(UUID.fromString("667ad88f-901d-4691-b2a2-3664e42026d3"), "Weapon modifier", 0.075, AttributeModifier.Operation.MULTIPLY_BASE));

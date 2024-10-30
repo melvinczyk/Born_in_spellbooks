@@ -5,9 +5,7 @@ import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.compat.tetra.TetraProxy;
 import net.melvinczyk.borninspellbooks.effect.PhantomSplitEffect;
 import net.melvinczyk.borninspellbooks.misc.MASynchedSpellData;
-import net.melvinczyk.borninspellbooks.spells.blood.MalevolentShrineSpell;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraftforge.client.event.RenderLevelStageEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -29,6 +27,4 @@ public class ServerEvents {
             TetraProxy.PROXY.handleLivingAttackEvent(event);
         }
     }
-
-
 }

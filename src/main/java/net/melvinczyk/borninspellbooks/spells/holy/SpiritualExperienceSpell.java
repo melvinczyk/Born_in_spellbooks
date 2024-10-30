@@ -1,4 +1,4 @@
-package net.melvinczyk.borninspellbooks.spells.evocation;
+package net.melvinczyk.borninspellbooks.spells.holy;
 
 import io.redspace.ironsspellbooks.api.config.DefaultConfig;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
@@ -21,9 +21,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 import java.util.List;
 import java.util.Optional;
 
-@AutoSpellConfig
-public class StunSpell extends AbstractSpell {
-    private final ResourceLocation spellId = new ResourceLocation(BornInSpellbooks.MODID, "stun");
+public class SpiritualExperienceSpell extends AbstractSpell {
+    private final ResourceLocation spellId = new ResourceLocation(BornInSpellbooks.MODID, "spiritual_experience");
 
     @Override
     public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
@@ -34,13 +33,13 @@ public class StunSpell extends AbstractSpell {
     }
 
     private final DefaultConfig defaultConfig = new DefaultConfig()
-            .setMinRarity(SpellRarity.COMMON)
-            .setSchoolResource(SchoolRegistry.EVOCATION_RESOURCE)
+            .setMinRarity(SpellRarity.EPIC)
+            .setSchoolResource(SchoolRegistry.HOLY_RESOURCE)
             .setMaxLevel(10)
             .setCooldownSeconds(25)
             .build();
 
-    public StunSpell() {
+    public SpiritualExperienceSpell() {
         this.manaCostPerLevel = 5;
         this.baseSpellPower = 20;
         this.spellPowerPerLevel = 4;
