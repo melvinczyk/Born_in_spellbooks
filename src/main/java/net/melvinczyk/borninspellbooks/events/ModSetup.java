@@ -5,6 +5,7 @@ import net.melvinczyk.borninspellbooks.BornInSpellbooks;
 import net.melvinczyk.borninspellbooks.entity.mobs.*;
 import net.melvinczyk.borninspellbooks.entity.spells.pumpkins.PumpkinFriend;
 import net.melvinczyk.borninspellbooks.entity.spells.phantom_copy.PhantomCopyHumanoid;
+import net.melvinczyk.borninspellbooks.entity.spells.spirit_copy.SpiritCopyHumanoid;
 import net.melvinczyk.borninspellbooks.registry.MAEntityRegistry;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -26,6 +27,7 @@ public class ModSetup {
         event.put(MAEntityRegistry.ZOMBIE_BRUISER.get(), SummonedZombieBruiser.setAttributes());
         event.put(MAEntityRegistry.PHANTOM_COPY.get(), PhantomCopyHumanoid.prepareAttributes().build());
         event.put(MAEntityRegistry.PUMPKIN_FRIEND.get(), PumpkinFriend.setAttributes());
+        event.put(MAEntityRegistry.SPIRIT_COPY.get(), SpiritCopyHumanoid.prepareAttributes().build());
 
     }
 }

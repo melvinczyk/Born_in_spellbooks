@@ -16,6 +16,7 @@ import net.melvinczyk.borninspellbooks.entity.spells.maggot.MaggotProjectile;
 import net.melvinczyk.borninspellbooks.entity.spells.malevolent_shrine.Domain;
 import net.melvinczyk.borninspellbooks.entity.spells.nightmare_rend.NightmareRend;
 import net.melvinczyk.borninspellbooks.entity.spells.phantom_copy.PhantomCopyHumanoid;
+import net.melvinczyk.borninspellbooks.entity.spells.spirit_copy.SpiritCopyHumanoid;
 import net.melvinczyk.borninspellbooks.entity.spells.stun.StunField;
 import net.melvinczyk.borninspellbooks.entity.spells.swarm.SwarmProjectile;
 import net.melvinczyk.borninspellbooks.entity.spells.trident.TridentProjectile;
@@ -206,4 +207,11 @@ public class MAEntityRegistry {
                     .sized(0.6F, 1.8F)
                     .clientTrackingRange(64)
                     .build(new ResourceLocation(BornInSpellbooks.MODID, "phantom_copy").toString()));
+
+    public static final RegistryObject<EntityType<SpiritCopyHumanoid>> SPIRIT_COPY =
+            ENTITIES.register("spirit_copy", () -> EntityType.Builder.<SpiritCopyHumanoid>of(SpiritCopyHumanoid::new, MobCategory.MISC)
+                    .sized(0.6F, 1.8F)
+                    .clientTrackingRange(64)
+                    .build(new ResourceLocation(BornInSpellbooks.MODID, "spirit_copy").toString()));
+
 }

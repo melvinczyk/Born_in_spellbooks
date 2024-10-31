@@ -14,6 +14,7 @@ import net.melvinczyk.borninspellbooks.entity.spells.malevolent_shrine.DomainRen
 import net.melvinczyk.borninspellbooks.entity.spells.nightmare_rend.NightmareRendRenderer;
 import net.melvinczyk.borninspellbooks.entity.spells.phantom_copy.PhantomCopyRenderer;
 import net.melvinczyk.borninspellbooks.entity.spells.pumpkins.PumpkinProjectileRenderer;
+import net.melvinczyk.borninspellbooks.entity.spells.spirit_copy.SpiritCopyRenderer;
 import net.melvinczyk.borninspellbooks.entity.spells.trident.TridentRenderer;
 import net.melvinczyk.borninspellbooks.registry.*;
 import net.minecraft.client.Minecraft;
@@ -103,6 +104,7 @@ public class BornInSpellbooks
             EntityRenderers.register(MAEntityRegistry.DOMAIN.get(), DomainRenderer::new);
             EntityRenderers.register(MAEntityRegistry.WATER_FIELD.get(), WaterEffectRenderer::new);
             EntityRenderers.register(MAEntityRegistry.STUN_FIELD.get(), NoopRenderer::new);
+            EntityRenderers.register(MAEntityRegistry.SPIRIT_COPY.get(), SpiritCopyRenderer::new);
 
 
             EntityRenderers.register(MAEntityRegistry.PUMPKIN_PROJECTILE.get(), PumpkinProjectileRenderer::new);

@@ -6,14 +6,21 @@ import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import io.redspace.ironsspellbooks.api.spells.*;
 import io.redspace.ironsspellbooks.api.util.AnimationHolder;
 import io.redspace.ironsspellbooks.api.util.Utils;
+import io.redspace.ironsspellbooks.registries.MobEffectRegistry;
 import net.melvinczyk.borninspellbooks.BornInSpellbooks;
+import net.melvinczyk.borninspellbooks.entity.spells.spirit_copy.SpiritCopyHumanoid;
 import net.melvinczyk.borninspellbooks.entity.spells.stun.StunField;
 import net.melvinczyk.borninspellbooks.misc.MATickHandler;
+import net.melvinczyk.borninspellbooks.registry.MAMobEffectRegistry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -21,7 +28,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 import java.util.List;
 import java.util.Optional;
 
-public class SpiritualExperienceSpell extends AbstractSpell {
+@AutoSpellConfig
+public class SpectralPlaneSpell extends AbstractSpell {
     private final ResourceLocation spellId = new ResourceLocation(BornInSpellbooks.MODID, "spiritual_experience");
 
     @Override
@@ -39,17 +47,17 @@ public class SpiritualExperienceSpell extends AbstractSpell {
             .setCooldownSeconds(25)
             .build();
 
-    public SpiritualExperienceSpell() {
+    public SpectralPlaneSpell() {
         this.manaCostPerLevel = 5;
         this.baseSpellPower = 20;
         this.spellPowerPerLevel = 4;
-        this.castTime = 17;
+        this.castTime = 0;
         this.baseManaCost = 50;
     }
 
     @Override
     public CastType getCastType() {
-        return CastType.LONG;
+        return CastType.INSTANT;
     }
 
     @Override
@@ -63,41 +71,18 @@ public class SpiritualExperienceSpell extends AbstractSpell {
     }
 
     @Override
-    public Optional<SoundEvent> getCastStartSound() {
-        return Optional.of(ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("born_in_chaos_v1", "missionary_stun")));
-    }
-
-    @Override
     public Optional<SoundEvent> getCastFinishSound() {
         return Optional.empty();
     }
 
     @Override
     public void onCast(Level world, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
-        if (!world.isClientSide) {
-            MATickHandler.delay(20, () -> {
-                StunField stunField = new StunField(world);
-                stunField.setOwner(entity);
-                stunField.setDuration(10);
-                stunField.setEffectDuration(getDuration(spellLevel, entity));
-                stunField.setDamage(getDamage(spellLevel, entity));
-                stunField.setCircular();
-                stunField.setRadius(5);
-                stunField.moveTo(new Vec3(entity.getX(), entity.getY(), entity.getZ()));
-                world.addFreshEntity(stunField);
-            });
-        }
+        SpiritCopyHumanoid copy = new SpiritCopyHumanoid(world, entity, (Player) entity, 400);
+        copy.setPos(new Vec3(entity.getX(), entity.getY(), entity.getZ()));
+        world.addFreshEntity(copy);
+        entity.addEffect(new MobEffectInstance(MAMobEffectRegistry.SPIRIT_EFFECT.get(), 400, spellLevel, false, false, true));
+        entity.addEffect(new MobEffectInstance(MobEffectRegistry.TRUE_INVISIBILITY.get(), 400, spellLevel, false, false, false));
         super.onCast(world, spellLevel, entity, castSource, playerMagicData);
-    }
-
-    @Override
-    public AnimationHolder getCastStartAnimation() {
-        return SpellAnimations.PREPARE_CROSS_ARMS;
-    }
-
-    @Override
-    public AnimationHolder getCastFinishAnimation() {
-        return SpellAnimations.STOMP;
     }
 
     private int getDuration(int spellLevel, LivingEntity caster)

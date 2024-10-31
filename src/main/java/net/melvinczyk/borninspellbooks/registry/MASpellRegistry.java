@@ -13,6 +13,7 @@ import net.melvinczyk.borninspellbooks.spells.evocation.StunSpell;
 import net.melvinczyk.borninspellbooks.spells.fire.InfernalArrowSpell;
 import net.melvinczyk.borninspellbooks.spells.fire.InfernalBoltSpell;
 import net.melvinczyk.borninspellbooks.spells.fire.InfernalBombSpell;
+import net.melvinczyk.borninspellbooks.spells.holy.SpectralPlaneSpell;
 import net.melvinczyk.borninspellbooks.spells.nature.*;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -65,7 +66,7 @@ public class MASpellRegistry {
 
 
     // Holy
-
+    public static final RegistryObject<AbstractSpell> SPECTRAL_PLANE = registerSpell(new SpectralPlaneSpell());
 
 
     // Ice

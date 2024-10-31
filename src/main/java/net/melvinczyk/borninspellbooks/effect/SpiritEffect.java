@@ -42,7 +42,6 @@ public class SpiritEffect extends CustomDescriptionMobEffect {
     @Override
     public void removeAttributeModifiers(LivingEntity pLivingEntity, AttributeMap pAttributeMap, int pAmplifier) {
         super.removeAttributeModifiers(pLivingEntity, pAttributeMap, pAmplifier);
-        MagicData.getPlayerMagicData(pLivingEntity).getSyncedData().removeEffects(MASynchedSpellData.PHANTOM_SPLIT);
     }
 
     @Override
@@ -54,76 +53,15 @@ public class SpiritEffect extends CustomDescriptionMobEffect {
             amplifier = effectInstance.getAmplifier() + 2;
             duration = effectInstance.getDuration();
         }
-        MagicData.getPlayerMagicData(pLivingEntity).getSyncedData().addEffects(MASynchedSpellData.PHANTOM_SPLIT);
     }
 
-    public static boolean doEffect(LivingEntity livingEntity, DamageSource damageSource) {
-        if (livingEntity.level().isClientSide
-                || damageSource.is(DamageTypeTags.IS_FALL)
-                || damageSource.is(DamageTypeTags.IS_FIRE)
-                || damageSource.is(DamageTypeTags.BYPASSES_INVULNERABILITY)
-                || damageSource.is(DamageTypeTagGenerator.BYPASS_EVASION)) {
-            return false;
+    public static boolean isImmuneToDamage(LivingEntity entity) {
+        if (entity instanceof Player) {
+            MobEffectInstance spiritEffect = entity.getEffect(MAMobEffectRegistry.SPIRIT_EFFECT.get());
+            return spiritEffect != null;
         }
-        else {
-
-            var data = MagicData.getPlayerMagicData(livingEntity).getSyncedData();
-            data.subtractEvasionHit();
-            if (data.getEvasionHitsRemaining() < 0) {
-                livingEntity.removeEffect(MAMobEffectRegistry.PHANTOM_SPLIT.get());
-            }
-
-            var level = livingEntity.level();
-            Vec3 currentPosition = livingEntity.position();
-            Vec3 dest = getRandomTeleportLocation(currentPosition, level);
-
-            var teleportData = MagicData.getPlayerMagicData(livingEntity).getAdditionalCastData();
-            if (teleportData instanceof TeleportSpell.TeleportData) {
-                dest = ((TeleportSpell.TeleportData) teleportData).getTeleportTargetPosition();
-            }
-
-            Entity directDamager = damageSource.getDirectEntity();
-            Entity damager = damageSource.getEntity();
-            if (directDamager instanceof Projectile projectile)
-            {
-                Entity projectileOwner = projectile.getOwner();
-                if (projectileOwner != null)
-                {
-                    damager = projectileOwner;
-                }
-            }
-
-            PhantomCopyHumanoid copy = new PhantomCopyHumanoid(level, livingEntity, (Player) livingEntity, damager, duration);
-            level.addFreshEntity(copy);
-
-            if (dest == null) {
-                dest = getRandomTeleportLocation(currentPosition, level);
-            }
-
-            if (livingEntity.isPassenger()) {
-                livingEntity.stopRiding();
-            }
-
-            livingEntity.teleportTo(dest.x, dest.y, dest.z);
-            livingEntity.resetFallDistance();
-
-            level.playSound(null, dest.x, dest.y, dest.z, SoundEvents.ENDERMAN_TELEPORT, SoundSource.PLAYERS, 1.0F, 1.0F);
-            livingEntity.playSound(SoundEvents.ENDERMAN_TELEPORT, 2.0F, 1.0F);
-            particleCloud(livingEntity);
-            livingEntity.removeEffect(MAMobEffectRegistry.PHANTOM_SPLIT.get());
-
-            return true;
-        }
+        return false;
     }
-
-    private static Vec3 getRandomTeleportLocation(Vec3 currentPosition, Level level) {
-        double randomX = currentPosition.x + (level.random.nextDouble() * 6 - 3);
-        double randomY = Math.max(level.getMinBuildHeight(), currentPosition.y);
-        double randomZ = currentPosition.z + (level.random.nextDouble() * 6 - 3);
-
-        return new Vec3(randomX, randomY, randomZ);
-    }
-
 
     private static void particleCloud(LivingEntity entity) {
         Vec3 pos = entity.position().add(0, entity.getBbHeight() / 2, 0);
