@@ -11,6 +11,7 @@ import net.melvinczyk.borninspellbooks.registry.MAMobEffectRegistry;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.DamageTypeTags;
@@ -63,8 +64,11 @@ public class SpiritEffect extends CustomDescriptionMobEffect {
         return false;
     }
 
-    private static void particleCloud(LivingEntity entity) {
-        Vec3 pos = entity.position().add(0, entity.getBbHeight() / 2, 0);
-        MagicManager.spawnParticles(entity.level(), ParticleTypes.PORTAL, pos.x, pos.y, pos.z, 70, entity.getBbWidth() / 4, entity.getBbHeight() / 5, entity.getBbWidth() / 4, .035, false);
+    public static void particleCloud(LivingEntity entity) {
+        if (!entity.level().isClientSide()) {
+            ServerLevel serverLevel = (ServerLevel) entity.level();
+            Vec3 pos = entity.position().add(0, entity.getBbHeight() / 2, 0);
+            MagicManager.spawnParticles(serverLevel, ParticleTypes.PORTAL, pos.x, pos.y, pos.z, 70, entity.getBbWidth() / 4, entity.getBbHeight() / 5, entity.getBbWidth() / 4, .035, false);
+        }
     }
 }

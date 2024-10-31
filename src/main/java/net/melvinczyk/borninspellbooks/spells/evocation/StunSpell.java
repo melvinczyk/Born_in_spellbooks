@@ -8,7 +8,6 @@ import io.redspace.ironsspellbooks.api.util.AnimationHolder;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import net.melvinczyk.borninspellbooks.BornInSpellbooks;
 import net.melvinczyk.borninspellbooks.entity.spells.stun.StunField;
-import net.melvinczyk.borninspellbooks.misc.MATickHandler;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -76,24 +75,22 @@ public class StunSpell extends AbstractSpell {
     @Override
     public void onCast(Level world, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
         if (!world.isClientSide) {
-            MATickHandler.delay(20, () -> {
-                StunField stunField = new StunField(world);
-                stunField.setOwner(entity);
-                stunField.setDuration(10);
-                stunField.setEffectDuration(getDuration(spellLevel, entity));
-                stunField.setDamage(getDamage(spellLevel, entity));
-                stunField.setCircular();
-                stunField.setRadius(5);
-                stunField.moveTo(new Vec3(entity.getX(), entity.getY(), entity.getZ()));
-                world.addFreshEntity(stunField);
-            });
+            StunField stunField = new StunField(world);
+            stunField.setOwner(entity);
+            stunField.setDuration(10);
+            stunField.setEffectDuration(getDuration(spellLevel, entity));
+            stunField.setDamage(getDamage(spellLevel, entity));
+            stunField.setCircular();
+            stunField.setRadius(5);
+            stunField.moveTo(new Vec3(entity.getX(), entity.getY(), entity.getZ()));
+            world.addFreshEntity(stunField);
         }
         super.onCast(world, spellLevel, entity, castSource, playerMagicData);
     }
 
     @Override
     public AnimationHolder getCastStartAnimation() {
-        return SpellAnimations.PREPARE_CROSS_ARMS;
+        return SpellAnimations.ANIMATION_INSTANT_CAST;
     }
 
     @Override

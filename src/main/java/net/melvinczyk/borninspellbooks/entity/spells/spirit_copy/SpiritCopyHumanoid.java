@@ -8,7 +8,10 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -17,8 +20,10 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.slf4j.Logger;
 
+import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.Optional;
 import java.util.UUID;
@@ -146,8 +151,7 @@ public class SpiritCopyHumanoid extends FrozenHumanoid {
         this.player = player;
     }
 
-    private void setMomentum(Vec3 momentum)
-    {
+    private void setMomentum(Vec3 momentum) {
         this.playerMovement = momentum;
     }
 
@@ -271,5 +275,15 @@ public class SpiritCopyHumanoid extends FrozenHumanoid {
         }
     }
 
+    @Nullable
+    @Override
+    protected SoundEvent getHurtSound(DamageSource pDamageSource) {
+        return ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("born_in_chaos_v1", "vortex_hurt1"));
+    }
 
+    @Nullable
+    @Override
+    protected SoundEvent getDeathSound() {
+        return ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("born_in_chaos_v1", "vortex_hurt1"));
+    }
 }
