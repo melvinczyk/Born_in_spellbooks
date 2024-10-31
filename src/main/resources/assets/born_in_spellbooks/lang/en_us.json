@@ -32,6 +32,8 @@
   "spell.born_in_spellbooks.pumpkin_friend": "Pumpkin Friend",
   "spell.born_in_spellbooks.great_glutton": "Great Glutton",
   "spell.born_in_spellbooks.stun": "Dust Stun",
+  "spell.born_in_spellbooks.spiritual_experience": "Spectral Plane",
+
 
   "entity.born_in_spellbooks.summoned_skeleton_thrasher": "Summoned Skeleton Thrasher",
   "entity.born_in_spellbooks.summoned_zombie_bruiser": "Summoned Zombie Bruiser",
@@ -43,6 +45,8 @@
   "entity.born_in_spellbooks.infernal_bomb": "Infernal Bomb",
   "entity.born_in_spellbooks.infernal_bolt": "Infernal Bolt",
   "entity.born_in_spellbooks.pumpkin_friend": "Pumpkin Friend",
+  "entity.born_in_spellbooks.phantom_copy": "Phantom Copy",
+  "entity.born_in_spellbooks.spirit_copy": "Spirit Form",
 
 
   "effect.born_in_spellbooks.cursed_mark": "Cursed Mark",
@@ -77,7 +81,9 @@
   "spell.born_in_spellbooks.great_glutton.guide": "Paralyze an enemy and open an ocean portal beneath them. A Glutton Fish will appear out of the portal and damage the target.",
   "spell.born_in_spellbooks.infernal_bolt.guide": "Shoot a small infernal bolt that damages an entity and applies infernal flame on it.",
   "spell.born_in_spellbooks.infernal_bomb.guide": "Launch a Fel Soil bomb that explodes on contact and leaves behind an infernal flame filed that deals DOT and inflicts infernal flame.",
-  "spell.born_in_spellbooks.infernal_arrow.guide": "Shoot an explosive arrow that inflicts infernal flame on contact. If it hits the ground, it leaves behind an infernal flame field."
+  "spell.born_in_spellbooks.infernal_arrow.guide": "Shoot an explosive arrow that inflicts infernal flame on contact. If it hits the ground, it leaves behind an infernal flame field.",
+  "spell.born_in_spellbooks.stun.guide": "Stomp on the ground, stunning nearby enemies while also doing damage",
+  "spell.born_in_spellbooks.spiritual_experience.guide": "Leave your physical body behind and become a spirit where nothing can hurt you, but you can't hurt anything too. When your time is up, teleport back to your physical body."
 
 
 }

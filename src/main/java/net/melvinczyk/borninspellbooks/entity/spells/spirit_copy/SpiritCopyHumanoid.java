@@ -1,9 +1,11 @@
 package net.melvinczyk.borninspellbooks.entity.spells.spirit_copy;
 
 import com.mojang.logging.LogUtils;
+import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
 import io.redspace.ironsspellbooks.entity.mobs.frozen_humanoid.FrozenHumanoid;
 import net.melvinczyk.borninspellbooks.registry.MAEntityRegistry;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -13,6 +15,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -24,12 +27,12 @@ import net.minecraftforge.registries.ForgeRegistries;
 import org.slf4j.Logger;
 
 import javax.annotation.Nullable;
-import java.util.Collections;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
+
 
 public class SpiritCopyHumanoid extends FrozenHumanoid {
     protected static final EntityDataAccessor<Optional<UUID>> DATA_PLAYER_UUID = SynchedEntityData.defineId(SpiritCopyHumanoid.class, EntityDataSerializers.OPTIONAL_UUID);
+    private final List<MobEffectInstance> originalEffects = new ArrayList<>();
 
     protected static final EntityDataAccessor<Boolean> DATA_IS_BABY = SynchedEntityData.defineId(SpiritCopyHumanoid.class, EntityDataSerializers.BOOLEAN);
     protected static final EntityDataAccessor<Boolean> DATA_IS_SITTING = SynchedEntityData.defineId(SpiritCopyHumanoid.class, EntityDataSerializers.BOOLEAN);
@@ -49,6 +52,8 @@ public class SpiritCopyHumanoid extends FrozenHumanoid {
     private float storedYBodyRot;
     private float storedYHeadRot;
     private boolean invulnerable = true;
+    private int storedHunger;
+    private int storedBreath;
 
     private boolean isAutoSpinAttack;
     private HumanoidArm mainArm = HumanoidArm.RIGHT;
@@ -108,6 +113,12 @@ public class SpiritCopyHumanoid extends FrozenHumanoid {
                 setMomentum(player.getDeltaMovement());
                 this.storedYBodyRot = player.yBodyRot;
                 this.storedYHeadRot = player.yHeadRot;
+                this.storedBreath = player.getAirSupply();
+                this.storedHunger = player.getFoodData().getFoodLevel();
+                for (MobEffectInstance effect : caster.getActiveEffects())
+                {
+                    originalEffects.add(new MobEffectInstance(effect.getEffect(), effect.getDuration(), effect.getAmplifier(), effect.isAmbient(), effect.isVisible(), effect.showIcon()));
+                }
                 for (EquipmentSlot slot : EquipmentSlot.values()) {
                     this.setItemSlot(slot, player.getItemBySlot(slot));
                 }
@@ -263,10 +274,20 @@ public class SpiritCopyHumanoid extends FrozenHumanoid {
         Player player = getPlayer();
         if (player != null && !level().isClientSide) {
             player.teleportTo(this.getX(), this.getY(), this.getZ());
+            if (!this.level().isClientSide()) {
+                ServerLevel serverLevel = (ServerLevel) this.level();
+                MagicManager.spawnParticles(serverLevel, ParticleTypes.END_ROD, this.getX(), this.getY() + this.getBbHeight() * .5f, this.getZ(), 25, this.getBbWidth() * .5f, this.getBbHeight() * .5f, this.getBbWidth() * .5f, .03, false);
+            }
 
-
+            player.removeAllEffects();
+            for (MobEffectInstance effect : originalEffects)
+            {
+                player.addEffect(new MobEffectInstance(effect.getEffect(), effect.getDuration(), effect.getAmplifier(), effect.isAmbient(), effect.isVisible(), effect.showIcon()));
+            }
             player.setYBodyRot(this.storedYBodyRot);
             player.setYHeadRot(this.storedYHeadRot);
+            player.getFoodData().setFoodLevel(this.storedHunger);
+            player.setAirSupply(this.storedBreath);
 
             if (this.playerMovement != null) {
                 player.setDeltaMovement(this.playerMovement);
@@ -278,12 +299,12 @@ public class SpiritCopyHumanoid extends FrozenHumanoid {
     @Nullable
     @Override
     protected SoundEvent getHurtSound(DamageSource pDamageSource) {
-        return ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("born_in_chaos_v1", "vortex_hurt1"));
+        return ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("born_in_chaos_v1", "charm_of_protection_use"));
     }
 
     @Nullable
     @Override
     protected SoundEvent getDeathSound() {
-        return ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("born_in_chaos_v1", "vortex_hurt1"));
+        return ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("born_in_chaos_v1", "charm_of_protection_use"));
     }
 }

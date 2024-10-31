@@ -3,10 +3,7 @@ package net.melvinczyk.borninspellbooks.registry;
 
 import io.redspace.ironsspellbooks.effect.*;
 import net.melvinczyk.borninspellbooks.BornInSpellbooks;
-import net.melvinczyk.borninspellbooks.effect.CursedMarkEffect;
-import net.melvinczyk.borninspellbooks.effect.DeathWishEffect;
-import net.melvinczyk.borninspellbooks.effect.PhantomSplitEffect;
-import net.melvinczyk.borninspellbooks.effect.SpiritEffect;
+import net.melvinczyk.borninspellbooks.effect.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -35,4 +32,6 @@ public class MAMobEffectRegistry {
     public static final RegistryObject<MobEffect> DEATH_WISH = MOB_EFFECT_DEFERRED_REGISTER.register("death_wish", () -> new DeathWishEffect(MobEffectCategory.HARMFUL, 0xed0707));
     public static final RegistryObject<MobEffect> PHANTOM_SPLIT = MOB_EFFECT_DEFERRED_REGISTER.register("phantom_split", () -> new PhantomSplitEffect(MobEffectCategory.BENEFICIAL, 0xed0707));
     public static final RegistryObject<MobEffect> SPIRIT_EFFECT = MOB_EFFECT_DEFERRED_REGISTER.register("spirit_effect", () -> new SpiritEffect(MobEffectCategory.BENEFICIAL, 0xed0707));
+    public static final RegistryObject<MobEffect> SNEAKY_INVISIBILITY = MOB_EFFECT_DEFERRED_REGISTER.register("invisible", () -> new SneakyTrueInvisibilityEffect(MobEffectCategory.BENEFICIAL, 0xed0707));
+
 }

@@ -1,6 +1,7 @@
 package net.melvinczyk.borninspellbooks;
 
 import com.mojang.logging.LogUtils;
+import io.redspace.ironsspellbooks.effect.PlanarSightEffect;
 import net.melvinczyk.borninspellbooks.entity.mobs.render.*;
 import net.melvinczyk.borninspellbooks.entity.spells.great_glutton.WaterEffectRenderer;
 import net.melvinczyk.borninspellbooks.entity.spells.pumpkins.PumpkinBombRenderer;
@@ -18,6 +19,7 @@ import net.melvinczyk.borninspellbooks.entity.spells.spirit_copy.SpiritCopyRende
 import net.melvinczyk.borninspellbooks.entity.spells.trident.TridentRenderer;
 import net.melvinczyk.borninspellbooks.registry.*;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.FogRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.resources.ResourceLocation;
@@ -82,7 +84,6 @@ public class BornInSpellbooks
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {
-
             //EntityRenderers.register(MAEntityRegistry.SUMMONED_BONE_SERPENT.get(), SummonedBoneSerpentRenderer::new);
             EntityRenderers.register(MAEntityRegistry.TRIDENT_PROJECTILE.get(), TridentRenderer::new);
             EntityRenderers.register(MAEntityRegistry.SUMMONED_DREAD_HOUND.get(), SummonedDreadHoundRenderer::new);
