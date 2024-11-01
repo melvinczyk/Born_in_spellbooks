@@ -24,6 +24,9 @@
 - Infernal Bomb: Summon a block of fel soil that explodes on impact and leaves behind an infernal fire field that applies infernal fire on entities
 - Infernal Bolt: The infernal fire version of the firebolt spell that is weaker on contact but applies DOT infernal fire.
 
+### Holy
+- Spectral Plane: Have an out of body experience where you leave your physical body. In this state you are immune to all damage but can only place blocks. When the time is up you will return back to your physical form where you cast the spell with the same stats you had when you cast the spell.
+
 ### Nature
 - Great Glutton: Target an enemy and open an ocean portal below them where the great glutton will come out and damage the mob.
 - Infect: Target an enemy with a corpse fly that infect the target. Summons 3 maggots when hit the target.
