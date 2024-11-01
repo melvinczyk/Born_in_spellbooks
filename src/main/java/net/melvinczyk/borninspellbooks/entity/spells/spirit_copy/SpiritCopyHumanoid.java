@@ -54,6 +54,7 @@ public class SpiritCopyHumanoid extends FrozenHumanoid {
     private boolean invulnerable = true;
     private int storedHunger;
     private int storedBreath;
+    private float storedFallDistance;
 
     private boolean isAutoSpinAttack;
     private HumanoidArm mainArm = HumanoidArm.RIGHT;
@@ -115,6 +116,7 @@ public class SpiritCopyHumanoid extends FrozenHumanoid {
                 this.storedYHeadRot = player.yHeadRot;
                 this.storedBreath = player.getAirSupply();
                 this.storedHunger = player.getFoodData().getFoodLevel();
+                this.storedFallDistance = player.fallDistance;
                 for (MobEffectInstance effect : caster.getActiveEffects())
                 {
                     originalEffects.add(new MobEffectInstance(effect.getEffect(), effect.getDuration(), effect.getAmplifier(), effect.isAmbient(), effect.isVisible(), effect.showIcon()));
@@ -288,6 +290,7 @@ public class SpiritCopyHumanoid extends FrozenHumanoid {
             player.setYHeadRot(this.storedYHeadRot);
             player.getFoodData().setFoodLevel(this.storedHunger);
             player.setAirSupply(this.storedBreath);
+            player.fallDistance = this.storedFallDistance;
             if (player.getRemainingFireTicks() > 0) {
                 player.setSecondsOnFire(0);
             }

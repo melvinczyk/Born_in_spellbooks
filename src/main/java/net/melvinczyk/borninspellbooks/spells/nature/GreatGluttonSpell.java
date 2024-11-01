@@ -120,6 +120,6 @@ public class GreatGluttonSpell extends AbstractSpell {
     }
 
     private float getDamage(int spellLevel, LivingEntity entity) {
-        return getSpellPower(spellLevel, entity) + 12;
+        return getSpellPower(spellLevel, entity) + 14;
     }
 }
