@@ -78,12 +78,12 @@ public class PumpkinFriendSpell extends AbstractSpell {
     }
 
     public float getDamage(int spellLevel, LivingEntity caster) {
-        return getSpellPower(spellLevel, caster) * 0.2f + 1;
+        return getSpellPower(spellLevel, caster) * 0.2f + 3;
     }
 
     public float getExplosionDamage(int spellLevel, LivingEntity caster)
     {
-        return getSpellPower(spellLevel, caster) * 0.25f + 3;
+        return getSpellPower(spellLevel, caster) * 0.25f + 6;
     }
 
     private float getFriendHealth(int spellLevel, LivingEntity caster)

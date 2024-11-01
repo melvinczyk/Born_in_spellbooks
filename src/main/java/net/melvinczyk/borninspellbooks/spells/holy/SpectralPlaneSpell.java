@@ -31,7 +31,7 @@ public class SpectralPlaneSpell extends AbstractSpell {
 
     @Override
     public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
-        return List.of(Component.translatable("ui.irons_spellbooks.effect_length", Utils.timeFromTicks((getSpellPower(spellLevel, caster) * 20) - 200, 1)));
+        return List.of(Component.translatable("ui.irons_spellbooks.effect_length", Utils.timeFromTicks((getSpellPower(spellLevel, caster) * 20) - 300, 1)));
     }
 
     private final DefaultConfig defaultConfig = new DefaultConfig()
@@ -88,6 +88,6 @@ public class SpectralPlaneSpell extends AbstractSpell {
     }
 
     private int getDuration(int spellLevel, LivingEntity source) {
-        return (int) (getSpellPower(spellLevel, source) * 20) - 200;
+        return (int) (getSpellPower(spellLevel, source) * 20) - 300;
     }
 }

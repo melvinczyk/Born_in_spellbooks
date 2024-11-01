@@ -288,6 +288,9 @@ public class SpiritCopyHumanoid extends FrozenHumanoid {
             player.setYHeadRot(this.storedYHeadRot);
             player.getFoodData().setFoodLevel(this.storedHunger);
             player.setAirSupply(this.storedBreath);
+            if (player.getRemainingFireTicks() > 0) {
+                player.setSecondsOnFire(0);
+            }
 
             if (this.playerMovement != null) {
                 player.setDeltaMovement(this.playerMovement);
