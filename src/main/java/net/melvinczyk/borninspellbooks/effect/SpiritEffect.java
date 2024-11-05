@@ -66,16 +66,16 @@ public class SpiritEffect extends MagicMobEffect {
 
     @OnlyIn(Dist.CLIENT)
     public static float getFogEnd() {
-        return 15.0F;
+        return 10.0F;
     }
 
     @Override
     public void applyEffectTick(LivingEntity livingEntity, int pAmplifier) {
         if (livingEntity.level().isClientSide && livingEntity == Minecraft.getInstance().player) {
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < 50; i++) {
                 Vec3 pos = new Vec3(
                         getRandomScaled(20),
-                        getRandomScaled(4f) + 3,
+                        getRandomScaled(4f) + 4,
                         getRandomScaled(20)
                 ).add(livingEntity.position());
 

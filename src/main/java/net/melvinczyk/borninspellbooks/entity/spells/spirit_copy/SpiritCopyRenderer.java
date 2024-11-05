@@ -94,7 +94,7 @@ public class SpiritCopyRenderer extends LivingEntityRenderer<SpiritCopyHumanoid,
         this.model.prepareMobModel(iceMan, limbSwing, limbSwingAmount, pPartialTicks);
         this.model.setupAnim(iceMan, limbSwing, limbSwingAmount, 0, f2, f6);
 
-        RenderType renderType = RenderType.entityTranslucent(getTextureLocation(iceMan)); // Ensure translucent type is used
+        RenderType renderType = RenderType.entityTranslucent(getTextureLocation(iceMan));
         VertexConsumer vertexConsumer = pBuffer.getBuffer(renderType);
 
         this.model.renderToBuffer(pMatrixStack, vertexConsumer, pPackedLight, LivingEntityRenderer.getOverlayCoords(iceMan, 0), 1.0F, 1.0F, 1.0F, ALPHA_VALUE);

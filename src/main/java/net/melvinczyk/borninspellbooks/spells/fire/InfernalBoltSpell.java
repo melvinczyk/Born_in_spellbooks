@@ -8,6 +8,7 @@ import net.melvinczyk.borninspellbooks.BornInSpellbooks;
 import net.melvinczyk.borninspellbooks.entity.spells.infernal_bolt.InfernalBoltProjectile;
 import net.melvinczyk.borninspellbooks.entity.spells.trident.TridentProjectile;
 import net.melvinczyk.borninspellbooks.registry.MASchoolRegistry;
+import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;

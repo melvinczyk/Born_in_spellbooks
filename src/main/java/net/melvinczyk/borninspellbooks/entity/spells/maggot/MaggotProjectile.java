@@ -60,7 +60,7 @@ public class MaggotProjectile extends AbstractMagicProjectile implements GeoAnim
     @Override
     protected void onHitBlock(BlockHitResult blockHitResult) {
         super.onHitBlock(blockHitResult);
-        int timer = 20 * 30;
+        int timer = 20 * 15;
         SpawnedMaggot maggot = new SpawnedMaggot(this.level(), (LivingEntity) getOwner(), timer);
         Vec3 position = this.getPosition(0);
         maggot.setPos(position);

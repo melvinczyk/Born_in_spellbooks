@@ -95,7 +95,7 @@ public class StunSpell extends AbstractSpell {
 
     @Override
     public AnimationHolder getCastStartAnimation() {
-        return SpellAnimations.ANIMATION_INSTANT_CAST;
+        return SpellAnimations.TOUCH_GROUND_ANIMATION;
     }
 
     @Override
