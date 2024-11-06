@@ -14,8 +14,8 @@ public class MAMobEffectInstance extends MobEffectInstance {
         this.spellPower = spellPower;
     }
 
-    public MAMobEffectInstance(MobEffect pEffect, int pDuration, int amplifier, LivingEntity caster) {
-        super(pEffect, pDuration, amplifier);
+    public MAMobEffectInstance(MobEffect pEffect, int pDuration, int amplifier, LivingEntity caster, boolean ambient, boolean visible, boolean showIcon) {
+        super(pEffect, pDuration, amplifier, ambient, visible, showIcon);
         this.caster = caster;
         this.spellPower = 0;
     }

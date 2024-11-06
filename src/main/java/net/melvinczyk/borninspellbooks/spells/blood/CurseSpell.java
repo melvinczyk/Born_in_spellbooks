@@ -5,19 +5,18 @@ import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import io.redspace.ironsspellbooks.api.spells.*;
 import io.redspace.ironsspellbooks.api.util.Utils;
+import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
 import io.redspace.ironsspellbooks.capabilities.magic.TargetEntityCastData;
-import io.redspace.ironsspellbooks.entity.mobs.MagicSummon;
 import io.redspace.ironsspellbooks.entity.spells.target_area.TargetedAreaEntity;
-import io.redspace.ironsspellbooks.registries.SoundRegistry;
 import io.redspace.ironsspellbooks.spells.TargetedTargetAreaCastData;
 import net.melvinczyk.borninspellbooks.BornInSpellbooks;
 import net.melvinczyk.borninspellbooks.util.MAMobEffectInstance;
+import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
@@ -103,7 +102,8 @@ public class CurseSpell extends AbstractSpell {
     public void onCast(Level world, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
         if (playerMagicData.getAdditionalCastData() instanceof TargetedTargetAreaCastData targetData) {
             var targetEntity = targetData.getTarget((ServerLevel) world);
-            targetEntity.addEffect(new MAMobEffectInstance(MAMobEffectRegistry.CURSED_MARK.get(), getDuration(spellLevel, entity), getAmplifier(spellLevel, entity), entity));
+            MagicManager.spawnParticles(world, (ParticleOptions) ForgeRegistries.PARTICLE_TYPES.getValue(new ResourceLocation("born_in_chaos_v1", "srirst_part")), targetEntity.getX(), targetEntity.getY() + targetEntity.getBbHeight() * .5f, targetEntity.getZ(), 50, targetEntity.getBbWidth() * .5f, targetEntity.getBbHeight() * .5f, targetEntity.getBbWidth() * .5f, .03, false);
+            targetEntity.addEffect(new MAMobEffectInstance(MAMobEffectRegistry.CURSED_MARK.get(), getDuration(spellLevel, entity), getAmplifier(spellLevel, entity), entity, false, false, true));
         }
         super.onCast(world, spellLevel, entity, castSource, playerMagicData);
     }
@@ -130,5 +130,4 @@ public class CurseSpell extends AbstractSpell {
     {
         return 4 + (getSpellPower(spellLevel, caster) * 0.1F);
     }
-
 }

@@ -4,9 +4,8 @@ import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
 import io.redspace.ironsspellbooks.effect.MagicMobEffect;
 import net.melvinczyk.borninspellbooks.entity.mobs.ScarletPersecutor;
-import net.melvinczyk.borninspellbooks.registry.MAEntityRegistry;
-import net.melvinczyk.borninspellbooks.registry.MAMobEffectRegistry;
 import net.melvinczyk.borninspellbooks.util.MAMobEffectInstance;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
@@ -46,6 +45,13 @@ public class CursedMarkEffect extends MagicMobEffect {
     public void removeAttributeModifiers(LivingEntity entity, AttributeMap attributes, int amplifier) {
         super.removeAttributeModifiers(entity, attributes, amplifier);
         spawnScarletPersecutor(entity, amplifier);
+    }
+
+    @Override
+    public void applyEffectTick(LivingEntity livingEntity, int pAmplifier) {
+        if (livingEntity.level().isClientSide) {
+            MagicManager.spawnParticles(livingEntity.level(), (ParticleOptions) ForgeRegistries.PARTICLE_TYPES.getValue(new ResourceLocation("born_in_chaos_v1", "fleshsplash")), livingEntity.getX(), livingEntity.getY() + livingEntity.getBbHeight() * .5f, livingEntity.getZ(), 50, livingEntity.getBbWidth() * .25f, livingEntity.getBbHeight() * .25f, livingEntity.getBbWidth() * .25f, .03, false);
+        }
     }
 
     private void playSound(LivingEntity targetEntity)

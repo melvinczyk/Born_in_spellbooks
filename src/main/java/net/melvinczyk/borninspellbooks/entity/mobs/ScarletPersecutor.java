@@ -89,6 +89,10 @@ public class ScarletPersecutor extends ScarletPersecutorEntity implements MagicS
 
     @Override
     public boolean doHurtTarget(Entity pEntity) {
+        if (this.getSummoner() == null)
+        {
+            return false;
+        }
         if (pEntity instanceof LivingEntity && pEntity.getUUID().equals(this.getSummoner().getUUID())) {
             return false;
         }

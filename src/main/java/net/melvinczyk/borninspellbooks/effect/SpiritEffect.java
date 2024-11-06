@@ -4,7 +4,6 @@ import io.redspace.ironsspellbooks.effect.MagicMobEffect;
 import net.melvinczyk.borninspellbooks.registry.MAMobEffectRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
@@ -13,7 +12,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.RenderGuiEvent;
+
 
 public class SpiritEffect extends MagicMobEffect {
     public SpiritEffect(MobEffectCategory mobEffectCategory, int color) {
