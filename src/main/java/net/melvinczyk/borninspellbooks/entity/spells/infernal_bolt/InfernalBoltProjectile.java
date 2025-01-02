@@ -67,7 +67,8 @@ public class InfernalBoltProjectile extends AbstractMagicProjectile {
         DamageSources.applyDamage(target, getDamage(), MASpellRegistry.INFERNAL_BOLT.get().getDamageSource(this, getOwner()));
         int time = 40 + (20 * effectAmplifier);
         MobEffectInstance infernalFlameEffect = new MobEffectInstance(ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation("born_in_chaos_v1", "infernal_flame")), time, effectAmplifier);
-        ((LivingEntity) target).addEffect(infernalFlameEffect);
+        if (target instanceof LivingEntity)
+            ((LivingEntity) target).addEffect(infernalFlameEffect);
         discard();
     }
 

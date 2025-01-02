@@ -222,7 +222,7 @@ dependencies {
     implementation fg.deobf("maven.modrinth:4A86JsDZ:FCQy9L24")
     implementation fg.deobf("maven.modrinth:twkfQtEc:ViCNvRED")
 
-    implementation fg.deobf("curse.maven:born-in-chaos-686437:5864266")
+    implementation fg.deobf("curse.maven:born-in-chaos-686437:6033911")
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
